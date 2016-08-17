@@ -16,21 +16,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.three_buttons_activity);
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.activity_tre_tab);
 
         BottomBar bottomBar = BottomBar.attach(this, savedInstanceState);
-        bottomBar.setItemsFromMenu(R.menu.three_buttons_menu, new OnMenuTabSelectedListener() {
+        bottomBar.setItemsFromMenu(R.menu.menu_tre_tab, new OnMenuTabSelectedListener() {
             @Override
             public void onMenuItemSelected(int itemId) {
                 switch (itemId) {
-                    case R.id.recent_item:
-                        Snackbar.make(coordinatorLayout, "Recent Item Selected", Snackbar.LENGTH_LONG).show();
+                    case R.id.item_pdi:
+                        Snackbar.make(coordinatorLayout, R.string.punti_di_interesse, Snackbar.LENGTH_LONG).show();
                         break;
-                    case R.id.favorite_item:
-                        Snackbar.make(coordinatorLayout, "Favorite Item Selected", Snackbar.LENGTH_LONG).show();
+                    case R.id.item_google_maps:
+                        Snackbar.make(coordinatorLayout, "Google Maps", Snackbar.LENGTH_LONG).show();
                         break;
-                    case R.id.location_item:
-                        Snackbar.make(coordinatorLayout, "Location Item Selected", Snackbar.LENGTH_LONG).show();
+                    case R.id.item_open_street_maps:
+                        Snackbar.make(coordinatorLayout, "OpenStreetMap", Snackbar.LENGTH_LONG).show();
                         break;
                 }
             }

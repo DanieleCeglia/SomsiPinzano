@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">SomsiPinzano</string>
+    <string name="app_name">SOMSI Pinzano</string>
+    <string name="pdi">POI</string>
+    <string name="punti_di_interesse">Points of interest</string>
 </resources>
