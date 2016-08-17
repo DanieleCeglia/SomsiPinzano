@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/recent_item"
+        android:icon="@mipmap/ic_pois"
+        android:title="PDI" />
+
+    <item
+        android:id="@+id/location_item"
+        android:icon="@mipmap/ic_google_maps"
+        android:title="GM" />
+
+    <item
+        android:id="@+id/favorite_item"
+        android:icon="@mipmap/ic_open_street_maps"
+        android:title="OSM" />
+</menu>
