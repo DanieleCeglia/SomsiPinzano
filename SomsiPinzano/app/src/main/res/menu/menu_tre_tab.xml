@@ -11,7 +11,7 @@
         android:title="GM" />
 
     <item
-        android:id="@+id/item_open_street_maps"
-        android:icon="@mipmap/ic_open_street_maps"
+        android:id="@+id/item_open_street_map"
+        android:icon="@mipmap/ic_open_street_map"
         android:title="OSM" />
 </menu>
