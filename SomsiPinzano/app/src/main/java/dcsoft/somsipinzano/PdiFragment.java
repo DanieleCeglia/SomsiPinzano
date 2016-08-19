@@ -24,7 +24,7 @@ public class PdiFragment extends Fragment {
 
         Log.d("DEBUGAPP", TAG + "onAttach");
 
-        if (context instanceof Activity){
+        if (context instanceof MainActivity){
             mainActivity = (MainActivity) context;
             mainActivity.pdiFragment = this;
         }
@@ -33,6 +33,17 @@ public class PdiFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.d("DEBUGAPP", TAG + "onCreateView");
+
         return inflater.inflate(R.layout.fragment_pdi, container, false);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+
+        Log.d("DEBUGAPP", TAG + "onCreateView");
+
+        mainActivity = null;
     }
 }

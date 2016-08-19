@@ -24,7 +24,7 @@ public class OpenStreetMapFragment extends Fragment {
 
         Log.d("DEBUGAPP", TAG + "onAttach");
 
-        if (context instanceof Activity){
+        if (context instanceof MainActivity){
             mainActivity = (MainActivity) context;
             mainActivity.openStreetMapFragment = this;
         }
@@ -33,6 +33,17 @@ public class OpenStreetMapFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.d("DEBUGAPP", TAG + "onCreateView");
+
         return inflater.inflate(R.layout.fragment_open_street_map, container, false);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+
+        Log.d("DEBUGAPP", TAG + "onCreateView");
+
+        mainActivity = null;
     }
 }
