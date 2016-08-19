@@ -1,5 +1,6 @@
 package dcsoft.somsipinzano;
 
+import android.support.annotation.IdRes;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -8,11 +9,15 @@ import android.util.Log;
 import android.view.View;
 
 import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnMenuTabSelectedListener;
+import com.roughike.bottombar.OnMenuTabClickListener;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity ";
     private CoordinatorLayout coordinatorLayout;
+    private BottomBar mBottomBar;
+    private View pdiView;
+    private View gmView;
+    private View opmView;
 
     public PdiFragment pdiFragment;
     public GoogleMapsFragment googleMapsFragment;
@@ -21,48 +26,74 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
         Log.d("DEBUGAPP", TAG + "onCreate");
 
-        googleMapsFragment.getView().setVisibility(View.GONE);
-        openStreetMapFragment.getView().setVisibility(View.GONE);
+        setContentView(R.layout.activity_main);
 
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.activity_tre_tab);
 
-        BottomBar bottomBar = BottomBar.attach(this, savedInstanceState);
-        bottomBar.setItemsFromMenu(R.menu.menu_tre_tab, new OnMenuTabSelectedListener() {
+        pdiView = pdiFragment.getView();
+        gmView = googleMapsFragment.getView();
+        opmView = openStreetMapFragment.getView();
+
+        assert pdiView != null;
+        assert gmView != null;
+        assert opmView != null;
+
+        gmView.setVisibility(View.GONE);
+        opmView.setVisibility(View.GONE);
+
+        mBottomBar = BottomBar.attach(this, savedInstanceState);
+        mBottomBar.setItems(R.menu.menu_tre_tab);
+        mBottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
             @Override
-            public void onMenuItemSelected(int itemId) {
-                switch (itemId) {
-                    case R.id.item_pdi: {
-                        Snackbar.make(coordinatorLayout, R.string.punti_di_interesse, Snackbar.LENGTH_LONG).show();
+            public void onMenuTabSelected(@IdRes int menuItemId) {
+                eseguiAzione(menuItemId);
+            }
 
-                        pdiFragment.getView().setVisibility(View.VISIBLE);
-                        googleMapsFragment.getView().setVisibility(View.GONE);
-                        openStreetMapFragment.getView().setVisibility(View.GONE);
-                    }
-                        break;
-                    case R.id.item_google_maps: {
-                        Snackbar.make(coordinatorLayout, "Google Maps", Snackbar.LENGTH_LONG).show();
+            @Override
+            public void onMenuTabReSelected(@IdRes int menuItemId) {
+                eseguiAzione(menuItemId);
 
-                        pdiFragment.getView().setVisibility(View.GONE);
-                        googleMapsFragment.getView().setVisibility(View.VISIBLE);
-                        openStreetMapFragment.getView().setVisibility(View.GONE);
-                    }
-                        break;
-                    case R.id.item_open_street_map: {
-                        Snackbar.make(coordinatorLayout, "OpenStreetMap", Snackbar.LENGTH_LONG).show();
-
-                        pdiFragment.getView().setVisibility(View.GONE);
-                        googleMapsFragment.getView().setVisibility(View.GONE);
-                        openStreetMapFragment.getView().setVisibility(View.VISIBLE);
-                    }
-                }
             }
         });
+    }
 
-        // Set the color for the active tab. Ignored on mobile when there are more than three tabs.
-        bottomBar.setActiveTabColor("#C2185B");
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // Necessary to restore the BottomBar's state, otherwise we would
+        // lose the current tab on orientation change.
+        mBottomBar.onSaveInstanceState(outState);
+    }
+
+    private void eseguiAzione(int menuItemId) {
+        switch (menuItemId) {
+            case R.id.item_pdi: {
+                Snackbar.make(coordinatorLayout, R.string.punti_di_interesse, Snackbar.LENGTH_LONG).show();
+
+                pdiView.setVisibility(View.VISIBLE);
+                gmView.setVisibility(View.GONE);
+                opmView.setVisibility(View.GONE);
+            }
+            break;
+            case R.id.item_google_maps: {
+                Snackbar.make(coordinatorLayout, "Google Maps", Snackbar.LENGTH_LONG).show();
+
+                pdiView.setVisibility(View.GONE);
+                gmView.setVisibility(View.VISIBLE);
+                opmView.setVisibility(View.GONE);
+            }
+            break;
+            case R.id.item_open_street_map: {
+                Snackbar.make(coordinatorLayout, "OpenStreetMap", Snackbar.LENGTH_LONG).show();
+
+                pdiView.setVisibility(View.GONE);
+                gmView.setVisibility(View.GONE);
+                opmView.setVisibility(View.VISIBLE);
+            }
+        }
     }
 }
