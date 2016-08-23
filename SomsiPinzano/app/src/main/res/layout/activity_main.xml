@@ -14,38 +14,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <fragment
+        <FrameLayout
+            android:id="@+id/fragment_centrale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/fragment_pdi"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:name="dcsoft.somsipinzano.CategoriaFragment"
-            tools:layout="@layout/fragment_categoria_list" />
-
-        <fragment
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/fragment_google_maps"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:name="dcsoft.somsipinzano.GoogleMapsFragment"
-            tools:layout="@layout/fragment_google_maps" />
-
-        <fragment
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/fragment_open_street_map"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:name="dcsoft.somsipinzano.OpenStreetMapFragment"
-            tools:layout="@layout/fragment_open_street_map" />
+            />
     </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>
