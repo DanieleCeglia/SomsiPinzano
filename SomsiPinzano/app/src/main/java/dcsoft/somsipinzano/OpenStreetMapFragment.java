@@ -10,13 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+interface OpenStreetMapFragmentEseguiAlOnCreateView {
+    public void esegui(TextView tvOSM);
+}
+
 public class OpenStreetMapFragment extends Fragment {
     private static final String TAG = "OpenStreetMapFragment ";
     private MainActivity mainActivity;
     private View openStreetMapFragmentView;
 
-    public TextView tvOSM;
-    public Runnable eseguiAlOnCreateView;
+    public OpenStreetMapFragmentEseguiAlOnCreateView eseguiAlOnCreateView;
 
     public OpenStreetMapFragment() {
         // Required empty public constructor
@@ -41,10 +44,10 @@ public class OpenStreetMapFragment extends Fragment {
 
         openStreetMapFragmentView = inflater.inflate(R.layout.fragment_open_street_map, container, false);
 
-        tvOSM = (TextView) openStreetMapFragmentView.findViewById(R.id.tvOSM);
+        TextView tvOSM = (TextView) openStreetMapFragmentView.findViewById(R.id.tvOSM);
 
         if (eseguiAlOnCreateView != null) {
-            eseguiAlOnCreateView.run();
+            eseguiAlOnCreateView.esegui(tvOSM);
         }
 
         return openStreetMapFragmentView;

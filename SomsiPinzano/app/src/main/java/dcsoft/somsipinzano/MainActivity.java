@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabReselectListener;
@@ -71,11 +72,11 @@ public class MainActivity extends AppCompatActivity {
                 }
                 fragmentTransaction.replace(R.id.contentContainer, openStreetMapFragment);
 
-                openStreetMapFragment.eseguiAlOnCreateView = new Runnable() {
+                openStreetMapFragment.eseguiAlOnCreateView = new OpenStreetMapFragmentEseguiAlOnCreateView() {
                     @Override
-                    public void run() {
-                        Log.d("DEBUGAPP", TAG + "eseguiAlOnCreateView");
-                        openStreetMapFragment.tvOSM.append(" asd");
+                    public void esegui(TextView tvOSM) {
+                        Log.d("DEBUGAPP", TAG + "OpenStreetMapFragmentEseguiAlOnCreateView");
+                        tvOSM.append(" asd");
                     }
                 };
             }
