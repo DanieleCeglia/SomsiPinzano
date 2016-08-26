@@ -8,10 +8,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class OpenStreetMapFragment extends Fragment {
     private static final String TAG = "OpenStreetMapFragment ";
     private MainActivity mainActivity;
+    private View openStreetMapFragmentView;
+
+    public TextView tvOSM;
+    public Runnable eseguiAlOnCreateView;
 
     public OpenStreetMapFragment() {
         // Required empty public constructor
@@ -25,7 +30,7 @@ public class OpenStreetMapFragment extends Fragment {
 
         if (context instanceof MainActivity){
             mainActivity = (MainActivity) context;
-            //mainActivity.openStreetMapFragment = this;
+            mainActivity.openStreetMapFragment = this;
         }
     }
 
@@ -34,7 +39,15 @@ public class OpenStreetMapFragment extends Fragment {
                              Bundle savedInstanceState) {
         Log.d("DEBUGAPP", TAG + "onCreateView");
 
-        return inflater.inflate(R.layout.fragment_open_street_map, container, false);
+        openStreetMapFragmentView = inflater.inflate(R.layout.fragment_open_street_map, container, false);
+
+        tvOSM = (TextView) openStreetMapFragmentView.findViewById(R.id.tvOSM);
+
+        if (eseguiAlOnCreateView != null) {
+            eseguiAlOnCreateView.run();
+        }
+
+        return openStreetMapFragmentView;
     }
 
     @Override

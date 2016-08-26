@@ -25,7 +25,7 @@ public class GoogleMapsFragment extends Fragment {
 
         if (context instanceof MainActivity){
             mainActivity = (MainActivity) context;
-            //mainActivity.googleMapsFragment = this;
+            mainActivity.googleMapsFragment = this;
         }
     }
 

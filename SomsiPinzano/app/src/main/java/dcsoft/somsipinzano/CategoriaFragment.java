@@ -26,7 +26,7 @@ public class CategoriaFragment extends Fragment {
 
         if (context instanceof MainActivity){
             mainActivity = (MainActivity) context;
-            //mainActivity.categoriaFragment = this;
+            mainActivity.categoriaFragment = this;
         }
     }
 
