@@ -28,23 +28,39 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        fragmentManager = getFragmentManager();
+        if (savedInstanceState == null) {
+            fragmentManager = getFragmentManager();
+            categoriaFragment = new CategoriaFragment();
+            googleMapsFragment = new GoogleMapsFragment();
+            openStreetMapFragment = new OpenStreetMapFragment();
 
-        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
-        if (bottomBar != null) {
-            bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+            openStreetMapFragment.eseguiAlOnHiddenChanged = new OpenStreetMapFragmentEseguiAlOnHiddenChanged() {
                 @Override
-                public void onTabSelected(@IdRes int tabId) {
-                    eseguiAzione(tabId);
-                }
-            });
+                public void esegui(boolean hidden, TextView tvOSM) {
+                    Log.d("DEBUGAPP", TAG + "OpenStreetMapFragmentEseguiAlOnStart");
 
-            bottomBar.setOnTabReselectListener(new OnTabReselectListener() {
-                @Override
-                public void onTabReSelected(@IdRes int tabId) {
-                    eseguiAzione(tabId);
+                    if (!hidden) {
+                        tvOSM.append(" asd");
+                    }
                 }
-            });
+            };
+
+            BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+            if (bottomBar != null) {
+                bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+                    @Override
+                    public void onTabSelected(@IdRes int tabId) {
+                        eseguiAzione(tabId);
+                    }
+                });
+
+                bottomBar.setOnTabReselectListener(new OnTabReselectListener() {
+                    @Override
+                    public void onTabReSelected(@IdRes int tabId) {
+                        eseguiAzione(tabId);
+                    }
+                });
+            }
         }
     }
 
@@ -53,32 +69,48 @@ public class MainActivity extends AppCompatActivity {
 
         switch (tabId) {
             case R.id.item_pdi: {
-                if (categoriaFragment == null) {
-                    categoriaFragment = new CategoriaFragment();
+                if (googleMapsFragment.isAdded()) {
+                    fragmentTransaction.hide(googleMapsFragment);
                 }
-                fragmentTransaction.replace(R.id.contentContainer, categoriaFragment);
+                if (openStreetMapFragment.isAdded()) {
+                    fragmentTransaction.hide(openStreetMapFragment);
+                }
+
+                if (!categoriaFragment.isAdded()) {
+                    fragmentTransaction.add(R.id.contentContainer, categoriaFragment);
+                }
+
+                fragmentTransaction.show(categoriaFragment);
             }
             break;
             case R.id.item_google_maps: {
-                if (googleMapsFragment == null) {
-                    googleMapsFragment = new GoogleMapsFragment();
+                if (categoriaFragment.isAdded()) {
+                    fragmentTransaction.hide(categoriaFragment);
                 }
-                fragmentTransaction.replace(R.id.contentContainer, googleMapsFragment);
+                if (openStreetMapFragment.isAdded()) {
+                    fragmentTransaction.hide(openStreetMapFragment);
+                }
+
+                if (!googleMapsFragment.isAdded()) {
+                    fragmentTransaction.add(R.id.contentContainer, googleMapsFragment);
+                }
+
+                fragmentTransaction.show(googleMapsFragment);
             }
             break;
             case R.id.item_open_street_map: {
-                if (openStreetMapFragment == null) {
-                    openStreetMapFragment = new OpenStreetMapFragment();
+                if (categoriaFragment.isAdded()) {
+                    fragmentTransaction.hide(categoriaFragment);
                 }
-                fragmentTransaction.replace(R.id.contentContainer, openStreetMapFragment);
+                if (googleMapsFragment.isAdded()) {
+                    fragmentTransaction.hide(googleMapsFragment);
+                }
 
-                openStreetMapFragment.eseguiAlOnCreateView = new OpenStreetMapFragmentEseguiAlOnCreateView() {
-                    @Override
-                    public void esegui(TextView tvOSM) {
-                        Log.d("DEBUGAPP", TAG + "OpenStreetMapFragmentEseguiAlOnCreateView");
-                        tvOSM.append(" asd");
-                    }
-                };
+                if (!openStreetMapFragment.isAdded()) {
+                    fragmentTransaction.add(R.id.contentContainer, openStreetMapFragment);
+                }
+
+                fragmentTransaction.show(openStreetMapFragment);
             }
         }
 

@@ -10,8 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-interface OpenStreetMapFragmentEseguiAlOnCreateView {
-    public void esegui(TextView tvOSM);
+interface OpenStreetMapFragmentEseguiAlOnHiddenChanged {
+    void esegui(boolean hidden, TextView tvOSM);
 }
 
 public class OpenStreetMapFragment extends Fragment {
@@ -19,7 +19,7 @@ public class OpenStreetMapFragment extends Fragment {
     private MainActivity mainActivity;
     private View openStreetMapFragmentView;
 
-    public OpenStreetMapFragmentEseguiAlOnCreateView eseguiAlOnCreateView;
+    public OpenStreetMapFragmentEseguiAlOnHiddenChanged eseguiAlOnHiddenChanged;
 
     public OpenStreetMapFragment() {
         // Required empty public constructor
@@ -43,14 +43,18 @@ public class OpenStreetMapFragment extends Fragment {
         Log.d("DEBUGAPP", TAG + "onCreateView");
 
         openStreetMapFragmentView = inflater.inflate(R.layout.fragment_open_street_map, container, false);
-
-        TextView tvOSM = (TextView) openStreetMapFragmentView.findViewById(R.id.tvOSM);
-
-        if (eseguiAlOnCreateView != null) {
-            eseguiAlOnCreateView.esegui(tvOSM);
-        }
-
         return openStreetMapFragmentView;
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+
+        Log.d("DEBUGAPP", TAG + "onCreateView");
+
+        if (eseguiAlOnHiddenChanged != null) {
+            eseguiAlOnHiddenChanged.esegui(hidden, (TextView) openStreetMapFragmentView.findViewById(R.id.tvOSM));
+        }
     }
 
     @Override
