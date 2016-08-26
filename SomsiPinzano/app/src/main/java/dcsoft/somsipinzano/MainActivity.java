@@ -1,5 +1,8 @@
 package dcsoft.somsipinzano;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.design.widget.CoordinatorLayout;
@@ -14,9 +17,6 @@ import com.roughike.bottombar.OnTabSelectListener;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity ";
 
-    //public CategoriaFragment categoriaFragment = new CategoriaFragment();
-    //public GoogleMapsFragment googleMapsFragment = new GoogleMapsFragment();
-    //public OpenStreetMapFragment openStreetMapFragment = new OpenStreetMapFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,23 +43,33 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
-        //FragmentManager fragmentManager = getSupportFragmentManager();
-        //FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        //fragmentTransaction.replace(R.id.fragment_categoria, categoriaFragment);
-        //fragmentTransaction.commit();
     }
 
-    private void eseguiAzione(int menuItemId) {
-        switch (menuItemId) {
+    private void eseguiAzione(int tabId) {
+        Fragment fragment = null;
+        switch (tabId) {
             case R.id.item_pdi: {
+                fragment = new CategoriaFragment();
+                break;
             }
-            break;
             case R.id.item_google_maps: {
+                fragment = new GoogleMapsFragment();
+                break;
             }
-            break;
             case R.id.item_open_street_map: {
+                fragment = new OpenStreetMapFragment();
+                break;
             }
         }
+        if (fragment != null) {
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.contentContainer, fragment);
+            fragmentTransaction.commit();
+        } else {
+            //todo log error
+        }
+
     }
 
     public void categoriaScelta(String categoria) {
