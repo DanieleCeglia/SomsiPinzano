@@ -2,12 +2,12 @@
 <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/listCategoria"
-    android:name="dcsoft.somsipinzano.CategoriaFragment"
+    android:id="@+id/listPdi"
+    android:name="dcsoft.somsipinzano.PdiFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context="dcsoft.somsipinzano.CategoriaFragment"
-    tools:listitem="@layout/fragment_categoria" />
+    tools:context="dcsoft.somsipinzano.PdiFragment"
+    tools:listitem="@layout/fragment_pdi" />

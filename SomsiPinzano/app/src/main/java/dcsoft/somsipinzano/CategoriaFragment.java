@@ -26,7 +26,6 @@ public class CategoriaFragment extends Fragment {
 
         if (context instanceof MainActivity){
             mainActivity = (MainActivity) context;
-            mainActivity.categoriaFragment = this;
         }
     }
 
@@ -41,7 +40,7 @@ public class CategoriaFragment extends Fragment {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setAdapter(new MyCategoriaRecyclerViewAdapter(new String[]{"Torino", "Roma", "Milano", "Napoli", "Firenze"}, mainActivity));
+            recyclerView.setAdapter(new CategoriaRecyclerViewAdapter(new String[]{"Torino", "Roma", "Milano", "Napoli", "Firenze"}, mainActivity));
         }
 
         return view;

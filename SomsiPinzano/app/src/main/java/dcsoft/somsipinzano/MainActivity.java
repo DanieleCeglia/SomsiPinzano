@@ -15,10 +15,9 @@ import com.roughike.bottombar.OnTabSelectListener;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity ";
     private FragmentManager fragmentManager;
-
-    public CategoriaFragment categoriaFragment;
-    public GoogleMapsFragment googleMapsFragment;
-    public OpenStreetMapFragment openStreetMapFragment;
+    private CategoriaFragment categoriaFragment;
+    private GoogleMapsFragment googleMapsFragment;
+    private OpenStreetMapFragment openStreetMapFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,5 +118,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void categoriaScelta(String categoria) {
         Log.d("DEBUGAPP", TAG + "categoriaScelta: " + categoria);
+
+        PdiFragment pdiFragment = new PdiFragment();
+
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.contentContainer, pdiFragment);
+        fragmentTransaction.addToBackStack(pdiFragment.getClass().getName());
+        fragmentTransaction.commit();
+    }
+
+    public void pdiScelto(String pdi) {
+        Log.d("DEBUGAPP", TAG + "pdiScelto: " + pdi);
     }
 }

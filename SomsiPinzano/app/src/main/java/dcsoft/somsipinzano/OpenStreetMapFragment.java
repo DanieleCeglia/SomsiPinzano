@@ -33,7 +33,6 @@ public class OpenStreetMapFragment extends Fragment {
 
         if (context instanceof MainActivity){
             mainActivity = (MainActivity) context;
-            mainActivity.openStreetMapFragment = this;
         }
     }
 

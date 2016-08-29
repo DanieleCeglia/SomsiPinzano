@@ -7,12 +7,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MyCategoriaRecyclerViewAdapter extends RecyclerView.Adapter<MyCategoriaRecyclerViewAdapter.ViewHolder> {
-    private static final String TAG = "MyCategoriaRecyclerViewAdapter ";
+public class CategoriaRecyclerViewAdapter extends RecyclerView.Adapter<CategoriaRecyclerViewAdapter.ViewHolder> {
+    private static final String TAG = "CategoriaRecyclerViewAdapter ";
     private String[] categorie;
     private MainActivity mainActivity;
 
-    public MyCategoriaRecyclerViewAdapter(String[] categorie, MainActivity mainActivity) {
+    public CategoriaRecyclerViewAdapter(String[] categorie, MainActivity mainActivity) {
         this.categorie = categorie;
         this.mainActivity = mainActivity;
     }
