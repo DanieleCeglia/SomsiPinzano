@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity ";
     private FragmentManager fragmentManager;
     private CategoriaFragment categoriaFragment;
+    private PdiFragment pdiFragment;
     private GoogleMapsFragment googleMapsFragment;
     private OpenStreetMapFragment openStreetMapFragment;
 
@@ -75,16 +76,23 @@ public class MainActivity extends AppCompatActivity {
                     fragmentTransaction.hide(openStreetMapFragment);
                 }
 
-                if (!categoriaFragment.isAdded()) {
-                    fragmentTransaction.add(R.id.contentContainer, categoriaFragment);
-                }
+                if (pdiFragment!= null && pdiFragment.isAdded()) {
+                    fragmentTransaction.show(pdiFragment);
+                } else {
+                    if (!categoriaFragment.isAdded()) {
+                        fragmentTransaction.add(R.id.contentContainer, categoriaFragment);
+                    }
 
-                fragmentTransaction.show(categoriaFragment);
+                    fragmentTransaction.show(categoriaFragment);
+                }
             }
             break;
             case R.id.item_google_maps: {
                 if (categoriaFragment.isAdded()) {
                     fragmentTransaction.hide(categoriaFragment);
+                }
+                if (pdiFragment!= null && pdiFragment.isAdded()) {
+                    fragmentTransaction.hide(pdiFragment);
                 }
                 if (openStreetMapFragment.isAdded()) {
                     fragmentTransaction.hide(openStreetMapFragment);
@@ -100,6 +108,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.item_open_street_map: {
                 if (categoriaFragment.isAdded()) {
                     fragmentTransaction.hide(categoriaFragment);
+                }
+                if (pdiFragment!= null && pdiFragment.isAdded()) {
+                    fragmentTransaction.hide(pdiFragment);
                 }
                 if (googleMapsFragment.isAdded()) {
                     fragmentTransaction.hide(googleMapsFragment);
@@ -119,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
     public void categoriaScelta(String categoria) {
         Log.d("DEBUGAPP", TAG + "categoriaScelta: " + categoria);
 
-        PdiFragment pdiFragment = new PdiFragment();
+        pdiFragment = new PdiFragment();
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.contentContainer, pdiFragment);
