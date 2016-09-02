@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private OpenStreetMapFragment openStreetMapFragment;
     private ActionBar actionBar;
 
+    public String categoriaScelta;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,6 +137,8 @@ public class MainActivity extends AppCompatActivity {
     public void categoriaScelta(String categoria) {
         Log.d("DEBUGAPP", TAG + "categoriaScelta: " + categoria);
 
+        categoriaScelta = categoria;
+
         pdiFragment = new PdiFragment();
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -151,15 +155,21 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home: {
-                getFragmentManager().popBackStack();
+                fragmentManager.popBackStack();
+
                 if (actionBar != null) {
                     actionBar.setDisplayHomeAsUpEnabled(false);
                 }
+
                 return true;
             }
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void setActionBarTitle(String title){
+        actionBar.setTitle(title);
     }
 
     public void pdiScelto(String pdi) {

@@ -47,6 +47,13 @@ public class PdiFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        mainActivity.setActionBarTitle(mainActivity.categoriaScelta);
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
 

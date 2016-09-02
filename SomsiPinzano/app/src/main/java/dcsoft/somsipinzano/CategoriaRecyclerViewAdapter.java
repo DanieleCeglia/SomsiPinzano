@@ -34,7 +34,7 @@ public class CategoriaRecyclerViewAdapter extends RecyclerView.Adapter<Categoria
                 if (null != mainActivity) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mainActivity.categoriaScelta(holder.toString());
+                    mainActivity.categoriaScelta(holder.categoria());
                 }
             }
         });
@@ -61,6 +61,10 @@ public class CategoriaRecyclerViewAdapter extends RecyclerView.Adapter<Categoria
         @Override
         public String toString() {
             return super.toString() + " '" + tvTitoloCategoria.getText() + "'";
+        }
+
+        public String categoria() {
+            return tvTitoloCategoria.getText().toString();
         }
     }
 }

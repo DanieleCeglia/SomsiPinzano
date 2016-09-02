@@ -47,6 +47,13 @@ public class CategoriaFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        mainActivity.setActionBarTitle(getResources().getString(R.string.app_name));
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
 
