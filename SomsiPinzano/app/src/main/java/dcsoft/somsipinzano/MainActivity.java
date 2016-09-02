@@ -4,8 +4,10 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.roughike.bottombar.BottomBar;
@@ -19,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private PdiFragment pdiFragment;
     private GoogleMapsFragment googleMapsFragment;
     private OpenStreetMapFragment openStreetMapFragment;
+    private ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
             }
+
+            actionBar = getSupportActionBar();
         }
     }
 
@@ -136,6 +141,25 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.contentContainer, pdiFragment);
         fragmentTransaction.addToBackStack(pdiFragment.getClass().getName());
         fragmentTransaction.commit();
+
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: {
+                getFragmentManager().popBackStack();
+                if (actionBar != null) {
+                    actionBar.setDisplayHomeAsUpEnabled(false);
+                }
+                return true;
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void pdiScelto(String pdi) {
