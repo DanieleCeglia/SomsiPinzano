@@ -50,7 +50,7 @@ public class CategoriaFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        mainActivity.setActionBarTitle(getResources().getString(R.string.app_name));
+        mainActivity.setActionBarTitle(getResources().getString(R.string.Categorie));
     }
 
     @Override

@@ -68,6 +68,9 @@ public class MainActivity extends AppCompatActivity {
             }
 
             actionBar = getSupportActionBar();
+            if (actionBar != null) {
+                actionBar.setTitle(R.string.Categorie);
+            }
         }
     }
 
@@ -85,16 +88,31 @@ public class MainActivity extends AppCompatActivity {
 
                 if (pdiFragment!= null && pdiFragment.isAdded()) {
                     fragmentTransaction.show(pdiFragment);
+
+                    if (actionBar != null) {
+                        actionBar.setDisplayHomeAsUpEnabled(true);
+                        actionBar.setTitle(categoriaScelta);
+                    }
                 } else {
                     if (!categoriaFragment.isAdded()) {
                         fragmentTransaction.add(R.id.contentContainer, categoriaFragment);
                     }
 
                     fragmentTransaction.show(categoriaFragment);
+
+                    if (actionBar != null) {
+                        actionBar.setDisplayHomeAsUpEnabled(false);
+                        actionBar.setTitle(R.string.Categorie);
+                    }
                 }
             }
             break;
             case R.id.item_google_maps: {
+                if (actionBar != null) {
+                    actionBar.setDisplayHomeAsUpEnabled(false);
+                    actionBar.setTitle("Google Maps");
+                }
+
                 if (categoriaFragment.isAdded()) {
                     fragmentTransaction.hide(categoriaFragment);
                 }
@@ -113,6 +131,11 @@ public class MainActivity extends AppCompatActivity {
             }
             break;
             case R.id.item_open_street_map: {
+                if (actionBar != null) {
+                    actionBar.setDisplayHomeAsUpEnabled(false);
+                    actionBar.setTitle("OpenStreetMap");
+                }
+
                 if (categoriaFragment.isAdded()) {
                     fragmentTransaction.hide(categoriaFragment);
                 }
@@ -169,10 +192,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setActionBarTitle(String title){
-        actionBar.setTitle(title);
+        if (actionBar != null) {
+            actionBar.setTitle(title);
+        }
     }
 
     public void pdiScelto(String pdi) {
         Log.d("DEBUGAPP", TAG + "pdiScelto: " + pdi);
+    }
+
+    public void onBackPressed(){
+        Log.d("DEBUGAPP", TAG + "onBackPressed");
+
+        if (googleMapsFragment.isAdded() || openStreetMapFragment.isAdded()) {
+            eseguiAzione(R.id.item_pdi);
+        }
+        else
+        {
+            super.onBackPressed();
+        }
     }
 }
