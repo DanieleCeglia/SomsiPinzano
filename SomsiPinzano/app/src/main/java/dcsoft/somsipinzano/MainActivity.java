@@ -162,9 +162,13 @@ public class MainActivity extends AppCompatActivity {
 
         categoriaScelta = categoria;
 
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        if (categoriaFragment.isAdded()) {
+            fragmentTransaction.hide(categoriaFragment);
+        }
+
         pdiFragment = new PdiFragment();
 
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.contentContainer, pdiFragment);
         fragmentTransaction.addToBackStack(pdiFragment.getClass().getName());
         fragmentTransaction.commit();
@@ -176,8 +180,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d("DEBUGAPP", TAG + "onOptionsItemSelected");
+
         switch (item.getItemId()) {
             case android.R.id.home: {
+                Log.d("DEBUGAPP", TAG + "onOptionsItemSelected home");
+
                 fragmentManager.popBackStack();
 
                 if (actionBar != null) {
@@ -201,14 +209,12 @@ public class MainActivity extends AppCompatActivity {
         Log.d("DEBUGAPP", TAG + "pdiScelto: " + pdi);
     }
 
-    public void onBackPressed(){
-        Log.d("DEBUGAPP", TAG + "onBackPressed");
-
+    public void onBackPressed() {
         if (googleMapsFragment.isAdded() || openStreetMapFragment.isAdded()) {
+            Log.d("DEBUGAPP", TAG + "onBackPressed eseguiAzione");
             eseguiAzione(R.id.item_pdi);
-        }
-        else
-        {
+        } else {
+            Log.d("DEBUGAPP", TAG + "onBackPressed super");
             super.onBackPressed();
         }
     }
