@@ -158,8 +158,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void categoriaScelta(String categoria) {
-        Log.d("DEBUGAPP", TAG + "categoriaScelta: " + categoria);
-
         categoriaScelta = categoria;
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -180,17 +178,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Log.d("DEBUGAPP", TAG + "onOptionsItemSelected");
-
         switch (item.getItemId()) {
             case android.R.id.home: {
-                Log.d("DEBUGAPP", TAG + "onOptionsItemSelected home");
 
-                fragmentManager.popBackStack();
-
-                if (actionBar != null) {
-                    actionBar.setDisplayHomeAsUpEnabled(false);
-                }
+                faiBackStackConFrecciaVisibile(false);
 
                 return true;
             }
@@ -210,12 +201,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onBackPressed() {
-        if (googleMapsFragment.isAdded() || openStreetMapFragment.isAdded()) {
-            Log.d("DEBUGAPP", TAG + "onBackPressed eseguiAzione");
-            eseguiAzione(R.id.item_pdi);
+        if (pdiFragment!= null && pdiFragment.isVisible()) {
+            faiBackStackConFrecciaVisibile(false);
         } else {
-            Log.d("DEBUGAPP", TAG + "onBackPressed super");
-            super.onBackPressed();
+            this.finishAffinity();
+        }
+    }
+
+    private void faiBackStackConFrecciaVisibile(boolean frecciaVisibile) {
+        fragmentManager.popBackStack();
+
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(frecciaVisibile);
         }
     }
 }
