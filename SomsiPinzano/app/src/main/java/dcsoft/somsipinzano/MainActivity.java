@@ -15,21 +15,23 @@ import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
 
 public class MainActivity extends AppCompatActivity {
+    public String categoriaScelta;
+
     private static final String TAG = "MainActivity ";
     private FragmentManager fragmentManager;
     private CategoriaFragment categoriaFragment;
     private PdiFragment pdiFragment;
     private GoogleMapsFragment googleMapsFragment;
     private OpenStreetMapFragment openStreetMapFragment;
+    private BottomBar bottomBar;
     private ActionBar actionBar;
 
-    public String categoriaScelta;
-
+    //region Metodi override
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Log.d("DEBUGAPP", TAG + "onCreate");
+        //Log.d("DEBUGAPP", TAG + "onCreate");
 
         setContentView(R.layout.activity_main);
 
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             openStreetMapFragment.eseguiAlOnHiddenChanged = new OpenStreetMapFragmentEseguiAlOnHiddenChanged() {
                 @Override
                 public void esegui(boolean hidden, TextView tvOSM) {
-                    Log.d("DEBUGAPP", TAG + "OpenStreetMapFragmentEseguiAlOnStart");
+                    //Log.d("DEBUGAPP", TAG + "OpenStreetMapFragmentEseguiAlOnStart");
 
                     if (!hidden) {
                         tvOSM.append(" asd");
@@ -50,19 +52,19 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
 
-            BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+            bottomBar = (BottomBar) findViewById(R.id.bottomBar);
             if (bottomBar != null) {
                 bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
                     @Override
                     public void onTabSelected(@IdRes int tabId) {
-                        eseguiAzione(tabId);
+                        attivaTab(tabId);
                     }
                 });
 
                 bottomBar.setOnTabReselectListener(new OnTabReselectListener() {
                     @Override
                     public void onTabReSelected(@IdRes int tabId) {
-                        eseguiAzione(tabId);
+                        attivaTab(tabId);
                     }
                 });
             }
@@ -74,105 +76,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void eseguiAzione(int tabId) {
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        switch (tabId) {
-            case R.id.item_pdi: {
-                if (googleMapsFragment.isAdded()) {
-                    fragmentTransaction.hide(googleMapsFragment);
-                }
-                if (openStreetMapFragment.isAdded()) {
-                    fragmentTransaction.hide(openStreetMapFragment);
-                }
-
-                if (pdiFragment!= null && pdiFragment.isAdded()) {
-                    fragmentTransaction.show(pdiFragment);
-
-                    if (actionBar != null) {
-                        actionBar.setDisplayHomeAsUpEnabled(true);
-                        actionBar.setTitle(categoriaScelta);
-                    }
-                } else {
-                    if (!categoriaFragment.isAdded()) {
-                        fragmentTransaction.add(R.id.contentContainer, categoriaFragment);
-                    }
-
-                    fragmentTransaction.show(categoriaFragment);
-
-                    if (actionBar != null) {
-                        actionBar.setDisplayHomeAsUpEnabled(false);
-                        actionBar.setTitle(R.string.Categorie);
-                    }
-                }
-            }
-            break;
-            case R.id.item_google_maps: {
-                if (actionBar != null) {
-                    actionBar.setDisplayHomeAsUpEnabled(false);
-                    actionBar.setTitle("Google Maps");
-                }
-
-                if (categoriaFragment.isAdded()) {
-                    fragmentTransaction.hide(categoriaFragment);
-                }
-                if (pdiFragment!= null && pdiFragment.isAdded()) {
-                    fragmentTransaction.hide(pdiFragment);
-                }
-                if (openStreetMapFragment.isAdded()) {
-                    fragmentTransaction.hide(openStreetMapFragment);
-                }
-
-                if (!googleMapsFragment.isAdded()) {
-                    fragmentTransaction.add(R.id.contentContainer, googleMapsFragment);
-                }
-
-                fragmentTransaction.show(googleMapsFragment);
-            }
-            break;
-            case R.id.item_open_street_map: {
-                if (actionBar != null) {
-                    actionBar.setDisplayHomeAsUpEnabled(false);
-                    actionBar.setTitle("OpenStreetMap");
-                }
-
-                if (categoriaFragment.isAdded()) {
-                    fragmentTransaction.hide(categoriaFragment);
-                }
-                if (pdiFragment!= null && pdiFragment.isAdded()) {
-                    fragmentTransaction.hide(pdiFragment);
-                }
-                if (googleMapsFragment.isAdded()) {
-                    fragmentTransaction.hide(googleMapsFragment);
-                }
-
-                if (!openStreetMapFragment.isAdded()) {
-                    fragmentTransaction.add(R.id.contentContainer, openStreetMapFragment);
-                }
-
-                fragmentTransaction.show(openStreetMapFragment);
-            }
-        }
-
-        fragmentTransaction.commit();
-    }
-
-    public void categoriaScelta(String categoria) {
-        categoriaScelta = categoria;
-
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        if (categoriaFragment.isAdded()) {
-            fragmentTransaction.hide(categoriaFragment);
-        }
-
-        pdiFragment = new PdiFragment();
-
-        fragmentTransaction.replace(R.id.contentContainer, pdiFragment);
-        fragmentTransaction.addToBackStack(pdiFragment.getClass().getName());
-        fragmentTransaction.commit();
-
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
+    @Override
+    public void onBackPressed() {
+        if (pdiFragment!= null && pdiFragment.isVisible()) {
+            rimuoviPdiFragment();
+        } else {
+            this.finishAffinity();
         }
     }
 
@@ -180,8 +89,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home: {
-
-                faiBackStackConFrecciaVisibile(false);
+                rimuoviPdiFragment();
 
                 return true;
             }
@@ -189,30 +97,128 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    //endregion
 
-    public void setActionBarTitle(String title){
+    //region Metodi pubblici
+    public void impostaTitoloActionBar(String title){
         if (actionBar != null) {
             actionBar.setTitle(title);
+        }
+    }
+
+    public void categoriaScelta(String categoria) {
+        categoriaScelta = categoria;
+        pdiFragment = new PdiFragment();
+
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.hide(categoriaFragment);
+        fragmentTransaction.add(R.id.contentContainer, pdiFragment);
+        fragmentTransaction.commit();
+
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
         }
     }
 
     public void pdiScelto(String pdi) {
         Log.d("DEBUGAPP", TAG + "pdiScelto: " + pdi);
     }
+    //endregion
 
-    public void onBackPressed() {
-        if (pdiFragment!= null && pdiFragment.isVisible()) {
-            faiBackStackConFrecciaVisibile(false);
-        } else {
-            this.finishAffinity();
+    //region Metodi privati
+    private void nascondiCategoriaFragmentEFigli(FragmentTransaction fragmentTransaction) {
+        if (categoriaFragment.isAdded()) {
+            fragmentTransaction.hide(categoriaFragment);
+
+            if (pdiFragment!= null && pdiFragment.isAdded()) {
+                fragmentTransaction.hide(pdiFragment);
+            }
         }
     }
 
-    private void faiBackStackConFrecciaVisibile(boolean frecciaVisibile) {
-        fragmentManager.popBackStack();
+    private void nascondiGoogleMapsFragment(FragmentTransaction fragmentTransaction) {
+        if (googleMapsFragment.isAdded()) {
+            fragmentTransaction.hide(googleMapsFragment);
+        }
+    }
+
+    private void nascondiOpenStreetMapFragment(FragmentTransaction fragmentTransaction) {
+        if (openStreetMapFragment.isAdded()) {
+            fragmentTransaction.hide(openStreetMapFragment);
+        }
+    }
+
+    private void impostaActionBar(boolean backAttivo, String titolo) {
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(backAttivo);
+            actionBar.setTitle(titolo);
+        }
+    }
+
+    private void attivaTab(int tabId) {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        switch (tabId) {
+            case R.id.item_pdi: {
+                nascondiGoogleMapsFragment(fragmentTransaction);
+                nascondiOpenStreetMapFragment(fragmentTransaction);
+
+                if (pdiFragment!= null && pdiFragment.isAdded()) {
+                    fragmentTransaction.show(pdiFragment);
+
+                    impostaActionBar(true, categoriaScelta);
+                } else {
+                    if (categoriaFragment.isAdded()) {
+                        fragmentTransaction.show(categoriaFragment);
+                    } else {
+                        fragmentTransaction.add(R.id.contentContainer, categoriaFragment);
+                    }
+
+                    impostaActionBar(false, getResources().getString(R.string.Categorie));
+                }
+            }
+            break;
+            case R.id.item_google_maps: {
+                nascondiCategoriaFragmentEFigli(fragmentTransaction);
+                nascondiOpenStreetMapFragment(fragmentTransaction);
+
+                if (googleMapsFragment.isAdded()) {
+                    fragmentTransaction.show(googleMapsFragment);
+                } else {
+                    fragmentTransaction.add(R.id.contentContainer, googleMapsFragment);
+                }
+
+                impostaActionBar(false, "Google Maps");
+            }
+            break;
+            case R.id.item_open_street_map: {
+                nascondiCategoriaFragmentEFigli(fragmentTransaction);
+                nascondiGoogleMapsFragment(fragmentTransaction);
+
+                if (openStreetMapFragment.isAdded()) {
+                    fragmentTransaction.show(openStreetMapFragment);
+                } else {
+                    fragmentTransaction.add(R.id.contentContainer, openStreetMapFragment);
+                }
+
+                impostaActionBar(false, "OpenStreetMap");
+            }
+        }
+
+        fragmentTransaction.commit();
+    }
+
+    private void rimuoviPdiFragment() {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.remove(pdiFragment);
+        fragmentTransaction.show(categoriaFragment);
+        fragmentTransaction.commit();
+
+        pdiFragment = null;
 
         if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(frecciaVisibile);
+            actionBar.setDisplayHomeAsUpEnabled(false);
         }
     }
+    //endregion
 }

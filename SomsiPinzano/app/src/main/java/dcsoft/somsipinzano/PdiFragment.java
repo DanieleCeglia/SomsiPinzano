@@ -22,7 +22,7 @@ public class PdiFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        Log.d("DEBUGAPP", TAG + "onAttach");
+        //Log.d("DEBUGAPP", TAG + "onAttach");
 
         if (context instanceof MainActivity){
             mainActivity = (MainActivity) context;
@@ -32,7 +32,7 @@ public class PdiFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.d("DEBUGAPP", TAG + "onCreateView");
+        //Log.d("DEBUGAPP", TAG + "onCreateView");
 
         View view = inflater.inflate(R.layout.fragment_pdi_list, container, false);
 
@@ -50,14 +50,14 @@ public class PdiFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        mainActivity.setActionBarTitle(mainActivity.categoriaScelta);
+        mainActivity.impostaTitoloActionBar(mainActivity.categoriaScelta);
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
 
-        Log.d("DEBUGAPP", TAG + "onDetach");
+        //Log.d("DEBUGAPP", TAG + "onDetach");
 
         mainActivity = null;
     }

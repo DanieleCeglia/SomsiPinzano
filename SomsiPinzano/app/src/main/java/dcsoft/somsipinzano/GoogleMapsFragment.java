@@ -21,7 +21,7 @@ public class GoogleMapsFragment extends Fragment {
     public void onAttach(@Nullable Context context) {
         super.onAttach(context);
 
-        Log.d("DEBUGAPP", TAG + "onAttach");
+        //Log.d("DEBUGAPP", TAG + "onAttach");
 
         if (context instanceof MainActivity){
             mainActivity = (MainActivity) context;
@@ -31,7 +31,7 @@ public class GoogleMapsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.d("DEBUGAPP", TAG + "onCreateView");
+        //Log.d("DEBUGAPP", TAG + "onCreateView");
 
         return inflater.inflate(R.layout.fragment_google_maps, container, false);
     }
@@ -40,7 +40,7 @@ public class GoogleMapsFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
 
-        Log.d("DEBUGAPP", TAG + "onCreateView");
+        //Log.d("DEBUGAPP", TAG + "onCreateView");
 
         mainActivity = null;
     }

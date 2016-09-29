@@ -29,7 +29,7 @@ public class OpenStreetMapFragment extends Fragment {
     public void onAttach(@Nullable Context context) {
         super.onAttach(context);
 
-        Log.d("DEBUGAPP", TAG + "onAttach");
+        //Log.d("DEBUGAPP", TAG + "onAttach");
 
         if (context instanceof MainActivity){
             mainActivity = (MainActivity) context;
@@ -39,7 +39,7 @@ public class OpenStreetMapFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.d("DEBUGAPP", TAG + "onCreateView");
+        //Log.d("DEBUGAPP", TAG + "onCreateView");
 
         openStreetMapFragmentView = inflater.inflate(R.layout.fragment_open_street_map, container, false);
         return openStreetMapFragmentView;
@@ -49,7 +49,7 @@ public class OpenStreetMapFragment extends Fragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
 
-        Log.d("DEBUGAPP", TAG + "onCreateView");
+        //Log.d("DEBUGAPP", TAG + "onCreateView");
 
         if (eseguiAlOnHiddenChanged != null) {
             eseguiAlOnHiddenChanged.esegui(hidden, (TextView) openStreetMapFragmentView.findViewById(R.id.tvOSM));
@@ -60,7 +60,7 @@ public class OpenStreetMapFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
 
-        Log.d("DEBUGAPP", TAG + "onCreateView");
+        //Log.d("DEBUGAPP", TAG + "onCreateView");
 
         mainActivity = null;
     }
