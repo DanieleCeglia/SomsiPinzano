@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private BottomBar bottomBar;
     private ActionBar actionBar;
 
+    private DbHelper dbHelper;
+
     //region Metodi override
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
             if (actionBar != null) {
                 actionBar.setTitle(R.string.Categorie);
             }
+
+            dbHelper = DbHelper.dammiDbHelperCondiviso(this.getApplicationContext()); // inizializzo il singleton DbHelper
+            dbHelper.query();
         }
     }
 
