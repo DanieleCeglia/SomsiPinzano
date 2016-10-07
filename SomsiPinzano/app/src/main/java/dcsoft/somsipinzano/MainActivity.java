@@ -14,6 +14,8 @@ import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
     public String categoriaScelta;
 
@@ -26,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private BottomBar bottomBar;
     private ActionBar actionBar;
 
-    private DbHelper dbHelper;
+    private DatabaseAdapter databaseAdapter;
 
     //region Metodi override
     @Override
@@ -76,8 +78,12 @@ public class MainActivity extends AppCompatActivity {
                 actionBar.setTitle(R.string.Categorie);
             }
 
-            dbHelper = DbHelper.dammiDbHelperCondiviso(this.getApplicationContext()); // inizializzo il singleton DbHelper
-            dbHelper.query();
+            databaseAdapter = DatabaseAdapter.dammiDbHelperCondiviso(this); // inizializzo il singleton DatabaseAdapter
+            databaseAdapter.open();
+            List <String> categorie = databaseAdapter.dammiCategorie();
+            databaseAdapter.close();
+
+            Log.d("DEBUGAPP", TAG + "categorie: " + categorie);
         }
     }
 
