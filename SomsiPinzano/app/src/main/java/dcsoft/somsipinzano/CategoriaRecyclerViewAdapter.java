@@ -29,6 +29,7 @@ class CategoriaRecyclerViewAdapter extends RecyclerView.Adapter<CategoriaRecycle
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.tvTitoloCategoria.setText(categorie.get(position).nome);
+        holder.categoria = categorie.get(position);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,7 +37,7 @@ class CategoriaRecyclerViewAdapter extends RecyclerView.Adapter<CategoriaRecycle
                 if (null != mainActivity) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mainActivity.categoriaScelta(holder.categoria());
+                    mainActivity.categoriaScelta(holder.categoria);
                 }
             }
         });
@@ -51,6 +52,7 @@ class CategoriaRecyclerViewAdapter extends RecyclerView.Adapter<CategoriaRecycle
         final View mView;
         final ImageView ivImmagineCategoria;
         final TextView tvTitoloCategoria;
+        Categoria categoria;
 
         ViewHolder(View view) {
             super(view);
@@ -63,10 +65,6 @@ class CategoriaRecyclerViewAdapter extends RecyclerView.Adapter<CategoriaRecycle
         @Override
         public String toString() {
             return super.toString() + " '" + tvTitoloCategoria.getText() + "'";
-        }
-
-        String categoria() {
-            return tvTitoloCategoria.getText().toString();
         }
     }
 }

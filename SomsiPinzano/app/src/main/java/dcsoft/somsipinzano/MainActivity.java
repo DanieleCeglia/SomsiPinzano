@@ -17,7 +17,7 @@ import com.roughike.bottombar.OnTabSelectListener;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    public String categoriaScelta;
+    public Categoria categoriaScelta;
 
     private static final String TAG = "MainActivity ";
     private FragmentManager fragmentManager;
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void categoriaScelta(String categoria) {
+    public void categoriaScelta(Categoria categoria) {
         categoriaScelta = categoria;
         pdiFragment = new PdiFragment();
 
@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                 if (pdiFragment!= null && pdiFragment.isAdded()) {
                     fragmentTransaction.show(pdiFragment);
 
-                    impostaActionBar(true, categoriaScelta);
+                    impostaActionBar(true, categoriaScelta.nome);
                 } else {
                     if (categoriaFragment.isAdded()) {
                         fragmentTransaction.show(categoriaFragment);
