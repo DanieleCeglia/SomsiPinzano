@@ -16,13 +16,9 @@ class DatabaseAdapter {
 
     private DatabaseAdapter(Context context) { // init privato per impedire uso NON come singleton
         this.databaseHelper = new DatabaseHelper(context);
-
-        Log.d("DEBUGAPP", TAG + "DatabaseAdapter");
     }
 
     static DatabaseAdapter dammiDbHelperCondiviso(Context context) {
-        Log.d("DEBUGAPP", TAG + "dammiDbHelperCondiviso");
-
         if (databaseAdapterCondiviso == null) {
             databaseAdapterCondiviso = new DatabaseAdapter(context);
         }
@@ -30,28 +26,38 @@ class DatabaseAdapter {
         return databaseAdapterCondiviso;
     }
 
-    public void open() {
+    void apriConnesioneDatabase() {
         this.database = databaseHelper.getWritableDatabase();
     }
 
-    void close() {
+    void chiudiConnessioneDatabase() {
         if (database != null) {
             this.database.close();
         }
     }
 
-    List <String> dammiCategorie() {
-        List <String> list = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT * FROM CATEGORIA", null);
-        cursor.moveToFirst();
+    List <Categoria> dammiCategorie() {
+        List <Categoria> list = new ArrayList<>();
 
-        while (!cursor.isAfterLast()) {
-            list.add(cursor.getString(1));
+        if (database != null) {
+            Cursor cursor = database.rawQuery("SELECT * FROM CATEGORIA", null);
+            cursor.moveToFirst();
 
-            cursor.moveToNext();
+            while (!cursor.isAfterLast()) {
+                Categoria categoria = new Categoria();
+                categoria.idCategoria  = cursor.getInt(0);
+                categoria.nome         = cursor.getString(1);
+                categoria.fileImmagine = cursor.getString(2);
+
+                list.add(categoria);
+
+                cursor.moveToNext();
+            }
+
+            cursor.close();
+        } else {
+            Log.d("DEBUGAPP", TAG + "[dammiCategorie] Connessione NON aperta!");
         }
-
-        cursor.close();
 
         return list;
     }

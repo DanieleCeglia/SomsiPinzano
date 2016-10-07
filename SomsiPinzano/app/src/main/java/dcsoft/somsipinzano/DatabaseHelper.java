@@ -11,7 +11,5 @@ class DatabaseHelper extends SQLiteAssetHelper {
 
     DatabaseHelper(Context context) {
         super(context, NOME_DATABASE, null, VERSIONE);
-
-        Log.d("DEBUGAPP", TAG + "DatabaseHelper");
     }
 }

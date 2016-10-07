@@ -1,18 +1,16 @@
 package dcsoft.somsipinzano;
 
-/**
- * Created by daniele on 03/10/16.
- */
-
-public class Categoria {
-    public int idCategoria;
-    public String nome;
+class Categoria {
+    int idCategoria;
+    String nome;
+    String fileImmagine;
 
     @Override
     public String toString() {
         return "\n" +
                 "\nidCategoria: " + idCategoria +
                 "\nnome: " + nome +
+                "\nfileImmagine: " + fileImmagine +
                 "\n\n";
     }
 }

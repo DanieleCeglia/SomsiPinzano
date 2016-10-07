@@ -79,9 +79,9 @@ public class MainActivity extends AppCompatActivity {
             }
 
             databaseAdapter = DatabaseAdapter.dammiDbHelperCondiviso(this); // inizializzo il singleton DatabaseAdapter
-            databaseAdapter.open();
-            List <String> categorie = databaseAdapter.dammiCategorie();
-            databaseAdapter.close();
+            databaseAdapter.apriConnesioneDatabase();
+            List <Categoria> categorie = databaseAdapter.dammiCategorie();
+            databaseAdapter.chiudiConnessioneDatabase();
 
             Log.d("DEBUGAPP", TAG + "categorie: " + categorie);
         }

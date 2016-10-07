@@ -1,21 +1,18 @@
 package dcsoft.somsipinzano;
 
-/**
- * Created by daniele on 03/10/16.
- */
-
-public class Pdi {
-    public int idPdi;
-    public int idPdi_idCategoria;
-    public String titolo;
-    public String descrizione;
-    public String citta;
-    public String via;
-    public int numeroCivico;
-    public String interno;
-    public int cap;
-    public double latitudine;
-    public double longitudine;
+class Pdi {
+    int idPdi;
+    int idPdi_idCategoria;
+    String titolo;
+    String descrizione;
+    String citta;
+    String via;
+    int numeroCivico;
+    String interno;
+    int cap;
+    double latitudine;
+    double longitudine;
+    String fileImmagine;
 
     @Override
     public String toString() {
@@ -31,6 +28,7 @@ public class Pdi {
                 "\ncap: " + cap +
                 "\nlatitudine: " + latitudine +
                 "\nlongitudine: " + longitudine +
+                "\nfileImmagine: " + fileImmagine +
                 "\n\n";
     }
 }
