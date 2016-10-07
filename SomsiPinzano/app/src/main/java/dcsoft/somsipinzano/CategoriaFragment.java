@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 public class CategoriaFragment extends Fragment {
     private static final String TAG = "CategoriaFragment ";
     private MainActivity mainActivity;
@@ -40,17 +42,16 @@ public class CategoriaFragment extends Fragment {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setAdapter(new CategoriaRecyclerViewAdapter(new String[]{"Torino", "Roma", "Milano", "Napoli", "Firenze"}, mainActivity));
+
+            DatabaseAdapter databaseAdapter = DatabaseAdapter.dammiDbHelperCondiviso(mainActivity);
+            databaseAdapter.apriConnesioneDatabase();
+            List <Categoria> categorie = databaseAdapter.dammiCategorie();
+            databaseAdapter.chiudiConnessioneDatabase();
+
+            recyclerView.setAdapter(new CategoriaRecyclerViewAdapter(categorie, mainActivity));
         }
 
         return view;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        mainActivity.impostaTitoloActionBar(getResources().getString(R.string.Categorie));
     }
 
     @Override

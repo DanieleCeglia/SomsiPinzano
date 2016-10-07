@@ -7,12 +7,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class CategoriaRecyclerViewAdapter extends RecyclerView.Adapter<CategoriaRecyclerViewAdapter.ViewHolder> {
+import java.util.List;
+
+class CategoriaRecyclerViewAdapter extends RecyclerView.Adapter<CategoriaRecyclerViewAdapter.ViewHolder> {
     private static final String TAG = "CategoriaRecyclerViewAdapter ";
-    private String[] categorie;
+    private List <Categoria> categorie;
     private MainActivity mainActivity;
 
-    public CategoriaRecyclerViewAdapter(String[] categorie, MainActivity mainActivity) {
+    CategoriaRecyclerViewAdapter(List<Categoria> categorie, MainActivity mainActivity) {
         this.categorie = categorie;
         this.mainActivity = mainActivity;
     }
@@ -26,7 +28,7 @@ public class CategoriaRecyclerViewAdapter extends RecyclerView.Adapter<Categoria
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.tvTitoloCategoria.setText(categorie[position]);
+        holder.tvTitoloCategoria.setText(categorie.get(position).nome);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,15 +44,15 @@ public class CategoriaRecyclerViewAdapter extends RecyclerView.Adapter<Categoria
 
     @Override
     public int getItemCount() {
-        return categorie.length;
+        return categorie.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final ImageView ivImmagineCategoria;
-        public final TextView tvTitoloCategoria;
+    class ViewHolder extends RecyclerView.ViewHolder {
+        final View mView;
+        final ImageView ivImmagineCategoria;
+        final TextView tvTitoloCategoria;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
 
             mView = view;
@@ -63,7 +65,7 @@ public class CategoriaRecyclerViewAdapter extends RecyclerView.Adapter<Categoria
             return super.toString() + " '" + tvTitoloCategoria.getText() + "'";
         }
 
-        public String categoria() {
+        String categoria() {
             return tvTitoloCategoria.getText().toString();
         }
     }

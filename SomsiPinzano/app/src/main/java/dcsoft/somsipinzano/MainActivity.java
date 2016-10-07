@@ -28,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
     private BottomBar bottomBar;
     private ActionBar actionBar;
 
-    private DatabaseAdapter databaseAdapter;
-
     //region Metodi override
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,16 +72,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             actionBar = getSupportActionBar();
-            if (actionBar != null) {
-                actionBar.setTitle(R.string.Categorie);
-            }
-
-            databaseAdapter = DatabaseAdapter.dammiDbHelperCondiviso(this); // inizializzo il singleton DatabaseAdapter
-            databaseAdapter.apriConnesioneDatabase();
-            List <Categoria> categorie = databaseAdapter.dammiCategorie();
-            databaseAdapter.chiudiConnessioneDatabase();
-
-            Log.d("DEBUGAPP", TAG + "categorie: " + categorie);
+            impostaActionBar(false, getResources().getString(R.string.Categorie));
         }
     }
 
@@ -111,9 +100,10 @@ public class MainActivity extends AppCompatActivity {
     //endregion
 
     //region Metodi pubblici
-    public void impostaTitoloActionBar(String title){
+    public void impostaActionBar(boolean backAttivo, String titolo) {
         if (actionBar != null) {
-            actionBar.setTitle(title);
+            actionBar.setDisplayHomeAsUpEnabled(backAttivo);
+            actionBar.setTitle(titolo);
         }
     }
 
@@ -156,13 +146,6 @@ public class MainActivity extends AppCompatActivity {
     private void nascondiOpenStreetMapFragment(FragmentTransaction fragmentTransaction) {
         if (openStreetMapFragment.isAdded()) {
             fragmentTransaction.hide(openStreetMapFragment);
-        }
-    }
-
-    private void impostaActionBar(boolean backAttivo, String titolo) {
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(backAttivo);
-            actionBar.setTitle(titolo);
         }
     }
 
@@ -227,9 +210,7 @@ public class MainActivity extends AppCompatActivity {
 
         pdiFragment = null;
 
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(false);
-        }
+        impostaActionBar(false, getResources().getString(R.string.Categorie));
     }
     //endregion
 }

@@ -50,7 +50,7 @@ public class PdiFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        mainActivity.impostaTitoloActionBar(mainActivity.categoriaScelta);
+        mainActivity.impostaActionBar(true, mainActivity.categoriaScelta);
     }
 
     @Override
