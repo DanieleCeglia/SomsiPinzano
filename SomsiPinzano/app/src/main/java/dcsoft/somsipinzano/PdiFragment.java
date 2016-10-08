@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 public class PdiFragment extends Fragment {
     private static final String TAG = "PdiFragment ";
     private MainActivity mainActivity;
@@ -40,7 +42,13 @@ public class PdiFragment extends Fragment {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setAdapter(new PdiRecyclerViewAdapter(new String[]{"ASD", "LOL", "ROLFT", "LMFAO", "GG"}, mainActivity));
+
+            DatabaseAdapter databaseAdapter = DatabaseAdapter.dammiDbHelperCondiviso(mainActivity);
+            databaseAdapter.apriConnesioneDatabase();
+            List <Pdi> pdi = databaseAdapter.dammiPdiPerCategoria(mainActivity.categoriaScelta.idCategoria);
+            databaseAdapter.chiudiConnessioneDatabase();
+
+            recyclerView.setAdapter(new PdiRecyclerViewAdapter(pdi, mainActivity));
         }
 
         return view;

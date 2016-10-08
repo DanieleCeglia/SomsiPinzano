@@ -7,12 +7,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class PdiRecyclerViewAdapter extends RecyclerView.Adapter<PdiRecyclerViewAdapter.ViewHolder> {
+import java.util.List;
+
+class PdiRecyclerViewAdapter extends RecyclerView.Adapter<PdiRecyclerViewAdapter.ViewHolder> {
     private static final String TAG = "PdiRecyclerViewAdapter ";
-    private String[] pdi;
+    private List <Pdi> pdi;
     private MainActivity mainActivity;
 
-    public PdiRecyclerViewAdapter(String[] pdi, MainActivity mainActivity) {
+    PdiRecyclerViewAdapter(List <Pdi> pdi, MainActivity mainActivity) {
         this.pdi = pdi;
         this.mainActivity = mainActivity;
     }
@@ -26,7 +28,8 @@ public class PdiRecyclerViewAdapter extends RecyclerView.Adapter<PdiRecyclerView
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.tvTitoloPdi.setText(pdi[position]);
+        holder.tvTitoloPdi.setText(pdi.get(position).titolo);
+        holder.pdi = pdi.get(position);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,15 +45,16 @@ public class PdiRecyclerViewAdapter extends RecyclerView.Adapter<PdiRecyclerView
 
     @Override
     public int getItemCount() {
-        return pdi.length;
+        return pdi.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final ImageView ivImmaginePdi;
-        public final TextView tvTitoloPdi;
+    class ViewHolder extends RecyclerView.ViewHolder {
+        final View mView;
+        final ImageView ivImmaginePdi;
+        final TextView tvTitoloPdi;
+        Pdi pdi;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
 
             mView = view;
