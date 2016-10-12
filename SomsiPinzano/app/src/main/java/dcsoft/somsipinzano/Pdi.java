@@ -1,6 +1,8 @@
 package dcsoft.somsipinzano;
 
-class Pdi {
+import java.io.Serializable;
+
+class Pdi implements Serializable {
     int idPdi;
     int idPdi_idCategoria;
     String titolo;

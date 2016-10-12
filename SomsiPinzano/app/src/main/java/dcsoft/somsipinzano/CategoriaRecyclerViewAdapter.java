@@ -7,14 +7,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
+import java.util.ArrayList;
 
 class CategoriaRecyclerViewAdapter extends RecyclerView.Adapter<CategoriaRecyclerViewAdapter.ViewHolder> {
     private static final String TAG = "CategoriaRecyclerViewAdapter ";
-    private List <Categoria> categorie;
+    private ArrayList <Categoria> categorie;
     private MainActivity mainActivity;
 
-    CategoriaRecyclerViewAdapter(List<Categoria> categorie, MainActivity mainActivity) {
+    CategoriaRecyclerViewAdapter(ArrayList <Categoria> categorie, MainActivity mainActivity) {
         this.categorie = categorie;
         this.mainActivity = mainActivity;
     }

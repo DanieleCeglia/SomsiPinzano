@@ -1,6 +1,8 @@
 package dcsoft.somsipinzano;
 
-class Categoria {
+import java.io.Serializable;
+
+class Categoria implements Serializable {
     int idCategoria;
     String nome;
     String fileImmagine;

@@ -10,11 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class PdiFragment extends Fragment {
     private static final String TAG = "PdiFragment ";
     private MainActivity mainActivity;
+    private ArrayList<Pdi> pdi;
 
     public PdiFragment() {
         // Required empty public constructor
@@ -24,17 +25,18 @@ public class PdiFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        //Log.d("DEBUGAPP", TAG + "onAttach");
+        Log.d("DEBUGAPP", TAG + "onAttach");
 
         if (context instanceof MainActivity){
             mainActivity = (MainActivity) context;
         }
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //Log.d("DEBUGAPP", TAG + "onCreateView");
+        Log.d("DEBUGAPP", TAG + "onCreateView");
 
         View view = inflater.inflate(R.layout.fragment_pdi_list, container, false);
 
@@ -43,10 +45,16 @@ public class PdiFragment extends Fragment {
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-            DatabaseAdapter databaseAdapter = DatabaseAdapter.dammiDbHelperCondiviso(mainActivity);
-            databaseAdapter.apriConnesioneDatabase();
-            List <Pdi> pdi = databaseAdapter.dammiPdiPerCategoria(mainActivity.categoriaScelta.idCategoria);
-            databaseAdapter.chiudiConnessioneDatabase();
+            if (savedInstanceState == null) {
+                DatabaseAdapter databaseAdapter = DatabaseAdapter.dammiDbHelperCondiviso(mainActivity);
+                databaseAdapter.apriConnesioneDatabase();
+                pdi = databaseAdapter.dammiPdiPerCategoria(mainActivity.categoriaScelta.idCategoria);
+                databaseAdapter.chiudiConnessioneDatabase();
+            } else {
+                Log.d("DEBUGAPP", TAG + "savedInstanceState!!!!!!!!!!!!!");
+                pdi = (ArrayList<Pdi>) savedInstanceState.getSerializable("pdi"); // @SuppressWarnings("unchecked")
+            }
+
 
             recyclerView.setAdapter(new PdiRecyclerViewAdapter(pdi, mainActivity));
         }
@@ -55,8 +63,19 @@ public class PdiFragment extends Fragment {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        Log.d("DEBUGAPP", TAG + "onSaveInstanceState");
+
+        outState.putSerializable("pdi", pdi);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
+
+        Log.d("DEBUGAPP", TAG + "onResume");
 
         mainActivity.impostaActionBar(true, mainActivity.categoriaScelta.nome);
     }
@@ -65,7 +84,7 @@ public class PdiFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
 
-        //Log.d("DEBUGAPP", TAG + "onDetach");
+        Log.d("DEBUGAPP", TAG + "onDetach");
 
         mainActivity = null;
     }

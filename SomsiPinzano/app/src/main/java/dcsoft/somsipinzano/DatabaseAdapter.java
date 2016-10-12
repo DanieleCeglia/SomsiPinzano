@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.List;
 
 class DatabaseAdapter {
     private static final String TAG = "DatabaseAdapter ";
@@ -36,8 +35,8 @@ class DatabaseAdapter {
         }
     }
 
-    List <Categoria> dammiCategorie() {
-        List <Categoria> list = new ArrayList<>();
+    ArrayList <Categoria> dammiCategorie() {
+        ArrayList <Categoria> list = new ArrayList<>();
 
         if (database != null) {
             Cursor cursor = database.rawQuery("SELECT * FROM CATEGORIA", null);
@@ -63,8 +62,8 @@ class DatabaseAdapter {
         return list;
     }
 
-    List <Pdi> dammiPdiPerCategoria(int idCategoria) {
-        List <Pdi> list = new ArrayList<>();
+    ArrayList <Pdi> dammiPdiPerCategoria(int idCategoria) {
+        ArrayList <Pdi> list = new ArrayList<>();
 
         if (database != null) {
             Cursor cursor = database.rawQuery("SELECT * FROM PDI WHERE idPdi_idCategoria = " + idCategoria, null);

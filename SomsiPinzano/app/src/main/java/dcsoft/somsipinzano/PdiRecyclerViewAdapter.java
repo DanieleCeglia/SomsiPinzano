@@ -7,14 +7,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
+import java.util.ArrayList;
 
 class PdiRecyclerViewAdapter extends RecyclerView.Adapter<PdiRecyclerViewAdapter.ViewHolder> {
     private static final String TAG = "PdiRecyclerViewAdapter ";
-    private List <Pdi> pdi;
+    private ArrayList<Pdi> pdi;
     private MainActivity mainActivity;
 
-    PdiRecyclerViewAdapter(List <Pdi> pdi, MainActivity mainActivity) {
+    PdiRecyclerViewAdapter(ArrayList <Pdi> pdi, MainActivity mainActivity) {
         this.pdi = pdi;
         this.mainActivity = mainActivity;
     }
