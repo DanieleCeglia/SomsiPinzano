@@ -21,12 +21,12 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity ";
     private FragmentManager fragmentManager;
+    private BottomBar bottomBar;
+    private ActionBar actionBar;
     private CategoriaFragment categoriaFragment;
     private PdiFragment pdiFragment;
     private GoogleMapsFragment googleMapsFragment;
     private OpenStreetMapFragment openStreetMapFragment;
-    private BottomBar bottomBar;
-    private ActionBar actionBar;
 
     //region Metodi override
     @Override
@@ -46,37 +46,6 @@ public class MainActivity extends AppCompatActivity {
 
             categoriaFragment     = new CategoriaFragment();
             pdiFragment           = null;
-            googleMapsFragment    = new GoogleMapsFragment();
-            openStreetMapFragment = new OpenStreetMapFragment();
-
-            openStreetMapFragment.eseguiAlOnHiddenChanged = new OpenStreetMapFragmentEseguiAlOnHiddenChanged() {
-                @Override
-                public void esegui(boolean hidden, TextView tvOSM) {
-                    //Log.d("DEBUGAPP", TAG + "OpenStreetMapFragmentEseguiAlOnStart");
-
-                    if (!hidden) {
-                        tvOSM.append(" asd");
-                    }
-                }
-            };
-
-            if (bottomBar != null) {
-                bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
-                    @Override
-                    public void onTabSelected(@IdRes int tabId) {
-                        attivaTab(tabId);
-                    }
-                });
-
-                bottomBar.setOnTabReselectListener(new OnTabReselectListener() {
-                    @Override
-                    public void onTabReSelected(@IdRes int tabId) {
-                        attivaTab(tabId);
-                    }
-                });
-            }
-
-            impostaActionBar(false, getResources().getString(R.string.Categorie));
         } else {
             Log.d("DEBUGAPP", TAG + "onCreate 2!!!!");
 
@@ -86,6 +55,44 @@ public class MainActivity extends AppCompatActivity {
             pdiFragment           = (PdiFragment)           fragmentManager.findFragmentByTag("pdiFragment");
             googleMapsFragment    = (GoogleMapsFragment)    fragmentManager.findFragmentByTag("googleMapsFragment");
             openStreetMapFragment = (OpenStreetMapFragment) fragmentManager.findFragmentByTag("openStreetMapFragment");
+        }
+
+        if (googleMapsFragment == null) {
+            googleMapsFragment = new GoogleMapsFragment();
+        }
+
+        if (openStreetMapFragment == null) {
+            openStreetMapFragment = new OpenStreetMapFragment();
+        }
+        openStreetMapFragment.eseguiAlOnHiddenChanged = new OpenStreetMapFragmentEseguiAlOnHiddenChanged() {
+            @Override
+            public void esegui(boolean hidden, TextView tvOSM) {
+                //Log.d("DEBUGAPP", TAG + "OpenStreetMapFragmentEseguiAlOnStart");
+
+                if (!hidden) {
+                    tvOSM.append(" asd");
+                }
+            }
+        };
+
+        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelected(@IdRes int tabId) {
+                attivaTab(tabId);
+            }
+        });
+
+        bottomBar.setOnTabReselectListener(new OnTabReselectListener() {
+            @Override
+            public void onTabReSelected(@IdRes int tabId) {
+                attivaTab(tabId);
+            }
+        });
+
+        if (pdiFragment == null) {
+            impostaActionBar(false, getResources().getString(R.string.Categorie));
+        } else {
+            impostaActionBar(true, categoriaScelta.nome);
         }
 
         Log.d("DEBUGAPP", TAG + "bottomBar: " + bottomBar.toString());
