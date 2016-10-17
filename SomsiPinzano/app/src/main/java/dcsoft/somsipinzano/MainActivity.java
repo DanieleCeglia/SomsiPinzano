@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Log.d("DEBUGAPP", TAG + "onCreate 2!!!!");
 
-            categoriaScelta = (Categoria) savedInstanceState.getSerializable("categorie");
+            categoriaScelta = (Categoria) savedInstanceState.getSerializable("categoriaScelta");
 
             categoriaFragment     = (CategoriaFragment)     fragmentManager.findFragmentByTag("categoriaFragment");
             pdiFragment           = (PdiFragment)           fragmentManager.findFragmentByTag("pdiFragment");
