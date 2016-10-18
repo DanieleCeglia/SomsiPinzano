@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         actionBar = getSupportActionBar();
 
+        int currentTabId = -1;
+
         if (savedInstanceState == null) {
             categoriaScelta = null;
 
@@ -55,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
             pdiFragment           = (PdiFragment)           fragmentManager.findFragmentByTag("pdiFragment");
             googleMapsFragment    = (GoogleMapsFragment)    fragmentManager.findFragmentByTag("googleMapsFragment");
             openStreetMapFragment = (OpenStreetMapFragment) fragmentManager.findFragmentByTag("openStreetMapFragment");
+
+            bottomBar.setDefaultTabPosition(savedInstanceState.getInt("currentTabPosition"));
+            currentTabId = savedInstanceState.getInt("currentTabId");
         }
 
         if (googleMapsFragment == null) {
@@ -89,18 +94,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if (pdiFragment == null) {
-            impostaActionBar(false, getResources().getString(R.string.Categorie));
-        } else {
-            impostaActionBar(true, categoriaScelta.nome);
+        Log.d("DEBUGAPP2", TAG + "categoriaFragment: " + categoriaFragment);
+        if (categoriaFragment != null) {
+            Log.d("DEBUGAPP2", TAG + "categoriaFragment isAdded: " + categoriaFragment.isAdded());
+        }
+        Log.d("DEBUGAPP2", TAG + "pdiFragment: " + pdiFragment);
+        if (pdiFragment != null) {
+            Log.d("DEBUGAPP2", TAG + "pdiFragment isAdded: " + pdiFragment.isAdded());
+        }
+        Log.d("DEBUGAPP2", TAG + "googleMapsFragment: " + googleMapsFragment);
+        if (googleMapsFragment != null) {
+            Log.d("DEBUGAPP2", TAG + "googleMapsFragment isAdded: " + googleMapsFragment.isAdded());
+        }
+        Log.d("DEBUGAPP2", TAG + "openStreetMapFragment: " + categoriaFragment);
+        if (openStreetMapFragment != null) {
+            Log.d("DEBUGAPP2", TAG + "openStreetMapFragment isAdded: " + openStreetMapFragment.isAdded());
         }
 
-        Log.d("DEBUGAPP", TAG + "bottomBar: " + bottomBar.toString());
-        Log.d("DEBUGAPP", TAG + "actionBar: " + actionBar.toString());
-        if (categoriaScelta == null) {
-            Log.d("DEBUGAPP", TAG + "categoriaScelta: null");
-        } else {
-            Log.d("DEBUGAPP", TAG + "categoriaScelta: " + categoriaScelta.toString());
+        if (currentTabId != -1) {
+            Log.d("DEBUGAPP", TAG + "pdiFragment: " + pdiFragment);
+
+            attivaTab(currentTabId);
         }
     }
 
@@ -111,11 +125,8 @@ public class MainActivity extends AppCompatActivity {
         Log.d("DEBUGAPP", TAG + "onSaveInstanceState");
 
         savedInstanceState.putSerializable("categoriaScelta", categoriaScelta);
-
-        //savedInstanceState.putBoolean("MyBoolean", true);
-        //savedInstanceState.putDouble("myDouble", 1.9);
-        //savedInstanceState.putInt("MyInt", 1);
-        //savedInstanceState.putString("MyString", "Welcome back to Android");
+        savedInstanceState.putInt("currentTabPosition", bottomBar.getCurrentTabPosition());
+        savedInstanceState.putInt("currentTabId", bottomBar.getCurrentTabId());
     }
 
     @Override
@@ -167,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.hide(categoriaFragment);
-        fragmentTransaction.add(R.id.contentContainer, pdiFragment);
+        fragmentTransaction.add(R.id.contentContainer, pdiFragment, "pdiFragment");
         fragmentTransaction.commit();
 
         if (actionBar != null) {
@@ -181,24 +192,29 @@ public class MainActivity extends AppCompatActivity {
     //endregion
 
     //region Metodi privati
-    private void nascondiCategoriaFragmentEFigli(FragmentTransaction fragmentTransaction) {
-        if (categoriaFragment.isAdded()) {
+    private void nascondiCategoriaFragment(FragmentTransaction fragmentTransaction) {
+        if (categoriaFragment!= null && categoriaFragment.isAdded()) {
             fragmentTransaction.hide(categoriaFragment);
-
-            if (pdiFragment!= null && pdiFragment.isAdded()) {
-                fragmentTransaction.hide(pdiFragment);
-            }
         }
+    }
+    private void nascondiPdiFragment(FragmentTransaction fragmentTransaction) {
+        if (pdiFragment!= null && pdiFragment.isAdded()) {
+            fragmentTransaction.hide(pdiFragment);
+        }
+    }
+    private void nascondiCategoriaFragmentEFigli(FragmentTransaction fragmentTransaction) {
+        nascondiCategoriaFragment(fragmentTransaction);
+        nascondiPdiFragment(fragmentTransaction);
     }
 
     private void nascondiGoogleMapsFragment(FragmentTransaction fragmentTransaction) {
-        if (googleMapsFragment.isAdded()) {
+        if (googleMapsFragment!= null && googleMapsFragment.isAdded()) {
             fragmentTransaction.hide(googleMapsFragment);
         }
     }
 
     private void nascondiOpenStreetMapFragment(FragmentTransaction fragmentTransaction) {
-        if (openStreetMapFragment.isAdded()) {
+        if (openStreetMapFragment!= null && openStreetMapFragment.isAdded()) {
             fragmentTransaction.hide(openStreetMapFragment);
         }
     }
@@ -211,7 +227,9 @@ public class MainActivity extends AppCompatActivity {
                 nascondiGoogleMapsFragment(fragmentTransaction);
                 nascondiOpenStreetMapFragment(fragmentTransaction);
 
-                if (pdiFragment!= null && pdiFragment.isAdded()) {
+                if (pdiFragment != null && pdiFragment.isAdded()) {
+                    nascondiCategoriaFragment(fragmentTransaction);
+
                     fragmentTransaction.show(pdiFragment);
 
                     impostaActionBar(true, categoriaScelta.nome);
