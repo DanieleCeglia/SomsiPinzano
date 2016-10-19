@@ -5,11 +5,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import java.util.ArrayList;
 
 public class PdiFragment extends Fragment {
@@ -25,7 +23,7 @@ public class PdiFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        Log.d("DEBUGAPP", TAG + "onAttach");
+        //Log.d("DEBUGAPP", TAG + "onAttach");
 
         if (context instanceof MainActivity){
             mainActivity = (MainActivity) context;
@@ -34,9 +32,8 @@ public class PdiFragment extends Fragment {
 
     @SuppressWarnings("unchecked")
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        Log.d("DEBUGAPP", TAG + "onCreateView");
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        //Log.d("DEBUGAPP", TAG + "onCreateView");
 
         View view = inflater.inflate(R.layout.fragment_pdi_list, container, false);
 
@@ -51,10 +48,10 @@ public class PdiFragment extends Fragment {
                 pdi = databaseAdapter.dammiPdiPerCategoria(mainActivity.categoriaScelta.idCategoria);
                 databaseAdapter.chiudiConnessioneDatabase();
             } else {
-                Log.d("DEBUGAPP", TAG + "savedInstanceState!!!!!!!!!!!!!");
+                //Log.d("DEBUGAPP", TAG + "onCreateView savedInstanceState != nul");
+
                 pdi = (ArrayList<Pdi>) savedInstanceState.getSerializable("pdi"); // @SuppressWarnings("unchecked")
             }
-
 
             recyclerView.setAdapter(new PdiRecyclerViewAdapter(pdi, mainActivity));
         }
@@ -66,7 +63,7 @@ public class PdiFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        Log.d("DEBUGAPP", TAG + "onSaveInstanceState");
+        //Log.d("DEBUGAPP", TAG + "onSaveInstanceState");
 
         outState.putSerializable("pdi", pdi);
     }
@@ -75,7 +72,7 @@ public class PdiFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        Log.d("DEBUGAPP", TAG + "onResume");
+        //Log.d("DEBUGAPP", TAG + "onResume");
 
         if (mainActivity.bottomBar.getCurrentTabId() == R.id.item_pdi) {
             mainActivity.impostaActionBar(true, mainActivity.categoriaScelta.nome);
@@ -86,7 +83,7 @@ public class PdiFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
 
-        Log.d("DEBUGAPP", TAG + "onDetach");
+        //Log.d("DEBUGAPP", TAG + "onDetach");
 
         mainActivity = null;
     }

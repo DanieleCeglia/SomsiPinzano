@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-
 import java.util.ArrayList;
 
 class DatabaseAdapter {
@@ -35,8 +34,8 @@ class DatabaseAdapter {
         }
     }
 
-    ArrayList <Categoria> dammiCategorie() {
-        ArrayList <Categoria> list = new ArrayList<>();
+    ArrayList<Categoria> dammiCategorie() {
+        ArrayList<Categoria> list = new ArrayList<>();
 
         if (database != null) {
             Cursor cursor = database.rawQuery("SELECT * FROM CATEGORIA", null);
@@ -62,8 +61,8 @@ class DatabaseAdapter {
         return list;
     }
 
-    ArrayList <Pdi> dammiPdiPerCategoria(int idCategoria) {
-        ArrayList <Pdi> list = new ArrayList<>();
+    ArrayList<Pdi> dammiPdiPerCategoria(int idCategoria) {
+        ArrayList<Pdi> list = new ArrayList<>();
 
         if (database != null) {
             Cursor cursor = database.rawQuery("SELECT * FROM PDI WHERE idPdi_idCategoria = " + idCategoria, null);

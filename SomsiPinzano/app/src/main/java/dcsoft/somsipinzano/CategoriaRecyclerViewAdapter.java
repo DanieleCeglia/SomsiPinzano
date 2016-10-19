@@ -6,15 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 
 class CategoriaRecyclerViewAdapter extends RecyclerView.Adapter<CategoriaRecyclerViewAdapter.ViewHolder> {
     private static final String TAG = "CategoriaRecyclerViewAdapter ";
-    private ArrayList <Categoria> categorie;
+    private ArrayList<Categoria> categorie;
     private MainActivity mainActivity;
 
-    CategoriaRecyclerViewAdapter(ArrayList <Categoria> categorie, MainActivity mainActivity) {
+    CategoriaRecyclerViewAdapter(ArrayList<Categoria> categorie, MainActivity mainActivity) {
         this.categorie = categorie;
         this.mainActivity = mainActivity;
     }
@@ -35,8 +34,6 @@ class CategoriaRecyclerViewAdapter extends RecyclerView.Adapter<CategoriaRecycle
             @Override
             public void onClick(View v) {
                 if (null != mainActivity) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
                     mainActivity.categoriaScelta(holder.categoria);
                 }
             }

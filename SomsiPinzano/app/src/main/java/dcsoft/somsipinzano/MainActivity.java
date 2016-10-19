@@ -2,7 +2,6 @@ package dcsoft.somsipinzano;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.ActionBar;
@@ -10,15 +9,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
 
 public class MainActivity extends AppCompatActivity {
-    public Categoria categoriaScelta;
     public BottomBar bottomBar;
+    public Categoria categoriaScelta;
 
     private static final String TAG = "MainActivity ";
     private FragmentManager fragmentManager;
@@ -41,15 +38,13 @@ public class MainActivity extends AppCompatActivity {
         bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         actionBar = getSupportActionBar();
 
-        int currentTabId = -1;
-
         if (savedInstanceState == null) {
             categoriaScelta = null;
 
             categoriaFragment     = new CategoriaFragment();
             pdiFragment           = null;
         } else {
-            Log.d("DEBUGAPP", TAG + "onCreate 2!!!!");
+            //Log.d("DEBUGAPP", TAG + "onCreate savedInstanceState != nul");
 
             categoriaScelta = (Categoria) savedInstanceState.getSerializable("categoriaScelta");
 
@@ -59,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
             openStreetMapFragment = (OpenStreetMapFragment) fragmentManager.findFragmentByTag("openStreetMapFragment");
 
             bottomBar.setDefaultTabPosition(savedInstanceState.getInt("currentTabPosition"));
-            currentTabId = savedInstanceState.getInt("currentTabId");
         }
 
         if (googleMapsFragment == null) {
@@ -93,45 +87,21 @@ public class MainActivity extends AppCompatActivity {
                 attivaTab(tabId);
             }
         });
-
-        Log.d("DEBUGAPP2", TAG + "categoriaFragment: " + categoriaFragment);
-        if (categoriaFragment != null) {
-            Log.d("DEBUGAPP2", TAG + "categoriaFragment isAdded: " + categoriaFragment.isAdded());
-        }
-        Log.d("DEBUGAPP2", TAG + "pdiFragment: " + pdiFragment);
-        if (pdiFragment != null) {
-            Log.d("DEBUGAPP2", TAG + "pdiFragment isAdded: " + pdiFragment.isAdded());
-        }
-        Log.d("DEBUGAPP2", TAG + "googleMapsFragment: " + googleMapsFragment);
-        if (googleMapsFragment != null) {
-            Log.d("DEBUGAPP2", TAG + "googleMapsFragment isAdded: " + googleMapsFragment.isAdded());
-        }
-        Log.d("DEBUGAPP2", TAG + "openStreetMapFragment: " + categoriaFragment);
-        if (openStreetMapFragment != null) {
-            Log.d("DEBUGAPP2", TAG + "openStreetMapFragment isAdded: " + openStreetMapFragment.isAdded());
-        }
-
-        if (currentTabId != -1) {
-            Log.d("DEBUGAPP", TAG + "pdiFragment: " + pdiFragment);
-
-            //attivaTab(currentTabId);
-        }
     }
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
 
-        Log.d("DEBUGAPP", TAG + "onSaveInstanceState");
+        //Log.d("DEBUGAPP", TAG + "onSaveInstanceState");
 
         savedInstanceState.putSerializable("categoriaScelta", categoriaScelta);
         savedInstanceState.putInt("currentTabPosition", bottomBar.getCurrentTabPosition());
-        savedInstanceState.putInt("currentTabId", bottomBar.getCurrentTabId());
     }
 
     @Override
     public void onBackPressed() {
-        if (pdiFragment!= null && pdiFragment.isVisible()) {
+        if (pdiFragment != null && pdiFragment.isVisible()) {
             rimuoviPdiFragment();
         } else {
             this.finishAffinity();
@@ -149,18 +119,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-
-        // Checks the orientation of the screen
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
-            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
-        }
     }
     //endregion
 
@@ -180,10 +138,6 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.hide(categoriaFragment);
         fragmentTransaction.add(R.id.contentContainer, pdiFragment, "pdiFragment");
         fragmentTransaction.commit();
-
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
     }
 
     public void pdiScelto(String pdi) {
@@ -244,6 +198,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             break;
+
             case R.id.item_google_maps: {
                 nascondiCategoriaFragmentEFigli(fragmentTransaction);
                 nascondiOpenStreetMapFragment(fragmentTransaction);
@@ -257,6 +212,7 @@ public class MainActivity extends AppCompatActivity {
                 impostaActionBar(false, "Google Maps");
             }
             break;
+
             case R.id.item_open_street_map: {
                 nascondiCategoriaFragmentEFigli(fragmentTransaction);
                 nascondiGoogleMapsFragment(fragmentTransaction);

@@ -2,7 +2,6 @@ package dcsoft.somsipinzano;
 
 import android.content.Context;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
-import android.util.Log;
 
 class DatabaseHelper extends SQLiteAssetHelper {
     private static final String TAG = "DatabaseHelper ";
