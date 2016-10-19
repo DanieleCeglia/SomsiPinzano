@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 interface OpenStreetMapFragmentEseguiAlOnHiddenChanged {
     void esegui(boolean hidden, TextView tvOSM);
 }
@@ -42,7 +44,27 @@ public class OpenStreetMapFragment extends Fragment {
         //Log.d("DEBUGAPP", TAG + "onCreateView");
 
         openStreetMapFragmentView = inflater.inflate(R.layout.fragment_open_street_map, container, false);
+
+        if (savedInstanceState != null) {
+            //Log.d("DEBUGAPP", TAG + "savedInstanceState!!!!!!!!!!!!!");
+            
+            TextView tvOSM = (TextView) openStreetMapFragmentView.findViewById(R.id.tvOSM);
+
+            tvOSM.setText(savedInstanceState.getString("tvOSM_testo"));
+        }
+
         return openStreetMapFragmentView;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        //Log.d("DEBUGAPP", TAG + "onSaveInstanceState");
+
+        TextView tvOSM = (TextView) openStreetMapFragmentView.findViewById(R.id.tvOSM);
+
+        outState.putString("tvOSM_testo", tvOSM.getText().toString());
     }
 
     @Override
