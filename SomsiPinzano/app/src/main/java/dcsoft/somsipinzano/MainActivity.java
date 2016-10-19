@@ -18,10 +18,10 @@ import com.roughike.bottombar.OnTabSelectListener;
 
 public class MainActivity extends AppCompatActivity {
     public Categoria categoriaScelta;
+    public BottomBar bottomBar;
 
     private static final String TAG = "MainActivity ";
     private FragmentManager fragmentManager;
-    private BottomBar bottomBar;
     private ActionBar actionBar;
     private CategoriaFragment categoriaFragment;
     private PdiFragment pdiFragment;
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
         if (currentTabId != -1) {
             Log.d("DEBUGAPP", TAG + "pdiFragment: " + pdiFragment);
 
-            attivaTab(currentTabId);
+            //attivaTab(currentTabId);
         }
     }
 

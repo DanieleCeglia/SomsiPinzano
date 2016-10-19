@@ -77,7 +77,9 @@ public class PdiFragment extends Fragment {
 
         Log.d("DEBUGAPP", TAG + "onResume");
 
-        mainActivity.impostaActionBar(true, mainActivity.categoriaScelta.nome);
+        if (mainActivity.bottomBar.getCurrentTabId() == R.id.item_pdi) {
+            mainActivity.impostaActionBar(true, mainActivity.categoriaScelta.nome);
+        }
     }
 
     @Override
