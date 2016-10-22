@@ -5,10 +5,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+
+import org.osmdroid.api.IMapController;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapView;
 
 interface OpenStreetMapFragmentEseguiAlOnHiddenChanged {
-    void esegui(boolean hidden, TextView tvOSM);
+    void esegui(boolean hidden);
 }
 
 public class OpenStreetMapFragment extends Fragment {
@@ -27,12 +31,22 @@ public class OpenStreetMapFragment extends Fragment {
 
         openStreetMapFragmentView = inflater.inflate(R.layout.fragment_open_street_map, container, false);
 
+
+        org.osmdroid.tileprovider.constants.OpenStreetMapTileProviderConstants.setUserAgentValue(BuildConfig.APPLICATION_ID);
+
+        MapView map = (MapView) openStreetMapFragmentView.findViewById(R.id.map);
+        map.setTileSource(TileSourceFactory.MAPNIK);
+
+        map.setBuiltInZoomControls(true);
+        map.setMultiTouchControls(true);
+
+        IMapController mapController = map.getController();
+        mapController.setZoom(17);
+        GeoPoint startPoint = new GeoPoint(46.1822, 12.9452);
+        mapController.setCenter(startPoint);
+
         if (savedInstanceState != null) {
             //Log.d("DEBUGAPP", TAG + "onCreateView savedInstanceState != nul");
-
-            TextView tvOSM = (TextView) openStreetMapFragmentView.findViewById(R.id.tvOSM);
-
-            tvOSM.setText(savedInstanceState.getString("tvOSM_testo"));
         }
 
         return openStreetMapFragmentView;
@@ -43,20 +57,16 @@ public class OpenStreetMapFragment extends Fragment {
         super.onSaveInstanceState(outState);
 
         //Log.d("DEBUGAPP", TAG + "onSaveInstanceState");
-
-        TextView tvOSM = (TextView) openStreetMapFragmentView.findViewById(R.id.tvOSM);
-
-        outState.putString("tvOSM_testo", tvOSM.getText().toString());
     }
 
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
 
-        //Log.d("DEBUGAPP", TAG + "onCreateView");
+        //Log.d("DEBUGAPP", TAG + "onHiddenChanged");
 
         if (eseguiAlOnHiddenChanged != null) {
-            eseguiAlOnHiddenChanged.esegui(hidden, (TextView) openStreetMapFragmentView.findViewById(R.id.tvOSM));
+            eseguiAlOnHiddenChanged.esegui(hidden);
         }
     }
 }

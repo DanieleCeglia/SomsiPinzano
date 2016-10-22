@@ -13,7 +13,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.roughike.bottombar.BottomBar;
@@ -74,17 +73,23 @@ public class MainActivity extends AppCompatActivity {
         if (googleMapsFragment == null) {
             googleMapsFragment = new GoogleMapsFragment();
         }
+        googleMapsFragment.eseguiAlOnHiddenChanged = new GoogleMapsFragmentEseguiAlOnHiddenChanged() {
+            @Override
+            public void esegui(boolean hidden) {
+                if (!hidden) {
+                    Log.d("DEBUGAPP", TAG + "GoogleMapsFragmentEseguiAlOnHiddenChanged");
+                }
+            }
+        };
 
         if (openStreetMapFragment == null) {
             openStreetMapFragment = new OpenStreetMapFragment();
         }
         openStreetMapFragment.eseguiAlOnHiddenChanged = new OpenStreetMapFragmentEseguiAlOnHiddenChanged() {
             @Override
-            public void esegui(boolean hidden, TextView tvOSM) {
-                //Log.d("DEBUGAPP", TAG + "OpenStreetMapFragmentEseguiAlOnStart");
-
+            public void esegui(boolean hidden) {
                 if (!hidden) {
-                    tvOSM.append(" asd");
+                    Log.d("DEBUGAPP", TAG + "OpenStreetMapFragmentEseguiAlOnHiddenChanged");
                 }
             }
         };
