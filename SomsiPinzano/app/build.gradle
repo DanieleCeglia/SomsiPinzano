@@ -28,4 +28,5 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:24.2.1'
     compile 'com.roughike:bottom-bar:2.0.2'
     compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1'
+    compile 'org.osmdroid:osmdroid-android:5.5:release@aar'
 }

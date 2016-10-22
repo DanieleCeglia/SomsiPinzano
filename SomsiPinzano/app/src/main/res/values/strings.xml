@@ -2,4 +2,7 @@
     <string name="app_name">Vivi Pinzano</string>
     <string name="punti_di_interesse">Points of interest</string>
     <string name="Categorie">Categories</string>
+    <string name="messaggio_permessi_accettati">App all necessary permits have been accepted!</string>
+    <string name="messaggio_permesso_di_archiviazione_non_accettato">Storage permission not accepted: it is necessary to store map tiles to reduce data usage and for offline usage.</string>
+    <string name="messaggio_permesso_di_localizzazione_non_accettato">Storage permission not accepted: it is necessary to show the user&#8217;s location on map.</string>
 </resources>
