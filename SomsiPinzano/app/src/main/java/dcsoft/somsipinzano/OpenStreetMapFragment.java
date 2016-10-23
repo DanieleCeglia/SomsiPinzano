@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
@@ -18,6 +19,8 @@ interface OpenStreetMapFragmentEseguiAlOnHiddenChanged {
 public class OpenStreetMapFragment extends Fragment {
     private static final String TAG = "OpenStreetMapFragment ";
     private View openStreetMapFragmentView;
+    private MapView map;
+    private IMapController mapController;
 
     public OpenStreetMapFragmentEseguiAlOnHiddenChanged eseguiAlOnHiddenChanged;
 
@@ -31,22 +34,25 @@ public class OpenStreetMapFragment extends Fragment {
 
         openStreetMapFragmentView = inflater.inflate(R.layout.fragment_open_street_map, container, false);
 
-
-        org.osmdroid.tileprovider.constants.OpenStreetMapTileProviderConstants.setUserAgentValue(BuildConfig.APPLICATION_ID);
-
-        MapView map = (MapView) openStreetMapFragmentView.findViewById(R.id.map);
+        map = (MapView) openStreetMapFragmentView.findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
-
         map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);
 
         IMapController mapController = map.getController();
-        mapController.setZoom(17);
-        GeoPoint startPoint = new GeoPoint(46.1822, 12.9452);
-        mapController.setCenter(startPoint);
 
-        if (savedInstanceState != null) {
+        if (savedInstanceState == null) {
+            org.osmdroid.tileprovider.constants.OpenStreetMapTileProviderConstants.setUserAgentValue(BuildConfig.APPLICATION_ID);
+
+            mapController.setZoom(17);
+            GeoPoint startPoint = new GeoPoint(46.1822, 12.9452);
+            mapController.setCenter(startPoint);
+        } else {
             //Log.d("DEBUGAPP", TAG + "onCreateView savedInstanceState != nul");
+
+            mapController.setZoom(savedInstanceState.getInt("zoom"));
+            GeoPoint startPoint = new GeoPoint(savedInstanceState.getDouble("lat"), savedInstanceState.getDouble("lon"));
+            mapController.setCenter(startPoint);
         }
 
         return openStreetMapFragmentView;
@@ -57,6 +63,10 @@ public class OpenStreetMapFragment extends Fragment {
         super.onSaveInstanceState(outState);
 
         //Log.d("DEBUGAPP", TAG + "onSaveInstanceState");
+
+        outState.putInt("zoom", map.getZoomLevel());
+        outState.putDouble("lat", map.getMapCenter().getLatitude());
+        outState.putDouble("lon", map.getMapCenter().getLongitude());
     }
 
     @Override
