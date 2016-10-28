@@ -29,4 +29,5 @@ dependencies {
     compile 'com.roughike:bottom-bar:2.0.2'
     compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1'
     compile 'org.osmdroid:osmdroid-android:5.5:release@aar'
+    compile 'com.google.android.gms:play-services:9.8.00'
 }

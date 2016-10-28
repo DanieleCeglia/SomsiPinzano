@@ -33,7 +33,7 @@ public class OpenStreetMapFragment extends Fragment {
 
         openStreetMapFragmentView = inflater.inflate(R.layout.fragment_open_street_map, container, false);
 
-        map = (MapView) openStreetMapFragmentView.findViewById(R.id.map);
+        map = (MapView) openStreetMapFragmentView.findViewById(R.id.osmMap);
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);
@@ -44,7 +44,7 @@ public class OpenStreetMapFragment extends Fragment {
         if (savedInstanceState == null) {
             org.osmdroid.tileprovider.constants.OpenStreetMapTileProviderConstants.setUserAgentValue(BuildConfig.APPLICATION_ID);
 
-            mapController.setZoom(17);
+            mapController.setZoom(15);
             GeoPoint startPoint = new GeoPoint(46.1822, 12.9452);
             mapController.setCenter(startPoint);
         } else {

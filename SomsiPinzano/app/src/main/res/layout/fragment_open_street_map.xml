@@ -5,7 +5,7 @@
     tools:context="dcsoft.somsipinzano.OpenStreetMapFragment">
 
     <org.osmdroid.views.MapView
-        android:id="@+id/map"
+        android:id="@+id/osmMap"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
