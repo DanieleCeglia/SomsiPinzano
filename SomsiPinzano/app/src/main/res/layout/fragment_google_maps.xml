@@ -4,10 +4,8 @@
     android:layout_height="match_parent"
     tools:context="dcsoft.somsipinzano.GoogleMapsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/gmMapView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Google Maps" />
-
+        android:layout_height="match_parent" />
 </FrameLayout>

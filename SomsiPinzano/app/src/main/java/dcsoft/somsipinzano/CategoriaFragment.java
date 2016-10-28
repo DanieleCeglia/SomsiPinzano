@@ -25,7 +25,7 @@ public class CategoriaFragment extends Fragment {
 
         //Log.d("DEBUGAPP", TAG + "onAttach");
 
-        if (context instanceof MainActivity){
+        if (context instanceof MainActivity) {
             mainActivity = (MainActivity) context;
         }
     }

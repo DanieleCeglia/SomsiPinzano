@@ -18,7 +18,7 @@ interface OpenStreetMapFragmentEseguiAlOnHiddenChanged {
 public class OpenStreetMapFragment extends Fragment {
     private static final String TAG = "OpenStreetMapFragment ";
     private View openStreetMapFragmentView;
-    private MapView map;
+    private MapView osmMap;
     private IMapController mapController;
 
     public OpenStreetMapFragmentEseguiAlOnHiddenChanged eseguiAlOnHiddenChanged;
@@ -33,13 +33,13 @@ public class OpenStreetMapFragment extends Fragment {
 
         openStreetMapFragmentView = inflater.inflate(R.layout.fragment_open_street_map, container, false);
 
-        map = (MapView) openStreetMapFragmentView.findViewById(R.id.osmMap);
-        map.setTileSource(TileSourceFactory.MAPNIK);
-        map.setBuiltInZoomControls(true);
-        map.setMultiTouchControls(true);
-        map.setTilesScaledToDpi(true);
+        osmMap = (MapView) openStreetMapFragmentView.findViewById(R.id.osmMap);
+        osmMap.setTileSource(TileSourceFactory.MAPNIK);
+        osmMap.setBuiltInZoomControls(true);
+        osmMap.setMultiTouchControls(true);
+        osmMap.setTilesScaledToDpi(true);
 
-        IMapController mapController = map.getController();
+        IMapController mapController = osmMap.getController();
 
         if (savedInstanceState == null) {
             org.osmdroid.tileprovider.constants.OpenStreetMapTileProviderConstants.setUserAgentValue(BuildConfig.APPLICATION_ID);
@@ -64,9 +64,9 @@ public class OpenStreetMapFragment extends Fragment {
 
         //Log.d("DEBUGAPP", TAG + "onSaveInstanceState");
 
-        outState.putInt("zoom", map.getZoomLevel());
-        outState.putDouble("lat", map.getMapCenter().getLatitude());
-        outState.putDouble("lon", map.getMapCenter().getLongitude());
+        outState.putInt("zoom", osmMap.getZoomLevel());
+        outState.putDouble("lat", osmMap.getMapCenter().getLatitude());
+        outState.putDouble("lon", osmMap.getMapCenter().getLongitude());
     }
 
     @Override
