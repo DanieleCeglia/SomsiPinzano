@@ -23,6 +23,9 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
     private View googleMapsFragmentView;
     private MapView mMapView;
     private GoogleMap gmMap;
+    private float zoom = -1;
+    private double lat = -1;
+    private double lon = -1;
 
     public GoogleMapsFragmentEseguiAlOnHiddenChanged eseguiAlOnHiddenChanged;
 
@@ -36,14 +39,18 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
 
         googleMapsFragmentView = inflater.inflate(R.layout.fragment_google_maps, container, false);
 
-        if (savedInstanceState != null) {
-            //Log.d("DEBUGAPP", TAG + "onCreateView savedInstanceState != nul");
-        }
-
         mMapView = (MapView) googleMapsFragmentView.findViewById(R.id.gmMapView);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume(); // serve per far vedere la mappa immediatamente
         mMapView.getMapAsync(this);
+
+        if (savedInstanceState != null) {
+            //Log.d("DEBUGAPP", TAG + "onCreateView savedInstanceState != nul");
+
+            zoom = savedInstanceState.getFloat("zoom");
+            lat = savedInstanceState.getDouble("lat");
+            lon = savedInstanceState.getDouble("lon");
+        }
 
         return googleMapsFragmentView;
     }
@@ -53,6 +60,10 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
         super.onSaveInstanceState(outState);
 
         //Log.d("DEBUGAPP", TAG + "onSaveInstanceState");
+
+        outState.putFloat("zoom", gmMap.getCameraPosition().zoom);
+        outState.putDouble("lat", gmMap.getCameraPosition().target.latitude);
+        outState.putDouble("lon", gmMap.getCameraPosition().target.longitude);
     }
 
     @Override
@@ -81,6 +92,15 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
 
         LatLng pinzano = new LatLng(46.1822, 12.9452);
         gmMap.addMarker(new MarkerOptions().position(pinzano).title("Pinzano al Tagliamento"));
-        gmMap.moveCamera(CameraUpdateFactory.newLatLng(pinzano));
+
+        if (lat == -1) {
+            gmMap.moveCamera(CameraUpdateFactory.newLatLng(pinzano));
+            gmMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+        } else {
+            LatLng centroMappaSalvato = new LatLng(lat, lon);
+
+            gmMap.moveCamera(CameraUpdateFactory.newLatLng(centroMappaSalvato));
+            gmMap.animateCamera(CameraUpdateFactory.zoomTo(zoom));
+        }
     }
 }

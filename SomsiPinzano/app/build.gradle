@@ -6,11 +6,10 @@ android {
 
     defaultConfig {
         applicationId "dcsoft.somsipinzano"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -30,5 +29,5 @@ dependencies {
     compile 'com.roughike:bottom-bar:2.0.2'
     compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1'
     compile 'org.osmdroid:osmdroid-android:5.5:release@aar'
-    compile 'com.google.android.gms:play-services:9.8.00'
+    compile 'com.google.android.gms:play-services-maps:9.8.0'
 }
