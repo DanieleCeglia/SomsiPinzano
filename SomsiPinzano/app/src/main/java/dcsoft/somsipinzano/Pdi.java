@@ -15,6 +15,9 @@ class Pdi implements Serializable {
     double latitudine;
     double longitudine;
     String fileImmagine;
+    String titoloLinkGenerico;
+    String linkGenerico;
+    String linkVideo;
 
     @Override
     public String toString() {
@@ -31,6 +34,9 @@ class Pdi implements Serializable {
                 "\nlatitudine: " + latitudine +
                 "\nlongitudine: " + longitudine +
                 "\nfileImmagine: " + fileImmagine +
+                "\ntitoloLinkGenerico: " + titoloLinkGenerico +
+                "\nlinkGenerico: " + linkGenerico +
+                "\nlinkVideo: " + linkVideo +
                 "\n\n";
     }
 }

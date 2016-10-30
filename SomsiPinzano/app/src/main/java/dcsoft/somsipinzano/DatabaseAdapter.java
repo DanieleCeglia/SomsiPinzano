@@ -71,18 +71,21 @@ class DatabaseAdapter {
             while (!cursor.isAfterLast()) {
                 Pdi pdi = new Pdi();
 
-                pdi.idPdi             = cursor.getInt(0);
-                pdi.idPdi_idCategoria = cursor.getInt(1);
-                pdi.titolo            = cursor.getString(2);
-                pdi.descrizione       = cursor.getString(3);
-                pdi.citta             = cursor.getString(4);
-                pdi.via               = cursor.getString(5);
-                pdi.numeroCivico      = cursor.getInt(6);
-                pdi.interno           = cursor.getString(7);
-                pdi.cap               = cursor.getInt(8);
-                pdi.latitudine        = cursor.getDouble(9);
-                pdi.longitudine       = cursor.getDouble(10);
-                pdi.fileImmagine      = cursor.getString(11);
+                pdi.idPdi              = cursor.getInt(0);
+                pdi.idPdi_idCategoria  = cursor.getInt(1);
+                pdi.titolo             = cursor.getString(2);
+                pdi.descrizione        = cursor.getString(3);
+                pdi.citta              = cursor.getString(4);
+                pdi.via                = cursor.getString(5);
+                pdi.numeroCivico       = cursor.getInt(6);
+                pdi.interno            = cursor.getString(7);
+                pdi.cap                = cursor.getInt(8);
+                pdi.latitudine         = cursor.getDouble(9);
+                pdi.longitudine        = cursor.getDouble(10);
+                pdi.fileImmagine       = cursor.getString(11);
+                pdi.titoloLinkGenerico = cursor.getString(12);
+                pdi.linkGenerico       = cursor.getString(13);
+                pdi.linkVideo          = cursor.getString(14);
 
                 list.add(pdi);
 
