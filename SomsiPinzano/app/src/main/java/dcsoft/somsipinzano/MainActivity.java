@@ -27,6 +27,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     public BottomBar bottomBar;
     public Categoria categoriaScelta;
+    public Pdi pdiScelto;
 
     private static final String TAG = "MainActivity ";
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private ActionBar actionBar;
     private CategoriaFragment categoriaFragment;
     private PdiFragment pdiFragment;
+    private PdiDettaglioFragment pdiDettaglioFragment;
     private GoogleMapsFragment googleMapsFragment;
     private OpenStreetMapFragment openStreetMapFragment;
 
@@ -61,9 +63,11 @@ public class MainActivity extends AppCompatActivity {
             //Log.d("DEBUGAPP", TAG + "onCreate savedInstanceState != nul");
 
             categoriaScelta = (Categoria) savedInstanceState.getSerializable("categoriaScelta");
+            pdiScelto       = (Pdi)       savedInstanceState.getSerializable("pdiScelto");
 
             categoriaFragment     = (CategoriaFragment)     fragmentManager.findFragmentByTag("categoriaFragment");
             pdiFragment           = (PdiFragment)           fragmentManager.findFragmentByTag("pdiFragment");
+            pdiDettaglioFragment  = (PdiDettaglioFragment)  fragmentManager.findFragmentByTag("pdiDettaglioFragment");
             googleMapsFragment    = (GoogleMapsFragment)    fragmentManager.findFragmentByTag("googleMapsFragment");
             openStreetMapFragment = (OpenStreetMapFragment) fragmentManager.findFragmentByTag("openStreetMapFragment");
 
@@ -150,12 +154,15 @@ public class MainActivity extends AppCompatActivity {
         //Log.d("DEBUGAPP", TAG + "onSaveInstanceState");
 
         savedInstanceState.putSerializable("categoriaScelta", categoriaScelta);
+        savedInstanceState.putSerializable("pdiScelto", pdiScelto);
         savedInstanceState.putInt("currentTabPosition", bottomBar.getCurrentTabPosition());
     }
 
     @Override
     public void onBackPressed() {
-        if (pdiFragment != null && pdiFragment.isVisible()) {
+        if (pdiDettaglioFragment != null && pdiDettaglioFragment.isVisible()) {
+            rimuoviPdiDettaglioFragment();
+        } else if (pdiFragment != null && pdiFragment.isVisible()) {
             rimuoviPdiFragment();
         } else {
             this.finishAffinity();
@@ -166,7 +173,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home: {
-                rimuoviPdiFragment();
+                if (pdiDettaglioFragment != null && pdiDettaglioFragment.isVisible()) {
+                    rimuoviPdiDettaglioFragment();
+                } else {
+                    rimuoviPdiFragment();
+                }
 
                 return true;
             }
@@ -194,8 +205,14 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    public void pdiScelto(String pdi) {
-        Log.d("DEBUGAPP", TAG + "pdiScelto: " + pdi);
+    public void pdiScelto(Pdi pdi) {
+        pdiScelto = pdi;
+        pdiDettaglioFragment = new PdiDettaglioFragment();
+
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.hide(pdiFragment);
+        fragmentTransaction.add(R.id.contentContainer, pdiDettaglioFragment, "pdiDettaglioFragment");
+        fragmentTransaction.commit();
     }
     //endregion
 
@@ -219,28 +236,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void nascondiCategoriaFragment(FragmentTransaction fragmentTransaction) {
-        if (categoriaFragment!= null && categoriaFragment.isAdded()) {
+        if (categoriaFragment != null && categoriaFragment.isAdded()) {
             fragmentTransaction.hide(categoriaFragment);
         }
     }
+
     private void nascondiPdiFragment(FragmentTransaction fragmentTransaction) {
-        if (pdiFragment!= null && pdiFragment.isAdded()) {
+        if (pdiFragment != null && pdiFragment.isAdded()) {
             fragmentTransaction.hide(pdiFragment);
         }
     }
+
+    private void nascondiPdiDettaglioFragment(FragmentTransaction fragmentTransaction) {
+        if (pdiDettaglioFragment != null && pdiDettaglioFragment.isAdded()) {
+            fragmentTransaction.hide(pdiDettaglioFragment);
+        }
+    }
+
     private void nascondiCategoriaFragmentEFigli(FragmentTransaction fragmentTransaction) {
         nascondiCategoriaFragment(fragmentTransaction);
         nascondiPdiFragment(fragmentTransaction);
+        nascondiPdiDettaglioFragment(fragmentTransaction);
     }
 
     private void nascondiGoogleMapsFragment(FragmentTransaction fragmentTransaction) {
-        if (googleMapsFragment!= null && googleMapsFragment.isAdded()) {
+        if (googleMapsFragment != null && googleMapsFragment.isAdded()) {
             fragmentTransaction.hide(googleMapsFragment);
         }
     }
 
     private void nascondiOpenStreetMapFragment(FragmentTransaction fragmentTransaction) {
-        if (openStreetMapFragment!= null && openStreetMapFragment.isAdded()) {
+        if (openStreetMapFragment != null && openStreetMapFragment.isAdded()) {
             fragmentTransaction.hide(openStreetMapFragment);
         }
     }
@@ -253,7 +279,13 @@ public class MainActivity extends AppCompatActivity {
                 nascondiGoogleMapsFragment(fragmentTransaction);
                 nascondiOpenStreetMapFragment(fragmentTransaction);
 
-                if (pdiFragment != null && pdiFragment.isAdded()) {
+                if (pdiDettaglioFragment != null && pdiDettaglioFragment.isAdded()) {
+                    nascondiPdiFragment(fragmentTransaction);
+
+                    fragmentTransaction.show(pdiDettaglioFragment);
+
+                    impostaActionBar(true, pdiScelto.titolo);
+                } else if (pdiFragment != null && pdiFragment.isAdded()) {
                     nascondiCategoriaFragment(fragmentTransaction);
 
                     fragmentTransaction.show(pdiFragment);
@@ -311,6 +343,17 @@ public class MainActivity extends AppCompatActivity {
         pdiFragment = null;
 
         impostaActionBar(false, getResources().getString(R.string.Categorie));
+    }
+
+    private void rimuoviPdiDettaglioFragment() {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.remove(pdiDettaglioFragment);
+        fragmentTransaction.show(pdiFragment);
+        fragmentTransaction.commit();
+
+        pdiDettaglioFragment = null;
+
+        impostaActionBar(true, categoriaScelta.nome);
     }
     //endregion
 }

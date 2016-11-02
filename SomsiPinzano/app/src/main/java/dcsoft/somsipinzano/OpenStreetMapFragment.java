@@ -48,7 +48,7 @@ public class OpenStreetMapFragment extends Fragment {
             GeoPoint startPoint = new GeoPoint(46.1822, 12.9452);
             mapController.setCenter(startPoint);
         } else {
-            //Log.d("DEBUGAPP", TAG + "onCreateView savedInstanceState != nul");
+            //Log.d("DEBUGAPP", TAG + "onCreateView savedInstanceState != null");
 
             mapController.setZoom(savedInstanceState.getInt("zoom"));
             GeoPoint startPoint = new GeoPoint(savedInstanceState.getDouble("lat"), savedInstanceState.getDouble("lon"));

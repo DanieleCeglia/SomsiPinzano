@@ -48,7 +48,7 @@ public class PdiFragment extends Fragment {
                 pdi = databaseAdapter.dammiPdiPerCategoria(mainActivity.categoriaScelta.idCategoria);
                 databaseAdapter.chiudiConnessioneDatabase();
             } else {
-                //Log.d("DEBUGAPP", TAG + "onCreateView savedInstanceState != nul");
+                //Log.d("DEBUGAPP", TAG + "onCreateView savedInstanceState != null");
 
                 pdi = (ArrayList<Pdi>) savedInstanceState.getSerializable("pdi"); // @SuppressWarnings("unchecked")
             }

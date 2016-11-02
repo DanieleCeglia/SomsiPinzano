@@ -10,6 +10,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -45,7 +46,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
         mMapView.getMapAsync(this);
 
         if (savedInstanceState != null) {
-            //Log.d("DEBUGAPP", TAG + "onCreateView savedInstanceState != nul");
+            //Log.d("DEBUGAPP", TAG + "onCreateView savedInstanceState != null");
 
             zoom = savedInstanceState.getFloat("zoom");
             lat = savedInstanceState.getDouble("lat");
@@ -61,9 +62,15 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
 
         //Log.d("DEBUGAPP", TAG + "onSaveInstanceState");
 
-        outState.putFloat("zoom", gmMap.getCameraPosition().zoom);
-        outState.putDouble("lat", gmMap.getCameraPosition().target.latitude);
-        outState.putDouble("lon", gmMap.getCameraPosition().target.longitude);
+        if (gmMap != null) {
+            CameraPosition cameraPosition = gmMap.getCameraPosition();
+
+            if (cameraPosition != null) {
+                outState.putFloat("zoom", gmMap.getCameraPosition().zoom);
+                outState.putDouble("lat", gmMap.getCameraPosition().target.latitude);
+                outState.putDouble("lon", gmMap.getCameraPosition().target.longitude);
+            }
+        }
     }
 
     @Override

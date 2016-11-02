@@ -34,7 +34,7 @@ class PdiRecyclerViewAdapter extends RecyclerView.Adapter<PdiRecyclerViewAdapter
             @Override
             public void onClick(View v) {
                 if (null != mainActivity) {
-                    mainActivity.pdiScelto(holder.toString());
+                    mainActivity.pdiScelto(holder.pdi);
                 }
             }
         });

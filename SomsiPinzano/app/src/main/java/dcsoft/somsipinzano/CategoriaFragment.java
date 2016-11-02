@@ -48,7 +48,7 @@ public class CategoriaFragment extends Fragment {
                 categorie = databaseAdapter.dammiCategorie();
                 databaseAdapter.chiudiConnessioneDatabase();
             } else {
-                //Log.d("DEBUGAPP", TAG + "onCreateView savedInstanceState != nul");
+                //Log.d("DEBUGAPP", TAG + "onCreateView savedInstanceState != null");
 
                 categorie = (ArrayList<Categoria>) savedInstanceState.getSerializable("categorie"); // @SuppressWarnings("unchecked")
             }
