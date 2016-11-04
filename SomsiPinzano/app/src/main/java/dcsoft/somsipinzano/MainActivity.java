@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void esegui(boolean hidden) {
                 if (!hidden) {
-                    Log.d("DEBUGAPP", TAG + "GoogleMapsFragmentEseguiAlOnHiddenChanged");
+                    //Log.d("DEBUGAPP", TAG + "GoogleMapsFragmentEseguiAlOnHiddenChanged");
                 }
             }
         };
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void esegui(boolean hidden) {
                 if (!hidden) {
-                    Log.d("DEBUGAPP", TAG + "OpenStreetMapFragmentEseguiAlOnHiddenChanged");
+                    //Log.d("DEBUGAPP", TAG + "OpenStreetMapFragmentEseguiAlOnHiddenChanged");
                 }
             }
         };
