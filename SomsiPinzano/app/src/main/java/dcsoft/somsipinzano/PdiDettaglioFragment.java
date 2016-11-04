@@ -61,8 +61,9 @@ public class PdiDettaglioFragment extends Fragment {
 
         if (mainActivity.bottomBar.getCurrentTabId() == R.id.item_pdi) {
             mainActivity.impostaActionBar(true, mainActivity.pdiScelto.titolo);
-            testDettaglioPdi.setText(mainActivity.pdiScelto.descrizione);
         }
+
+        testDettaglioPdi.setText(mainActivity.pdiScelto.descrizione);
     }
 
     @Override
