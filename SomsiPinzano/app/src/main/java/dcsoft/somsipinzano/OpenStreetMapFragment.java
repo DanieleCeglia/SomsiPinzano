@@ -1,6 +1,7 @@
 package dcsoft.somsipinzano;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,10 @@ import org.osmdroid.api.IMapController;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.compass.CompassOverlay;
+import org.osmdroid.views.overlay.compass.InternalCompassOrientationProvider;
+import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
+import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 interface OpenStreetMapFragmentEseguiAlOnHiddenChanged {
     void esegui(boolean hidden);
@@ -17,14 +22,28 @@ interface OpenStreetMapFragmentEseguiAlOnHiddenChanged {
 
 public class OpenStreetMapFragment extends Fragment {
     private static final String TAG = "OpenStreetMapFragment ";
+    private MainActivity mainActivity;
     private View openStreetMapFragmentView;
     private MapView osmMap;
+    private CompassOverlay compassOverlay;
+    private MyLocationNewOverlay locationOverlay;
     private IMapController mapController;
 
     public OpenStreetMapFragmentEseguiAlOnHiddenChanged eseguiAlOnHiddenChanged;
 
     public OpenStreetMapFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        //Log.d("DEBUGAPP", TAG + "onAttach");
+
+        if (context instanceof MainActivity){
+            mainActivity = (MainActivity) context;
+        }
     }
 
     @Override
@@ -38,6 +57,18 @@ public class OpenStreetMapFragment extends Fragment {
         osmMap.setBuiltInZoomControls(true);
         osmMap.setMultiTouchControls(true);
         osmMap.setTilesScaledToDpi(true);
+
+        compassOverlay = new CompassOverlay(mainActivity, new InternalCompassOrientationProvider(mainActivity), osmMap);
+        compassOverlay.enableCompass();
+        osmMap.getOverlays().add(compassOverlay);
+
+        //GpsMyLocationProvider gpsLocationProvider = new GpsMyLocationProvider(mainActivity);
+        //gpsLocationProvider.setLocationUpdateMinTime(1000);
+        //gpsLocationProvider.setLocationUpdateMinDistance(1);
+
+        locationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(mainActivity), osmMap);
+        locationOverlay.enableMyLocation();
+        osmMap.getOverlays().add(locationOverlay);
 
         IMapController mapController = osmMap.getController();
 
@@ -78,5 +109,14 @@ public class OpenStreetMapFragment extends Fragment {
         if (eseguiAlOnHiddenChanged != null) {
             eseguiAlOnHiddenChanged.esegui(hidden);
         }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+
+        //Log.d("DEBUGAPP", TAG + "onDetach");
+
+        mainActivity = null;
     }
 }

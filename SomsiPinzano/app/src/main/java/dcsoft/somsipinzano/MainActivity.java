@@ -3,6 +3,7 @@ package dcsoft.somsipinzano;
 import android.Manifest;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
@@ -131,13 +133,30 @@ public class MainActivity extends AppCompatActivity {
 
                 if (location && storage) {
                     Toast.makeText(MainActivity.this,  getResources().getString(R.string.messaggio_permessi_accettati), Toast.LENGTH_SHORT).show();
-                } else if (location) {
-                    Toast.makeText(this, getResources().getString(R.string.messaggio_permesso_di_archiviazione_non_accettato), Toast.LENGTH_LONG).show();
-                } else if (storage) {
-                    Toast.makeText(this, getResources().getString(R.string.messaggio_permesso_di_localizzazione_non_accettato), Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(MainActivity.this, getResources().getString(R.string.messaggio_permesso_di_archiviazione_non_accettato) + "\n\n"
-                            + getResources().getString(R.string.messaggio_permesso_di_localizzazione_non_accettato), Toast.LENGTH_LONG).show();
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+                    alertDialogBuilder.setCancelable(true);
+
+                    if (location) {
+                        alertDialogBuilder.setMessage(getResources().getString(R.string.messaggio_permesso_di_archiviazione_non_accettato));
+                    } else if (storage) {
+                        alertDialogBuilder.setMessage(getResources().getString(R.string.messaggio_permesso_di_localizzazione_non_accettato));
+                    } else {
+                        alertDialogBuilder.setMessage(getResources().getString(R.string.messaggio_permesso_di_archiviazione_non_accettato)
+                                + "\n\n"
+                                + getResources().getString(R.string.messaggio_permesso_di_localizzazione_non_accettato));
+                    }
+
+                    alertDialogBuilder.setNeutralButton(
+                            "Ok",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
                 }
             }
             break;

@@ -1,7 +1,11 @@
 package dcsoft.somsipinzano;
 
+import android.Manifest;
 import android.app.Fragment;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +36,17 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
 
     public GoogleMapsFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        //Log.d("DEBUGAPP", TAG + "onAttach");
+
+        if (context instanceof MainActivity){
+            mainActivity = (MainActivity) context;
+        }
     }
 
     @Override
@@ -97,6 +112,12 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         gmMap = googleMap;
 
+        if (ActivityCompat.checkSelfPermission(mainActivity, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                &&
+                ActivityCompat.checkSelfPermission(mainActivity, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            gmMap.setMyLocationEnabled(true);
+        }
+
         LatLng pinzano = new LatLng(46.1822, 12.9452);
         gmMap.addMarker(new MarkerOptions().position(pinzano).title("Pinzano al Tagliamento"));
 
@@ -109,5 +130,14 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
             gmMap.moveCamera(CameraUpdateFactory.newLatLng(centroMappaSalvato));
             gmMap.animateCamera(CameraUpdateFactory.zoomTo(zoom));
         }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+
+        //Log.d("DEBUGAPP", TAG + "onDetach");
+
+        mainActivity = null;
     }
 }
