@@ -5,8 +5,10 @@ import java.io.Serializable;
 class Pdi implements Serializable {
     int idPdi;
     int idPdi_idCategoria;
-    String titolo;
-    String descrizione;
+    String titoloItaliano;
+    String titoloInglese;
+    String descrizioneItaliano;
+    String descrizioneInglese;
     String citta;
     String via;
     int numeroCivico;
@@ -15,7 +17,8 @@ class Pdi implements Serializable {
     double latitudine;
     double longitudine;
     String fileImmagine;
-    String titoloLinkGenerico;
+    String titoloLinkGenericoItaliano;
+    String titoloLinkGenericoInglese;
     String linkGenerico;
     String linkVideo;
 
@@ -24,8 +27,10 @@ class Pdi implements Serializable {
         return "\n" +
                 "\nidPdi: " + idPdi +
                 "\nidPdi_idCategoria: " + idPdi_idCategoria +
-                "\ntitolo: " + titolo +
-                "\ndescrizione: " + descrizione +
+                "\ntitoloItaliano: " + titoloItaliano +
+                "\ntitoloInglese: " + titoloInglese +
+                "\ndescrizioneItaliano: " + descrizioneItaliano +
+                "\ndescrizioneInglese: " + descrizioneInglese +
                 "\ncitta: " + citta +
                 "\nvia: " + via +
                 "\nnumeroCivico: " + numeroCivico +
@@ -34,7 +39,8 @@ class Pdi implements Serializable {
                 "\nlatitudine: " + latitudine +
                 "\nlongitudine: " + longitudine +
                 "\nfileImmagine: " + fileImmagine +
-                "\ntitoloLinkGenerico: " + titoloLinkGenerico +
+                "\ntitoloLinkGenericoItaliano: " + titoloLinkGenericoItaliano +
+                "\ntitoloLinkGenericoInglese: " + titoloLinkGenericoInglese +
                 "\nlinkGenerico: " + linkGenerico +
                 "\nlinkVideo: " + linkVideo +
                 "\n\n";

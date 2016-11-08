@@ -4,15 +4,19 @@ import java.io.Serializable;
 
 class Categoria implements Serializable {
     int idCategoria;
-    String nome;
+    String nomeItaliano;
+    String nomeInglese;
     String fileImmagine;
+    String coloreEsadecimale;
 
     @Override
     public String toString() {
         return "\n" +
                 "\nidCategoria: " + idCategoria +
-                "\nnome: " + nome +
+                "\nnomeItaliano: " + nomeItaliano +
+                "\nnomeInglese: " + nomeInglese +
                 "\nfileImmagine: " + fileImmagine +
+                "\ncoloreEsadecimale: " + coloreEsadecimale +
                 "\n\n";
     }
 }

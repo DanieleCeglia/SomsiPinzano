@@ -70,13 +70,37 @@ public class PdiDettaglioFragment extends Fragment {
         //Log.d("DEBUGAPP", TAG + "onResume");
 
         if (mainActivity.bottomBar.getCurrentTabId() == R.id.item_pdi) {
-            mainActivity.impostaActionBar(true, mainActivity.pdiScelto.titolo);
+            switch (mainActivity.databaseAdapter.getLingua()) {
+                case "italiano": {
+                    mainActivity.impostaActionBar(true, mainActivity.pdiScelto.titoloItaliano);
+                }
+                break;
+
+                default: {
+                    mainActivity.impostaActionBar(true, mainActivity.pdiScelto.titoloInglese);
+                }
+            }
         }
 
-        if (mainActivity.pdiScelto.descrizione != null) {
-            tvDescrizione.setText(mainActivity.pdiScelto.descrizione);
-        } else {
-            tvDescrizione.setText("");
+        switch (mainActivity.databaseAdapter.getLingua()) {
+            case "italiano": {
+
+                if (mainActivity.pdiScelto.descrizioneItaliano != null) {
+                    tvDescrizione.setText(mainActivity.pdiScelto.descrizioneItaliano);
+                } else {
+                    tvDescrizione.setText("");
+                }
+            }
+            break;
+
+            default: {
+
+                if (mainActivity.pdiScelto.descrizioneInglese != null) {
+                    tvDescrizione.setText(mainActivity.pdiScelto.descrizioneInglese);
+                } else {
+                    tvDescrizione.setText("");
+                }
+            }
         }
 
         if (mainActivity.pdiScelto.fileImmagine != null) {

@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     public BottomBar bottomBar;
     public Categoria categoriaScelta;
     public Pdi pdiScelto;
+    public DatabaseAdapter databaseAdapter;
 
     private static final String TAG = "MainActivity ";
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
@@ -106,13 +107,14 @@ public class MainActivity extends AppCompatActivity {
                 attivaTab(tabId);
             }
         });
-
         bottomBar.setOnTabReselectListener(new OnTabReselectListener() {
             @Override
             public void onTabReSelected(@IdRes int tabId) {
                 attivaTab(tabId);
             }
         });
+
+        databaseAdapter = DatabaseAdapter.dammiDbHelperCondiviso(this);
     }
 
     @Override
@@ -303,13 +305,31 @@ public class MainActivity extends AppCompatActivity {
 
                     fragmentTransaction.show(pdiDettaglioFragment);
 
-                    impostaActionBar(true, pdiScelto.titolo);
+                    switch (databaseAdapter.getLingua()) {
+                        case "italiano": {
+                            impostaActionBar(true, pdiScelto.titoloItaliano);
+                        }
+                        break;
+
+                        default: {
+                            impostaActionBar(true, pdiScelto.titoloInglese);
+                        }
+                    }
                 } else if (pdiFragment != null && pdiFragment.isAdded()) {
                     nascondiCategoriaFragment(fragmentTransaction);
 
                     fragmentTransaction.show(pdiFragment);
 
-                    impostaActionBar(true, categoriaScelta.nome);
+                    switch (databaseAdapter.getLingua()) {
+                        case "italiano": {
+                            impostaActionBar(true, categoriaScelta.nomeItaliano);
+                        }
+                        break;
+
+                        default: {
+                            impostaActionBar(true, categoriaScelta.nomeInglese);
+                        }
+                    }
                 } else {
                     if (categoriaFragment.isAdded()) {
                         fragmentTransaction.show(categoriaFragment);
@@ -372,7 +392,16 @@ public class MainActivity extends AppCompatActivity {
 
         pdiDettaglioFragment = null;
 
-        impostaActionBar(true, categoriaScelta.nome);
+        switch (databaseAdapter.getLingua()) {
+            case "italiano": {
+                impostaActionBar(true, categoriaScelta.nomeItaliano);
+            }
+            break;
+
+            default: {
+                impostaActionBar(true, categoriaScelta.nomeInglese);
+            }
+        }
     }
     //endregion
 }

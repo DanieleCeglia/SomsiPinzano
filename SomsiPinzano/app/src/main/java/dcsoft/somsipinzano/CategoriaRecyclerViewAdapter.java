@@ -27,7 +27,16 @@ class CategoriaRecyclerViewAdapter extends RecyclerView.Adapter<CategoriaRecycle
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.tvTitoloCategoria.setText(categorie.get(position).nome);
+        switch (mainActivity.databaseAdapter.getLingua()) {
+            case "italiano": {
+                holder.tvTitoloCategoria.setText(categorie.get(position).nomeItaliano);
+            }
+            break;
+
+            default: {
+                holder.tvTitoloCategoria.setText(categorie.get(position).nomeInglese);
+            }
+        }
         holder.categoria = categorie.get(position);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
