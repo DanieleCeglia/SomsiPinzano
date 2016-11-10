@@ -72,15 +72,15 @@ class DatabaseAdapter {
         return list;
     }
 
-    ArrayList<Categoria> dammiCategoria(int idCategoria) {
-        ArrayList<Categoria> list = new ArrayList<>();
+    Categoria dammiCategoria(int idCategoria) {
+        Categoria categoria = null;
 
         if (database != null) {
             Cursor cursor = database.rawQuery("SELECT * FROM CATEGORIA WHERE idCategoria = " + idCategoria, null);
             cursor.moveToFirst();
 
             while (!cursor.isAfterLast()) {
-                Categoria categoria = new Categoria();
+                categoria = new Categoria();
 
                 categoria.idCategoria       = cursor.getInt(0);
                 categoria.nomeItaliano      = cursor.getString(1);
@@ -88,14 +88,54 @@ class DatabaseAdapter {
                 categoria.fileImmagine      = cursor.getString(3);
                 categoria.coloreEsadecimale = cursor.getString(4);
 
-                list.add(categoria);
-
                 cursor.moveToNext();
             }
 
             cursor.close();
         } else {
             Log.d("DEBUGAPP", TAG + "[dammiCategorie] Connessione NON aperta!");
+        }
+
+        return categoria;
+    }
+
+    ArrayList<Pdi> dammiPdi() {
+        ArrayList<Pdi> list = new ArrayList<>();
+
+        if (database != null) {
+            Cursor cursor = database.rawQuery("SELECT * FROM PDI", null);
+            cursor.moveToFirst();
+
+            while (!cursor.isAfterLast()) {
+                Pdi pdi = new Pdi();
+
+                pdi.idPdi                      = cursor.getInt(0);
+                pdi.idPdi_idCategoria          = cursor.getInt(1);
+                pdi.titoloItaliano             = cursor.getString(2);
+                pdi.titoloInglese              = cursor.getString(3);
+                pdi.descrizioneItaliano        = cursor.getString(4);
+                pdi.descrizioneInglese         = cursor.getString(5);
+                pdi.citta                      = cursor.getString(6);
+                pdi.via                        = cursor.getString(7);
+                pdi.numeroCivico               = cursor.getInt(8);
+                pdi.interno                    = cursor.getString(9);
+                pdi.cap                        = cursor.getInt(10);
+                pdi.latitudine                 = cursor.getDouble(11);
+                pdi.longitudine                = cursor.getDouble(12);
+                pdi.fileImmagine               = cursor.getString(13);
+                pdi.titoloLinkGenericoItaliano = cursor.getString(14);
+                pdi.titoloLinkGenericoInglese  = cursor.getString(15);
+                pdi.linkGenerico               = cursor.getString(16);
+                pdi.linkVideo                  = cursor.getString(17);
+
+                list.add(pdi);
+
+                cursor.moveToNext();
+            }
+
+            cursor.close();
+        } else {
+            Log.d("DEBUGAPP", TAG + "[dammiPdiPerCategoria] Connessione NON aperta!");
         }
 
         return list;

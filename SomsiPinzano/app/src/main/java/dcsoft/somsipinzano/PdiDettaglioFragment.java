@@ -84,7 +84,6 @@ public class PdiDettaglioFragment extends Fragment {
 
         switch (mainActivity.databaseAdapter.getLingua()) {
             case "italiano": {
-
                 if (mainActivity.pdiScelto.descrizioneItaliano != null) {
                     tvDescrizione.setText(mainActivity.pdiScelto.descrizioneItaliano);
                 } else {
@@ -94,7 +93,6 @@ public class PdiDettaglioFragment extends Fragment {
             break;
 
             default: {
-
                 if (mainActivity.pdiScelto.descrizioneInglese != null) {
                     tvDescrizione.setText(mainActivity.pdiScelto.descrizioneInglese);
                 } else {

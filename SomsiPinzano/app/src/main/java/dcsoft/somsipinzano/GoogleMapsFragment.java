@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
@@ -14,9 +15,13 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.ArrayList;
 
 interface GoogleMapsFragmentEseguiAlOnHiddenChanged {
     void esegui(boolean hidden);
@@ -31,6 +36,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
     private float zoom = -1;
     private double lat = -1;
     private double lon = -1;
+    private ArrayList<Pdi> listaPdi;
 
     public GoogleMapsFragmentEseguiAlOnHiddenChanged eseguiAlOnHiddenChanged;
 
@@ -38,6 +44,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
         // Required empty public constructor
     }
 
+    //region Metodi override
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -112,6 +119,9 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         gmMap = googleMap;
 
+        mainActivity.databaseAdapter.apriConnesioneDatabase();
+        listaPdi = mainActivity.databaseAdapter.dammiPdi();
+
         if (ActivityCompat.checkSelfPermission(mainActivity, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 &&
                 ActivityCompat.checkSelfPermission(mainActivity, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -130,6 +140,33 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
             gmMap.moveCamera(CameraUpdateFactory.newLatLng(centroMappaSalvato));
             gmMap.animateCamera(CameraUpdateFactory.zoomTo(zoom));
         }
+
+        for (int i = 0; i < listaPdi.size(); i++) {
+            Pdi pdi = listaPdi.get(i);
+
+            LatLng posizione = new LatLng(pdi.latitudine, pdi.longitudine);
+            MarkerOptions markerOptions = new MarkerOptions().position(posizione);
+
+            Categoria categoria = mainActivity.databaseAdapter.dammiCategoria(pdi.idPdi_idCategoria);
+            if (categoria != null) {
+                markerOptions.icon(getMarkerIcon("#" + categoria.coloreEsadecimale));
+            }
+
+            switch (mainActivity.databaseAdapter.getLingua()) {
+                case "italiano": {
+                    markerOptions.title(pdi.titoloItaliano);
+                }
+                break;
+
+                default: {
+                    markerOptions.title(pdi.titoloInglese);
+                }
+            }
+
+            gmMap.addMarker(markerOptions);
+        }
+
+        mainActivity.databaseAdapter.chiudiConnessioneDatabase();
     }
 
     @Override
@@ -140,4 +177,15 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
 
         mainActivity = null;
     }
+    //endregion
+
+    //region Metodi privati
+    public BitmapDescriptor getMarkerIcon(String color) {
+        float[] hsv = new float[3];
+
+        Color.colorToHSV(Color.parseColor(color), hsv);
+
+        return BitmapDescriptorFactory.defaultMarker(hsv[0]);
+    }
+    //endregion
 }
