@@ -129,7 +129,6 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
         }
 
         LatLng pinzano = new LatLng(46.1822, 12.9452);
-        gmMap.addMarker(new MarkerOptions().position(pinzano).title("Pinzano al Tagliamento"));
 
         if (lat == -1) {
             gmMap.moveCamera(CameraUpdateFactory.newLatLng(pinzano));
