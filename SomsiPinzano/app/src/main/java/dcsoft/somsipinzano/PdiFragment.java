@@ -44,7 +44,7 @@ public class PdiFragment extends Fragment {
 
             if (savedInstanceState == null) {
                 mainActivity.databaseAdapter.apriConnesioneDatabase();
-                pdi = mainActivity.databaseAdapter.dammiPdiPerCategoria(mainActivity.categoriaScelta.idCategoria);
+                pdi = mainActivity.databaseAdapter.dammiPdiPerCategoria(mainActivity.categoriaScelta.getIdCategoria());
                 mainActivity.databaseAdapter.chiudiConnessioneDatabase();
             } else {
                 //Log.d("DEBUGAPP", TAG + "onCreateView savedInstanceState != null");
@@ -76,12 +76,12 @@ public class PdiFragment extends Fragment {
         if (mainActivity.bottomBar.getCurrentTabId() == R.id.item_pdi) {
             switch (mainActivity.databaseAdapter.getLingua()) {
                 case "italiano": {
-                    mainActivity.impostaActionBar(true, mainActivity.categoriaScelta.nomeItaliano);
+                    mainActivity.impostaActionBar(true, mainActivity.categoriaScelta.getNomeItaliano());
                 }
                 break;
 
                 default: {
-                    mainActivity.impostaActionBar(true, mainActivity.categoriaScelta.nomeInglese);
+                    mainActivity.impostaActionBar(true, mainActivity.categoriaScelta.getNomeInglese());
                 }
             }
         }

@@ -148,7 +148,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
 
             Categoria categoria = mainActivity.databaseAdapter.dammiCategoria(pdi.idPdi_idCategoria);
             if (categoria != null) {
-                markerOptions.icon(getMarkerIcon("#" + categoria.coloreEsadecimale));
+                markerOptions.icon(getMarkerIcon("#" + categoria.getColoreEsadecimale()));
             }
 
             switch (mainActivity.databaseAdapter.getLingua()) {

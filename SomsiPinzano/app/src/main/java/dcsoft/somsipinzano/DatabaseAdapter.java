@@ -51,13 +51,7 @@ class DatabaseAdapter {
             cursor.moveToFirst();
 
             while (!cursor.isAfterLast()) {
-                Categoria categoria = new Categoria();
-
-                categoria.idCategoria       = cursor.getInt(0);
-                categoria.nomeItaliano      = cursor.getString(1);
-                categoria.nomeInglese       = cursor.getString(2);
-                categoria.fileImmagine      = cursor.getString(3);
-                categoria.coloreEsadecimale = cursor.getString(4);
+                Categoria categoria = new Categoria(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
 
                 list.add(categoria);
 
@@ -80,13 +74,7 @@ class DatabaseAdapter {
             cursor.moveToFirst();
 
             while (!cursor.isAfterLast()) {
-                categoria = new Categoria();
-
-                categoria.idCategoria       = cursor.getInt(0);
-                categoria.nomeItaliano      = cursor.getString(1);
-                categoria.nomeInglese       = cursor.getString(2);
-                categoria.fileImmagine      = cursor.getString(3);
-                categoria.coloreEsadecimale = cursor.getString(4);
+                categoria = new Categoria(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
 
                 cursor.moveToNext();
             }

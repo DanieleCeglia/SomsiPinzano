@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
         //Log.d("DEBUGAPP", TAG + "onCreate");
 
+        databaseAdapter = DatabaseAdapter.dammiDbHelperCondiviso(this);
+
         controllaPermessi();
 
         setContentView(R.layout.activity_main);
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             //Log.d("DEBUGAPP", TAG + "onCreate savedInstanceState != nul");
 
-            categoriaScelta = (Categoria) savedInstanceState.getSerializable("categoriaScelta");
+            categoriaScelta = (Categoria) savedInstanceState.getParcelable("categoriaScelta");
             pdiScelto       = (Pdi)       savedInstanceState.getSerializable("pdiScelto");
 
             categoriaFragment     = (CategoriaFragment)     fragmentManager.findFragmentByTag("categoriaFragment");
@@ -113,8 +115,6 @@ public class MainActivity extends AppCompatActivity {
                 attivaTab(tabId);
             }
         });
-
-        databaseAdapter = DatabaseAdapter.dammiDbHelperCondiviso(this);
     }
 
     @Override
@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Log.d("DEBUGAPP", TAG + "onSaveInstanceState");
 
-        savedInstanceState.putSerializable("categoriaScelta", categoriaScelta);
+        savedInstanceState.putParcelable("categoriaScelta", categoriaScelta);
         savedInstanceState.putSerializable("pdiScelto", pdiScelto);
         savedInstanceState.putInt("currentTabPosition", bottomBar.getCurrentTabPosition());
     }
@@ -322,12 +322,12 @@ public class MainActivity extends AppCompatActivity {
 
                     switch (databaseAdapter.getLingua()) {
                         case "italiano": {
-                            impostaActionBar(true, categoriaScelta.nomeItaliano);
+                            impostaActionBar(true, categoriaScelta.getNomeItaliano());
                         }
                         break;
 
                         default: {
-                            impostaActionBar(true, categoriaScelta.nomeInglese);
+                            impostaActionBar(true, categoriaScelta.getNomeInglese());
                         }
                     }
                 } else {
@@ -394,12 +394,12 @@ public class MainActivity extends AppCompatActivity {
 
         switch (databaseAdapter.getLingua()) {
             case "italiano": {
-                impostaActionBar(true, categoriaScelta.nomeItaliano);
+                impostaActionBar(true, categoriaScelta.getNomeItaliano());
             }
             break;
 
             default: {
-                impostaActionBar(true, categoriaScelta.nomeInglese);
+                impostaActionBar(true, categoriaScelta.getNomeInglese());
             }
         }
     }

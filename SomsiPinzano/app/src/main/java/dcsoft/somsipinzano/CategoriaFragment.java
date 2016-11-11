@@ -49,7 +49,7 @@ public class CategoriaFragment extends Fragment {
             } else {
                 //Log.d("DEBUGAPP", TAG + "onCreateView savedInstanceState != null");
 
-                categorie = (ArrayList<Categoria>) savedInstanceState.getSerializable("categorie"); // @SuppressWarnings("unchecked")
+                categorie = savedInstanceState.getParcelableArrayList("categorie"); // @SuppressWarnings("unchecked")
             }
 
             recyclerView.setAdapter(new CategoriaRecyclerViewAdapter(categorie, mainActivity));
@@ -64,7 +64,7 @@ public class CategoriaFragment extends Fragment {
 
         //Log.d("DEBUGAPP", TAG + "onSaveInstanceState");
 
-        outState.putSerializable("categorie", categorie);
+        outState.putParcelableArrayList("categorie", categorie);
     }
 
     @Override
