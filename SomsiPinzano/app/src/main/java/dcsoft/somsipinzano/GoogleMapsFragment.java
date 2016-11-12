@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,6 +102,8 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
 
         //Log.d("DEBUGAPP", TAG + "onHiddenChanged");
 
+        zoommaSuPdiSceltoSeNecessario();
+
         if (eseguiAlOnHiddenChanged != null) {
             eseguiAlOnHiddenChanged.esegui(hidden);
         }
@@ -117,6 +120,8 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        Log.d("DEBUGAPP", TAG + "onMapReady");
+
         gmMap = googleMap;
 
         mainActivity.databaseAdapter.apriConnesioneDatabase();
@@ -130,14 +135,16 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
 
         LatLng pinzano = new LatLng(46.1822, 12.9452);
 
-        if (lat == -1) {
-            gmMap.moveCamera(CameraUpdateFactory.newLatLng(pinzano));
-            gmMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-        } else {
-            LatLng centroMappaSalvato = new LatLng(lat, lon);
+        if (!zoommaSuPdiSceltoSeNecessario()) {
+            if (lat == -1) {
+                gmMap.moveCamera(CameraUpdateFactory.newLatLng(pinzano));
+                gmMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+            } else {
+                LatLng centroMappaSalvato = new LatLng(lat, lon);
 
-            gmMap.moveCamera(CameraUpdateFactory.newLatLng(centroMappaSalvato));
-            gmMap.animateCamera(CameraUpdateFactory.zoomTo(zoom));
+                gmMap.moveCamera(CameraUpdateFactory.newLatLng(centroMappaSalvato));
+                gmMap.animateCamera(CameraUpdateFactory.zoomTo(zoom));
+            }
         }
 
         for (int i = 0; i < listaPdi.size(); i++) {
@@ -179,12 +186,27 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
     //endregion
 
     //region Metodi privati
-    public BitmapDescriptor getMarkerIcon(String color) {
+    private BitmapDescriptor getMarkerIcon(String color) {
         float[] hsv = new float[3];
 
         Color.colorToHSV(Color.parseColor(color), hsv);
 
         return BitmapDescriptorFactory.defaultMarker(hsv[0]);
+    }
+
+    private boolean zoommaSuPdiSceltoSeNecessario() {
+        if (mainActivity.vediPdiSceltoSuGM) {
+            mainActivity.vediPdiSceltoSuGM = false;
+
+            LatLng pdiDaZoommare = new LatLng(mainActivity.pdiScelto.getLatitudine(), mainActivity.pdiScelto.getLongitudine());
+
+            gmMap.moveCamera(CameraUpdateFactory.newLatLng(pdiDaZoommare));
+            gmMap.animateCamera(CameraUpdateFactory.zoomTo(19));
+
+            return true;
+        }
+
+        return false;
     }
     //endregion
 }

@@ -5,4 +5,6 @@
     <string name="messaggio_permessi_accettati">Tutti i permessi necessari all&#8217;app sono stati accettati!</string>
     <string name="messaggio_permesso_di_archiviazione_non_accettato">PERMESSO DI ARCHIVIAZIONE NON ACCETTATO\nÈ necessario per memorizzare i tiles della mappa al fine di ridurre l&#8217;utilizzo dei dati internet e per l&#8217;utilizzo offline.\n*** Non accettando questo permesso la mappa OpenStreetMaps non sarà disponibile. ***</string>
     <string name="messaggio_permesso_di_localizzazione_non_accettato">PERMESSO DI LOCALIZZAZIONE NON ACCETTATO\nÈ necessario per mostrare la posizione dell&#8217;utente sulla mappa.</string>
+    <string name="vedi_su_google_maps">Vedi su Google Maps</string>
+    <string name="vedi_su_openstreetmap">Vedi su OpenStreetMap</string>
 </resources>

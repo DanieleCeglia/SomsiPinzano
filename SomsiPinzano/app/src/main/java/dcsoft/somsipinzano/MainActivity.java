@@ -27,10 +27,12 @@ import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
+    public DatabaseAdapter databaseAdapter;
     public BottomBar bottomBar;
     public Categoria categoriaScelta;
     public Pdi pdiScelto;
-    public DatabaseAdapter databaseAdapter;
+    public Boolean vediPdiSceltoSuGM;
+    public Boolean vediPdiSceltoSuOSM;
 
     private static final String TAG = "MainActivity ";
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
@@ -60,12 +62,18 @@ public class MainActivity extends AppCompatActivity {
         actionBar = getSupportActionBar();
 
         if (savedInstanceState == null) {
+            vediPdiSceltoSuGM  = false;
+            vediPdiSceltoSuOSM = false;
+
             categoriaScelta = null;
 
             categoriaFragment     = new CategoriaFragment();
             pdiFragment           = null;
         } else {
-            //Log.d("DEBUGAPP", TAG + "onCreate savedInstanceState != nul");
+            //Log.d("DEBUGAPP", TAG + "onCreate savedInstanceState != null");
+
+            vediPdiSceltoSuGM  = savedInstanceState.getBoolean("vediPdiSceltoSuGM");
+            vediPdiSceltoSuOSM = savedInstanceState.getBoolean("vediPdiSceltoSuOSM");
 
             categoriaScelta = (Categoria) savedInstanceState.getParcelable("categoriaScelta");
             pdiScelto       = (Pdi)       savedInstanceState.getParcelable("pdiScelto");
@@ -86,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void esegui(boolean hidden) {
                 if (!hidden) {
-                    //Log.d("DEBUGAPP", TAG + "GoogleMapsFragmentEseguiAlOnHiddenChanged");
+                    Log.d("DEBUGAPP", TAG + "GoogleMapsFragmentEseguiAlOnHiddenChanged");
                 }
             }
         };
@@ -98,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void esegui(boolean hidden) {
                 if (!hidden) {
-                    //Log.d("DEBUGAPP", TAG + "OpenStreetMapFragmentEseguiAlOnHiddenChanged");
+                    Log.d("DEBUGAPP", TAG + "OpenStreetMapFragmentEseguiAlOnHiddenChanged");
                 }
             }
         };
@@ -174,9 +182,11 @@ public class MainActivity extends AppCompatActivity {
 
         //Log.d("DEBUGAPP", TAG + "onSaveInstanceState");
 
+        savedInstanceState.putBoolean("vediPdiSceltoSuGM", vediPdiSceltoSuGM);
+        savedInstanceState.putBoolean("vediPdiSceltoSuOSM", vediPdiSceltoSuOSM);
+        savedInstanceState.putInt("currentTabPosition", bottomBar.getCurrentTabPosition());
         savedInstanceState.putParcelable("categoriaScelta", categoriaScelta);
         savedInstanceState.putParcelable("pdiScelto", pdiScelto);
-        savedInstanceState.putInt("currentTabPosition", bottomBar.getCurrentTabPosition());
     }
 
     @Override
@@ -234,6 +244,17 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.hide(pdiFragment);
         fragmentTransaction.add(R.id.contentContainer, pdiDettaglioFragment, "pdiDettaglioFragment");
         fragmentTransaction.commit();
+    }
+
+    public void vediPdiSceltoSuGM() {
+        vediPdiSceltoSuGM = true;
+        bottomBar.selectTabAtPosition(1);
+    }
+
+
+    public void vediPdiSceltoSuOSM() {
+        vediPdiSceltoSuOSM = true;
+        bottomBar.selectTabAtPosition(2);
     }
     //endregion
 

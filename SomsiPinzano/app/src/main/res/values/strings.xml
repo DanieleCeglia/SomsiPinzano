@@ -5,7 +5,6 @@
     <string name="messaggio_permessi_accettati">App all necessary permits have been accepted!</string>
     <string name="messaggio_permesso_di_archiviazione_non_accettato">STORAGE PERMISSION NOT ACCEPTED: it is necessary to store map tiles to reduce data usage and for offline usage.\n*** Not accepting this permit the map OpenStreetMaps will not be available. ***</string>
     <string name="messaggio_permesso_di_localizzazione_non_accettato">STORAGE PERMISSION NOT ACCEPTED: it is necessary to show the user&#8217;s location on map.</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="vedi_su_google_maps">See on Google Maps</string>
+    <string name="vedi_su_openstreetmap">See on OpenStreetMap</string>
 </resources>

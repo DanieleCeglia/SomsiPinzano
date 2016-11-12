@@ -2,10 +2,13 @@ package dcsoft.somsipinzano;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -18,6 +21,8 @@ public class PdiDettaglioFragment extends Fragment {
     private ScrollView svContenitore;
     private TextView tvDescrizione;
     private ImageView ivImmagine;
+    private Button bVediSuGM;
+    private Button bVediSuOSM;
 
     public PdiDettaglioFragment() {
         // Required empty public constructor
@@ -40,9 +45,33 @@ public class PdiDettaglioFragment extends Fragment {
 
         pdiDettaglioFragmentView = inflater.inflate(R.layout.fragment_pdi_dettaglio, container, false);
 
-        svContenitore = (ScrollView)  pdiDettaglioFragmentView.findViewById(R.id.svContenitore);
-        tvDescrizione = (TextView)  pdiDettaglioFragmentView.findViewById(R.id.tvDescrizione);
-        ivImmagine    = (ImageView) pdiDettaglioFragmentView.findViewById(R.id.ivImmagine);
+        svContenitore = (ScrollView) pdiDettaglioFragmentView.findViewById(R.id.svContenitore);
+        tvDescrizione = (TextView)   pdiDettaglioFragmentView.findViewById(R.id.tvDescrizione);
+        ivImmagine    = (ImageView)  pdiDettaglioFragmentView.findViewById(R.id.ivImmagine);
+        bVediSuGM     = (Button)     pdiDettaglioFragmentView.findViewById(R.id.bVediSuGM);
+        bVediSuOSM    = (Button)     pdiDettaglioFragmentView.findViewById(R.id.bVediSuOSM);
+
+        if (bVediSuGM != null) {
+            bVediSuGM.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mainActivity.vediPdiSceltoSuGM();
+                        }
+                    }
+            );
+        }
+
+        if (bVediSuOSM != null) {
+            bVediSuOSM.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mainActivity.vediPdiSceltoSuOSM();
+                        }
+                    }
+            );
+        }
 
         if (savedInstanceState == null) {
         } else {
