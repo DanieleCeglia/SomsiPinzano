@@ -35,6 +35,7 @@ public class OpenStreetMapFragment extends Fragment {
         // Required empty public constructor
     }
 
+    //region Metodi override
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -70,20 +71,24 @@ public class OpenStreetMapFragment extends Fragment {
         locationOverlay.enableMyLocation();
         osmMap.getOverlays().add(locationOverlay);
 
-        IMapController mapController = osmMap.getController();
+        mapController = osmMap.getController();
 
         if (savedInstanceState == null) {
             org.osmdroid.tileprovider.constants.OpenStreetMapTileProviderConstants.setUserAgentValue(BuildConfig.APPLICATION_ID);
 
-            mapController.setZoom(15);
-            GeoPoint startPoint = new GeoPoint(46.1822, 12.9452);
-            mapController.setCenter(startPoint);
+            if (!zoommaSuPdiSceltoSeNecessario()) {
+                mapController.setZoom(15);
+                GeoPoint startPoint = new GeoPoint(46.1822, 12.9452);
+                mapController.setCenter(startPoint);
+            }
         } else {
             //Log.d("DEBUGAPP", TAG + "onCreateView savedInstanceState != null");
 
-            mapController.setZoom(savedInstanceState.getInt("zoom"));
-            GeoPoint startPoint = new GeoPoint(savedInstanceState.getDouble("lat"), savedInstanceState.getDouble("lon"));
-            mapController.setCenter(startPoint);
+            if (!zoommaSuPdiSceltoSeNecessario()) {
+                mapController.setZoom(savedInstanceState.getInt("zoom"));
+                GeoPoint startPoint = new GeoPoint(savedInstanceState.getDouble("lat"), savedInstanceState.getDouble("lon"));
+                mapController.setCenter(startPoint);
+            }
         }
 
         return openStreetMapFragmentView;
@@ -106,6 +111,8 @@ public class OpenStreetMapFragment extends Fragment {
 
         //Log.d("DEBUGAPP", TAG + "onHiddenChanged");
 
+        zoommaSuPdiSceltoSeNecessario();
+
         if (eseguiAlOnHiddenChanged != null) {
             eseguiAlOnHiddenChanged.esegui(hidden);
         }
@@ -119,4 +126,21 @@ public class OpenStreetMapFragment extends Fragment {
 
         mainActivity = null;
     }
+    //endregion
+
+    //region Metodi privati
+    private boolean zoommaSuPdiSceltoSeNecessario() {
+        if (mainActivity.vediPdiSceltoSuOSM) {
+            mainActivity.vediPdiSceltoSuOSM = false;
+
+            mapController.setZoom(18);
+            GeoPoint startPoint = new GeoPoint(mainActivity.pdiScelto.getLatitudine(), mainActivity.pdiScelto.getLongitudine());
+            mapController.setCenter(startPoint);
+
+            return true;
+        }
+
+        return false;
+    }
+    //endregion
 }

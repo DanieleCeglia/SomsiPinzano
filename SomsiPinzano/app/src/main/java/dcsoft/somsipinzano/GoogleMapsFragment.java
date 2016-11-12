@@ -120,7 +120,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        Log.d("DEBUGAPP", TAG + "onMapReady");
+        //Log.d("DEBUGAPP", TAG + "onMapReady");
 
         gmMap = googleMap;
 
@@ -201,7 +201,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
             LatLng pdiDaZoommare = new LatLng(mainActivity.pdiScelto.getLatitudine(), mainActivity.pdiScelto.getLongitudine());
 
             gmMap.moveCamera(CameraUpdateFactory.newLatLng(pdiDaZoommare));
-            gmMap.animateCamera(CameraUpdateFactory.zoomTo(19));
+            gmMap.animateCamera(CameraUpdateFactory.zoomTo(18));
 
             return true;
         }
