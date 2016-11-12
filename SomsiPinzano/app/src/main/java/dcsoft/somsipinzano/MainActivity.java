@@ -256,53 +256,30 @@ public class MainActivity extends AppCompatActivity {
         } // else: ci sono già i permessi, quindi non c'è niente da fare!
     }
 
-    private void nascondiCategoriaFragment(FragmentTransaction fragmentTransaction) {
-        if (categoriaFragment != null && categoriaFragment.isAdded()) {
-            fragmentTransaction.hide(categoriaFragment);
-        }
-    }
-
-    private void nascondiPdiFragment(FragmentTransaction fragmentTransaction) {
-        if (pdiFragment != null && pdiFragment.isAdded()) {
-            fragmentTransaction.hide(pdiFragment);
-        }
-    }
-
-    private void nascondiPdiDettaglioFragment(FragmentTransaction fragmentTransaction) {
-        if (pdiDettaglioFragment != null && pdiDettaglioFragment.isAdded()) {
-            fragmentTransaction.hide(pdiDettaglioFragment);
-        }
-    }
-
-    private void nascondiCategoriaFragmentEFigli(FragmentTransaction fragmentTransaction) {
-        nascondiCategoriaFragment(fragmentTransaction);
-        nascondiPdiFragment(fragmentTransaction);
-        nascondiPdiDettaglioFragment(fragmentTransaction);
-    }
-
-    private void nascondiGoogleMapsFragment(FragmentTransaction fragmentTransaction) {
-        if (googleMapsFragment != null && googleMapsFragment.isAdded()) {
-            fragmentTransaction.hide(googleMapsFragment);
-        }
-    }
-
-    private void nascondiOpenStreetMapFragment(FragmentTransaction fragmentTransaction) {
-        if (openStreetMapFragment != null && openStreetMapFragment.isAdded()) {
-            fragmentTransaction.hide(openStreetMapFragment);
-        }
-    }
-
     private void attivaTab(int tabId) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
+        // per prima cosa nascondo tutti i fragment (se esistenti e già aggiunti)...
+        if (categoriaFragment != null && categoriaFragment.isAdded()) {
+            fragmentTransaction.hide(categoriaFragment);
+        }
+        if (pdiFragment != null && pdiFragment.isAdded()) {
+            fragmentTransaction.hide(pdiFragment);
+        }
+        if (pdiDettaglioFragment != null && pdiDettaglioFragment.isAdded()) {
+            fragmentTransaction.hide(pdiDettaglioFragment);
+        }
+        if (googleMapsFragment != null && googleMapsFragment.isAdded()) {
+            fragmentTransaction.hide(googleMapsFragment);
+        }
+        if (openStreetMapFragment != null && openStreetMapFragment.isAdded()) {
+            fragmentTransaction.hide(openStreetMapFragment);
+        }
+
+        // poi vedo chi mostrare o addirittura aggiungere...
         switch (tabId) {
             case R.id.item_pdi: {
-                nascondiGoogleMapsFragment(fragmentTransaction);
-                nascondiOpenStreetMapFragment(fragmentTransaction);
-
                 if (pdiDettaglioFragment != null && pdiDettaglioFragment.isAdded()) {
-                    nascondiPdiFragment(fragmentTransaction);
-
                     fragmentTransaction.show(pdiDettaglioFragment);
 
                     switch (databaseAdapter.getLingua()) {
@@ -316,8 +293,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 } else if (pdiFragment != null && pdiFragment.isAdded()) {
-                    nascondiCategoriaFragment(fragmentTransaction);
-
                     fragmentTransaction.show(pdiFragment);
 
                     switch (databaseAdapter.getLingua()) {
@@ -331,7 +306,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 } else {
-                    if (categoriaFragment.isAdded()) {
+                    if (categoriaFragment != null && categoriaFragment.isAdded()) {
                         fragmentTransaction.show(categoriaFragment);
                     } else {
                         fragmentTransaction.add(R.id.contentContainer, categoriaFragment, "categoriaFragment");
@@ -343,10 +318,7 @@ public class MainActivity extends AppCompatActivity {
             break;
 
             case R.id.item_google_maps: {
-                nascondiCategoriaFragmentEFigli(fragmentTransaction);
-                nascondiOpenStreetMapFragment(fragmentTransaction);
-
-                if (googleMapsFragment.isAdded()) {
+                if (googleMapsFragment != null && googleMapsFragment.isAdded()) {
                     fragmentTransaction.show(googleMapsFragment);
                 } else {
                     fragmentTransaction.add(R.id.contentContainer, googleMapsFragment, "googleMapsFragment");
@@ -357,10 +329,7 @@ public class MainActivity extends AppCompatActivity {
             break;
 
             case R.id.item_open_street_map: {
-                nascondiCategoriaFragmentEFigli(fragmentTransaction);
-                nascondiGoogleMapsFragment(fragmentTransaction);
-
-                if (openStreetMapFragment.isAdded()) {
+                if (openStreetMapFragment != null && openStreetMapFragment.isAdded()) {
                     fragmentTransaction.show(openStreetMapFragment);
                 } else {
                     fragmentTransaction.add(R.id.contentContainer, openStreetMapFragment, "openStreetMapFragment");
