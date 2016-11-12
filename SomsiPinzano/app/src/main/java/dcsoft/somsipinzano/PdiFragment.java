@@ -49,7 +49,7 @@ public class PdiFragment extends Fragment {
             } else {
                 //Log.d("DEBUGAPP", TAG + "onCreateView savedInstanceState != null");
 
-                pdi = (ArrayList<Pdi>) savedInstanceState.getSerializable("pdi"); // @SuppressWarnings("unchecked")
+                pdi = savedInstanceState.getParcelableArrayList("pdi"); // @SuppressWarnings("unchecked")
             }
 
             recyclerView.setAdapter(new PdiRecyclerViewAdapter(pdi, mainActivity));
@@ -64,7 +64,7 @@ public class PdiFragment extends Fragment {
 
         //Log.d("DEBUGAPP", TAG + "onSaveInstanceState");
 
-        outState.putSerializable("pdi", pdi);
+        outState.putParcelableArrayList("pdi", pdi);
     }
 
     @Override

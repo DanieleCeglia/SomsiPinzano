@@ -72,20 +72,20 @@ public class PdiDettaglioFragment extends Fragment {
         if (mainActivity.bottomBar.getCurrentTabId() == R.id.item_pdi) {
             switch (mainActivity.databaseAdapter.getLingua()) {
                 case "italiano": {
-                    mainActivity.impostaActionBar(true, mainActivity.pdiScelto.titoloItaliano);
+                    mainActivity.impostaActionBar(true, mainActivity.pdiScelto.getTitoloItaliano());
                 }
                 break;
 
                 default: {
-                    mainActivity.impostaActionBar(true, mainActivity.pdiScelto.titoloInglese);
+                    mainActivity.impostaActionBar(true, mainActivity.pdiScelto.getTitoloInglese());
                 }
             }
         }
 
         switch (mainActivity.databaseAdapter.getLingua()) {
             case "italiano": {
-                if (mainActivity.pdiScelto.descrizioneItaliano != null) {
-                    tvDescrizione.setText(mainActivity.pdiScelto.descrizioneItaliano);
+                if (mainActivity.pdiScelto.getDescrizioneItaliano() != null) {
+                    tvDescrizione.setText(mainActivity.pdiScelto.getDescrizioneItaliano());
                 } else {
                     tvDescrizione.setText("");
                 }
@@ -93,16 +93,16 @@ public class PdiDettaglioFragment extends Fragment {
             break;
 
             default: {
-                if (mainActivity.pdiScelto.descrizioneInglese != null) {
-                    tvDescrizione.setText(mainActivity.pdiScelto.descrizioneInglese);
+                if (mainActivity.pdiScelto.getDescrizioneInglese() != null) {
+                    tvDescrizione.setText(mainActivity.pdiScelto.getDescrizioneInglese());
                 } else {
                     tvDescrizione.setText("");
                 }
             }
         }
 
-        if (mainActivity.pdiScelto.fileImmagine != null) {
-            String nomeFileSenzaEstensione = mainActivity.pdiScelto.fileImmagine.substring(0, mainActivity.pdiScelto.fileImmagine.lastIndexOf('.'));
+        if (mainActivity.pdiScelto.getFileImmagine() != null) {
+            String nomeFileSenzaEstensione = mainActivity.pdiScelto.getFileImmagine().substring(0, mainActivity.pdiScelto.getFileImmagine().lastIndexOf('.'));
             String packageName = mainActivity.getPackageName();
             ivImmagine.setImageResource(getResources().getIdentifier(nomeFileSenzaEstensione, "drawable", packageName));
         }

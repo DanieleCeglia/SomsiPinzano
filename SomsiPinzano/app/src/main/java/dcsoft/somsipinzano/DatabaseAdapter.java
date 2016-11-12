@@ -51,7 +51,12 @@ class DatabaseAdapter {
             cursor.moveToFirst();
 
             while (!cursor.isAfterLast()) {
-                Categoria categoria = new Categoria(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
+                Categoria categoria = new Categoria(
+                        cursor.getInt(0),     // idCategoria
+                        cursor.getString(1),  // nomeItaliano
+                        cursor.getString(2),  // nomeInglese
+                        cursor.getString(3),  // fileImmagine
+                        cursor.getString(4)); // coloreEsadecimale
 
                 list.add(categoria);
 
@@ -74,7 +79,12 @@ class DatabaseAdapter {
             cursor.moveToFirst();
 
             while (!cursor.isAfterLast()) {
-                categoria = new Categoria(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
+                categoria = new Categoria(
+                        cursor.getInt(0),     // idCategoria
+                        cursor.getString(1),  // nomeItaliano
+                        cursor.getString(2),  // nomeInglese
+                        cursor.getString(3),  // fileImmagine
+                        cursor.getString(4)); // coloreEsadecimale
 
                 cursor.moveToNext();
             }
@@ -95,26 +105,25 @@ class DatabaseAdapter {
             cursor.moveToFirst();
 
             while (!cursor.isAfterLast()) {
-                Pdi pdi = new Pdi();
-
-                pdi.idPdi                      = cursor.getInt(0);
-                pdi.idPdi_idCategoria          = cursor.getInt(1);
-                pdi.titoloItaliano             = cursor.getString(2);
-                pdi.titoloInglese              = cursor.getString(3);
-                pdi.descrizioneItaliano        = cursor.getString(4);
-                pdi.descrizioneInglese         = cursor.getString(5);
-                pdi.citta                      = cursor.getString(6);
-                pdi.via                        = cursor.getString(7);
-                pdi.numeroCivico               = cursor.getInt(8);
-                pdi.interno                    = cursor.getString(9);
-                pdi.cap                        = cursor.getInt(10);
-                pdi.latitudine                 = cursor.getDouble(11);
-                pdi.longitudine                = cursor.getDouble(12);
-                pdi.fileImmagine               = cursor.getString(13);
-                pdi.titoloLinkGenericoItaliano = cursor.getString(14);
-                pdi.titoloLinkGenericoInglese  = cursor.getString(15);
-                pdi.linkGenerico               = cursor.getString(16);
-                pdi.linkVideo                  = cursor.getString(17);
+                Pdi pdi = new Pdi(
+                        cursor.getInt(0),      // idPdi
+                        cursor.getInt(1),      // idPdi_idCategoria
+                        cursor.getString(2),   // titoloItaliano
+                        cursor.getString(3),   // titoloInglese
+                        cursor.getString(4),   // descrizioneItaliano
+                        cursor.getString(5),   // descrizioneInglese
+                        cursor.getString(6),   // citta
+                        cursor.getString(7),   // via
+                        cursor.getInt(8),      // numeroCivico
+                        cursor.getString(9),   // interno
+                        cursor.getInt(10),     // cap
+                        cursor.getDouble(11),  // latitudine
+                        cursor.getDouble(12),  // longitudine
+                        cursor.getString(13),  // fileImmagine
+                        cursor.getString(14),  // titoloLinkGenericoItaliano
+                        cursor.getString(15),  // titoloLinkGenericoInglese
+                        cursor.getString(16),  // linkGenerico
+                        cursor.getString(17)); // linkVideo
 
                 list.add(pdi);
 
@@ -137,26 +146,25 @@ class DatabaseAdapter {
             cursor.moveToFirst();
 
             while (!cursor.isAfterLast()) {
-                Pdi pdi = new Pdi();
-
-                pdi.idPdi                      = cursor.getInt(0);
-                pdi.idPdi_idCategoria          = cursor.getInt(1);
-                pdi.titoloItaliano             = cursor.getString(2);
-                pdi.titoloInglese              = cursor.getString(3);
-                pdi.descrizioneItaliano        = cursor.getString(4);
-                pdi.descrizioneInglese         = cursor.getString(5);
-                pdi.citta                      = cursor.getString(6);
-                pdi.via                        = cursor.getString(7);
-                pdi.numeroCivico               = cursor.getInt(8);
-                pdi.interno                    = cursor.getString(9);
-                pdi.cap                        = cursor.getInt(10);
-                pdi.latitudine                 = cursor.getDouble(11);
-                pdi.longitudine                = cursor.getDouble(12);
-                pdi.fileImmagine               = cursor.getString(13);
-                pdi.titoloLinkGenericoItaliano = cursor.getString(14);
-                pdi.titoloLinkGenericoInglese  = cursor.getString(15);
-                pdi.linkGenerico               = cursor.getString(16);
-                pdi.linkVideo                  = cursor.getString(17);
+                Pdi pdi = new Pdi(
+                        cursor.getInt(0),      // idPdi
+                        cursor.getInt(1),      // idPdi_idCategoria
+                        cursor.getString(2),   // titoloItaliano
+                        cursor.getString(3),   // titoloInglese
+                        cursor.getString(4),   // descrizioneItaliano
+                        cursor.getString(5),   // descrizioneInglese
+                        cursor.getString(6),   // citta
+                        cursor.getString(7),   // via
+                        cursor.getInt(8),      // numeroCivico
+                        cursor.getString(9),   // interno
+                        cursor.getInt(10),     // cap
+                        cursor.getDouble(11),  // latitudine
+                        cursor.getDouble(12),  // longitudine
+                        cursor.getString(13),  // fileImmagine
+                        cursor.getString(14),  // titoloLinkGenericoItaliano
+                        cursor.getString(15),  // titoloLinkGenericoInglese
+                        cursor.getString(16),  // linkGenerico
+                        cursor.getString(17)); // linkVideo
 
                 list.add(pdi);
 

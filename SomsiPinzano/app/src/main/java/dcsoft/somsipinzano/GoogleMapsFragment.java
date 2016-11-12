@@ -143,22 +143,22 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
         for (int i = 0; i < listaPdi.size(); i++) {
             Pdi pdi = listaPdi.get(i);
 
-            LatLng posizione = new LatLng(pdi.latitudine, pdi.longitudine);
+            LatLng posizione = new LatLng(pdi.getLatitudine(), pdi.getLongitudine());
             MarkerOptions markerOptions = new MarkerOptions().position(posizione);
 
-            Categoria categoria = mainActivity.databaseAdapter.dammiCategoria(pdi.idPdi_idCategoria);
+            Categoria categoria = mainActivity.databaseAdapter.dammiCategoria(pdi.getIdPdi_idCategoria());
             if (categoria != null) {
                 markerOptions.icon(getMarkerIcon("#" + categoria.getColoreEsadecimale()));
             }
 
             switch (mainActivity.databaseAdapter.getLingua()) {
                 case "italiano": {
-                    markerOptions.title(pdi.titoloItaliano);
+                    markerOptions.title(pdi.getTitoloItaliano());
                 }
                 break;
 
                 default: {
-                    markerOptions.title(pdi.titoloInglese);
+                    markerOptions.title(pdi.getTitoloInglese());
                 }
             }
 

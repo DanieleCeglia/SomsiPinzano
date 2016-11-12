@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             //Log.d("DEBUGAPP", TAG + "onCreate savedInstanceState != nul");
 
             categoriaScelta = (Categoria) savedInstanceState.getParcelable("categoriaScelta");
-            pdiScelto       = (Pdi)       savedInstanceState.getSerializable("pdiScelto");
+            pdiScelto       = (Pdi)       savedInstanceState.getParcelable("pdiScelto");
 
             categoriaFragment     = (CategoriaFragment)     fragmentManager.findFragmentByTag("categoriaFragment");
             pdiFragment           = (PdiFragment)           fragmentManager.findFragmentByTag("pdiFragment");
@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
         //Log.d("DEBUGAPP", TAG + "onSaveInstanceState");
 
         savedInstanceState.putParcelable("categoriaScelta", categoriaScelta);
-        savedInstanceState.putSerializable("pdiScelto", pdiScelto);
+        savedInstanceState.putParcelable("pdiScelto", pdiScelto);
         savedInstanceState.putInt("currentTabPosition", bottomBar.getCurrentTabPosition());
     }
 
@@ -307,12 +307,12 @@ public class MainActivity extends AppCompatActivity {
 
                     switch (databaseAdapter.getLingua()) {
                         case "italiano": {
-                            impostaActionBar(true, pdiScelto.titoloItaliano);
+                            impostaActionBar(true, pdiScelto.getTitoloItaliano());
                         }
                         break;
 
                         default: {
-                            impostaActionBar(true, pdiScelto.titoloInglese);
+                            impostaActionBar(true, pdiScelto.getTitoloInglese());
                         }
                     }
                 } else if (pdiFragment != null && pdiFragment.isAdded()) {
