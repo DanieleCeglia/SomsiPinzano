@@ -7,4 +7,8 @@
     <string name="messaggio_permesso_di_localizzazione_non_accettato">PERMESSO DI LOCALIZZAZIONE NON ACCETTATO\nÈ necessario per mostrare la posizione dell&#8217;utente sulla mappa.</string>
     <string name="vedi_su_google_maps">Vedi su Google Maps</string>
     <string name="vedi_su_openstreetmap">Vedi su OpenStreetMap</string>
+    <string name="normale">Normale</string>
+    <string name="satellitare">Satellitare</string>
+    <string name="ibrida">Ibrida</string>
+    <string name="rilievo">Rilievo</string>
 </resources>

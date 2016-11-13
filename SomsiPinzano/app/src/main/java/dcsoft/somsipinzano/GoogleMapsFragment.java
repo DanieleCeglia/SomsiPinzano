@@ -221,4 +221,22 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
         return false;
     }
     //endregion
+
+    //region Metodi pubblici
+    public void impostaMappaNormale () {
+        gmMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+    }
+
+    public void impostaMappaSatellitare () {
+        gmMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+    }
+
+    public void impostaMappaIbrida () {
+        gmMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+    }
+
+    public void impostaMapparilievo () {
+        gmMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+    }
+    //endregion
 }

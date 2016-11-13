@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:compat="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menuMappNormleGM"
+        compat:showAsAction="never"
+        android:title="Stradale" />
+    <item
+        android:id="@+id/menuMappSatellitareGM"
+        compat:showAsAction="never"
+        android:title="Satellitare"/>
+    <item
+        android:id="@+id/menuMappIbridaGM"
+        compat:showAsAction="never"
+        android:title="Ibrida"/>
+    <item
+        android:id="@+id/menuMappRilievoGM"
+        compat:showAsAction="never"
+        android:title="Rilievo"/>
+</menu>

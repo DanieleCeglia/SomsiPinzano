@@ -14,6 +14,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -209,12 +211,38 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     rimuoviPdiFragment();
                 }
-
-                return true;
+            }
+            break;
+            case R.id.menuMappNormleGM: {
+                googleMapsFragment.impostaMappaNormale();
+            }
+            break;
+            case R.id.menuMappSatellitareGM: {
+                googleMapsFragment.impostaMappaSatellitare();
+            }
+            break;
+            case R.id.menuMappIbridaGM: {
+                googleMapsFragment.impostaMappaIbrida();
+            }
+            break;
+            case R.id.menuMappRilievoGM: {
+                googleMapsFragment.impostaMapparilievo();
             }
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if (bottomBar.getCurrentTabPosition() == 1) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_gm, menu);
+
+            return true;
+        }
+
+        return false;
     }
     //endregion
 
@@ -361,6 +389,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         fragmentTransaction.commit();
+
+        invalidateOptionsMenu();
     }
 
     private void rimuoviPdiFragment() {
