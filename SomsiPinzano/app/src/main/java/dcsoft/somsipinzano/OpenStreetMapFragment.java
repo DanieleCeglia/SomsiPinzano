@@ -155,4 +155,18 @@ public class OpenStreetMapFragment extends Fragment {
         return false;
     }
     //endregion
+
+    //region Metodi pubblici
+    public void impostaMappaNormale () {
+        osmMap.setTileSource(TileSourceFactory.MAPNIK);
+    }
+
+    public void impostaMappaCiclabile () {
+        osmMap.setTileSource(TileSourceFactory.CYCLEMAP);
+    }
+
+    public void impostaMappaTrasporti () {
+        osmMap.setTileSource(TileSourceFactory.PUBLIC_TRANSPORT);
+    }
+    //endregion
 }

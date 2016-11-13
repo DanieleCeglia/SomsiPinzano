@@ -1,19 +1,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:compat="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/menuMappNormleGM"
+        android:id="@+id/menuMappaNormleGM"
         compat:showAsAction="never"
         android:title="@string/normale" />
     <item
-        android:id="@+id/menuMappSatellitareGM"
+        android:id="@+id/menuMappaSatellitareGM"
         compat:showAsAction="never"
         android:title="@string/satellitare"/>
     <item
-        android:id="@+id/menuMappIbridaGM"
+        android:id="@+id/menuMappaIbridaGM"
         compat:showAsAction="never"
         android:title="@string/ibrida"/>
     <item
-        android:id="@+id/menuMappRilievoGM"
+        android:id="@+id/menuMappaRilievoGM"
         compat:showAsAction="never"
         android:title="@string/rilievo"/>
 </menu>

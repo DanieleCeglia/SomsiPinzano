@@ -11,4 +11,6 @@
     <string name="satellitare">Satellite</string>
     <string name="ibrida">Hybrid</string>
     <string name="rilievo">Terrain</string>
+    <string name="ciclabile">Cycle</string>
+    <string name="trasporti">Transport</string>
 </resources>

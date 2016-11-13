@@ -213,20 +213,38 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             break;
-            case R.id.menuMappNormleGM: {
+
+            case R.id.menuMappaNormleGM: {
                 googleMapsFragment.impostaMappaNormale();
             }
             break;
-            case R.id.menuMappSatellitareGM: {
+
+            case R.id.menuMappaSatellitareGM: {
                 googleMapsFragment.impostaMappaSatellitare();
             }
             break;
-            case R.id.menuMappIbridaGM: {
+
+            case R.id.menuMappaIbridaGM: {
                 googleMapsFragment.impostaMappaIbrida();
             }
             break;
-            case R.id.menuMappRilievoGM: {
+
+            case R.id.menuMappaRilievoGM: {
                 googleMapsFragment.impostaMapparilievo();
+            }
+
+            case R.id.menuMappaNormleOSM: {
+                openStreetMapFragment.impostaMappaNormale();
+            }
+            break;
+
+            case R.id.menuMappaCiclabileOSM: {
+                openStreetMapFragment.impostaMappaCiclabile();
+            }
+            break;
+
+            case R.id.menuMappaTrasportiOSM: {
+                openStreetMapFragment.impostaMappaTrasporti();
             }
         }
 
@@ -238,6 +256,13 @@ public class MainActivity extends AppCompatActivity {
         if (bottomBar.getCurrentTabPosition() == 1) {
             MenuInflater inflater = getMenuInflater();
             inflater.inflate(R.menu.menu_gm, menu);
+
+            return true;
+        }
+
+        if (bottomBar.getCurrentTabPosition() == 2) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_osm, menu);
 
             return true;
         }

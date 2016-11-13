@@ -1,19 +1,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:compat="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/menuMappNormleGM"
+        android:id="@+id/menuMappaNormleOSM"
         compat:showAsAction="never"
-        android:title="Stradale" />
+        android:title="@string/normale" />
     <item
-        android:id="@+id/menuMappSatellitareGM"
+        android:id="@+id/menuMappaCiclabileOSM"
         compat:showAsAction="never"
-        android:title="Satellitare"/>
+        android:title="@string/ciclabile"/>
     <item
-        android:id="@+id/menuMappIbridaGM"
+        android:id="@+id/menuMappaTrasportiOSM"
         compat:showAsAction="never"
-        android:title="Ibrida"/>
-    <item
-        android:id="@+id/menuMappRilievoGM"
-        compat:showAsAction="never"
-        android:title="Rilievo"/>
+        android:title="@string/trasporti"/>
 </menu>
