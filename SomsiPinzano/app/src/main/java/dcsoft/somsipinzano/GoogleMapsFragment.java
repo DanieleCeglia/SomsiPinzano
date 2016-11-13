@@ -1,6 +1,7 @@
 package dcsoft.somsipinzano;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -46,6 +47,17 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
     }
 
     //region Metodi override
+    @Override
+    public void onAttach(Activity activity) { // per API < 23
+        super.onAttach(activity);
+
+        //Log.d("DEBUGAPP", TAG + "onAttach");
+
+        if (activity instanceof MainActivity) {
+            mainActivity = (MainActivity) activity;
+        }
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

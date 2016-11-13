@@ -1,5 +1,6 @@
 package dcsoft.somsipinzano;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -26,6 +27,17 @@ public class PdiDettaglioFragment extends Fragment {
 
     public PdiDettaglioFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onAttach(Activity activity) { // per API < 23
+        super.onAttach(activity);
+
+        //Log.d("DEBUGAPP", TAG + "onAttach");
+
+        if (activity instanceof MainActivity) {
+            mainActivity = (MainActivity) activity;
+        }
     }
 
     @Override
