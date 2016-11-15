@@ -232,6 +232,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menuMappaRilievoGM: {
                 googleMapsFragment.impostaMapparilievo();
             }
+            break;
 
             case R.id.menuMappaNormleOSM: {
                 openStreetMapFragment.impostaMappaNormale();
