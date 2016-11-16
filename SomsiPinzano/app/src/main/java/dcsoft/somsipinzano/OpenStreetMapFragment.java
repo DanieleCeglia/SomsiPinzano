@@ -12,10 +12,14 @@ import org.osmdroid.api.IMapController;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.Marker;
+import org.osmdroid.views.overlay.Polyline;
 import org.osmdroid.views.overlay.compass.CompassOverlay;
 import org.osmdroid.views.overlay.compass.InternalCompassOrientationProvider;
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
+
+import java.util.ArrayList;
 
 interface OpenStreetMapFragmentEseguiAlOnHiddenChanged {
     void esegui(boolean hidden);
@@ -29,6 +33,7 @@ public class OpenStreetMapFragment extends Fragment {
     private CompassOverlay compassOverlay;
     private MyLocationNewOverlay locationOverlay;
     private IMapController mapController;
+    private ArrayList<Pdi> listaPdi;
 
     public OpenStreetMapFragmentEseguiAlOnHiddenChanged eseguiAlOnHiddenChanged;
 
@@ -103,6 +108,44 @@ public class OpenStreetMapFragment extends Fragment {
             }
         }
 
+
+        mainActivity.databaseAdapter.apriConnesioneDatabase();
+        listaPdi = mainActivity.databaseAdapter.dammiPdi();
+
+        for (int i = 0; i < listaPdi.size(); i++) {
+            Pdi pdi = listaPdi.get(i);
+
+            GeoPoint posizione = new GeoPoint(pdi.getLatitudine(), pdi.getLongitudine());
+
+            Marker marker = new Marker(osmMap);
+            marker.setPosition(posizione);
+            //marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+
+            Categoria categoria = mainActivity.databaseAdapter.dammiCategoria(pdi.getIdPdi_idCategoria());
+            if (categoria != null) {
+                //marker.setIcon(getResources().getDrawable(R.drawable.marker_kml_point).mutate());
+                //marker.setImage(getResources().getDrawable(R.drawable.ic_launcher));
+                //marker.setInfoWindow(new MarkerInfoWindow(R.layout.bonuspack_bubble_black, map));
+            }
+
+            switch (mainActivity.databaseAdapter.getLingua()) {
+                case "italiano": {
+                    marker.setTitle(pdi.getTitoloItaliano());
+                }
+                break;
+
+                default: {
+                    marker.setTitle(pdi.getTitoloInglese());
+                }
+            }
+
+            marker.setDraggable(true);
+            marker.setOnMarkerDragListener(new OnMarkerDragListenerDrawer());
+            osmMap.getOverlays().add(marker);
+        }
+
+        mainActivity.databaseAdapter.chiudiConnessioneDatabase();
+
         return openStreetMapFragmentView;
     }
 
@@ -169,4 +212,33 @@ public class OpenStreetMapFragment extends Fragment {
         osmMap.setTileSource(TileSourceFactory.PUBLIC_TRANSPORT);
     }
     //endregion
+
+
+    class OnMarkerDragListenerDrawer implements Marker.OnMarkerDragListener {
+        ArrayList<GeoPoint> mTrace;
+        Polyline mPolyline;
+
+        OnMarkerDragListenerDrawer() {
+            mTrace = new ArrayList<GeoPoint>(100);
+            mPolyline = new Polyline();
+            mPolyline.setColor(0xAA0000FF);
+            mPolyline.setWidth(2.0f);
+            mPolyline.setGeodesic(true);
+            osmMap.getOverlays().add(mPolyline);
+        }
+
+        @Override public void onMarkerDrag(Marker marker) {
+            //mTrace.add(marker.getPosition());
+        }
+
+        @Override public void onMarkerDragEnd(Marker marker) {
+            mTrace.add(marker.getPosition());
+            mPolyline.setPoints(mTrace);
+            osmMap.invalidate();
+        }
+
+        @Override public void onMarkerDragStart(Marker marker) {
+            //mTrace.add(marker.getPosition());
+        }
+    }
 }
