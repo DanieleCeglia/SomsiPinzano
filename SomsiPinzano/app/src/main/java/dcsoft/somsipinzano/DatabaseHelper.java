@@ -5,7 +5,7 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 class DatabaseHelper extends SQLiteAssetHelper {
     private static final String TAG = "DatabaseHelper ";
-    private static final String NOME_DATABASE = "somsiPinzano.db";
+    private static final String NOME_DATABASE = "somsiPinzano002.db";
     private static final int VERSIONE = 1;
 
     DatabaseHelper(Context context) {
