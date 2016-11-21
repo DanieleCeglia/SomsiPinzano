@@ -48,6 +48,7 @@ dependencies {
     compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1'
     compile 'com.google.android.gms:play-services-maps:9.8.0'
     compile 'com.github.MKergall:osmbonuspack:6.0'
+    compile 'com.facebook.stetho:stetho:1.4.1'
     testCompile 'junit:junit:4.12'
     compile('com.crashlytics.sdk.android:crashlytics:2.6.5@aar') {
         transitive = true;
