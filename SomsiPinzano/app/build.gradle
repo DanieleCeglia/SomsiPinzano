@@ -44,7 +44,6 @@ dependencies {
     compile 'com.android.support:design:25.0.1'
     compile 'com.android.support:support-v4:25.0.1'
     compile 'com.android.support:recyclerview-v7:25.0.1'
-    compile 'com.roughike:bottom-bar:2.0.2'
     compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1'
     compile 'com.google.android.gms:play-services-maps:10.0.0'
     compile 'com.github.MKergall:osmbonuspack:6.0'

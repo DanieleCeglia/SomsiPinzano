@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:design="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="0dp"
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
-    tools:context="dcsoft.somsipinzano.MainActivity"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    tools:context="dcsoft.somsipinzano.MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,19 +18,17 @@
             android:id="@+id/contentContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_above="@+id/bottomBar"
-            />
+            android:layout_above="@+id/bottomNavigation"
+            android:layout_alignParentTop="true" />
 
-        <com.roughike.bottombar.BottomBar
-            android:id="@+id/bottomBar"
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bottomNavigation"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            app:bb_tabXmlResource="@xml/bottombar_tabs"
-            app:bb_behavior="shifting" />
+            design:menu="@menu/bottom_nav_items" />
     </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

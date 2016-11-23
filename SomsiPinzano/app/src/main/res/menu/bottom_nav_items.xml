@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item_pdi"
+        android:title="@string/punti_di_interesse"
+        android:icon="@mipmap/ic_pdi"
+        />
+
+    <item
+        android:id="@+id/item_google_maps"
+        android:title="Google Maps"
+        android:icon="@mipmap/ic_google_maps"
+        />
+
+    <item
+        android:id="@+id/item_open_street_map"
+        android:title="OpenStreetMap"
+        android:icon="@mipmap/ic_open_street_map" />
+</menu>

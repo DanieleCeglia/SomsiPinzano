@@ -110,7 +110,7 @@ public class PdiDettaglioFragment extends Fragment {
 
         //Log.d("DEBUGAPP", TAG + "onResume");
 
-        if (mainActivity.bottomBar.getCurrentTabId() == R.id.item_pdi) {
+        if (mainActivity.tabSelezionato == 0) {
             switch (mainActivity.databaseAdapter.getLingua()) {
                 case "italiano": {
                     mainActivity.impostaActionBar(true, mainActivity.pdiScelto.getTitoloItaliano());

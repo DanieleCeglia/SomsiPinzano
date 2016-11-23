@@ -7,13 +7,12 @@ import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,9 +20,6 @@ import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.facebook.stetho.Stetho;
-import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnTabReselectListener;
-import com.roughike.bottombar.OnTabSelectListener;
 
 import io.fabric.sdk.android.Fabric;
 import java.util.ArrayList;
@@ -33,7 +29,8 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     public DatabaseAdapter databaseAdapter;
-    public BottomBar bottomBar;
+    public BottomNavigationView bottomNavigation;
+    public int tabSelezionato;
     public Categoria categoriaScelta;
     public Pdi pdiScelto;
     public Boolean vediPdiSceltoSuGM;
@@ -64,9 +61,11 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        fragmentManager = getFragmentManager();
-        bottomBar = (BottomBar) findViewById(R.id.bottomBar);
-        actionBar = getSupportActionBar();
+        fragmentManager  = getFragmentManager();
+        bottomNavigation = (BottomNavigationView) findViewById(R.id.bottomNavigation);
+        actionBar        = getSupportActionBar();
+
+        MenuItem menuSelezionato;
 
         if (savedInstanceState == null) {
             vediPdiSceltoSuGM  = false;
@@ -76,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
 
             categoriaFragment     = new CategoriaFragment();
             pdiFragment           = null;
+
+            menuSelezionato = bottomNavigation.getMenu().getItem(0);
         } else {
             //Log.d("DEBUGAPP", TAG + "onCreate savedInstanceState != null");
 
@@ -91,7 +92,8 @@ public class MainActivity extends AppCompatActivity {
             googleMapsFragment    = (GoogleMapsFragment)    fragmentManager.findFragmentByTag("googleMapsFragment");
             openStreetMapFragment = (OpenStreetMapFragment) fragmentManager.findFragmentByTag("openStreetMapFragment");
 
-            bottomBar.setDefaultTabPosition(savedInstanceState.getInt("currentTabPosition"));
+            tabSelezionato = savedInstanceState.getInt("tabSelezionato");
+            menuSelezionato = bottomNavigation.getMenu().findItem(tabSelezionato);
         }
 
         if (googleMapsFragment == null) {
@@ -118,18 +120,19 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+        bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onTabSelected(@IdRes int tabId) {
-                attivaTab(tabId);
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                attivaTab(item);
+                return true;
             }
         });
-        bottomBar.setOnTabReselectListener(new OnTabReselectListener() {
-            @Override
-            public void onTabReSelected(@IdRes int tabId) {
-                attivaTab(tabId);
-            }
-        });
+
+        if (savedInstanceState == null) {
+            attivaTab(menuSelezionato);
+        } else {
+            sistemaTabSelezionato();
+        }
     }
 
     @Override
@@ -191,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
 
         savedInstanceState.putBoolean("vediPdiSceltoSuGM", vediPdiSceltoSuGM);
         savedInstanceState.putBoolean("vediPdiSceltoSuOSM", vediPdiSceltoSuOSM);
-        savedInstanceState.putInt("currentTabPosition", bottomBar.getCurrentTabPosition());
+        savedInstanceState.putInt("tabSelezionato", tabSelezionato);
         savedInstanceState.putParcelable("categoriaScelta", categoriaScelta);
         savedInstanceState.putParcelable("pdiScelto", pdiScelto);
     }
@@ -247,11 +250,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menuMappaCiclabileOSM: {
                 openStreetMapFragment.impostaMappaCiclabile();
             }
-            break;
-
-            case R.id.menuMappaTrasportiOSM: {
-                openStreetMapFragment.impostaMappaTrasporti();
-            }
+            //break;
+            //
+            //case R.id.menuMappaTrasportiOSM: {
+            //    openStreetMapFragment.impostaMappaTrasporti();
+            //}
         }
 
         return super.onOptionsItemSelected(item);
@@ -259,14 +262,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (bottomBar.getCurrentTabPosition() == 1) {
+        if (tabSelezionato == 1) {
             MenuInflater inflater = getMenuInflater();
             inflater.inflate(R.menu.menu_gm, menu);
 
             return true;
         }
 
-        if (bottomBar.getCurrentTabPosition() == 2) {
+        if (tabSelezionato == 2) {
             MenuInflater inflater = getMenuInflater();
             inflater.inflate(R.menu.menu_osm, menu);
 
@@ -307,13 +310,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void vediPdiSceltoSuGM() {
         vediPdiSceltoSuGM = true;
-        bottomBar.selectTabAtPosition(1);
+        MenuItem menuSelezionato = bottomNavigation.getMenu().getItem(1);
+        attivaTab(menuSelezionato);
     }
-
 
     public void vediPdiSceltoSuOSM() {
         vediPdiSceltoSuOSM = true;
-        bottomBar.selectTabAtPosition(2);
+        MenuItem menuSelezionato = bottomNavigation.getMenu().getItem(2);
+        attivaTab(menuSelezionato);
     }
     //endregion
 
@@ -336,7 +340,14 @@ public class MainActivity extends AppCompatActivity {
         } // else: ci sono già i permessi, quindi non c'è niente da fare!
     }
 
-    private void attivaTab(int tabId) {
+    private void sistemaTabSelezionato() {
+        bottomNavigation.getMenu().getItem(0).setChecked(false);
+        bottomNavigation.getMenu().getItem(1).setChecked(false);
+        bottomNavigation.getMenu().getItem(2).setChecked(false);
+        bottomNavigation.getMenu().getItem(tabSelezionato).setChecked(true);
+    }
+
+    private void attivaTab(MenuItem item) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         // per prima cosa nascondo tutti i fragment (se esistenti e già aggiunti)...
@@ -357,7 +368,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // poi vedo chi mostrare o addirittura aggiungere...
-        switch (tabId) {
+        switch (item.getItemId()) {
             case R.id.item_pdi: {
                 if (pdiDettaglioFragment != null && pdiDettaglioFragment.isAdded()) {
                     fragmentTransaction.show(pdiDettaglioFragment);
@@ -394,6 +405,8 @@ public class MainActivity extends AppCompatActivity {
 
                     impostaActionBar(false, getResources().getString(R.string.Categorie));
                 }
+
+                tabSelezionato = 0;
             }
             break;
 
@@ -405,6 +418,8 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 impostaActionBar(false, "Google Maps");
+
+                tabSelezionato = 1;
             }
             break;
 
@@ -416,8 +431,12 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 impostaActionBar(false, "OpenStreetMap");
+
+                tabSelezionato = 2;
             }
         }
+
+        sistemaTabSelezionato();
 
         fragmentTransaction.commit();
 

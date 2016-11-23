@@ -8,8 +8,8 @@
         android:id="@+id/menuMappaCiclabileOSM"
         compat:showAsAction="never"
         android:title="@string/ciclabile"/>
-    <item
+    <!--<item
         android:id="@+id/menuMappaTrasportiOSM"
         compat:showAsAction="never"
-        android:title="@string/trasporti"/>
+        android:title="@string/trasporti"/>-->
 </menu>
