@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             categoriaFragment     = new CategoriaFragment();
             pdiFragment           = null;
 
-            menuSelezionato = bottomNavigation.getMenu().getItem(0);
+            tabSelezionato = 0;
         } else {
             //Log.d("DEBUGAPP", TAG + "onCreate savedInstanceState != null");
 
@@ -93,8 +93,9 @@ public class MainActivity extends AppCompatActivity {
             openStreetMapFragment = (OpenStreetMapFragment) fragmentManager.findFragmentByTag("openStreetMapFragment");
 
             tabSelezionato = savedInstanceState.getInt("tabSelezionato");
-            menuSelezionato = bottomNavigation.getMenu().findItem(tabSelezionato);
         }
+
+        menuSelezionato = bottomNavigation.getMenu().getItem(tabSelezionato);
 
         if (googleMapsFragment == null) {
             googleMapsFragment = new GoogleMapsFragment();
@@ -127,12 +128,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
-        if (savedInstanceState == null) {
-            attivaTab(menuSelezionato);
-        } else {
-            sistemaTabSelezionato();
-        }
+        
+        attivaTab(menuSelezionato);
     }
 
     @Override
@@ -340,13 +337,6 @@ public class MainActivity extends AppCompatActivity {
         } // else: ci sono già i permessi, quindi non c'è niente da fare!
     }
 
-    private void sistemaTabSelezionato() {
-        bottomNavigation.getMenu().getItem(0).setChecked(false);
-        bottomNavigation.getMenu().getItem(1).setChecked(false);
-        bottomNavigation.getMenu().getItem(2).setChecked(false);
-        bottomNavigation.getMenu().getItem(tabSelezionato).setChecked(true);
-    }
-
     private void attivaTab(MenuItem item) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -366,6 +356,11 @@ public class MainActivity extends AppCompatActivity {
         if (openStreetMapFragment != null && openStreetMapFragment.isAdded()) {
             fragmentTransaction.hide(openStreetMapFragment);
         }
+
+        // ... e imposto tutti i tab come non selezionati...
+        bottomNavigation.getMenu().getItem(0).setChecked(false);
+        bottomNavigation.getMenu().getItem(1).setChecked(false);
+        bottomNavigation.getMenu().getItem(2).setChecked(false);
 
         // poi vedo chi mostrare o addirittura aggiungere...
         switch (item.getItemId()) {
@@ -436,11 +431,11 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        sistemaTabSelezionato();
+        bottomNavigation.getMenu().getItem(tabSelezionato).setChecked(true);
+
+        invalidateOptionsMenu(); // dico di aggiornare l'action bar (per GM e OSM che hanno il menu a puntini)
 
         fragmentTransaction.commit();
-
-        invalidateOptionsMenu();
     }
 
     private void rimuoviPdiFragment() {
