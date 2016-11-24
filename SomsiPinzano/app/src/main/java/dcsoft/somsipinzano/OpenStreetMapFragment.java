@@ -34,6 +34,7 @@ public class OpenStreetMapFragment extends Fragment {
     private MyLocationNewOverlay locationOverlay;
     private IMapController mapController;
     private ArrayList<Pdi> listaPdi;
+    private int tipoMappa = -1;
 
     public OpenStreetMapFragmentEseguiAlOnHiddenChanged eseguiAlOnHiddenChanged;
 
@@ -106,9 +107,18 @@ public class OpenStreetMapFragment extends Fragment {
                 GeoPoint startPoint = new GeoPoint(savedInstanceState.getDouble("lat"), savedInstanceState.getDouble("lon"));
                 mapController.setCenter(startPoint);
             }
+
+            tipoMappa = savedInstanceState.getInt("tipoMappa");
+
+            if (tipoMappa == 1) {
+                osmMap.setTileSource(TileSourceFactory.MAPNIK);
+            } else if (tipoMappa == 2) {
+                osmMap.setTileSource(TileSourceFactory.CYCLEMAP);
+            } else if (tipoMappa == 3) {
+                osmMap.setTileSource(TileSourceFactory.PUBLIC_TRANSPORT);
+            }
         }
-
-
+        
         mainActivity.databaseAdapter.apriConnesioneDatabase();
         listaPdi = mainActivity.databaseAdapter.dammiPdi();
 
@@ -158,6 +168,7 @@ public class OpenStreetMapFragment extends Fragment {
         outState.putInt("zoom", osmMap.getZoomLevel());
         outState.putDouble("lat", osmMap.getMapCenter().getLatitude());
         outState.putDouble("lon", osmMap.getMapCenter().getLongitude());
+        outState.putInt("tipoMappa", tipoMappa);
     }
 
     @Override
@@ -202,14 +213,17 @@ public class OpenStreetMapFragment extends Fragment {
     //region Metodi pubblici
     public void impostaMappaNormale () {
         osmMap.setTileSource(TileSourceFactory.MAPNIK);
+        tipoMappa = 1;
     }
 
     public void impostaMappaCiclabile () {
         osmMap.setTileSource(TileSourceFactory.CYCLEMAP);
+        tipoMappa = 2;
     }
 
     public void impostaMappaTrasporti () {
         osmMap.setTileSource(TileSourceFactory.PUBLIC_TRANSPORT);
+        tipoMappa = 2;
     }
     //endregion
 

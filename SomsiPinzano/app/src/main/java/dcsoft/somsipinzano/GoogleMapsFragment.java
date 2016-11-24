@@ -38,6 +38,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
     private float zoom = -1;
     private double lat = -1;
     private double lon = -1;
+    private int mapType = -1;
     private ArrayList<Pdi> listaPdi;
 
     public GoogleMapsFragmentEseguiAlOnHiddenChanged eseguiAlOnHiddenChanged;
@@ -86,6 +87,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
             zoom = savedInstanceState.getFloat("zoom");
             lat = savedInstanceState.getDouble("lat");
             lon = savedInstanceState.getDouble("lon");
+            mapType = savedInstanceState.getInt("mapType");
         }
 
         return googleMapsFragmentView;
@@ -105,6 +107,8 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
                 outState.putDouble("lat", gmMap.getCameraPosition().target.latitude);
                 outState.putDouble("lon", gmMap.getCameraPosition().target.longitude);
             }
+
+            outState.putInt("mapType", gmMap.getMapType());
         }
     }
 
@@ -185,6 +189,10 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
         }
 
         mainActivity.databaseAdapter.chiudiConnessioneDatabase();
+
+        if (mapType != -1) {
+            gmMap.setMapType(mapType);
+        }
     }
 
     @Override

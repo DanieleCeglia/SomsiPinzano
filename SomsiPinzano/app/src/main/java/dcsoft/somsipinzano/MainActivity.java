@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-        
+
         attivaTab(menuSelezionato);
     }
 
