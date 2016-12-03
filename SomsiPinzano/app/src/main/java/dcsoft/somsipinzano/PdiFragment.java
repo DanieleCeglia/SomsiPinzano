@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 public class PdiFragment extends Fragment {
-    private static final String TAG = "PdiFragment ";
+    private final String TAG = getClass().getSimpleName();
     private MainActivity mainActivity;
     private ArrayList<Pdi> pdi;
 
@@ -24,7 +24,7 @@ public class PdiFragment extends Fragment {
     public void onAttach(Activity activity) { // per API < 23
         super.onAttach(activity);
 
-        //Log.d("DEBUGAPP", TAG + "onAttach");
+        //Log.d("DEBUGAPP", TAG + " onAttach");
 
         if (activity instanceof MainActivity) {
             mainActivity = (MainActivity) activity;
@@ -35,7 +35,7 @@ public class PdiFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        //Log.d("DEBUGAPP", TAG + "onAttach");
+        //Log.d("DEBUGAPP", TAG + " onAttach");
 
         if (context instanceof MainActivity){
             mainActivity = (MainActivity) context;
@@ -45,7 +45,7 @@ public class PdiFragment extends Fragment {
     @SuppressWarnings("unchecked")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //Log.d("DEBUGAPP", TAG + "onCreateView");
+        //Log.d("DEBUGAPP", TAG + " onCreateView");
 
         View view = inflater.inflate(R.layout.fragment_pdi_list, container, false);
 
@@ -59,7 +59,7 @@ public class PdiFragment extends Fragment {
                 pdi = mainActivity.databaseAdapter.dammiPdiPerCategoria(mainActivity.categoriaScelta.getIdCategoria());
                 mainActivity.databaseAdapter.chiudiConnessioneDatabase();
             } else {
-                //Log.d("DEBUGAPP", TAG + "onCreateView savedInstanceState != null");
+                //Log.d("DEBUGAPP", TAG + " onCreateView savedInstanceState != null");
 
                 pdi = savedInstanceState.getParcelableArrayList("pdi"); // @SuppressWarnings("unchecked")
             }
@@ -74,7 +74,7 @@ public class PdiFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        //Log.d("DEBUGAPP", TAG + "onSaveInstanceState");
+        //Log.d("DEBUGAPP", TAG + " onSaveInstanceState");
 
         outState.putParcelableArrayList("pdi", pdi);
     }
@@ -83,7 +83,7 @@ public class PdiFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        //Log.d("DEBUGAPP", TAG + "onResume");
+        //Log.d("DEBUGAPP", TAG + " onResume");
 
         if (mainActivity.tabSelezionato == 0) {
             switch (mainActivity.databaseAdapter.getLingua()) {
@@ -103,7 +103,7 @@ public class PdiFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
 
-        //Log.d("DEBUGAPP", TAG + "onDetach");
+        //Log.d("DEBUGAPP", TAG + " onDetach");
 
         mainActivity = null;
     }

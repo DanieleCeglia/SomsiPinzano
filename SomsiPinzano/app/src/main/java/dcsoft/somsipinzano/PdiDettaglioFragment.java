@@ -15,7 +15,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class PdiDettaglioFragment extends Fragment {
-    private static final String TAG = "PdiDettaglioFragment ";
+    private final String TAG = getClass().getSimpleName();
     private View pdiDettaglioFragmentView;
     private MainActivity mainActivity;
 
@@ -33,7 +33,7 @@ public class PdiDettaglioFragment extends Fragment {
     public void onAttach(Activity activity) { // per API < 23
         super.onAttach(activity);
 
-        //Log.d("DEBUGAPP", TAG + "onAttach");
+        //Log.d("DEBUGAPP", TAG + " onAttach");
 
         if (activity instanceof MainActivity) {
             mainActivity = (MainActivity) activity;
@@ -44,7 +44,7 @@ public class PdiDettaglioFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        //Log.d("DEBUGAPP", TAG + "onAttach");
+        //Log.d("DEBUGAPP", TAG + " onAttach");
 
         if (context instanceof MainActivity){
             mainActivity = (MainActivity) context;
@@ -53,7 +53,7 @@ public class PdiDettaglioFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //Log.d("DEBUGAPP", TAG + "onCreateView");
+        //Log.d("DEBUGAPP", TAG + " onCreateView");
 
         pdiDettaglioFragmentView = inflater.inflate(R.layout.fragment_pdi_dettaglio, container, false);
 
@@ -87,7 +87,7 @@ public class PdiDettaglioFragment extends Fragment {
 
         if (savedInstanceState == null) {
         } else {
-            //Log.d("DEBUGAPP", TAG + "onCreateView savedInstanceState != null");
+            //Log.d("DEBUGAPP", TAG + " onCreateView savedInstanceState != null");
 
             svContenitore.setY(savedInstanceState.getFloat("svContenitoreY"));
         }
@@ -99,7 +99,7 @@ public class PdiDettaglioFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        //Log.d("DEBUGAPP", TAG + "onSaveInstanceState");
+        //Log.d("DEBUGAPP", TAG + " onSaveInstanceState");
 
         outState.putFloat("svContenitoreY", svContenitore.getY());
     }
@@ -108,7 +108,7 @@ public class PdiDettaglioFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        //Log.d("DEBUGAPP", TAG + "onResume");
+        //Log.d("DEBUGAPP", TAG + " onResume");
 
         if (mainActivity.tabSelezionato == 0) {
             switch (mainActivity.databaseAdapter.getLingua()) {
@@ -153,7 +153,7 @@ public class PdiDettaglioFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
 
-        //Log.d("DEBUGAPP", TAG + "onDetach");
+        //Log.d("DEBUGAPP", TAG + " onDetach");
 
         mainActivity = null;
     }

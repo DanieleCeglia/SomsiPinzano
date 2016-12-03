@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     public Boolean vediPdiSceltoSuGM;
     public Boolean vediPdiSceltoSuOSM;
 
-    private static final String TAG = "MainActivity ";
+    private final String TAG = getClass().getSimpleName();
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
     private FragmentManager fragmentManager;
     private ActionBar actionBar;
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         Fabric.with(this, new Crashlytics());
         Stetho.initializeWithDefaults(this);
 
-        //Log.d("DEBUGAPP", TAG + "onCreate");
+        //Log.d("DEBUGAPP", TAG + " onCreate");
 
         databaseAdapter = DatabaseAdapter.dammiDbHelperCondiviso(this);
 
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
             tabSelezionato = 0;
         } else {
-            //Log.d("DEBUGAPP", TAG + "onCreate savedInstanceState != null");
+            //Log.d("DEBUGAPP", TAG + " onCreate savedInstanceState != null");
 
             vediPdiSceltoSuGM  = savedInstanceState.getBoolean("vediPdiSceltoSuGM");
             vediPdiSceltoSuOSM = savedInstanceState.getBoolean("vediPdiSceltoSuOSM");
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void esegui(boolean hidden) {
                 if (!hidden) {
-                    //Log.d("DEBUGAPP", TAG + "GoogleMapsFragmentEseguiAlOnHiddenChanged");
+                    //Log.d("DEBUGAPP", TAG + " GoogleMapsFragmentEseguiAlOnHiddenChanged");
                 }
             }
         };
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void esegui(boolean hidden) {
                 if (!hidden) {
-                    //Log.d("DEBUGAPP", TAG + "OpenStreetMapFragmentEseguiAlOnHiddenChanged");
+                    //Log.d("DEBUGAPP", TAG + " OpenStreetMapFragmentEseguiAlOnHiddenChanged");
                 }
             }
         };
@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
 
-        //Log.d("DEBUGAPP", TAG + "onSaveInstanceState");
+        //Log.d("DEBUGAPP", TAG + " onSaveInstanceState");
 
         savedInstanceState.putBoolean("vediPdiSceltoSuGM", vediPdiSceltoSuGM);
         savedInstanceState.putBoolean("vediPdiSceltoSuOSM", vediPdiSceltoSuOSM);

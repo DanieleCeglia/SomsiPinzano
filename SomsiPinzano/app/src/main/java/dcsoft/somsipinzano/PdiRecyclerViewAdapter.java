@@ -9,7 +9,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 class PdiRecyclerViewAdapter extends RecyclerView.Adapter<PdiRecyclerViewAdapter.ViewHolder> {
-    private static final String TAG = "PdiRecyclerViewAdapter ";
+    private final String TAG = getClass().getSimpleName();
     private ArrayList<Pdi> pdi;
     private MainActivity mainActivity;
 

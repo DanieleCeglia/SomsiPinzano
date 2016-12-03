@@ -30,7 +30,7 @@ interface GoogleMapsFragmentEseguiAlOnHiddenChanged {
 }
 
 public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
-    private static final String TAG = "GoogleMapsFragment ";
+    private final String TAG = getClass().getSimpleName();
     private MainActivity mainActivity;
     private View googleMapsFragmentView;
     private MapView mMapView;
@@ -52,7 +52,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
     public void onAttach(Activity activity) { // per API < 23
         super.onAttach(activity);
 
-        //Log.d("DEBUGAPP", TAG + "onAttach");
+        //Log.d("DEBUGAPP", TAG + " onAttach");
 
         if (activity instanceof MainActivity) {
             mainActivity = (MainActivity) activity;
@@ -63,7 +63,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        //Log.d("DEBUGAPP", TAG + "onAttach");
+        //Log.d("DEBUGAPP", TAG + " onAttach");
 
         if (context instanceof MainActivity){
             mainActivity = (MainActivity) context;
@@ -72,7 +72,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //Log.d("DEBUGAPP", TAG + "onCreateView");
+        //Log.d("DEBUGAPP", TAG + " onCreateView");
 
         googleMapsFragmentView = inflater.inflate(R.layout.fragment_google_maps, container, false);
 
@@ -82,7 +82,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
         mMapView.getMapAsync(this);
 
         if (savedInstanceState != null) {
-            //Log.d("DEBUGAPP", TAG + "onCreateView savedInstanceState != null");
+            Log.d("DEBUGAPP", TAG + " onCreateView savedInstanceState != null");
 
             zoom = savedInstanceState.getFloat("zoom");
             lat = savedInstanceState.getDouble("lat");
@@ -97,7 +97,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        //Log.d("DEBUGAPP", TAG + "onSaveInstanceState");
+        Log.d("DEBUGAPP", TAG + " onSaveInstanceState");
 
         if (gmMap != null) {
             CameraPosition cameraPosition = gmMap.getCameraPosition();
@@ -116,7 +116,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
 
-        //Log.d("DEBUGAPP", TAG + "onHiddenChanged");
+        //Log.d("DEBUGAPP", TAG + " onHiddenChanged");
 
         zoommaSuPdiSceltoSeNecessario();
 
@@ -136,7 +136,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        //Log.d("DEBUGAPP", TAG + "onMapReady");
+        //Log.d("DEBUGAPP", TAG + " onMapReady");
 
         gmMap = googleMap;
 
@@ -199,7 +199,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
     public void onDetach() {
         super.onDetach();
 
-        //Log.d("DEBUGAPP", TAG + "onDetach");
+        //Log.d("DEBUGAPP", TAG + " onDetach");
 
         mainActivity = null;
     }

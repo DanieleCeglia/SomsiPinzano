@@ -9,7 +9,7 @@ import java.util.Locale;
 import java.util.StringTokenizer;
 
 class DatabaseAdapter {
-    private static final String TAG = "DatabaseAdapter ";
+    private final String TAG = getClass().getSimpleName();
     private static DatabaseAdapter databaseAdapterCondiviso;
     private DatabaseHelper databaseHelper;
     private SQLiteDatabase database;
@@ -65,7 +65,7 @@ class DatabaseAdapter {
 
             cursor.close();
         } else {
-            Log.d("DEBUGAPP", TAG + "[dammiCategorie] Connessione NON aperta!");
+            Log.d("DEBUGAPP", TAG + " [dammiCategorie] Connessione NON aperta!");
         }
 
         return list;
@@ -91,7 +91,7 @@ class DatabaseAdapter {
 
             cursor.close();
         } else {
-            Log.d("DEBUGAPP", TAG + "[dammiCategorie] Connessione NON aperta!");
+            Log.d("DEBUGAPP", TAG + " [dammiCategorie] Connessione NON aperta!");
         }
 
         return categoria;
@@ -132,7 +132,7 @@ class DatabaseAdapter {
 
             cursor.close();
         } else {
-            Log.d("DEBUGAPP", TAG + "[dammiPdiPerCategoria] Connessione NON aperta!");
+            Log.d("DEBUGAPP", TAG + " [dammiPdiPerCategoria] Connessione NON aperta!");
         }
 
         return list;
@@ -173,7 +173,7 @@ class DatabaseAdapter {
 
             cursor.close();
         } else {
-            Log.d("DEBUGAPP", TAG + "[dammiPdiPerCategoria] Connessione NON aperta!");
+            Log.d("DEBUGAPP", TAG + " [dammiPdiPerCategoria] Connessione NON aperta!");
         }
 
         return list;

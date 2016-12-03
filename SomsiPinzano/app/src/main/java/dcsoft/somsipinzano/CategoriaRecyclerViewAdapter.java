@@ -9,7 +9,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 class CategoriaRecyclerViewAdapter extends RecyclerView.Adapter<CategoriaRecyclerViewAdapter.ViewHolder> {
-    private static final String TAG = "CategoriaRecyclerViewAdapter ";
+    private final String TAG = getClass().getSimpleName();
     private ArrayList<Categoria> categorie;
     private MainActivity mainActivity;
 

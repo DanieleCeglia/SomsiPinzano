@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,7 @@ interface OpenStreetMapFragmentEseguiAlOnHiddenChanged {
 }
 
 public class OpenStreetMapFragment extends Fragment {
-    private static final String TAG = "OpenStreetMapFragment ";
+    private final String TAG = getClass().getSimpleName();
     private MainActivity mainActivity;
     private View openStreetMapFragmentView;
     private MapView osmMap;
@@ -47,7 +48,7 @@ public class OpenStreetMapFragment extends Fragment {
     public void onAttach(Activity activity) { // per API < 23
         super.onAttach(activity);
 
-        //Log.d("DEBUGAPP", TAG + "onAttach");
+        //Log.d("DEBUGAPP", TAG + " onAttach");
 
         if (activity instanceof MainActivity) {
             mainActivity = (MainActivity) activity;
@@ -58,7 +59,7 @@ public class OpenStreetMapFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        //Log.d("DEBUGAPP", TAG + "onAttach");
+        //Log.d("DEBUGAPP", TAG + " onAttach");
 
         if (context instanceof MainActivity){
             mainActivity = (MainActivity) context;
@@ -67,7 +68,7 @@ public class OpenStreetMapFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //Log.d("DEBUGAPP", TAG + "onCreateView");
+        //Log.d("DEBUGAPP", TAG + " onCreateView");
 
         openStreetMapFragmentView = inflater.inflate(R.layout.fragment_open_street_map, container, false);
 
@@ -100,7 +101,7 @@ public class OpenStreetMapFragment extends Fragment {
                 mapController.setCenter(startPoint);
             }
         } else {
-            //Log.d("DEBUGAPP", TAG + "onCreateView savedInstanceState != null");
+            Log.d("DEBUGAPP", TAG + " onCreateView savedInstanceState != null");
 
             if (!zoommaSuPdiSceltoSeNecessario()) {
                 mapController.setZoom(savedInstanceState.getInt("zoom"));
@@ -118,7 +119,7 @@ public class OpenStreetMapFragment extends Fragment {
                 osmMap.setTileSource(TileSourceFactory.PUBLIC_TRANSPORT);
             }
         }
-        
+
         mainActivity.databaseAdapter.apriConnesioneDatabase();
         listaPdi = mainActivity.databaseAdapter.dammiPdi();
 
@@ -163,7 +164,7 @@ public class OpenStreetMapFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        //Log.d("DEBUGAPP", TAG + "onSaveInstanceState");
+        Log.d("DEBUGAPP", TAG + " onSaveInstanceState");
 
         outState.putInt("zoom", osmMap.getZoomLevel());
         outState.putDouble("lat", osmMap.getMapCenter().getLatitude());
@@ -175,7 +176,7 @@ public class OpenStreetMapFragment extends Fragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
 
-        //Log.d("DEBUGAPP", TAG + "onHiddenChanged");
+        //Log.d("DEBUGAPP", TAG + " onHiddenChanged");
 
         zoommaSuPdiSceltoSeNecessario();
 
@@ -188,7 +189,7 @@ public class OpenStreetMapFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
 
-        //Log.d("DEBUGAPP", TAG + "onDetach");
+        //Log.d("DEBUGAPP", TAG + " onDetach");
 
         mainActivity = null;
     }
