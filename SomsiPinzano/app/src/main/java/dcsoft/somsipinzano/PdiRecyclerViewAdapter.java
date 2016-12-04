@@ -27,7 +27,7 @@ class PdiRecyclerViewAdapter extends RecyclerView.Adapter<PdiRecyclerViewAdapter
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        switch (mainActivity.databaseAdapter.getLingua()) {
+        switch (mainActivity.gestoreDatabaseCondiviso.getLingua()) {
             case "italiano": {
                 holder.tvTitoloPdi.setText(pdi.get(position).getTitoloItaliano());
             }

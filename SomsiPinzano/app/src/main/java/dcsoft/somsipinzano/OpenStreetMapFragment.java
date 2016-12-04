@@ -120,8 +120,7 @@ public class OpenStreetMapFragment extends Fragment {
             }
         }
 
-        mainActivity.databaseAdapter.apriConnesioneDatabase();
-        listaPdi = mainActivity.databaseAdapter.dammiPdi();
+        listaPdi = mainActivity.gestoreDatabaseCondiviso.dammiPdi();
 
         for (int i = 0; i < listaPdi.size(); i++) {
             Pdi pdi = listaPdi.get(i);
@@ -132,14 +131,14 @@ public class OpenStreetMapFragment extends Fragment {
             marker.setPosition(posizione);
             //marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
 
-            Categoria categoria = mainActivity.databaseAdapter.dammiCategoria(pdi.getIdPdi_idCategoria());
+            Categoria categoria = mainActivity.gestoreDatabaseCondiviso.dammiCategoria(pdi.getIdPdi_idCategoria());
             if (categoria != null) {
                 //marker.setIcon(getResources().getDrawable(R.drawable.marker_kml_point).mutate());
                 //marker.setImage(getResources().getDrawable(R.drawable.ic_launcher));
                 //marker.setInfoWindow(new MarkerInfoWindow(R.layout.bonuspack_bubble_black, map));
             }
 
-            switch (mainActivity.databaseAdapter.getLingua()) {
+            switch (mainActivity.gestoreDatabaseCondiviso.getLingua()) {
                 case "italiano": {
                     marker.setTitle(pdi.getTitoloItaliano());
                 }
@@ -154,8 +153,6 @@ public class OpenStreetMapFragment extends Fragment {
             marker.setOnMarkerDragListener(new OnMarkerDragListenerDrawer());
             osmMap.getOverlays().add(marker);
         }
-
-        mainActivity.databaseAdapter.chiudiConnessioneDatabase();
 
         return openStreetMapFragmentView;
     }

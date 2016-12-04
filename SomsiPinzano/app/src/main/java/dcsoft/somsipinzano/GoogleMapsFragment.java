@@ -140,8 +140,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
 
         gmMap = googleMap;
 
-        mainActivity.databaseAdapter.apriConnesioneDatabase();
-        listaPdi = mainActivity.databaseAdapter.dammiPdi();
+        listaPdi = mainActivity.gestoreDatabaseCondiviso.dammiPdi();
 
         if (ActivityCompat.checkSelfPermission(mainActivity, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 &&
@@ -169,12 +168,12 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
             LatLng posizione = new LatLng(pdi.getLatitudine(), pdi.getLongitudine());
             MarkerOptions markerOptions = new MarkerOptions().position(posizione);
 
-            Categoria categoria = mainActivity.databaseAdapter.dammiCategoria(pdi.getIdPdi_idCategoria());
+            Categoria categoria = mainActivity.gestoreDatabaseCondiviso.dammiCategoria(pdi.getIdPdi_idCategoria());
             if (categoria != null) {
                 markerOptions.icon(getMarkerIcon("#" + categoria.getColoreEsadecimale()));
             }
 
-            switch (mainActivity.databaseAdapter.getLingua()) {
+            switch (mainActivity.gestoreDatabaseCondiviso.getLingua()) {
                 case "italiano": {
                     markerOptions.title(pdi.getTitoloItaliano());
                 }
@@ -187,8 +186,6 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
 
             gmMap.addMarker(markerOptions);
         }
-
-        mainActivity.databaseAdapter.chiudiConnessioneDatabase();
 
         if (mapType != -1) {
             gmMap.setMapType(mapType);

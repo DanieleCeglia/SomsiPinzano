@@ -111,7 +111,7 @@ public class PdiDettaglioFragment extends Fragment {
         //Log.d("DEBUGAPP", TAG + " onResume");
 
         if (mainActivity.tabSelezionato == 0) {
-            switch (mainActivity.databaseAdapter.getLingua()) {
+            switch (mainActivity.gestoreDatabaseCondiviso.getLingua()) {
                 case "italiano": {
                     mainActivity.impostaActionBar(true, mainActivity.pdiScelto.getTitoloItaliano());
                 }
@@ -123,7 +123,7 @@ public class PdiDettaglioFragment extends Fragment {
             }
         }
 
-        switch (mainActivity.databaseAdapter.getLingua()) {
+        switch (mainActivity.gestoreDatabaseCondiviso.getLingua()) {
             case "italiano": {
                 if (mainActivity.pdiScelto.getDescrizioneItaliano() != null) {
                     tvDescrizione.setText(mainActivity.pdiScelto.getDescrizioneItaliano());

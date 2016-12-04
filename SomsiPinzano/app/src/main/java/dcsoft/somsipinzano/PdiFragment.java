@@ -55,9 +55,7 @@ public class PdiFragment extends Fragment {
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
             if (savedInstanceState == null) {
-                mainActivity.databaseAdapter.apriConnesioneDatabase();
-                pdi = mainActivity.databaseAdapter.dammiPdiPerCategoria(mainActivity.categoriaScelta.getIdCategoria());
-                mainActivity.databaseAdapter.chiudiConnessioneDatabase();
+                pdi = mainActivity.gestoreDatabaseCondiviso.dammiPdiPerCategoria(mainActivity.categoriaScelta.getIdCategoria());
             } else {
                 //Log.d("DEBUGAPP", TAG + " onCreateView savedInstanceState != null");
 
@@ -86,7 +84,7 @@ public class PdiFragment extends Fragment {
         //Log.d("DEBUGAPP", TAG + " onResume");
 
         if (mainActivity.tabSelezionato == 0) {
-            switch (mainActivity.databaseAdapter.getLingua()) {
+            switch (mainActivity.gestoreDatabaseCondiviso.getLingua()) {
                 case "italiano": {
                     mainActivity.impostaActionBar(true, mainActivity.categoriaScelta.getNomeItaliano());
                 }

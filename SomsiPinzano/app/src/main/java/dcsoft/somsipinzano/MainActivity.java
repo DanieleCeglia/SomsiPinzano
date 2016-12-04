@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-    public DatabaseAdapter databaseAdapter;
+    public GestoreDatabase gestoreDatabaseCondiviso;
     public BottomNavigationView bottomNavigation;
     public int tabSelezionato;
     public Categoria categoriaScelta;
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Log.d("DEBUGAPP", TAG + " onCreate");
 
-        databaseAdapter = DatabaseAdapter.dammiDbHelperCondiviso(this);
+        gestoreDatabaseCondiviso = GestoreDatabase.dammiGestoreDatabaseCondiviso(this);
 
         controllaPermessi();
 
@@ -368,7 +368,7 @@ public class MainActivity extends AppCompatActivity {
                 if (pdiDettaglioFragment != null && pdiDettaglioFragment.isAdded()) {
                     fragmentTransaction.show(pdiDettaglioFragment);
 
-                    switch (databaseAdapter.getLingua()) {
+                    switch (gestoreDatabaseCondiviso.getLingua()) {
                         case "italiano": {
                             impostaActionBar(true, pdiScelto.getTitoloItaliano());
                         }
@@ -381,7 +381,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if (pdiFragment != null && pdiFragment.isAdded()) {
                     fragmentTransaction.show(pdiFragment);
 
-                    switch (databaseAdapter.getLingua()) {
+                    switch (gestoreDatabaseCondiviso.getLingua()) {
                         case "italiano": {
                             impostaActionBar(true, categoriaScelta.getNomeItaliano());
                         }
@@ -457,7 +457,7 @@ public class MainActivity extends AppCompatActivity {
 
         pdiDettaglioFragment = null;
 
-        switch (databaseAdapter.getLingua()) {
+        switch (gestoreDatabaseCondiviso.getLingua()) {
             case "italiano": {
                 impostaActionBar(true, categoriaScelta.getNomeItaliano());
             }

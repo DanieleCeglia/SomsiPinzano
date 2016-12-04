@@ -55,9 +55,7 @@ public class CategoriaFragment extends Fragment {
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
             if (savedInstanceState == null) {
-                mainActivity.databaseAdapter.apriConnesioneDatabase();
-                categorie = mainActivity.databaseAdapter.dammiCategorie();
-                mainActivity.databaseAdapter.chiudiConnessioneDatabase();
+                categorie = mainActivity.gestoreDatabaseCondiviso.dammiCategorie();
             } else {
                 //Log.d("DEBUGAPP", TAG + " onCreateView savedInstanceState != null");
 
