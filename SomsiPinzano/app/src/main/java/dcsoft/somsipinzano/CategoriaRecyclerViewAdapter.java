@@ -30,13 +30,22 @@ class CategoriaRecyclerViewAdapter extends RecyclerView.Adapter<CategoriaRecycle
         switch (mainActivity.gestoreDatabaseCondiviso.getLingua()) {
             case "italiano": {
                 holder.tvTitoloCategoria.setText(categorie.get(position).getNomeItaliano());
+                holder.tvDescrizioneCategoria.setText(categorie.get(position).getDescrizioneItaliano());
             }
             break;
 
             default: {
                 holder.tvTitoloCategoria.setText(categorie.get(position).getNomeInglese());
+                holder.tvDescrizioneCategoria.setText(categorie.get(position).getDescrizioneInglese());
             }
         }
+
+        if (categorie.get(position).getFileImmagine() != null) {
+            String nomeFileSenzaEstensione = categorie.get(position).getFileImmagine().substring(0, categorie.get(position).getFileImmagine().lastIndexOf('.'));
+            String packageName = mainActivity.getPackageName();
+            holder.ivImmagineCategoria.setImageResource(mainActivity.getResources().getIdentifier(nomeFileSenzaEstensione, "drawable", packageName));
+        }
+
         holder.categoria = categorie.get(position);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -58,14 +67,16 @@ class CategoriaRecyclerViewAdapter extends RecyclerView.Adapter<CategoriaRecycle
         final View mView;
         final ImageView ivImmagineCategoria;
         final TextView tvTitoloCategoria;
+        final TextView tvDescrizioneCategoria;
         Categoria categoria;
 
         ViewHolder(View view) {
             super(view);
 
             mView = view;
-            ivImmagineCategoria = (ImageView) view.findViewById(R.id.ivImmagineCategoria);
-            tvTitoloCategoria = (TextView) view.findViewById(R.id.tvTitoloCategoria);
+            ivImmagineCategoria    = (ImageView) view.findViewById(R.id.ivImmagineCategoria);
+            tvTitoloCategoria      = (TextView)  view.findViewById(R.id.tvTitoloCategoria);
+            tvDescrizioneCategoria = (TextView)  view.findViewById(R.id.tvDescrizioneCategoria);
         }
 
         @Override

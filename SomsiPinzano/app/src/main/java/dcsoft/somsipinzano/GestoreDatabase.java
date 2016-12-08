@@ -161,8 +161,10 @@ class GestoreDatabase extends SQLiteOpenHelper {
                         cursor.getInt(0),     // idCategoria
                         cursor.getString(1),  // nomeItaliano
                         cursor.getString(2),  // nomeInglese
-                        cursor.getString(3),  // fileImmagine
-                        cursor.getString(4)); // coloreEsadecimale
+                        cursor.getString(3),  // descrizioneItaliano
+                        cursor.getString(4),  // descrizioneInglese
+                        cursor.getString(5),  // fileImmagine
+                        cursor.getString(6)); // coloreEsadecimale
 
                 list.add(categoria);
 
@@ -193,8 +195,10 @@ class GestoreDatabase extends SQLiteOpenHelper {
                         cursor.getInt(0),     // idCategoria
                         cursor.getString(1),  // nomeItaliano
                         cursor.getString(2),  // nomeInglese
-                        cursor.getString(3),  // fileImmagine
-                        cursor.getString(4)); // coloreEsadecimale
+                        cursor.getString(3),  // descrizioneItaliano
+                        cursor.getString(4),  // descrizioneInglese
+                        cursor.getString(5),  // fileImmagine
+                        cursor.getString(6)); // coloreEsadecimale
 
                 cursor.moveToNext();
             }
