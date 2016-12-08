@@ -170,7 +170,12 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
 
             Categoria categoria = mainActivity.gestoreDatabaseCondiviso.dammiCategoria(pdi.getIdPdi_idCategoria());
             if (categoria != null) {
-                markerOptions.icon(getMarkerIcon("#" + categoria.getColoreEsadecimale()));
+                String nomeFileSenzaEstensione = categoria.getFilePin().substring(0, categoria.getFilePin().lastIndexOf('.'));
+                String packageName = mainActivity.getPackageName();
+
+                BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(getResources().getIdentifier(nomeFileSenzaEstensione, "drawable", packageName));
+
+                markerOptions.icon(icon);
             }
 
             switch (mainActivity.gestoreDatabaseCondiviso.getLingua()) {
@@ -203,14 +208,6 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
     //endregion
 
     //region Metodi privati
-    private BitmapDescriptor getMarkerIcon(String color) {
-        float[] hsv = new float[3];
-
-        Color.colorToHSV(Color.parseColor(color), hsv);
-
-        return BitmapDescriptorFactory.defaultMarker(hsv[0]);
-    }
-
     private boolean zoommaSuPdiSceltoSeNecessario() {
         if (mainActivity.vediPdiSceltoSuGM) {
             mainActivity.vediPdiSceltoSuGM = false;

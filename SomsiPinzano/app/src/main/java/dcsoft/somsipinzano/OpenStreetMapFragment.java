@@ -9,6 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+
 import org.osmdroid.api.IMapController;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
@@ -133,7 +136,10 @@ public class OpenStreetMapFragment extends Fragment {
 
             Categoria categoria = mainActivity.gestoreDatabaseCondiviso.dammiCategoria(pdi.getIdPdi_idCategoria());
             if (categoria != null) {
-                //marker.setIcon(getResources().getDrawable(R.drawable.marker_kml_point).mutate());
+                String nomeFileSenzaEstensione = categoria.getFilePin().substring(0, categoria.getFilePin().lastIndexOf('.'));
+                String packageName = mainActivity.getPackageName();
+
+                marker.setIcon(getResources().getDrawable(getResources().getIdentifier(nomeFileSenzaEstensione, "drawable", packageName)));
                 //marker.setImage(getResources().getDrawable(R.drawable.ic_launcher));
                 //marker.setInfoWindow(new MarkerInfoWindow(R.layout.bonuspack_bubble_black, map));
             }
