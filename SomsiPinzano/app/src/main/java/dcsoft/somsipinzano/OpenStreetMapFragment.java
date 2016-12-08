@@ -4,13 +4,11 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.content.res.ResourcesCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
@@ -139,9 +137,7 @@ public class OpenStreetMapFragment extends Fragment {
                 String nomeFileSenzaEstensione = categoria.getFilePin().substring(0, categoria.getFilePin().lastIndexOf('.'));
                 String packageName = mainActivity.getPackageName();
 
-                marker.setIcon(getResources().getDrawable(getResources().getIdentifier(nomeFileSenzaEstensione, "drawable", packageName)));
-                //marker.setImage(getResources().getDrawable(R.drawable.ic_launcher));
-                //marker.setInfoWindow(new MarkerInfoWindow(R.layout.bonuspack_bubble_black, map));
+                marker.setIcon(ResourcesCompat.getDrawable(getResources(), getResources().getIdentifier(nomeFileSenzaEstensione, "drawable", packageName), null));
             }
 
             switch (mainActivity.gestoreDatabaseCondiviso.getLingua()) {
