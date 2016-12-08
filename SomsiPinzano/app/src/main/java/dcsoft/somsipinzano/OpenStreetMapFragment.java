@@ -130,7 +130,7 @@ public class OpenStreetMapFragment extends Fragment {
 
             Marker marker = new Marker(osmMap);
             marker.setPosition(posizione);
-            //marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+            marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
 
             Categoria categoria = mainActivity.gestoreDatabaseCondiviso.dammiCategoria(pdi.getIdPdi_idCategoria());
             if (categoria != null) {
