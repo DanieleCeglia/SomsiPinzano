@@ -20,9 +20,12 @@ import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 interface GoogleMapsFragmentEseguiAlOnHiddenChanged {
     void esegui(boolean hidden);
@@ -39,6 +42,8 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
     private double lon = -1;
     private int mapType = -1;
     private ArrayList<Pdi> listaPdi;
+    private static Map<Marker, Pdi>       mappaMarkerPdi       = new HashMap<>();
+    private static Map<Marker, Categoria> mappaMarkerCategoria = new HashMap<>();
 
     public GoogleMapsFragmentEseguiAlOnHiddenChanged eseguiAlOnHiddenChanged;
 
@@ -138,6 +143,18 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
         //Log.d("DEBUGAPP", TAG + " onMapReady");
 
         gmMap = googleMap;
+        gmMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                Categoria categoria = mappaMarkerCategoria.get(marker);
+                Pdi pdi = mappaMarkerPdi.get(marker);
+
+                Log.d("DEBUGAPP", TAG + " onMarkerClick categoria: " + categoria);
+                Log.d("DEBUGAPP", TAG + " onMarkerClick pdi: " + pdi);
+
+                return false;
+            }
+        });
 
         listaPdi = mainActivity.gestoreDatabaseCondiviso.dammiPdi();
 
@@ -188,7 +205,10 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
                 }
             }
 
-            gmMap.addMarker(markerOptions);
+            Marker marker = gmMap.addMarker(markerOptions);
+
+            mappaMarkerPdi.put(marker, pdi);
+            mappaMarkerCategoria.put(marker, categoria);
         }
 
         if (mapType != -1) {
