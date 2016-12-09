@@ -11,25 +11,26 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.osmdroid.api.IMapController;
+import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.Polyline;
 import org.osmdroid.views.overlay.compass.CompassOverlay;
 import org.osmdroid.views.overlay.compass.InternalCompassOrientationProvider;
+import org.osmdroid.views.overlay.infowindow.InfoWindow;
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 interface OpenStreetMapFragmentEseguiAlOnHiddenChanged {
     void esegui(boolean hidden);
 }
 
-public class OpenStreetMapFragment extends Fragment {
+public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver {
     private final String TAG = getClass().getSimpleName();
     private MainActivity mainActivity;
     private View openStreetMapFragmentView;
@@ -39,8 +40,6 @@ public class OpenStreetMapFragment extends Fragment {
     private IMapController mapController;
     private ArrayList<Pdi> listaPdi;
     private int tipoMappa = -1;
-    private static Map<Marker, Pdi>       mappaMarkerPdi       = new HashMap<>();
-    private static Map<Marker, Categoria> mappaMarkerCategoria = new HashMap<>();
 
     public OpenStreetMapFragmentEseguiAlOnHiddenChanged eseguiAlOnHiddenChanged;
 
@@ -82,6 +81,9 @@ public class OpenStreetMapFragment extends Fragment {
         osmMap.setBuiltInZoomControls(true);
         osmMap.setMultiTouchControls(true);
         osmMap.setTilesScaledToDpi(true);
+
+        MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(mainActivity, this);
+        osmMap.getOverlays().add(0, mapEventsOverlay);
 
         compassOverlay = new CompassOverlay(mainActivity, new InternalCompassOrientationProvider(mainActivity), osmMap);
         compassOverlay.enableCompass();
@@ -144,41 +146,37 @@ public class OpenStreetMapFragment extends Fragment {
                 marker.setIcon(ResourcesCompat.getDrawable(getResources(), getResources().getIdentifier(nomeFileSenzaEstensione, "drawable", packageName), null));
             }
 
-            switch (mainActivity.gestoreDatabaseCondiviso.getLingua()) {
-                case "italiano": {
-                    marker.setTitle(pdi.getTitoloItaliano());
-                }
-                break;
-
-                default: {
-                    marker.setTitle(pdi.getTitoloInglese());
-                }
-            }
-
-            mappaMarkerPdi.put(marker, pdi);
-            mappaMarkerCategoria.put(marker, categoria);
-
-            marker.setDraggable(true);
-            marker.setOnMarkerDragListener(new OnMarkerDragListenerDrawer());
             marker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
                 @Override
                 public boolean onMarkerClick(Marker item, MapView arg1) {
-                    Categoria categoria = mappaMarkerCategoria.get(item);
-                    Pdi pdi = mappaMarkerPdi.get(item);
-
-                    Log.d("DEBUGAPP", TAG + " onMarkerClick categoria: " + categoria);
-                    Log.d("DEBUGAPP", TAG + " onMarkerClick pdi: " + pdi);
-
+                    InfoWindow.closeAllInfoWindowsOn(osmMap);
                     item.showInfoWindow();
 
                     return true;
                 }
             });
 
+            OsmdroidMarkerInfoWindow markerInfoWindow = new OsmdroidMarkerInfoWindow(R.layout.osmdroid_marker_info_window, osmMap);
+            markerInfoWindow.mainActivity = mainActivity;
+            markerInfoWindow.pdi          = pdi;
+            marker.setInfoWindow(markerInfoWindow);
+
             osmMap.getOverlays().add(marker);
         }
 
         return openStreetMapFragmentView;
+    }
+
+    @Override
+    public boolean singleTapConfirmedHelper(GeoPoint geoPoint) {
+        InfoWindow.closeAllInfoWindowsOn(osmMap);
+
+        return false;
+    }
+
+    @Override
+    public boolean longPressHelper(GeoPoint geoPoint) {
+        return false;
     }
 
     @Override

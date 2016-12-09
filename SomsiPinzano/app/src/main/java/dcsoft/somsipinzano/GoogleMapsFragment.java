@@ -143,10 +143,6 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
             public void onInfoWindowClick(Marker marker) {
                 Pdi pdi = (Pdi) marker.getTag();
 
-                Log.d("DEBUGAPP", TAG + " onMarkerClick pdi: " + pdi);
-
-
-
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mainActivity);
                 alertDialogBuilder.setCancelable(true);
 
