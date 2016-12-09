@@ -43,7 +43,13 @@ class CategoriaRecyclerViewAdapter extends RecyclerView.Adapter<CategoriaRecycle
         if (categorie.get(position).getFileImmagine() != null) {
             String nomeFileSenzaEstensione = categorie.get(position).getFileImmagine().substring(0, categorie.get(position).getFileImmagine().lastIndexOf('.'));
             String packageName = mainActivity.getPackageName();
-            holder.ivImmagineCategoria.setImageResource(mainActivity.getResources().getIdentifier(nomeFileSenzaEstensione, "drawable", packageName));
+            holder.ivCategoria.setImageResource(mainActivity.getResources().getIdentifier(nomeFileSenzaEstensione, "drawable", packageName));
+        }
+
+        if (categorie.get(position).getFilePin() != null) {
+            String nomeFileSenzaEstensione = categorie.get(position).getFilePin().substring(0, categorie.get(position).getFilePin().lastIndexOf('.'));
+            String packageName = mainActivity.getPackageName();
+            holder.ivPin.setImageResource(mainActivity.getResources().getIdentifier(nomeFileSenzaEstensione, "drawable", packageName));
         }
 
         holder.categoria = categorie.get(position);
@@ -65,7 +71,8 @@ class CategoriaRecyclerViewAdapter extends RecyclerView.Adapter<CategoriaRecycle
 
     class ViewHolder extends RecyclerView.ViewHolder {
         final View mView;
-        final ImageView ivImmagineCategoria;
+        final ImageView ivCategoria;
+        final ImageView ivPin;
         final TextView tvTitoloCategoria;
         final TextView tvDescrizioneCategoria;
         Categoria categoria;
@@ -74,7 +81,8 @@ class CategoriaRecyclerViewAdapter extends RecyclerView.Adapter<CategoriaRecycle
             super(view);
 
             mView = view;
-            ivImmagineCategoria    = (ImageView) view.findViewById(R.id.ivImmagineCategoria);
+            ivCategoria            = (ImageView) view.findViewById(R.id.ivCategoria);
+            ivPin                  = (ImageView) view.findViewById(R.id.ivPin);
             tvTitoloCategoria      = (TextView)  view.findViewById(R.id.tvTitoloCategoria);
             tvDescrizioneCategoria = (TextView)  view.findViewById(R.id.tvDescrizioneCategoria);
         }

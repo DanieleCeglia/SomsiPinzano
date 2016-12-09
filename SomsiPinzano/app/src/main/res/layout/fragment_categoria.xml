@@ -1,21 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
     android:id="@+id/fragment_categoria"
-    android:gravity="center_vertical"
     android:background="@drawable/ombra">
 
     <ImageView
-        android:id="@+id/ivImmagineCategoria"
+        android:id="@+id/ivCategoria"
         android:layout_width="100dp"
-        android:layout_height="162dp" />
+        android:layout_height="162dp"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:id="@+id/ivPin"
+        android:background="@drawable/pin_arancione"
+        android:layout_height="50dp"
+        android:layout_width="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="-8dp" />
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
+        android:layout_toEndOf="@+id/ivCategoria"
+        android:gravity="center_vertical"
+        android:layout_alignBottom="@id/ivCategoria"
+        android:layout_alignTop="@id/ivCategoria"
+        android:layout_alignParentEnd="true"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <TextView
@@ -23,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?attr/textAppearanceListItem"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
             android:text="TITOLO"
             android:textColor="@color/colorPrimaryText"
             android:textStyle="normal|bold" />
@@ -33,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?attr/textAppearanceListItem"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
             android:text="Descrizione  adasd asd asdas das das das dasdsad asd asd asdasd as das dasd asdasdsada sda @string/about"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-condensed"
@@ -43,4 +54,4 @@
 
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>
