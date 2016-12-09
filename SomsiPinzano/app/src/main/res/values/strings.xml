@@ -13,4 +13,5 @@
     <string name="rilievo">Terrain</string>
     <string name="ciclabile">Cycle</string>
     <string name="trasporti">Transport</string>
+    <string name="tocca_qui_per_maggiori_dettagli">Tap here for more details...</string>
 </resources>

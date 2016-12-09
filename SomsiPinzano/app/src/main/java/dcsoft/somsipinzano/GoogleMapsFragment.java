@@ -4,13 +4,20 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -24,8 +31,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 interface GoogleMapsFragmentEseguiAlOnHiddenChanged {
     void esegui(boolean hidden);
@@ -42,8 +47,6 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
     private double lon = -1;
     private int mapType = -1;
     private ArrayList<Pdi> listaPdi;
-    private static Map<Marker, Pdi>       mappaMarkerPdi       = new HashMap<>();
-    private static Map<Marker, Categoria> mappaMarkerCategoria = new HashMap<>();
 
     public GoogleMapsFragmentEseguiAlOnHiddenChanged eseguiAlOnHiddenChanged;
 
@@ -88,9 +91,9 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
         if (savedInstanceState != null) {
             Log.d("DEBUGAPP", TAG + " onCreateView savedInstanceState != null");
 
-            zoom = savedInstanceState.getFloat("zoom");
-            lat = savedInstanceState.getDouble("lat");
-            lon = savedInstanceState.getDouble("lon");
+            zoom    = savedInstanceState.getFloat("zoom");
+            lat     = savedInstanceState.getDouble("lat");
+            lon     = savedInstanceState.getDouble("lon");
             mapType = savedInstanceState.getInt("mapType");
         }
 
@@ -129,30 +132,65 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         //Log.d("DEBUGAPP", TAG + " onMapReady");
 
         gmMap = googleMap;
-        gmMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                Categoria categoria = mappaMarkerCategoria.get(marker);
-                Pdi pdi = mappaMarkerPdi.get(marker);
 
-                Log.d("DEBUGAPP", TAG + " onMarkerClick categoria: " + categoria);
+        gmMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                Pdi pdi = (Pdi) marker.getTag();
+
                 Log.d("DEBUGAPP", TAG + " onMarkerClick pdi: " + pdi);
 
-                return false;
+
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mainActivity);
+                alertDialogBuilder.setCancelable(true);
+
+                alertDialogBuilder.setMessage(pdi.toString());
+
+                alertDialogBuilder.setNeutralButton(
+                        "Ok",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+            }
+        });
+
+        gmMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+            @Override
+            public View getInfoWindow(Marker marker) {
+                return null;
+            }
+
+            @Override
+            public View getInfoContents(Marker marker) {
+                LinearLayout info = new LinearLayout(mainActivity);
+                info.setOrientation(LinearLayout.VERTICAL);
+
+                TextView title = new TextView(mainActivity);
+                title.setTextColor(Color.BLACK);
+                title.setGravity(Gravity.CENTER);
+                title.setTypeface(null, Typeface.BOLD);
+                title.setText(marker.getTitle());
+
+                TextView snippet = new TextView(mainActivity);
+                snippet.setTextColor(Color.GRAY);
+                snippet.setGravity(Gravity.CENTER);
+                snippet.setText(marker.getSnippet());
+
+                info.addView(title);
+                info.addView(snippet);
+
+                return info;
             }
         });
 
@@ -205,10 +243,10 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
                 }
             }
 
-            Marker marker = gmMap.addMarker(markerOptions);
+            markerOptions.snippet(getResources().getString(R.string.tocca_qui_per_maggiori_dettagli));
 
-            mappaMarkerPdi.put(marker, pdi);
-            mappaMarkerCategoria.put(marker, categoria);
+            Marker marker = gmMap.addMarker(markerOptions);
+            marker.setTag(pdi);
         }
 
         if (mapType != -1) {
