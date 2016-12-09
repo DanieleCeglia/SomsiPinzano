@@ -22,6 +22,8 @@ import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 interface OpenStreetMapFragmentEseguiAlOnHiddenChanged {
     void esegui(boolean hidden);
@@ -37,6 +39,8 @@ public class OpenStreetMapFragment extends Fragment {
     private IMapController mapController;
     private ArrayList<Pdi> listaPdi;
     private int tipoMappa = -1;
+    private static Map<Marker, Pdi>       mappaMarkerPdi       = new HashMap<>();
+    private static Map<Marker, Categoria> mappaMarkerCategoria = new HashMap<>();
 
     public OpenStreetMapFragmentEseguiAlOnHiddenChanged eseguiAlOnHiddenChanged;
 
@@ -151,8 +155,26 @@ public class OpenStreetMapFragment extends Fragment {
                 }
             }
 
+            mappaMarkerPdi.put(marker, pdi);
+            mappaMarkerCategoria.put(marker, categoria);
+
             marker.setDraggable(true);
             marker.setOnMarkerDragListener(new OnMarkerDragListenerDrawer());
+            marker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(Marker item, MapView arg1) {
+                    Categoria categoria = mappaMarkerCategoria.get(item);
+                    Pdi pdi = mappaMarkerPdi.get(item);
+
+                    Log.d("DEBUGAPP", TAG + " onMarkerClick categoria: " + categoria);
+                    Log.d("DEBUGAPP", TAG + " onMarkerClick pdi: " + pdi);
+
+                    item.showInfoWindow();
+
+                    return true;
+                }
+            });
+
             osmMap.getOverlays().add(marker);
         }
 
