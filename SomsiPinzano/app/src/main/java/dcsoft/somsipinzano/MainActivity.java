@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     private PdiDettaglioFragment pdiDettaglioFragment;
     private GoogleMapsFragment googleMapsFragment;
     private OpenStreetMapFragment openStreetMapFragment;
+    private boolean toastGmVisualizzato;
+    private boolean toastOsmVisualizzato;
 
     //region Metodi override
     @Override
@@ -78,6 +80,9 @@ public class MainActivity extends AppCompatActivity {
             pdiFragment           = null;
 
             tabSelezionato = 0;
+
+            toastGmVisualizzato  = false;
+            toastOsmVisualizzato = false;
         } else {
             //Log.d("DEBUGAPP", TAG + " onCreate savedInstanceState != null");
 
@@ -94,6 +99,9 @@ public class MainActivity extends AppCompatActivity {
             openStreetMapFragment = (OpenStreetMapFragment) fragmentManager.findFragmentByTag("openStreetMapFragment");
 
             tabSelezionato = savedInstanceState.getInt("tabSelezionato");
+
+            toastGmVisualizzato  = savedInstanceState.getBoolean("toastGmVisualizzato");
+            toastOsmVisualizzato = savedInstanceState.getBoolean("toastOsmVisualizzato");
         }
 
         menuSelezionato = bottomNavigation.getMenu().getItem(tabSelezionato);
@@ -150,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
                 Boolean storage = perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
 
                 if (location && storage) {
-                    Toast.makeText(MainActivity.this,  getResources().getString(R.string.messaggio_permessi_accettati), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,  getResources().getString(R.string.messaggio_permessi_accettati), Toast.LENGTH_LONG).show();
                 } else {
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
                     alertDialogBuilder.setCancelable(true);
@@ -193,6 +201,8 @@ public class MainActivity extends AppCompatActivity {
         savedInstanceState.putBoolean("vediPdiSceltoSuGM", vediPdiSceltoSuGM);
         savedInstanceState.putBoolean("vediPdiSceltoSuOSM", vediPdiSceltoSuOSM);
         savedInstanceState.putInt("tabSelezionato", tabSelezionato);
+        savedInstanceState.putBoolean("toastGmVisualizzato", toastGmVisualizzato);
+        savedInstanceState.putBoolean("toastOsmVisualizzato", toastOsmVisualizzato);
         savedInstanceState.putParcelable("categoriaScelta", categoriaScelta);
         savedInstanceState.putParcelable("pdiScelto", pdiScelto);
     }
@@ -457,6 +467,16 @@ public class MainActivity extends AppCompatActivity {
             invalidateOptionsMenu(); // dico di aggiornare l'action bar (per GM e OSM che hanno il menu a puntini)
 
             fragmentTransaction.commit();
+
+            if (tabSelezionato == 1 && !toastGmVisualizzato) {
+                Toast.makeText(MainActivity.this,  getResources().getString(R.string.tocca_pin_per_maggiori_dettagli), Toast.LENGTH_LONG).show();
+                toastGmVisualizzato = true;
+            }
+
+            if (tabSelezionato == 2 && !toastOsmVisualizzato) {
+                Toast.makeText(MainActivity.this,  getResources().getString(R.string.tocca_pin_per_maggiori_dettagli), Toast.LENGTH_LONG).show();
+                toastOsmVisualizzato = true;
+            }
         }
     }
 
