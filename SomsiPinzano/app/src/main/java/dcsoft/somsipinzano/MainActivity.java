@@ -13,6 +13,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -83,8 +84,8 @@ public class MainActivity extends AppCompatActivity {
             vediPdiSceltoSuGM  = savedInstanceState.getBoolean("vediPdiSceltoSuGM");
             vediPdiSceltoSuOSM = savedInstanceState.getBoolean("vediPdiSceltoSuOSM");
 
-            categoriaScelta = (Categoria) savedInstanceState.getParcelable("categoriaScelta");
-            pdiScelto       = (Pdi)       savedInstanceState.getParcelable("pdiScelto");
+            categoriaScelta = savedInstanceState.getParcelable("categoriaScelta");
+            pdiScelto       = savedInstanceState.getParcelable("pdiScelto");
 
             categoriaFragment     = (CategoriaFragment)     fragmentManager.findFragmentByTag("categoriaFragment");
             pdiFragment           = (PdiFragment)           fragmentManager.findFragmentByTag("pdiFragment");
@@ -124,12 +125,12 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                attivaTab(item);
+                attivaTab(item, false);
                 return true;
             }
         });
 
-        attivaTab(menuSelezionato);
+        attivaTab(menuSelezionato, true);
     }
 
     @Override
@@ -308,19 +309,25 @@ public class MainActivity extends AppCompatActivity {
     public void vediPdiSceltoSuGM() {
         vediPdiSceltoSuGM = true;
         MenuItem menuSelezionato = bottomNavigation.getMenu().getItem(1);
-        attivaTab(menuSelezionato);
+        attivaTab(menuSelezionato, false);
     }
 
     public void vediPdiSceltoSuOSM() {
         vediPdiSceltoSuOSM = true;
         MenuItem menuSelezionato = bottomNavigation.getMenu().getItem(2);
-        attivaTab(menuSelezionato);
+        attivaTab(menuSelezionato, false);
+    }
+
+    public void apriDettaglioSuPdi(Pdi pdi) {
+        Categoria categoria = gestoreDatabaseCondiviso.dammiCategoria(pdi.getIdPdi_idCategoria());
+        Log.d("DEBUGAPP", TAG + " apriDettaglioSuPdi categoria: " + categoria);
+        Log.d("DEBUGAPP", TAG + " apriDettaglioSuPdi pdi: " + pdi);
     }
     //endregion
 
     //region Metodi privati
     private void controllaPermessi() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {// se è Android 6.0 o superiore...
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) { // se è Android 6.0 o superiore...
             List<String> permessiDaRichiedere = new ArrayList<>();
 
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -337,105 +344,109 @@ public class MainActivity extends AppCompatActivity {
         } // else: ci sono già i permessi, quindi non c'è niente da fare!
     }
 
-    private void attivaTab(MenuItem item) {
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+    private void attivaTab(MenuItem item, Boolean eseguiForzatamente) {
+        int itemId = item.getItemId();
 
-        // per prima cosa nascondo tutti i fragment (se esistenti e già aggiunti)...
-        if (categoriaFragment != null && categoriaFragment.isAdded()) {
-            fragmentTransaction.hide(categoriaFragment);
-        }
-        if (pdiFragment != null && pdiFragment.isAdded()) {
-            fragmentTransaction.hide(pdiFragment);
-        }
-        if (pdiDettaglioFragment != null && pdiDettaglioFragment.isAdded()) {
-            fragmentTransaction.hide(pdiDettaglioFragment);
-        }
-        if (googleMapsFragment != null && googleMapsFragment.isAdded()) {
-            fragmentTransaction.hide(googleMapsFragment);
-        }
-        if (openStreetMapFragment != null && openStreetMapFragment.isAdded()) {
-            fragmentTransaction.hide(openStreetMapFragment);
-        }
+        if (!((tabSelezionato == 0 && itemId == R.id.item_pdi) || (tabSelezionato == 1 && itemId == R.id.item_google_maps) || (tabSelezionato == 2 && itemId == R.id.item_open_street_map)) || eseguiForzatamente) { // evito di eseguire codice inutilmente (salvo forzature)...
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        // ... e imposto tutti i tab come non selezionati...
-        bottomNavigation.getMenu().getItem(0).setChecked(false);
-        bottomNavigation.getMenu().getItem(1).setChecked(false);
-        bottomNavigation.getMenu().getItem(2).setChecked(false);
+            // per prima cosa nascondo tutti i fragment (se esistenti e già aggiunti)...
+            if (categoriaFragment != null && categoriaFragment.isAdded()) {
+                fragmentTransaction.hide(categoriaFragment);
+            }
+            if (pdiFragment != null && pdiFragment.isAdded()) {
+                fragmentTransaction.hide(pdiFragment);
+            }
+            if (pdiDettaglioFragment != null && pdiDettaglioFragment.isAdded()) {
+                fragmentTransaction.hide(pdiDettaglioFragment);
+            }
+            if (googleMapsFragment != null && googleMapsFragment.isAdded()) {
+                fragmentTransaction.hide(googleMapsFragment);
+            }
+            if (openStreetMapFragment != null && openStreetMapFragment.isAdded()) {
+                fragmentTransaction.hide(openStreetMapFragment);
+            }
 
-        // poi vedo chi mostrare o addirittura aggiungere...
-        switch (item.getItemId()) {
-            case R.id.item_pdi: {
-                if (pdiDettaglioFragment != null && pdiDettaglioFragment.isAdded()) {
-                    fragmentTransaction.show(pdiDettaglioFragment);
+            // ... e imposto tutti i tab come non selezionati...
+            bottomNavigation.getMenu().getItem(0).setChecked(false);
+            bottomNavigation.getMenu().getItem(1).setChecked(false);
+            bottomNavigation.getMenu().getItem(2).setChecked(false);
 
-                    switch (gestoreDatabaseCondiviso.getLingua()) {
-                        case "italiano": {
-                            impostaActionBar(true, pdiScelto.getTitoloItaliano());
+            // poi vedo chi mostrare o addirittura aggiungere...
+            switch (itemId) {
+                case R.id.item_pdi: {
+                    if (pdiDettaglioFragment != null && pdiDettaglioFragment.isAdded()) {
+                        fragmentTransaction.show(pdiDettaglioFragment);
+
+                        switch (gestoreDatabaseCondiviso.getLingua()) {
+                            case "italiano": {
+                                impostaActionBar(true, pdiScelto.getTitoloItaliano());
+                            }
+                            break;
+
+                            default: {
+                                impostaActionBar(true, pdiScelto.getTitoloInglese());
+                            }
                         }
-                        break;
+                    } else if (pdiFragment != null && pdiFragment.isAdded()) {
+                        fragmentTransaction.show(pdiFragment);
 
-                        default: {
-                            impostaActionBar(true, pdiScelto.getTitoloInglese());
-                        }
-                    }
-                } else if (pdiFragment != null && pdiFragment.isAdded()) {
-                    fragmentTransaction.show(pdiFragment);
+                        switch (gestoreDatabaseCondiviso.getLingua()) {
+                            case "italiano": {
+                                impostaActionBar(true, categoriaScelta.getNomeItaliano());
+                            }
+                            break;
 
-                    switch (gestoreDatabaseCondiviso.getLingua()) {
-                        case "italiano": {
-                            impostaActionBar(true, categoriaScelta.getNomeItaliano());
+                            default: {
+                                impostaActionBar(true, categoriaScelta.getNomeInglese());
+                            }
                         }
-                        break;
-
-                        default: {
-                            impostaActionBar(true, categoriaScelta.getNomeInglese());
-                        }
-                    }
-                } else {
-                    if (categoriaFragment != null && categoriaFragment.isAdded()) {
-                        fragmentTransaction.show(categoriaFragment);
                     } else {
-                        fragmentTransaction.add(R.id.contentContainer, categoriaFragment, "categoriaFragment");
+                        if (categoriaFragment != null && categoriaFragment.isAdded()) {
+                            fragmentTransaction.show(categoriaFragment);
+                        } else {
+                            fragmentTransaction.add(R.id.contentContainer, categoriaFragment, "categoriaFragment");
+                        }
+
+                        impostaActionBar(false, getResources().getString(R.string.Categorie));
                     }
 
-                    impostaActionBar(false, getResources().getString(R.string.Categorie));
+                    tabSelezionato = 0;
                 }
+                break;
 
-                tabSelezionato = 0;
-            }
-            break;
+                case R.id.item_google_maps: {
+                    if (googleMapsFragment != null && googleMapsFragment.isAdded()) {
+                        fragmentTransaction.show(googleMapsFragment);
+                    } else {
+                        fragmentTransaction.add(R.id.contentContainer, googleMapsFragment, "googleMapsFragment");
+                    }
 
-            case R.id.item_google_maps: {
-                if (googleMapsFragment != null && googleMapsFragment.isAdded()) {
-                    fragmentTransaction.show(googleMapsFragment);
-                } else {
-                    fragmentTransaction.add(R.id.contentContainer, googleMapsFragment, "googleMapsFragment");
+                    impostaActionBar(false, "Google Maps");
+
+                    tabSelezionato = 1;
                 }
+                break;
 
-                impostaActionBar(false, "Google Maps");
+                case R.id.item_open_street_map: {
+                    if (openStreetMapFragment != null && openStreetMapFragment.isAdded()) {
+                        fragmentTransaction.show(openStreetMapFragment);
+                    } else {
+                        fragmentTransaction.add(R.id.contentContainer, openStreetMapFragment, "openStreetMapFragment");
+                    }
 
-                tabSelezionato = 1;
-            }
-            break;
+                    impostaActionBar(false, "OpenStreetMap");
 
-            case R.id.item_open_street_map: {
-                if (openStreetMapFragment != null && openStreetMapFragment.isAdded()) {
-                    fragmentTransaction.show(openStreetMapFragment);
-                } else {
-                    fragmentTransaction.add(R.id.contentContainer, openStreetMapFragment, "openStreetMapFragment");
+                    tabSelezionato = 2;
                 }
-
-                impostaActionBar(false, "OpenStreetMap");
-
-                tabSelezionato = 2;
             }
+
+            bottomNavigation.getMenu().getItem(tabSelezionato).setChecked(true);
+
+            invalidateOptionsMenu(); // dico di aggiornare l'action bar (per GM e OSM che hanno il menu a puntini)
+
+            fragmentTransaction.commit();
         }
-
-        bottomNavigation.getMenu().getItem(tabSelezionato).setChecked(true);
-
-        invalidateOptionsMenu(); // dico di aggiornare l'action bar (per GM e OSM che hanno il menu a puntini)
-
-        fragmentTransaction.commit();
     }
 
     private void rimuoviPdiFragment() {

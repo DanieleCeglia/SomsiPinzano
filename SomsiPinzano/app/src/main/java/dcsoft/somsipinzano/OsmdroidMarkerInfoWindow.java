@@ -1,7 +1,5 @@
 package dcsoft.somsipinzano;
 
-import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -37,21 +35,7 @@ public class OsmdroidMarkerInfoWindow extends InfoWindow {
         LinearLayout layout = (LinearLayout) mView.findViewById(R.id.bubble_layout);
         layout.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mainActivity);
-                alertDialogBuilder.setCancelable(true);
-
-                alertDialogBuilder.setMessage(pdi.toString());
-
-                alertDialogBuilder.setNeutralButton(
-                        "Ok",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
+                mainActivity.apriDettaglioSuPdi(pdi);
             }
         });
     }

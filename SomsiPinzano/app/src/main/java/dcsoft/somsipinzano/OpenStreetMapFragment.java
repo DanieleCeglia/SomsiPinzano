@@ -17,7 +17,6 @@ import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
-import org.osmdroid.views.overlay.Polyline;
 import org.osmdroid.views.overlay.compass.CompassOverlay;
 import org.osmdroid.views.overlay.compass.InternalCompassOrientationProvider;
 import org.osmdroid.views.overlay.infowindow.InfoWindow;
@@ -246,33 +245,4 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
         tipoMappa = 2;
     }
     //endregion
-
-
-    class OnMarkerDragListenerDrawer implements Marker.OnMarkerDragListener {
-        ArrayList<GeoPoint> mTrace;
-        Polyline mPolyline;
-
-        OnMarkerDragListenerDrawer() {
-            mTrace = new ArrayList<GeoPoint>(100);
-            mPolyline = new Polyline();
-            mPolyline.setColor(0xAA0000FF);
-            mPolyline.setWidth(2.0f);
-            mPolyline.setGeodesic(true);
-            osmMap.getOverlays().add(mPolyline);
-        }
-
-        @Override public void onMarkerDrag(Marker marker) {
-            //mTrace.add(marker.getPosition());
-        }
-
-        @Override public void onMarkerDragEnd(Marker marker) {
-            mTrace.add(marker.getPosition());
-            mPolyline.setPoints(mTrace);
-            osmMap.invalidate();
-        }
-
-        @Override public void onMarkerDragStart(Marker marker) {
-            //mTrace.add(marker.getPosition());
-        }
-    }
 }

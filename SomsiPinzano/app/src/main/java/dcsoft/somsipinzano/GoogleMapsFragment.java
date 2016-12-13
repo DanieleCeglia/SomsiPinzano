@@ -4,13 +4,11 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -143,21 +141,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
             public void onInfoWindowClick(Marker marker) {
                 Pdi pdi = (Pdi) marker.getTag();
 
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mainActivity);
-                alertDialogBuilder.setCancelable(true);
-
-                alertDialogBuilder.setMessage(pdi.toString());
-
-                alertDialogBuilder.setNeutralButton(
-                        "Ok",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
+                mainActivity.apriDettaglioSuPdi(pdi);
             }
         });
 
