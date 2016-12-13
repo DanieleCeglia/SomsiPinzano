@@ -319,9 +319,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void apriDettaglioSuPdi(Pdi pdi) {
+        MenuItem menuSelezionato = bottomNavigation.getMenu().getItem(0);
+        attivaTab(menuSelezionato, false);
+
+        if (pdiDettaglioFragment != null) {
+            rimuoviPdiDettaglioFragment();
+            rimuoviPdiFragment();
+        } else if (pdiFragment != null) {
+            rimuoviPdiFragment();
+        }
+
         Categoria categoria = gestoreDatabaseCondiviso.dammiCategoria(pdi.getIdPdi_idCategoria());
-        Log.d("DEBUGAPP", TAG + " apriDettaglioSuPdi categoria: " + categoria);
-        Log.d("DEBUGAPP", TAG + " apriDettaglioSuPdi pdi: " + pdi);
+        categoriaScelta(categoria);
+
+        pdiScelto(pdi);
     }
     //endregion
 
