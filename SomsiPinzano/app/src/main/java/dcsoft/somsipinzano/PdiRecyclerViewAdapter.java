@@ -56,7 +56,6 @@ class PdiRecyclerViewAdapter extends RecyclerView.Adapter<PdiRecyclerViewAdapter
 
     class ViewHolder extends RecyclerView.ViewHolder {
         final View mView;
-        final ImageView ivImmaginePdi;
         final TextView tvTitoloPdi;
         Pdi pdi;
 
@@ -64,7 +63,6 @@ class PdiRecyclerViewAdapter extends RecyclerView.Adapter<PdiRecyclerViewAdapter
             super(view);
 
             mView = view;
-            ivImmaginePdi = (ImageView) view.findViewById(R.id.ivImmaginePdi);
             tvTitoloPdi = (TextView) view.findViewById(R.id.tvTitoloPdi);
         }
 
