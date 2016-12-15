@@ -9,6 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 
 public class PdiFragment extends Fragment {
@@ -49,21 +52,46 @@ public class PdiFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_pdi_list, container, false);
 
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        ImageView ivCopertinaCategoria     = (ImageView)    view.findViewById(R.id.ivCopertinaCategoria);
+        ImageView ivPinPdi                 = (ImageView)    view.findViewById(R.id.ivPinPdi);
+        TextView tvDescrizioneCategoriaPdi = (TextView)     view.findViewById(R.id.tvDescrizioneCategoriaPdi);
+        RecyclerView recyclerView          = (RecyclerView) view.findViewById(R.id.listPdi);
 
-            if (savedInstanceState == null) {
-                pdi = mainActivity.gestoreDatabaseCondiviso.dammiPdiPerCategoria(mainActivity.categoriaScelta.getIdCategoria());
-            } else {
-                //Log.d("DEBUGAPP", TAG + " onCreateView savedInstanceState != null");
-
-                pdi = savedInstanceState.getParcelableArrayList("pdi"); // @SuppressWarnings("unchecked")
-            }
-
-            recyclerView.setAdapter(new PdiRecyclerViewAdapter(pdi, mainActivity));
+        if (mainActivity.categoriaScelta.getFileImmagine() != null) {
+            String nomeFileSenzaEstensione = mainActivity.categoriaScelta.getFileImmagine().substring(0, mainActivity.categoriaScelta.getFileImmagine().lastIndexOf('.'));
+            String packageName = mainActivity.getPackageName();
+            ivCopertinaCategoria.setImageResource(mainActivity.getResources().getIdentifier(nomeFileSenzaEstensione, "drawable", packageName));
         }
+
+        if (mainActivity.categoriaScelta.getFilePin() != null) {
+            String nomeFileSenzaEstensione = mainActivity.categoriaScelta.getFilePin().substring(0, mainActivity.categoriaScelta.getFilePin().lastIndexOf('.'));
+            String packageName = mainActivity.getPackageName();
+            ivPinPdi.setImageResource(mainActivity.getResources().getIdentifier(nomeFileSenzaEstensione, "drawable", packageName));
+        }
+
+        switch (mainActivity.gestoreDatabaseCondiviso.getLingua()) {
+            case "italiano": {
+                tvDescrizioneCategoriaPdi.setText(mainActivity.categoriaScelta.getDescrizioneItaliano());
+            }
+            break;
+
+            default: {
+                tvDescrizioneCategoriaPdi.setText(mainActivity.categoriaScelta.getDescrizioneInglese());
+            }
+        }
+
+        Context context = view.getContext();
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+
+        if (savedInstanceState == null) {
+            pdi = mainActivity.gestoreDatabaseCondiviso.dammiPdiPerCategoria(mainActivity.categoriaScelta.getIdCategoria());
+        } else {
+            //Log.d("DEBUGAPP", TAG + " onCreateView savedInstanceState != null");
+
+            pdi = savedInstanceState.getParcelableArrayList("pdi"); // @SuppressWarnings("unchecked")
+        }
+
+        recyclerView.setAdapter(new PdiRecyclerViewAdapter(pdi, mainActivity));
 
         return view;
     }

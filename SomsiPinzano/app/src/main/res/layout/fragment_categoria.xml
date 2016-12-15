@@ -13,11 +13,10 @@
 
     <ImageView
         android:id="@+id/ivPin"
-        android:background="@drawable/pin_arancione"
         android:layout_height="50dp"
         android:layout_width="50dp"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="-8dp" />
+        android:layout_marginEnd="-8dp" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -35,7 +34,6 @@
             android:layout_height="wrap_content"
             android:textAppearance="?attr/textAppearanceListItem"
             android:layout_marginStart="16dp"
-            android:text="TITOLO"
             android:textColor="@color/colorPrimaryText"
             android:textStyle="normal|bold" />
 
@@ -45,7 +43,6 @@
             android:layout_height="wrap_content"
             android:textAppearance="?attr/textAppearanceListItem"
             android:layout_marginStart="16dp"
-            android:text="Descrizione  adasd asd asdas das das das dasdsad asd asd asdasd as das dasd asdasdsada sda @string/about"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-condensed"
             android:textAllCaps="false"
