@@ -10,30 +10,33 @@ public class Categoria implements Parcelable {
     private String descrizioneItaliano;
     private String descrizioneInglese;
     private String fileImmagine;
+    private String fileImmagineCopertina;
     private String filePin;
 
-    public Categoria(int idCategoria, String nomeItaliano, String nomeInglese, String descrizioneItaliano, String descrizioneInglese, String fileImmagine, String filePin) {
+    public Categoria(int idCategoria, String nomeItaliano, String nomeInglese, String descrizioneItaliano, String descrizioneInglese, String fileImmagine, String fileImmagineCopertina, String filePin) {
         super();
 
-        this.idCategoria         = idCategoria;
-        this.nomeItaliano        = nomeItaliano;
-        this.nomeInglese         = nomeInglese;
-        this.descrizioneItaliano = descrizioneItaliano;
-        this.descrizioneInglese  = descrizioneInglese;
-        this.fileImmagine        = fileImmagine;
-        this.filePin             = filePin;
+        this.idCategoria           = idCategoria;
+        this.nomeItaliano          = nomeItaliano;
+        this.nomeInglese           = nomeInglese;
+        this.descrizioneItaliano   = descrizioneItaliano;
+        this.descrizioneInglese    = descrizioneInglese;
+        this.fileImmagine          = fileImmagine;
+        this.fileImmagineCopertina = fileImmagineCopertina;
+        this.filePin               = filePin;
     }
 
     public Categoria(Parcel parcel) {
         super();
 
-        this.idCategoria         = parcel.readInt();
-        this.nomeItaliano        = parcel.readString();
-        this.nomeInglese         = parcel.readString();
-        this.descrizioneItaliano = parcel.readString();
-        this.descrizioneInglese  = parcel.readString();
-        this.fileImmagine        = parcel.readString();
-        this.filePin             = parcel.readString();
+        this.idCategoria           = parcel.readInt();
+        this.nomeItaliano          = parcel.readString();
+        this.nomeInglese           = parcel.readString();
+        this.descrizioneItaliano   = parcel.readString();
+        this.descrizioneInglese    = parcel.readString();
+        this.fileImmagine          = parcel.readString();
+        this.fileImmagineCopertina = parcel.readString();
+        this.filePin               = parcel.readString();
     }
 
     public int getIdCategoria() {
@@ -58,6 +61,10 @@ public class Categoria implements Parcelable {
 
     public String getFileImmagine() {
         return fileImmagine;
+    }
+
+    public String getFileImmagineCopertina() {
+        return fileImmagineCopertina;
     }
 
     public String getFilePin() {
@@ -88,6 +95,10 @@ public class Categoria implements Parcelable {
         this.fileImmagine = fileImmagine;
     }
 
+    public void setFileImmagineCopertina(String fileImmagineCopertina) {
+        this.fileImmagineCopertina = fileImmagineCopertina;
+    }
+
     public void setFilePin(String filePin) {
         this.filePin = filePin;
     }
@@ -105,6 +116,7 @@ public class Categoria implements Parcelable {
         dest.writeString(descrizioneItaliano);
         dest.writeString(descrizioneInglese);
         dest.writeString(fileImmagine);
+        dest.writeString(fileImmagineCopertina);
         dest.writeString(filePin);
     }
 
@@ -129,6 +141,7 @@ public class Categoria implements Parcelable {
                 "\ndescrizioneItaliano: " + descrizioneItaliano +
                 "\ndescrizioneInglese: " + descrizioneInglese +
                 "\nfileImmagine: " + fileImmagine +
+                "\nfileImmagineCopertina: " + fileImmagineCopertina +
                 "\nfilePin: " + filePin +
                 "\n\n";
     }

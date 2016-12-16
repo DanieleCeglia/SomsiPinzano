@@ -57,8 +57,8 @@ public class PdiFragment extends Fragment {
         TextView tvDescrizioneCategoriaPdi = (TextView)     view.findViewById(R.id.tvDescrizioneCategoriaPdi);
         RecyclerView recyclerView          = (RecyclerView) view.findViewById(R.id.listPdi);
 
-        if (mainActivity.categoriaScelta.getFileImmagine() != null) {
-            String nomeFileSenzaEstensione = mainActivity.categoriaScelta.getFileImmagine().substring(0, mainActivity.categoriaScelta.getFileImmagine().lastIndexOf('.'));
+        if (mainActivity.categoriaScelta.getFileImmagineCopertina() != null) {
+            String nomeFileSenzaEstensione = mainActivity.categoriaScelta.getFileImmagineCopertina().substring(0, mainActivity.categoriaScelta.getFileImmagineCopertina().lastIndexOf('.'));
             String packageName = mainActivity.getPackageName();
             ivCopertinaCategoria.setImageResource(mainActivity.getResources().getIdentifier(nomeFileSenzaEstensione, "drawable", packageName));
         }
