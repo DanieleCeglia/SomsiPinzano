@@ -52,33 +52,38 @@ public class PdiFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_pdi_list, container, false);
 
-        ImageView ivCopertinaCategoria     = (ImageView)    view.findViewById(R.id.ivCopertinaCategoria);
-        ImageView ivPinPdi                 = (ImageView)    view.findViewById(R.id.ivPinPdi);
-        TextView tvDescrizioneCategoriaPdi = (TextView)     view.findViewById(R.id.tvDescrizioneCategoriaPdi);
-        RecyclerView recyclerView          = (RecyclerView) view.findViewById(R.id.listPdi);
+        ImageView ivCopertinaCategoria = (ImageView) view.findViewById(R.id.ivCopertinaCategoria);
 
-        if (mainActivity.categoriaScelta.getFileImmagineCopertina() != null) {
+        if (ivCopertinaCategoria!= null && mainActivity.categoriaScelta.getFileImmagineCopertina() != null) {
             String nomeFileSenzaEstensione = mainActivity.categoriaScelta.getFileImmagineCopertina().substring(0, mainActivity.categoriaScelta.getFileImmagineCopertina().lastIndexOf('.'));
             String packageName = mainActivity.getPackageName();
             ivCopertinaCategoria.setImageResource(mainActivity.getResources().getIdentifier(nomeFileSenzaEstensione, "drawable", packageName));
         }
 
-        if (mainActivity.categoriaScelta.getFilePin() != null) {
+        ImageView ivPinPdi = (ImageView) view.findViewById(R.id.ivPinPdi);
+
+        if (ivPinPdi!= null && mainActivity.categoriaScelta.getFilePin() != null) {
             String nomeFileSenzaEstensione = mainActivity.categoriaScelta.getFilePin().substring(0, mainActivity.categoriaScelta.getFilePin().lastIndexOf('.'));
             String packageName = mainActivity.getPackageName();
             ivPinPdi.setImageResource(mainActivity.getResources().getIdentifier(nomeFileSenzaEstensione, "drawable", packageName));
         }
 
-        switch (mainActivity.gestoreDatabaseCondiviso.getLingua()) {
-            case "italiano": {
-                tvDescrizioneCategoriaPdi.setText(mainActivity.categoriaScelta.getDescrizioneItaliano());
-            }
-            break;
+        TextView tvDescrizioneCategoriaPdi = (TextView) view.findViewById(R.id.tvDescrizioneCategoriaPdi);
 
-            default: {
-                tvDescrizioneCategoriaPdi.setText(mainActivity.categoriaScelta.getDescrizioneInglese());
+        if (tvDescrizioneCategoriaPdi != null) {
+            switch (mainActivity.gestoreDatabaseCondiviso.getLingua()) {
+                case "italiano": {
+                    tvDescrizioneCategoriaPdi.setText(mainActivity.categoriaScelta.getDescrizioneItaliano());
+                }
+                break;
+
+                default: {
+                    tvDescrizioneCategoriaPdi.setText(mainActivity.categoriaScelta.getDescrizioneInglese());
+                }
             }
         }
+
+        RecyclerView recyclerView  = (RecyclerView) view.findViewById(R.id.listPdi);
 
         Context context = view.getContext();
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
