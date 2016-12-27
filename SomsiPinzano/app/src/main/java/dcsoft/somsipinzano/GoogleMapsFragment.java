@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -157,13 +158,13 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
                 info.setOrientation(LinearLayout.VERTICAL);
 
                 TextView title = new TextView(mainActivity);
-                title.setTextColor(Color.BLACK);
+                title.setTextColor(ContextCompat.getColor(mainActivity, R.color.colorPrimaryText));
                 title.setGravity(Gravity.CENTER);
                 title.setTypeface(null, Typeface.BOLD);
                 title.setText(marker.getTitle());
 
                 TextView snippet = new TextView(mainActivity);
-                snippet.setTextColor(Color.GRAY);
+                snippet.setTextColor(ContextCompat.getColor(mainActivity, R.color.colorSecondaryText));
                 snippet.setGravity(Gravity.CENTER);
                 snippet.setText(marker.getSnippet());
 
