@@ -44,6 +44,8 @@ class CategoriaRecyclerViewAdapter extends RecyclerView.Adapter<CategoriaRecycle
             String nomeFileSenzaEstensione = categorie.get(position).getFileImmagine().substring(0, categorie.get(position).getFileImmagine().lastIndexOf('.'));
             String packageName = mainActivity.getPackageName();
             holder.ivCategoria.setImageResource(mainActivity.getResources().getIdentifier(nomeFileSenzaEstensione, "drawable", packageName));
+        } else {
+            holder.ivCategoria.setImageDrawable(null);
         }
 
         if (categorie.get(position).getFilePin() != null) {
