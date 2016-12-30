@@ -243,12 +243,13 @@ class GestoreDatabase extends SQLiteOpenHelper {
                         cursor.getDouble(12),  // latitudine
                         cursor.getDouble(13),  // longitudine
                         cursor.getString(14),  // telefono
-                        cursor.getString(15),  // cellulare
-                        cursor.getString(16),  // email
-                        cursor.getString(17),  // titoloLinkGenericoItaliano
-                        cursor.getString(18),  // titoloLinkGenericoInglese
-                        cursor.getString(19),  // linkGenerico
-                        cursor.getString(20)); // linkVideo
+                        cursor.getString(15),  // fax
+                        cursor.getString(16),  // cellulare
+                        cursor.getString(17),  // email
+                        cursor.getString(18),  // titoloLinkGenericoItaliano
+                        cursor.getString(19),  // titoloLinkGenericoInglese
+                        cursor.getString(20),  // linkGenerico
+                        cursor.getString(21)); // linkVideo
 
                 list.add(pdi);
 
@@ -291,12 +292,13 @@ class GestoreDatabase extends SQLiteOpenHelper {
                         cursor.getDouble(12),  // latitudine
                         cursor.getDouble(13),  // longitudine
                         cursor.getString(14),  // telefono
-                        cursor.getString(15),  // cellulare
-                        cursor.getString(16),  // email
-                        cursor.getString(17),  // titoloLinkGenericoItaliano
-                        cursor.getString(18),  // titoloLinkGenericoInglese
-                        cursor.getString(19),  // linkGenerico
-                        cursor.getString(20)); // linkVideo
+                        cursor.getString(15),  // fax
+                        cursor.getString(16),  // cellulare
+                        cursor.getString(17),  // email
+                        cursor.getString(18),  // titoloLinkGenericoItaliano
+                        cursor.getString(19),  // titoloLinkGenericoInglese
+                        cursor.getString(20),  // linkGenerico
+                        cursor.getString(21)); // linkVideo
 
                 list.add(pdi);
 

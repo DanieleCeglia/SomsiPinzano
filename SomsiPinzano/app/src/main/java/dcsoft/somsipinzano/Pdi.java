@@ -19,6 +19,7 @@ public class Pdi implements Parcelable {
     private double latitudine;
     private double longitudine;
     private String telefono;
+    private String fax;
     private String cellulare;
     private String email;
     private String titoloLinkGenericoItaliano;
@@ -26,7 +27,7 @@ public class Pdi implements Parcelable {
     private String linkGenerico;
     private String linkVideo;
 
-    public Pdi(int idPdi, int idPdi_idCategoria, int ordinamento, String titoloItaliano, String titoloInglese, String descrizioneItaliano, String descrizioneInglese, String citta, String via, int numeroCivico, String interno, int cap, double latitudine, double longitudine, String telefono, String cellulare, String email, String titoloLinkGenericoItaliano, String titoloLinkGenericoInglese, String linkGenerico, String linkVideo) {
+    public Pdi(int idPdi, int idPdi_idCategoria, int ordinamento, String titoloItaliano, String titoloInglese, String descrizioneItaliano, String descrizioneInglese, String citta, String via, int numeroCivico, String interno, int cap, double latitudine, double longitudine, String telefono, String fax, String cellulare, String email, String titoloLinkGenericoItaliano, String titoloLinkGenericoInglese, String linkGenerico, String linkVideo) {
         super();
 
         this.idPdi                      = idPdi;
@@ -44,6 +45,7 @@ public class Pdi implements Parcelable {
         this.latitudine                 = latitudine;
         this.longitudine                = longitudine;
         this.telefono                   = telefono;
+        this.fax                        = fax;
         this.cellulare                  = cellulare;
         this.email                      = email;
         this.titoloLinkGenericoItaliano = titoloLinkGenericoItaliano;
@@ -70,6 +72,7 @@ public class Pdi implements Parcelable {
         this.latitudine                 = parcel.readDouble();
         this.longitudine                = parcel.readDouble();
         this.telefono                   = parcel.readString();
+        this.fax                        = parcel.readString();
         this.cellulare                  = parcel.readString();
         this.email                      = parcel.readString();
         this.titoloLinkGenericoItaliano = parcel.readString();
@@ -136,6 +139,10 @@ public class Pdi implements Parcelable {
 
     public String getTelefono() {
         return telefono;
+    }
+
+    public String getFax() {
+        return fax;
     }
 
     public String getCellulare() {
@@ -222,6 +229,10 @@ public class Pdi implements Parcelable {
         this.telefono = telefono;
     }
 
+    public void setFax(String fax) {
+        this.fax = fax;
+    }
+
     public void setCellulare(String cellulare) {
         this.cellulare = cellulare;
     }
@@ -268,6 +279,7 @@ public class Pdi implements Parcelable {
         dest.writeDouble(latitudine);
         dest.writeDouble(longitudine);
         dest.writeString(telefono);
+        dest.writeString(fax);
         dest.writeString(cellulare);
         dest.writeString(email);
         dest.writeString(titoloLinkGenericoItaliano);
@@ -306,6 +318,7 @@ public class Pdi implements Parcelable {
                 "\nlatitudine: " + latitudine +
                 "\nlongitudine: " + longitudine +
                 "\ntelefono: " + telefono +
+                "\nfax: " + fax +
                 "\ncellulare: " + cellulare +
                 "\nemail: " + email +
                 "\ntitoloLinkGenericoItaliano: " + titoloLinkGenericoItaliano +
