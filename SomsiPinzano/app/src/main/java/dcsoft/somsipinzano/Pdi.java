@@ -18,12 +18,15 @@ public class Pdi implements Parcelable {
     private int cap;
     private double latitudine;
     private double longitudine;
+    private String telefono;
+    private String cellulare;
+    private String email;
     private String titoloLinkGenericoItaliano;
     private String titoloLinkGenericoInglese;
     private String linkGenerico;
     private String linkVideo;
 
-    public Pdi(int idPdi, int idPdi_idCategoria, int ordinamento, String titoloItaliano, String titoloInglese, String descrizioneItaliano, String descrizioneInglese, String citta, String via, int numeroCivico, String interno, int cap, double latitudine, double longitudine, String titoloLinkGenericoItaliano, String titoloLinkGenericoInglese, String linkGenerico, String linkVideo) {
+    public Pdi(int idPdi, int idPdi_idCategoria, int ordinamento, String titoloItaliano, String titoloInglese, String descrizioneItaliano, String descrizioneInglese, String citta, String via, int numeroCivico, String interno, int cap, double latitudine, double longitudine, String telefono, String cellulare, String email, String titoloLinkGenericoItaliano, String titoloLinkGenericoInglese, String linkGenerico, String linkVideo) {
         super();
 
         this.idPdi                      = idPdi;
@@ -40,6 +43,9 @@ public class Pdi implements Parcelable {
         this.cap                        = cap;
         this.latitudine                 = latitudine;
         this.longitudine                = longitudine;
+        this.telefono                   = telefono;
+        this.cellulare                  = cellulare;
+        this.email                      = email;
         this.titoloLinkGenericoItaliano = titoloLinkGenericoItaliano;
         this.titoloLinkGenericoInglese  = titoloLinkGenericoInglese;
         this.linkGenerico               = linkGenerico;
@@ -63,6 +69,9 @@ public class Pdi implements Parcelable {
         this.cap                        = parcel.readInt();
         this.latitudine                 = parcel.readDouble();
         this.longitudine                = parcel.readDouble();
+        this.telefono                   = parcel.readString();
+        this.cellulare                  = parcel.readString();
+        this.email                      = parcel.readString();
         this.titoloLinkGenericoItaliano = parcel.readString();
         this.titoloLinkGenericoInglese  = parcel.readString();
         this.linkGenerico               = parcel.readString();
@@ -123,6 +132,18 @@ public class Pdi implements Parcelable {
 
     public double getLongitudine() {
         return longitudine;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public String getCellulare() {
+        return cellulare;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getTitoloLinkGenericoItaliano() {
@@ -197,6 +218,18 @@ public class Pdi implements Parcelable {
         this.longitudine = longitudine;
     }
 
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public void setCellulare(String cellulare) {
+        this.cellulare = cellulare;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public void setTitoloLinkGenericoItaliano(String titoloLinkGenericoItaliano) {
         this.titoloLinkGenericoItaliano = titoloLinkGenericoItaliano;
     }
@@ -234,6 +267,9 @@ public class Pdi implements Parcelable {
         dest.writeInt(cap);
         dest.writeDouble(latitudine);
         dest.writeDouble(longitudine);
+        dest.writeString(telefono);
+        dest.writeString(cellulare);
+        dest.writeString(email);
         dest.writeString(titoloLinkGenericoItaliano);
         dest.writeString(titoloLinkGenericoInglese);
         dest.writeString(linkGenerico);
@@ -269,6 +305,9 @@ public class Pdi implements Parcelable {
                 "\ncap: " + cap +
                 "\nlatitudine: " + latitudine +
                 "\nlongitudine: " + longitudine +
+                "\ntelefono: " + telefono +
+                "\ncellulare: " + cellulare +
+                "\nemail: " + email +
                 "\ntitoloLinkGenericoItaliano: " + titoloLinkGenericoItaliano +
                 "\ntitoloLinkGenericoInglese: " + titoloLinkGenericoInglese +
                 "\nlinkGenerico: " + linkGenerico +
