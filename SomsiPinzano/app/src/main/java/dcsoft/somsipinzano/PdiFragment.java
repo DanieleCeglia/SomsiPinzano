@@ -54,7 +54,7 @@ public class PdiFragment extends Fragment {
 
         ImageView ivCopertinaCategoria = (ImageView) view.findViewById(R.id.ivCopertinaCategoria);
 
-        if (ivCopertinaCategoria!= null && mainActivity.categoriaScelta.getFileImmagineCopertina() != null) {
+        if (ivCopertinaCategoria!= null && mainActivity.categoriaScelta.getFileImmagineCopertina() != null && ivCopertinaCategoria!= null && mainActivity.categoriaScelta.getFileImmagineCopertina().length() > 0) {
             String nomeFileSenzaEstensione = mainActivity.categoriaScelta.getFileImmagineCopertina().substring(0, mainActivity.categoriaScelta.getFileImmagineCopertina().lastIndexOf('.'));
             String packageName = mainActivity.getPackageName();
             ivCopertinaCategoria.setImageResource(mainActivity.getResources().getIdentifier(nomeFileSenzaEstensione, "drawable", packageName));

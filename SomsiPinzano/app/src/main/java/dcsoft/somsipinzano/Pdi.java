@@ -17,13 +17,12 @@ public class Pdi implements Parcelable {
     private int cap;
     private double latitudine;
     private double longitudine;
-    private String fileImmagine;
     private String titoloLinkGenericoItaliano;
     private String titoloLinkGenericoInglese;
     private String linkGenerico;
     private String linkVideo;
 
-    public Pdi(int idPdi, int idPdi_idCategoria, String titoloItaliano, String titoloInglese, String descrizioneItaliano, String descrizioneInglese, String citta, String via, int numeroCivico, String interno, int cap, double latitudine, double longitudine, String fileImmagine, String titoloLinkGenericoItaliano, String titoloLinkGenericoInglese, String linkGenerico, String linkVideo) {
+    public Pdi(int idPdi, int idPdi_idCategoria, String titoloItaliano, String titoloInglese, String descrizioneItaliano, String descrizioneInglese, String citta, String via, int numeroCivico, String interno, int cap, double latitudine, double longitudine, String titoloLinkGenericoItaliano, String titoloLinkGenericoInglese, String linkGenerico, String linkVideo) {
         super();
 
         this.idPdi                      = idPdi;
@@ -39,7 +38,6 @@ public class Pdi implements Parcelable {
         this.cap                        = cap;
         this.latitudine                 = latitudine;
         this.longitudine                = longitudine;
-        this.fileImmagine               = fileImmagine;
         this.titoloLinkGenericoItaliano = titoloLinkGenericoItaliano;
         this.titoloLinkGenericoInglese  = titoloLinkGenericoInglese;
         this.linkGenerico               = linkGenerico;
@@ -62,7 +60,6 @@ public class Pdi implements Parcelable {
         this.cap                        = parcel.readInt();
         this.latitudine                 = parcel.readDouble();
         this.longitudine                = parcel.readDouble();
-        this.fileImmagine               = parcel.readString();
         this.titoloLinkGenericoItaliano = parcel.readString();
         this.titoloLinkGenericoInglese  = parcel.readString();
         this.linkGenerico               = parcel.readString();
@@ -119,10 +116,6 @@ public class Pdi implements Parcelable {
 
     public double getLongitudine() {
         return longitudine;
-    }
-
-    public String getFileImmagine() {
-        return fileImmagine;
     }
 
     public String getTitoloLinkGenericoItaliano() {
@@ -193,10 +186,6 @@ public class Pdi implements Parcelable {
         this.longitudine = longitudine;
     }
 
-    public void setFileImmagine(String fileImmagine) {
-        this.fileImmagine = fileImmagine;
-    }
-
     public void setTitoloLinkGenericoItaliano(String titoloLinkGenericoItaliano) {
         this.titoloLinkGenericoItaliano = titoloLinkGenericoItaliano;
     }
@@ -233,7 +222,6 @@ public class Pdi implements Parcelable {
         dest.writeInt(cap);
         dest.writeDouble(latitudine);
         dest.writeDouble(longitudine);
-        dest.writeString(fileImmagine);
         dest.writeString(titoloLinkGenericoItaliano);
         dest.writeString(titoloLinkGenericoInglese);
         dest.writeString(linkGenerico);
@@ -268,7 +256,6 @@ public class Pdi implements Parcelable {
                 "\ncap: " + cap +
                 "\nlatitudine: " + latitudine +
                 "\nlongitudine: " + longitudine +
-                "\nfileImmagine: " + fileImmagine +
                 "\ntitoloLinkGenericoItaliano: " + titoloLinkGenericoItaliano +
                 "\ntitoloLinkGenericoInglese: " + titoloLinkGenericoInglese +
                 "\nlinkGenerico: " + linkGenerico +

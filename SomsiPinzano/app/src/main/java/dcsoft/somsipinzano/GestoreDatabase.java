@@ -239,11 +239,10 @@ class GestoreDatabase extends SQLiteOpenHelper {
                         cursor.getInt(10),     // cap
                         cursor.getDouble(11),  // latitudine
                         cursor.getDouble(12),  // longitudine
-                        cursor.getString(13),  // fileImmagine
-                        cursor.getString(14),  // titoloLinkGenericoItaliano
-                        cursor.getString(15),  // titoloLinkGenericoInglese
-                        cursor.getString(16),  // linkGenerico
-                        cursor.getString(17)); // linkVideo
+                        cursor.getString(13),  // titoloLinkGenericoItaliano
+                        cursor.getString(14),  // titoloLinkGenericoInglese
+                        cursor.getString(15),  // linkGenerico
+                        cursor.getString(16)); // linkVideo
 
                 list.add(pdi);
 
@@ -284,11 +283,10 @@ class GestoreDatabase extends SQLiteOpenHelper {
                         cursor.getInt(10),     // cap
                         cursor.getDouble(11),  // latitudine
                         cursor.getDouble(12),  // longitudine
-                        cursor.getString(13),  // fileImmagine
-                        cursor.getString(14),  // titoloLinkGenericoItaliano
-                        cursor.getString(15),  // titoloLinkGenericoInglese
-                        cursor.getString(16),  // linkGenerico
-                        cursor.getString(17)); // linkVideo
+                        cursor.getString(13),  // titoloLinkGenericoItaliano
+                        cursor.getString(14),  // titoloLinkGenericoInglese
+                        cursor.getString(15),  // linkGenerico
+                        cursor.getString(16)); // linkVideo
 
                 list.add(pdi);
 

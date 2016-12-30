@@ -20,7 +20,6 @@ public class PdiDettaglioFragment extends Fragment {
 
     private ScrollView svContenitore;
     private TextView tvDescrizione;
-    private ImageView ivImmagine;
     private Button bVediSuGM;
     private Button bVediSuOSM;
 
@@ -58,7 +57,6 @@ public class PdiDettaglioFragment extends Fragment {
 
         svContenitore = (ScrollView) pdiDettaglioFragmentView.findViewById(R.id.svContenitore);
         tvDescrizione = (TextView)   pdiDettaglioFragmentView.findViewById(R.id.tvDescrizione);
-        ivImmagine    = (ImageView)  pdiDettaglioFragmentView.findViewById(R.id.ivImmagine);
         bVediSuGM     = (Button)     pdiDettaglioFragmentView.findViewById(R.id.bVediSuGM);
         bVediSuOSM    = (Button)     pdiDettaglioFragmentView.findViewById(R.id.bVediSuOSM);
 
@@ -139,12 +137,6 @@ public class PdiDettaglioFragment extends Fragment {
                     tvDescrizione.setText("");
                 }
             }
-        }
-
-        if (mainActivity.pdiScelto.getFileImmagine() != null) {
-            String nomeFileSenzaEstensione = mainActivity.pdiScelto.getFileImmagine().substring(0, mainActivity.pdiScelto.getFileImmagine().lastIndexOf('.'));
-            String packageName = mainActivity.getPackageName();
-            ivImmagine.setImageResource(getResources().getIdentifier(nomeFileSenzaEstensione, "drawable", packageName));
         }
     }
 
