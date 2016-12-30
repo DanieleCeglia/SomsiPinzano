@@ -153,19 +153,20 @@ class GestoreDatabase extends SQLiteOpenHelper {
         SQLiteDatabase database = getReadableDatabase();
 
         if (database != null) {
-            Cursor cursor = database.rawQuery("SELECT * FROM CATEGORIA", null);
+            Cursor cursor = database.rawQuery("SELECT * FROM CATEGORIA ORDER BY ordinamento", null);
             cursor.moveToFirst();
 
             while (!cursor.isAfterLast()) {
                 Categoria categoria = new Categoria(
                         cursor.getInt(0),     // idCategoria
-                        cursor.getString(1),  // nomeItaliano
-                        cursor.getString(2),  // nomeInglese
-                        cursor.getString(3),  // descrizioneItaliano
-                        cursor.getString(4),  // descrizioneInglese
-                        cursor.getString(5),  // fileImmagine
-                        cursor.getString(6),  // fileImmagineCopertina
-                        cursor.getString(7)); // filePin
+                        cursor.getInt(1),     // ordinamento
+                        cursor.getString(2),  // nomeItaliano
+                        cursor.getString(3),  // nomeInglese
+                        cursor.getString(4),  // descrizioneItaliano
+                        cursor.getString(5),  // descrizioneInglese
+                        cursor.getString(6),  // fileImmagine
+                        cursor.getString(7),  // fileImmagineCopertina
+                        cursor.getString(8)); // filePin
 
                 list.add(categoria);
 
@@ -188,19 +189,20 @@ class GestoreDatabase extends SQLiteOpenHelper {
         SQLiteDatabase database = getReadableDatabase();
 
         if (database != null) {
-            Cursor cursor = database.rawQuery("SELECT * FROM CATEGORIA WHERE idCategoria = " + idCategoria, null);
+            Cursor cursor = database.rawQuery("SELECT * FROM CATEGORIA WHERE idCategoria = " + idCategoria + " ORDER BY ordinamento", null);
             cursor.moveToFirst();
 
             while (!cursor.isAfterLast()) {
                 categoria = new Categoria(
                         cursor.getInt(0),     // idCategoria
-                        cursor.getString(1),  // nomeItaliano
-                        cursor.getString(2),  // nomeInglese
-                        cursor.getString(3),  // descrizioneItaliano
-                        cursor.getString(4),  // descrizioneInglese
-                        cursor.getString(5),  // fileImmagine
-                        cursor.getString(6),  // fileImmagineCopertina
-                        cursor.getString(7)); // filePin
+                        cursor.getInt(1),     // ordinamento
+                        cursor.getString(2),  // nomeItaliano
+                        cursor.getString(3),  // nomeInglese
+                        cursor.getString(4),  // descrizioneItaliano
+                        cursor.getString(5),  // descrizioneInglese
+                        cursor.getString(6),  // fileImmagine
+                        cursor.getString(7),  // fileImmagineCopertina
+                        cursor.getString(8)); // filePin
 
                 cursor.moveToNext();
             }
@@ -221,28 +223,29 @@ class GestoreDatabase extends SQLiteOpenHelper {
         SQLiteDatabase database = getReadableDatabase();
 
         if (database != null) {
-            Cursor cursor = database.rawQuery("SELECT * FROM PDI", null);
+            Cursor cursor = database.rawQuery("SELECT * FROM PDI ORDER BY ordinamento", null);
             cursor.moveToFirst();
 
             while (!cursor.isAfterLast()) {
                 Pdi pdi = new Pdi(
                         cursor.getInt(0),      // idPdi
                         cursor.getInt(1),      // idPdi_idCategoria
-                        cursor.getString(2),   // titoloItaliano
-                        cursor.getString(3),   // titoloInglese
-                        cursor.getString(4),   // descrizioneItaliano
-                        cursor.getString(5),   // descrizioneInglese
-                        cursor.getString(6),   // citta
-                        cursor.getString(7),   // via
-                        cursor.getInt(8),      // numeroCivico
-                        cursor.getString(9),   // interno
-                        cursor.getInt(10),     // cap
-                        cursor.getDouble(11),  // latitudine
-                        cursor.getDouble(12),  // longitudine
-                        cursor.getString(13),  // titoloLinkGenericoItaliano
-                        cursor.getString(14),  // titoloLinkGenericoInglese
-                        cursor.getString(15),  // linkGenerico
-                        cursor.getString(16)); // linkVideo
+                        cursor.getInt(2),      // ordinamento
+                        cursor.getString(3),   // titoloItaliano
+                        cursor.getString(4),   // titoloInglese
+                        cursor.getString(5),   // descrizioneItaliano
+                        cursor.getString(6),   // descrizioneInglese
+                        cursor.getString(7),   // citta
+                        cursor.getString(8),   // via
+                        cursor.getInt(9),      // numeroCivico
+                        cursor.getString(10),  // interno
+                        cursor.getInt(11),     // cap
+                        cursor.getDouble(12),  // latitudine
+                        cursor.getDouble(13),  // longitudine
+                        cursor.getString(14),  // titoloLinkGenericoItaliano
+                        cursor.getString(15),  // titoloLinkGenericoInglese
+                        cursor.getString(16),  // linkGenerico
+                        cursor.getString(17)); // linkVideo
 
                 list.add(pdi);
 
@@ -265,28 +268,29 @@ class GestoreDatabase extends SQLiteOpenHelper {
         SQLiteDatabase database = getReadableDatabase();
 
         if (database != null) {
-            Cursor cursor = database.rawQuery("SELECT * FROM PDI WHERE idPdi_idCategoria = " + idCategoria, null);
+            Cursor cursor = database.rawQuery("SELECT * FROM PDI WHERE idPdi_idCategoria = " + idCategoria + " ORDER BY ordinamento", null);
             cursor.moveToFirst();
 
             while (!cursor.isAfterLast()) {
                 Pdi pdi = new Pdi(
                         cursor.getInt(0),      // idPdi
                         cursor.getInt(1),      // idPdi_idCategoria
-                        cursor.getString(2),   // titoloItaliano
-                        cursor.getString(3),   // titoloInglese
-                        cursor.getString(4),   // descrizioneItaliano
-                        cursor.getString(5),   // descrizioneInglese
-                        cursor.getString(6),   // citta
-                        cursor.getString(7),   // via
-                        cursor.getInt(8),      // numeroCivico
-                        cursor.getString(9),   // interno
-                        cursor.getInt(10),     // cap
-                        cursor.getDouble(11),  // latitudine
-                        cursor.getDouble(12),  // longitudine
-                        cursor.getString(13),  // titoloLinkGenericoItaliano
-                        cursor.getString(14),  // titoloLinkGenericoInglese
-                        cursor.getString(15),  // linkGenerico
-                        cursor.getString(16)); // linkVideo
+                        cursor.getInt(2),      // ordinamento
+                        cursor.getString(3),   // titoloItaliano
+                        cursor.getString(4),   // titoloInglese
+                        cursor.getString(5),   // descrizioneItaliano
+                        cursor.getString(6),   // descrizioneInglese
+                        cursor.getString(7),   // citta
+                        cursor.getString(8),   // via
+                        cursor.getInt(9),      // numeroCivico
+                        cursor.getString(10),  // interno
+                        cursor.getInt(11),     // cap
+                        cursor.getDouble(12),  // latitudine
+                        cursor.getDouble(13),  // longitudine
+                        cursor.getString(14),  // titoloLinkGenericoItaliano
+                        cursor.getString(15),  // titoloLinkGenericoInglese
+                        cursor.getString(16),  // linkGenerico
+                        cursor.getString(17)); // linkVideo
 
                 list.add(pdi);
 

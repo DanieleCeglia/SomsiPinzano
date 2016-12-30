@@ -6,6 +6,7 @@ import android.os.Parcelable;
 public class Pdi implements Parcelable {
     private int idPdi;
     private int idPdi_idCategoria;
+    private int ordinamento;
     private String titoloItaliano;
     private String titoloInglese;
     private String descrizioneItaliano;
@@ -22,11 +23,12 @@ public class Pdi implements Parcelable {
     private String linkGenerico;
     private String linkVideo;
 
-    public Pdi(int idPdi, int idPdi_idCategoria, String titoloItaliano, String titoloInglese, String descrizioneItaliano, String descrizioneInglese, String citta, String via, int numeroCivico, String interno, int cap, double latitudine, double longitudine, String titoloLinkGenericoItaliano, String titoloLinkGenericoInglese, String linkGenerico, String linkVideo) {
+    public Pdi(int idPdi, int idPdi_idCategoria, int ordinamento, String titoloItaliano, String titoloInglese, String descrizioneItaliano, String descrizioneInglese, String citta, String via, int numeroCivico, String interno, int cap, double latitudine, double longitudine, String titoloLinkGenericoItaliano, String titoloLinkGenericoInglese, String linkGenerico, String linkVideo) {
         super();
 
         this.idPdi                      = idPdi;
         this.idPdi_idCategoria          = idPdi_idCategoria;
+        this.ordinamento                = ordinamento;
         this.titoloItaliano             = titoloItaliano;
         this.titoloInglese              = titoloInglese;
         this.descrizioneItaliano        = descrizioneItaliano;
@@ -49,6 +51,7 @@ public class Pdi implements Parcelable {
 
         this.idPdi                      = parcel.readInt();
         this.idPdi_idCategoria          = parcel.readInt();
+        this.ordinamento                = parcel.readInt();
         this.titoloItaliano             = parcel.readString();
         this.titoloInglese              = parcel.readString();
         this.descrizioneItaliano        = parcel.readString();
@@ -72,6 +75,10 @@ public class Pdi implements Parcelable {
 
     public int getIdPdi_idCategoria() {
         return idPdi_idCategoria;
+    }
+
+    public int getOrdinamento() {
+        return ordinamento;
     }
 
     public String getTitoloItaliano() {
@@ -140,6 +147,10 @@ public class Pdi implements Parcelable {
 
     public void setIdPdi_idCategoria(int idPdi_idCategoria) {
         this.idPdi_idCategoria = idPdi_idCategoria;
+    }
+
+    public void setOrdinamento(int ordinamento) {
+        this.ordinamento = ordinamento;
     }
 
     public void setTitoloItaliano(String titoloItaliano) {
@@ -211,6 +222,7 @@ public class Pdi implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(idPdi);
         dest.writeInt(idPdi_idCategoria);
+        dest.writeInt(ordinamento);
         dest.writeString(titoloItaliano);
         dest.writeString(titoloInglese);
         dest.writeString(descrizioneItaliano);
@@ -245,6 +257,7 @@ public class Pdi implements Parcelable {
         return "\n" +
                 "\nidPdi: " + idPdi +
                 "\nidPdi_idCategoria: " + idPdi_idCategoria +
+                "\nordinamento: " + ordinamento +
                 "\ntitoloItaliano: " + titoloItaliano +
                 "\ntitoloInglese: " + titoloInglese +
                 "\ndescrizioneItaliano: " + descrizioneItaliano +

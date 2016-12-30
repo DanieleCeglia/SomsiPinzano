@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 public class Categoria implements Parcelable {
     private int idCategoria;
+    private int ordinamento;
     private String nomeItaliano;
     private String nomeInglese;
     private String descrizioneItaliano;
@@ -13,10 +14,11 @@ public class Categoria implements Parcelable {
     private String fileImmagineCopertina;
     private String filePin;
 
-    public Categoria(int idCategoria, String nomeItaliano, String nomeInglese, String descrizioneItaliano, String descrizioneInglese, String fileImmagine, String fileImmagineCopertina, String filePin) {
+    public Categoria(int idCategoria, int ordinamento, String nomeItaliano, String nomeInglese, String descrizioneItaliano, String descrizioneInglese, String fileImmagine, String fileImmagineCopertina, String filePin) {
         super();
 
         this.idCategoria           = idCategoria;
+        this.ordinamento           = ordinamento;
         this.nomeItaliano          = nomeItaliano;
         this.nomeInglese           = nomeInglese;
         this.descrizioneItaliano   = descrizioneItaliano;
@@ -30,6 +32,7 @@ public class Categoria implements Parcelable {
         super();
 
         this.idCategoria           = parcel.readInt();
+        this.ordinamento           = parcel.readInt();
         this.nomeItaliano          = parcel.readString();
         this.nomeInglese           = parcel.readString();
         this.descrizioneItaliano   = parcel.readString();
@@ -41,6 +44,10 @@ public class Categoria implements Parcelable {
 
     public int getIdCategoria() {
         return idCategoria;
+    }
+
+    public int getOrdinamento() {
+        return ordinamento;
     }
 
     public String getNomeItaliano() {
@@ -73,6 +80,10 @@ public class Categoria implements Parcelable {
 
     public void setIdCategoria(int idCategoria) {
         this.idCategoria = idCategoria;
+    }
+
+    public void setOrdinamento(int ordinamento) {
+        this.ordinamento = ordinamento;
     }
 
     public void setNomeItaliano(String nomeItaliano) {
@@ -111,6 +122,7 @@ public class Categoria implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(idCategoria);
+        dest.writeInt(ordinamento);
         dest.writeString(nomeItaliano);
         dest.writeString(nomeInglese);
         dest.writeString(descrizioneItaliano);
@@ -136,6 +148,7 @@ public class Categoria implements Parcelable {
     public String toString() {
         return "\n" +
                 "\nidCategoria: " + idCategoria +
+                "\nordinamento: " + ordinamento +
                 "\nnomeItaliano: " + nomeItaliano +
                 "\nnomeInglese: " + nomeInglese +
                 "\ndescrizioneItaliano: " + descrizioneItaliano +
