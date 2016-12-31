@@ -5,8 +5,6 @@
     <string name="messaggio_permessi_accettati">Tutti i permessi necessari all&#8217;app sono stati accettati!</string>
     <string name="messaggio_permesso_di_archiviazione_non_accettato">PERMESSO DI ARCHIVIAZIONE NON ACCETTATO\nÈ necessario per memorizzare i tiles della mappa al fine di ridurre l&#8217;utilizzo dei dati internet e per l&#8217;utilizzo offline.\n*** Non accettando questo permesso la mappa OpenStreetMaps non sarà disponibile. ***</string>
     <string name="messaggio_permesso_di_localizzazione_non_accettato">PERMESSO DI LOCALIZZAZIONE NON ACCETTATO\nÈ necessario per mostrare la posizione dell&#8217;utente sulla mappa.</string>
-    <string name="vedi_su_google_maps">Vedi su Google Maps</string>
-    <string name="vedi_su_openstreetmap">Vedi su OpenStreetMap</string>
     <string name="normale">Normale</string>
     <string name="satellitare">Satellitare</string>
     <string name="ibrida">Ibrida</string>
@@ -15,4 +13,12 @@
     <string name="trasporti">Trasporti</string>
     <string name="tocca_qui_per_maggiori_dettagli">Tocca qui per maggiori dettagli...</string>
     <string name="tocca_pin_per_maggiori_dettagli">Tocca i pin per maggiori dettagli...</string>
+    <string name="indirizzo">Indirizzo:</string>
+    <string name="telefono">Telefono:</string>
+    <string name="fax">Fax:</string>
+    <string name="cellulare">Cellulare:</string>
+    <string name="email">Email:</string>
+    <string name="video">Video:</string>
+    <string name="vedi_su">VEDI SU</string>
+    <string name="descrizione">DESCRIZIONE</string>
 </resources>
