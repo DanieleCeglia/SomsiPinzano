@@ -150,6 +150,7 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
                 public boolean onMarkerClick(Marker item, MapView arg1) {
                     InfoWindow.closeAllInfoWindowsOn(osmMap);
                     item.showInfoWindow();
+                    mapController.animateTo(item.getPosition());
 
                     return true;
                 }
@@ -221,6 +222,8 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
             mapController.setZoom(18);
             GeoPoint startPoint = new GeoPoint(mainActivity.pdiScelto.getLatitudine(), mainActivity.pdiScelto.getLongitudine());
             mapController.setCenter(startPoint);
+
+            InfoWindow.closeAllInfoWindowsOn(osmMap);
 
             return true;
         }

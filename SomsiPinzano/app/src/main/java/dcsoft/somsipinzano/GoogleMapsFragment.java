@@ -46,6 +46,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
     private double lon = -1;
     private int mapType = -1;
     private ArrayList<Pdi> listaPdi;
+    private ArrayList<Marker> listaMarker;
 
     public GoogleMapsFragmentEseguiAlOnHiddenChanged eseguiAlOnHiddenChanged;
 
@@ -176,6 +177,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
         });
 
         listaPdi = mainActivity.gestoreDatabaseCondiviso.dammiPdi();
+        listaMarker = new ArrayList<Marker>();
 
         if (ActivityCompat.checkSelfPermission(mainActivity, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 &&
@@ -228,6 +230,8 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
 
             Marker marker = gmMap.addMarker(markerOptions);
             marker.setTag(pdi);
+
+            listaMarker.add(marker);
         }
 
         if (mapType != -1) {
@@ -254,6 +258,12 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
 
             gmMap.moveCamera(CameraUpdateFactory.newLatLng(pdiDaZoommare));
             gmMap.animateCamera(CameraUpdateFactory.zoomTo(18));
+
+            for (int i = 0; i < listaMarker.size(); i++) {
+                Marker marker = listaMarker.get(i);
+
+                marker.hideInfoWindow();
+            }
 
             return true;
         }
