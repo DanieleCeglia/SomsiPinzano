@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                 Boolean storage = perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
 
                 if (location && storage) {
-                    Toast.makeText(MainActivity.this,  getResources().getString(R.string.messaggio_permessi_accettati), Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, getResources().getString(R.string.messaggio_permessi_accettati), Toast.LENGTH_LONG).show();
                 } else {
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
                     alertDialogBuilder.setCancelable(true);

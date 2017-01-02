@@ -11,8 +11,8 @@
     <string name="rilievo">Terrain</string>
     <string name="ciclabile">Cycle</string>
     <string name="trasporti">Transport</string>
-    <string name="tocca_qui_per_maggiori_dettagli">Tap here for more details...</string>
-    <string name="tocca_pin_per_maggiori_dettagli">Tap pins for more details...</string>
+    <string name="tocca_qui_per_maggiori_dettagli">Tap here for more details…</string>
+    <string name="tocca_pin_per_maggiori_dettagli">Tap pins for more details…</string>
     <string name="indirizzo">Address:</string>
     <string name="telefono">Telephone:</string>
     <string name="fax">Fax:</string>
@@ -21,4 +21,6 @@
     <string name="video">Video:</string>
     <string name="vedi_su">SEE ON</string>
     <string name="descrizione">DESCRIPTION</string>
+    <string name="indirizzo_copiato">Address copied!</string>
+    <string name="fax_copiato">Fax copied!</string>
 </resources>

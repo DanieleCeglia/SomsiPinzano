@@ -39,212 +39,191 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/llIndirizzo">
 
                 <TextView
                     android:text="@string/indirizzo"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:textColor="@color/colorPrimaryText"
                     android:textStyle="normal|bold"
                     android:textAlignment="textEnd"
                     android:textSize="12sp"
-                    android:paddingStart="10dp"
+                    android:paddingStart="5dp"
                     android:layout_width="80dp"
-                    android:layout_gravity="center"
-                    android:paddingTop="10dp" />
+                    android:gravity="center_vertical" />
 
-                <TextView
+                <Button
                     android:text="indirizzo"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvIndirizzo"
-                    android:textSize="12sp"
-                    android:paddingEnd="10dp"
-                    android:paddingStart="5dp"
+                    android:id="@+id/btIndirizzo"
+                    android:textSize="11sp"
                     android:layout_gravity="center"
-                    android:paddingTop="10dp" />
+                    android:layout_height="34dp"
+                    android:textAllCaps="false" />
             </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/llTelefono">
 
                 <TextView
                     android:text="@string/telefono"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:textColor="@color/colorPrimaryText"
                     android:textStyle="normal|bold"
                     android:textAlignment="textEnd"
                     android:textSize="12sp"
-                    android:paddingStart="10dp"
+                    android:paddingStart="5dp"
                     android:layout_width="80dp"
-                    android:layout_gravity="center"
-                    android:paddingTop="10dp" />
+                    android:gravity="center_vertical" />
 
-                <TextView
+                <Button
                     android:text="telefono"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvTelefono"
-                    android:textSize="12sp"
-                    android:paddingEnd="10dp"
-                    android:paddingStart="5dp"
+                    android:id="@+id/btTelefono"
+                    android:textSize="11sp"
                     android:layout_gravity="center"
-                    android:paddingTop="10dp" />
+                    android:layout_height="34dp"
+                    android:textAllCaps="false" />
             </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/llFax">
 
                 <TextView
                     android:text="@string/fax"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:textColor="@color/colorPrimaryText"
                     android:textStyle="normal|bold"
                     android:textAlignment="textEnd"
                     android:textSize="12sp"
-                    android:paddingStart="10dp"
+                    android:paddingStart="5dp"
                     android:layout_width="80dp"
-                    android:layout_gravity="center"
-                    android:paddingTop="10dp" />
+                    android:gravity="center_vertical" />
 
-                <TextView
+                <Button
                     android:text="fax"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvFax"
-                    android:textSize="12sp"
-                    android:paddingEnd="10dp"
-                    android:paddingStart="5dp"
+                    android:id="@+id/btFax"
+                    android:textSize="11sp"
                     android:layout_gravity="center"
-                    android:paddingTop="10dp" />
+                    android:layout_height="34dp"
+                    android:textAllCaps="false" />
             </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/llCellulare">
 
                 <TextView
                     android:text="@string/cellulare"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:textColor="@color/colorPrimaryText"
                     android:textStyle="normal|bold"
                     android:textAlignment="textEnd"
                     android:textSize="12sp"
-                    android:paddingStart="10dp"
+                    android:paddingStart="5dp"
                     android:layout_width="80dp"
-                    android:layout_gravity="center"
-                    android:paddingTop="10dp" />
+                    android:gravity="center_vertical" />
 
-                <TextView
+                <Button
                     android:text="cellulare"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvCellulare"
-                    android:textSize="12sp"
-                    android:paddingEnd="10dp"
-                    android:paddingStart="5dp"
+                    android:id="@+id/btCellulare"
+                    android:textSize="11sp"
                     android:layout_gravity="center"
-                    android:paddingTop="10dp" />
+                    android:layout_height="34dp"
+                    android:textAllCaps="false" />
             </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/llEmail">
 
                 <TextView
                     android:text="@string/email"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:textColor="@color/colorPrimaryText"
                     android:textStyle="normal|bold"
                     android:textAlignment="textEnd"
                     android:textSize="12sp"
-                    android:paddingStart="10dp"
+                    android:paddingStart="5dp"
                     android:layout_width="80dp"
-                    android:layout_gravity="center"
-                    android:paddingTop="10dp" />
+                    android:gravity="center_vertical" />
 
-                <TextView
+                <Button
                     android:text="email"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvEmail"
-                    android:textSize="12sp"
-                    android:paddingEnd="10dp"
-                    android:paddingStart="5dp"
+                    android:id="@+id/btEmail"
+                    android:textSize="11sp"
                     android:layout_gravity="center"
-                    android:paddingTop="10dp" />
+                    android:layout_height="34dp"
+                    android:textAllCaps="false" />
             </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/llLink">
 
                 <TextView
                     android:text="titoloLink"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:textColor="@color/colorPrimaryText"
                     android:textStyle="normal|bold"
                     android:textAlignment="textEnd"
                     android:textSize="12sp"
                     android:id="@+id/tvIntestazioneLink"
-                    android:paddingStart="10dp"
+                    android:paddingStart="5dp"
                     android:layout_width="80dp"
-                    android:layout_gravity="center"
-                    android:paddingTop="10dp" />
+                    android:gravity="center_vertical" />
 
-                <TextView
+                <Button
                     android:text="link"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvLink"
-                    android:textSize="12sp"
-                    android:paddingEnd="10dp"
-                    android:paddingStart="5dp"
+                    android:id="@+id/btLink"
+                    android:textSize="11sp"
                     android:layout_gravity="center"
-                    android:paddingTop="10dp" />
+                    android:layout_height="34dp"
+                    android:textAllCaps="false" />
             </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/llVideo">
 
                 <TextView
                     android:text="@string/video"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:textColor="@color/colorPrimaryText"
                     android:textStyle="normal|bold"
                     android:textAlignment="textEnd"
                     android:textSize="12sp"
-                    android:paddingStart="10dp"
+                    android:paddingStart="5dp"
                     android:layout_width="80dp"
-                    android:layout_gravity="center"
-                    android:paddingTop="10dp" />
+                    android:gravity="center_vertical" />
 
-                <TextView
+                <Button
                     android:text="video"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvVideo"
-                    android:textSize="12sp"
-                    android:paddingEnd="10dp"
-                    android:paddingStart="5dp"
+                    android:id="@+id/btVideo"
+                    android:textSize="11sp"
                     android:layout_gravity="center"
-                    android:paddingTop="10dp" />
+                    android:layout_height="34dp"
+                    android:textAllCaps="false" />
             </LinearLayout>
 
             <TextView
@@ -261,13 +240,15 @@
                 android:text="Google Maps"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/bVediSuGM" />
+                android:id="@+id/bVediSuGM"
+                android:textAllCaps="false" />
 
             <Button
-                android:text="Open Street Map"
+                android:text="OpenStreetMap"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/bVediSuOSM" />
+                android:id="@+id/bVediSuOSM"
+                android:textAllCaps="false" />
         </LinearLayout>>
     </ScrollView>
 </FrameLayout>

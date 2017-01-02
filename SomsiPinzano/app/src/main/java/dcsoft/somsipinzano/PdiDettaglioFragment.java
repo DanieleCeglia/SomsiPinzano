@@ -9,10 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class PdiDettaglioFragment extends Fragment {
     private final String TAG = getClass().getSimpleName();
@@ -25,26 +25,26 @@ public class PdiDettaglioFragment extends Fragment {
     private TextView tvDescrizione;
 
     private LinearLayout llIndirizzo;
-    private TextView tvIndirizzo;
+    private Button btIndirizzo;
 
     private LinearLayout llTelefono;
-    private TextView tvTelefono;
+    private Button btTelefono;
 
     private LinearLayout llFax;
-    private TextView tvFax;
+    private Button btFax;
 
     private LinearLayout llCellulare;
-    private TextView tvCellulare;
+    private Button btCellulare;
 
     private LinearLayout llEmail;
-    private TextView tvEmail;
+    private Button btEmail;
 
     private LinearLayout llLink;
     private TextView tvIntestazioneLink;
-    private TextView tvLink;
+    private Button btLink;
 
     private LinearLayout llVideo;
-    private TextView tvVideo;
+    private Button btVideo;
 
     private Button bVediSuGM;
     private Button bVediSuOSM;
@@ -87,30 +87,98 @@ public class PdiDettaglioFragment extends Fragment {
         tvDescrizione             = (TextView)     pdiDettaglioFragmentView.findViewById(R.id.tvDescrizione);
 
         llIndirizzo               = (LinearLayout) pdiDettaglioFragmentView.findViewById(R.id.llIndirizzo);
-        tvIndirizzo               = (TextView)     pdiDettaglioFragmentView.findViewById(R.id.tvIndirizzo);
+        btIndirizzo               = (Button)       pdiDettaglioFragmentView.findViewById(R.id.btIndirizzo);
+        if (btIndirizzo != null) {
+            btIndirizzo.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            copiaInClipboard(getResources().getString(R.string.indirizzo_copiato), (String) btIndirizzo.getText());
+                        }
+                    }
+            );
+        }
 
         llTelefono                = (LinearLayout) pdiDettaglioFragmentView.findViewById(R.id.llTelefono);
-        tvTelefono                = (TextView)     pdiDettaglioFragmentView.findViewById(R.id.tvTelefono);
+        btTelefono                = (Button)       pdiDettaglioFragmentView.findViewById(R.id.btTelefono);
+        if (btTelefono != null) {
+            btTelefono.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Log.d("DEBUGAPP", TAG + " btTelefono");
+                        }
+                    }
+            );
+        }
 
         llFax                     = (LinearLayout) pdiDettaglioFragmentView.findViewById(R.id.llFax);
-        tvFax                     = (TextView)     pdiDettaglioFragmentView.findViewById(R.id.tvFax);
+        btFax                     = (Button)       pdiDettaglioFragmentView.findViewById(R.id.btFax);
+        if (btFax != null) {
+            btFax.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            copiaInClipboard(getResources().getString(R.string.fax_copiato), (String) btFax.getText());
+                        }
+                    }
+            );
+        }
 
         llCellulare               = (LinearLayout) pdiDettaglioFragmentView.findViewById(R.id.llCellulare);
-        tvCellulare               = (TextView)     pdiDettaglioFragmentView.findViewById(R.id.tvCellulare);
+        btCellulare               = (Button)       pdiDettaglioFragmentView.findViewById(R.id.btCellulare);
+        if (btCellulare != null) {
+            btCellulare.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Log.d("DEBUGAPP", TAG + " btCellulare");
+                        }
+                    }
+            );
+        }
 
         llEmail                   = (LinearLayout) pdiDettaglioFragmentView.findViewById(R.id.llEmail);
-        tvEmail                   = (TextView)     pdiDettaglioFragmentView.findViewById(R.id.tvEmail);
+        btEmail                   = (Button)       pdiDettaglioFragmentView.findViewById(R.id.btEmail);
+        if (btEmail != null) {
+            btEmail.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Log.d("DEBUGAPP", TAG + " btEmail");
+                        }
+                    }
+            );
+        }
 
         llLink                    = (LinearLayout) pdiDettaglioFragmentView.findViewById(R.id.llLink);
         tvIntestazioneLink        = (TextView)     pdiDettaglioFragmentView.findViewById(R.id.tvIntestazioneLink);
-        tvLink                    = (TextView)     pdiDettaglioFragmentView.findViewById(R.id.tvLink);
+        btLink                    = (Button)       pdiDettaglioFragmentView.findViewById(R.id.btLink);
+        if (btLink != null) {
+            btLink.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Log.d("DEBUGAPP", TAG + " btLink");
+                        }
+                    }
+            );
+        }
 
         llVideo                   = (LinearLayout) pdiDettaglioFragmentView.findViewById(R.id.llVideo);
-        tvVideo                   = (TextView)     pdiDettaglioFragmentView.findViewById(R.id.tvVideo);
+        btVideo                   = (Button)       pdiDettaglioFragmentView.findViewById(R.id.btVideo);
+        if (btVideo != null) {
+            btVideo.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Log.d("DEBUGAPP", TAG + " btVideo");
+                        }
+                    }
+            );
+        }
 
         bVediSuGM                 = (Button)       pdiDettaglioFragmentView.findViewById(R.id.bVediSuGM);
-        bVediSuOSM                = (Button)       pdiDettaglioFragmentView.findViewById(R.id.bVediSuOSM);
-
         if (bVediSuGM != null) {
             bVediSuGM.setOnClickListener(
                     new View.OnClickListener() {
@@ -122,6 +190,7 @@ public class PdiDettaglioFragment extends Fragment {
             );
         }
 
+        bVediSuOSM                = (Button)       pdiDettaglioFragmentView.findViewById(R.id.bVediSuOSM);
         if (bVediSuOSM != null) {
             bVediSuOSM.setOnClickListener(
                     new View.OnClickListener() {
@@ -181,7 +250,7 @@ public class PdiDettaglioFragment extends Fragment {
         }
 
         indirizzo = indirizzo + ", " + mainActivity.pdiScelto.getCap();
-        tvIndirizzo.setText(indirizzo);
+        btIndirizzo.setText(indirizzo);
 
         switch (mainActivity.gestoreDatabaseCondiviso.getLingua()) {
             case "italiano": {
@@ -213,37 +282,37 @@ public class PdiDettaglioFragment extends Fragment {
         }
 
         if (mainActivity.pdiScelto.getTelefono() != null) {
-            tvTelefono.setText(mainActivity.pdiScelto.getTelefono());
+            btTelefono.setText(mainActivity.pdiScelto.getTelefono());
         } else {
             llTelefono.setVisibility(View.GONE);
         }
 
         if (mainActivity.pdiScelto.getFax() != null) {
-            tvFax.setText(mainActivity.pdiScelto.getFax());
+            btFax.setText(mainActivity.pdiScelto.getFax());
         } else {
             llFax.setVisibility(View.GONE);
         }
 
         if (mainActivity.pdiScelto.getCellulare() != null) {
-            tvCellulare.setText(mainActivity.pdiScelto.getCellulare());
+            btCellulare.setText(mainActivity.pdiScelto.getCellulare());
         } else {
             llCellulare.setVisibility(View.GONE);
         }
 
         if (mainActivity.pdiScelto.getEmail() != null) {
-            tvEmail.setText(mainActivity.pdiScelto.getEmail());
+            btEmail.setText(mainActivity.pdiScelto.getEmail());
         } else {
             llEmail.setVisibility(View.GONE);
         }
 
         if (mainActivity.pdiScelto.getLinkGenerico() != null) {
-            tvLink.setText(mainActivity.pdiScelto.getLinkGenerico());
+            btLink.setText(mainActivity.pdiScelto.getLinkGenerico());
         } else {
             llLink.setVisibility(View.GONE);
         }
 
         if (mainActivity.pdiScelto.getLinkVideo() != null) {
-            tvVideo.setText(mainActivity.pdiScelto.getLinkVideo());
+            btVideo.setText(mainActivity.pdiScelto.getLinkVideo());
         } else {
             llVideo.setVisibility(View.GONE);
         }
@@ -256,5 +325,18 @@ public class PdiDettaglioFragment extends Fragment {
         //Log.d("DEBUGAPP", TAG + " onDetach");
 
         mainActivity = null;
+    }
+
+    private void copiaInClipboard(String etichetta, String testo) {
+        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB) {
+            android.text.ClipboardManager clipboard = (android.text.ClipboardManager) mainActivity.getSystemService(Context.CLIPBOARD_SERVICE);
+            clipboard.setText(testo);
+        } else {
+            android.content.ClipboardManager clipboard = (android.content.ClipboardManager) mainActivity.getSystemService(Context.CLIPBOARD_SERVICE);
+            android.content.ClipData clip = android.content.ClipData.newPlainText(etichetta, testo);
+            clipboard.setPrimaryClip(clip);
+        }
+
+        Toast.makeText(mainActivity, etichetta, Toast.LENGTH_SHORT).show();
     }
 }

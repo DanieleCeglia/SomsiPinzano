@@ -11,8 +11,8 @@
     <string name="rilievo">Rilievo</string>
     <string name="ciclabile">Ciclabile</string>
     <string name="trasporti">Trasporti</string>
-    <string name="tocca_qui_per_maggiori_dettagli">Tocca qui per maggiori dettagli...</string>
-    <string name="tocca_pin_per_maggiori_dettagli">Tocca i pin per maggiori dettagli...</string>
+    <string name="tocca_qui_per_maggiori_dettagli">Tocca qui per maggiori dettagli…</string>
+    <string name="tocca_pin_per_maggiori_dettagli">Tocca i pin per maggiori dettagli…</string>
     <string name="indirizzo">Indirizzo:</string>
     <string name="telefono">Telefono:</string>
     <string name="fax">Fax:</string>
@@ -21,4 +21,6 @@
     <string name="video">Video:</string>
     <string name="vedi_su">VEDI SU</string>
     <string name="descrizione">DESCRIZIONE</string>
+    <string name="indirizzo_copiato">Indirizzo copiato!</string>
+    <string name="fax_copiato">Fax copiato!</string>
 </resources>
