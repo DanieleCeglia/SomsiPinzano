@@ -161,7 +161,6 @@ public class PdiDettaglioFragment extends Fragment {
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Log.d("DEBUGAPP", TAG + " btLink");
                             Intent i = new Intent(Intent.ACTION_VIEW);
                             i.setData(Uri.parse((String) btLink.getText()));
                             startActivity(i);
@@ -177,7 +176,9 @@ public class PdiDettaglioFragment extends Fragment {
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Log.d("DEBUGAPP", TAG + " btVideo");
+                            Intent i = new Intent(Intent.ACTION_VIEW);
+                            i.setData(Uri.parse((String) btVideo.getText()));
+                            startActivity(i);
                         }
                     }
             );
