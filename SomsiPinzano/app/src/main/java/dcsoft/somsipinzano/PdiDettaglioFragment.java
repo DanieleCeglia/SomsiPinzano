@@ -3,6 +3,8 @@ package dcsoft.somsipinzano;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -160,6 +162,9 @@ public class PdiDettaglioFragment extends Fragment {
                         @Override
                         public void onClick(View v) {
                             Log.d("DEBUGAPP", TAG + " btLink");
+                            Intent i = new Intent(Intent.ACTION_VIEW);
+                            i.setData(Uri.parse((String) btLink.getText()));
+                            startActivity(i);
                         }
                     }
             );
