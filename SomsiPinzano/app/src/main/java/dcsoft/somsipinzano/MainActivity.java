@@ -13,7 +13,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -32,9 +31,10 @@ public class MainActivity extends AppCompatActivity {
     public Pdi pdiScelto;
     public Boolean vediPdiSceltoSuGM;
     public Boolean vediPdiSceltoSuOSM;
+    public final int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 1;
+    public final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 2;
 
     private final String TAG = getClass().getSimpleName();
-    final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
     private FragmentManager fragmentManager;
     private ActionBar actionBar;
     private CategoriaFragment categoriaFragment;
@@ -181,8 +181,32 @@ public class MainActivity extends AppCompatActivity {
             }
             break;
 
-            default:
+            case MY_PERMISSIONS_REQUEST_CALL_PHONE: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    pdiDettaglioFragment.chiamaNumeroTelefonico(null);
+                } else {
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+                    alertDialogBuilder.setCancelable(true);
+
+                    alertDialogBuilder.setMessage(getResources().getString(R.string.messaggio_permesso_di_chiamata_non_accettato));
+
+                    alertDialogBuilder.setNeutralButton(
+                            "Ok",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
+                }
+            }
+            break;
+
+            default: {
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+            }
         }
     }
 

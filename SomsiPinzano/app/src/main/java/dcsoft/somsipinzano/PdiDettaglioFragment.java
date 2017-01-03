@@ -1,11 +1,15 @@
 package dcsoft.somsipinzano;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class PdiDettaglioFragment extends Fragment {
+    private String numeroDaChiamare = "0";
+
     private final String TAG = getClass().getSimpleName();
     private View pdiDettaglioFragmentView;
     private MainActivity mainActivity;
@@ -95,7 +101,7 @@ public class PdiDettaglioFragment extends Fragment {
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            copiaInClipboard(getResources().getString(R.string.indirizzo_copiato), (String) btIndirizzo.getText());
+                            copiaInClipboard(getResources().getString(R.string.indirizzo_copiato_negli_appunti), (String) btIndirizzo.getText());
                         }
                     }
             );
@@ -108,7 +114,7 @@ public class PdiDettaglioFragment extends Fragment {
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Log.d("DEBUGAPP", TAG + " btTelefono");
+                            chiamaNumeroTelefonico((String) btTelefono.getText());
                         }
                     }
             );
@@ -121,7 +127,7 @@ public class PdiDettaglioFragment extends Fragment {
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            copiaInClipboard(getResources().getString(R.string.fax_copiato), (String) btFax.getText());
+                            copiaInClipboard(getResources().getString(R.string.fax_copiato_negli_appunti), (String) btFax.getText());
                         }
                     }
             );
@@ -134,7 +140,7 @@ public class PdiDettaglioFragment extends Fragment {
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Log.d("DEBUGAPP", TAG + " btCellulare");
+                            chiamaNumeroTelefonico((String) btCellulare.getText());
                         }
                     }
             );
@@ -147,7 +153,10 @@ public class PdiDettaglioFragment extends Fragment {
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Log.d("DEBUGAPP", TAG + " btEmail");
+                            Intent i = new Intent(Intent.ACTION_SEND);
+                            i.setType("message/rfc822");
+                            i.putExtra(Intent.EXTRA_EMAIL, new String[]{(String) btEmail.getText()});
+                            startActivity(Intent.createChooser(i, getString(R.string.invia_email_a) + btEmail.getText() + getString(R.string.usando)));
                         }
                     }
             );
@@ -331,6 +340,20 @@ public class PdiDettaglioFragment extends Fragment {
         //Log.d("DEBUGAPP", TAG + " onDetach");
 
         mainActivity = null;
+    }
+
+    public void chiamaNumeroTelefonico(String numero) {
+        if (numero != null) {
+            numeroDaChiamare = numero;
+        }
+
+        if (ContextCompat.checkSelfPermission(mainActivity, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+            Intent i = new Intent(Intent.ACTION_CALL);
+            i.setData(Uri.parse("tel:" + numeroDaChiamare));
+            startActivity(i);
+        } else {
+            ActivityCompat.requestPermissions(mainActivity, new String[]{Manifest.permission.CALL_PHONE}, mainActivity.MY_PERMISSIONS_REQUEST_CALL_PHONE);
+        }
     }
 
     private void copiaInClipboard(String etichetta, String testo) {

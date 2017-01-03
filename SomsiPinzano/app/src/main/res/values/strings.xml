@@ -3,8 +3,8 @@
     <string name="punti_di_interesse">Points of interest</string>
     <string name="Categorie">Categories</string>
     <string name="messaggio_permessi_accettati">App all necessary permits have been accepted!</string>
-    <string name="messaggio_permesso_di_archiviazione_non_accettato">STORAGE PERMISSION NOT ACCEPTED: it is necessary to store map tiles to reduce data usage and for offline usage.\n*** Not accepting this permit the map OpenStreetMaps will not be available. ***</string>
-    <string name="messaggio_permesso_di_localizzazione_non_accettato">STORAGE PERMISSION NOT ACCEPTED: it is necessary to show the user&#8217;s location on map.</string>
+    <string name="messaggio_permesso_di_archiviazione_non_accettato">STORAGE PERMISSION NOT ACCEPTED\n\nIt is necessary to store map tiles to reduce data usage and for offline usage.\n*** Not accepting this permit the map OpenStreetMaps will not be available. ***</string>
+    <string name="messaggio_permesso_di_localizzazione_non_accettato">STORAGE PERMISSION NOT ACCEPTED\n\nIt is necessary to show the user&#8217;s location on map.</string>
     <string name="normale">Normal</string>
     <string name="satellitare">Satellite</string>
     <string name="ibrida">Hybrid</string>
@@ -21,6 +21,9 @@
     <string name="video">Video:</string>
     <string name="vedi_su">SEE ON</string>
     <string name="descrizione">DESCRIPTION</string>
-    <string name="indirizzo_copiato">Address copied!</string>
-    <string name="fax_copiato">Fax copied!</string>
+    <string name="indirizzo_copiato_negli_appunti">Address copied to clipboard!</string>
+    <string name="fax_copiato_negli_appunti">Fax copied to clipboard!</string>
+    <string name="invia_email_a">"Send email to "</string>
+    <string name="usando">" using:"</string>
+    <string name="messaggio_permesso_di_chiamata_non_accettato">PERMISSION TO CALL NOT ACCEPTED\n\nYou need for call the phone number you just requested.</string>
 </resources>

@@ -3,8 +3,8 @@
     <string name="punti_di_interesse">Punti di interesse</string>
     <string name="Categorie">Categorie</string>
     <string name="messaggio_permessi_accettati">Tutti i permessi necessari all&#8217;app sono stati accettati!</string>
-    <string name="messaggio_permesso_di_archiviazione_non_accettato">PERMESSO DI ARCHIVIAZIONE NON ACCETTATO\nÈ necessario per memorizzare i tiles della mappa al fine di ridurre l&#8217;utilizzo dei dati internet e per l&#8217;utilizzo offline.\n*** Non accettando questo permesso la mappa OpenStreetMaps non sarà disponibile. ***</string>
-    <string name="messaggio_permesso_di_localizzazione_non_accettato">PERMESSO DI LOCALIZZAZIONE NON ACCETTATO\nÈ necessario per mostrare la posizione dell&#8217;utente sulla mappa.</string>
+    <string name="messaggio_permesso_di_archiviazione_non_accettato">PERMESSO DI ARCHIVIAZIONE NON ACCETTATO\n\nÈ necessario per memorizzare i tiles della mappa al fine di ridurre l&#8217;utilizzo dei dati internet e per l&#8217;utilizzo offline.\n*** Non accettando questo permesso la mappa OpenStreetMaps non sarà disponibile. ***</string>
+    <string name="messaggio_permesso_di_localizzazione_non_accettato">PERMESSO DI LOCALIZZAZIONE NON ACCETTATO\n\nÈ necessario per mostrare la posizione dell&#8217;utente sulla mappa.</string>
     <string name="normale">Normale</string>
     <string name="satellitare">Satellitare</string>
     <string name="ibrida">Ibrida</string>
@@ -21,6 +21,9 @@
     <string name="video">Video:</string>
     <string name="vedi_su">VEDI SU</string>
     <string name="descrizione">DESCRIZIONE</string>
-    <string name="indirizzo_copiato">Indirizzo copiato!</string>
-    <string name="fax_copiato">Fax copiato!</string>
+    <string name="indirizzo_copiato_negli_appunti">Indirizzo copiato negli appunti!</string>
+    <string name="fax_copiato_negli_appunti">Fax copiato negli appunti!</string>
+    <string name="invia_email_a">"Invia email a "</string>
+    <string name="usando">" usando:"</string>
+    <string name="messaggio_permesso_di_chiamata_non_accettato">PERMESSO DI CHIAMATA NON ACCETTATO\n\nÈ necessario per chiamare il numero telefonico appena richiesto.</string>
 </resources>
