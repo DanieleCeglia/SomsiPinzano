@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class PdiDettaglioFragment extends Fragment {
     private String numeroDaChiamare = "0";
@@ -56,6 +57,8 @@ public class PdiDettaglioFragment extends Fragment {
 
     private Button bVediSuGM;
     private Button bVediSuOSM;
+
+    private ArrayList<ImmaginePdi> immaginiPdi;
 
     public PdiDettaglioFragment() {
         // Required empty public constructor
@@ -217,9 +220,12 @@ public class PdiDettaglioFragment extends Fragment {
             );
         }
 
-        if (savedInstanceState != null) {
+        if (savedInstanceState == null) {
+            immaginiPdi = mainActivity.gestoreDatabaseCondiviso.dammiImmaginiPdiPerPdi(mainActivity.pdiScelto.getIdPdi());
+        } else {
             //Log.d("DEBUGAPP", TAG + " onCreateView savedInstanceState != null");
 
+            immaginiPdi = savedInstanceState.getParcelableArrayList("immaginiPdi"); // @SuppressWarnings("unchecked")
             svContenitore.setY(savedInstanceState.getFloat("svContenitoreY"));
         }
 
@@ -232,6 +238,7 @@ public class PdiDettaglioFragment extends Fragment {
 
         //Log.d("DEBUGAPP", TAG + " onSaveInstanceState");
 
+        outState.putParcelableArrayList("immaginiPdi", immaginiPdi);
         outState.putFloat("svContenitoreY", svContenitore.getY());
     }
 

@@ -211,7 +211,7 @@ class GestoreDatabase extends SQLiteOpenHelper {
 
             database.close();
         } else {
-            Log.d("DEBUGAPP", TAG + " [dammiCategorie] Connessione NON aperta!");
+            Log.d("DEBUGAPP", TAG + " [dammiCategoria] Connessione NON aperta!");
         }
 
         return categoria;
@@ -260,7 +260,7 @@ class GestoreDatabase extends SQLiteOpenHelper {
 
             database.close();
         } else {
-            Log.d("DEBUGAPP", TAG + " [dammiPdiPerCategoria] Connessione NON aperta!");
+            Log.d("DEBUGAPP", TAG + " [dammiPdi] Connessione NON aperta!");
         }
 
         return list;
@@ -310,6 +310,37 @@ class GestoreDatabase extends SQLiteOpenHelper {
             database.close();
         } else {
             Log.d("DEBUGAPP", TAG + " [dammiPdiPerCategoria] Connessione NON aperta!");
+        }
+
+        return list;
+    }
+
+    ArrayList<ImmaginePdi> dammiImmaginiPdiPerPdi(int idPdi) {
+        ArrayList<ImmaginePdi> list = new ArrayList<>();
+
+        SQLiteDatabase database = getReadableDatabase();
+
+        if (database != null) {
+            Cursor cursor = database.rawQuery("SELECT * FROM IMMAGINE_PDI WHERE idImmaginePdi_idPdi = " + idPdi + " ORDER BY ordinamento", null);
+            cursor.moveToFirst();
+
+            while (!cursor.isAfterLast()) {
+                ImmaginePdi immaginePdi = new ImmaginePdi(
+                        cursor.getInt(0),     // idImmaginePdi
+                        cursor.getInt(1),     // idImmaginePdi_idPdi
+                        cursor.getInt(2),     // ordinamento
+                        cursor.getString(3)); // fileImmagine
+
+                list.add(immaginePdi);
+
+                cursor.moveToNext();
+            }
+
+            cursor.close();
+
+            database.close();
+        } else {
+            Log.d("DEBUGAPP", TAG + " [dammiImmaginiPdiPerPdi] Connessione NON aperta!");
         }
 
         return list;
