@@ -21,7 +21,6 @@
                 android:layout_height="wrap_content"
                 android:textStyle="normal|bold"
                 android:textColor="@color/colorPrimaryText"
-                android:paddingStart="10dp"
                 android:paddingBottom="10dp"
                 android:id="@+id/tvIntestazioneDescrizione"
                 android:textAlignment="center" />
@@ -44,20 +43,19 @@
 
                 <TextView
                     android:text="@string/indirizzo"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimaryText"
                     android:textStyle="normal|bold"
-                    android:textAlignment="textEnd"
                     android:textSize="12sp"
-                    android:paddingStart="5dp"
                     android:layout_width="80dp"
-                    android:gravity="center_vertical" />
+                    android:gravity="center_vertical|end"
+                    android:minHeight="34dp" />
 
                 <Button
                     android:text="indirizzo"
                     android:layout_width="match_parent"
                     android:id="@+id/btIndirizzo"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     android:layout_gravity="center"
                     android:layout_height="34dp"
                     android:textAllCaps="false" />
@@ -71,20 +69,19 @@
 
                 <TextView
                     android:text="@string/telefono"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimaryText"
                     android:textStyle="normal|bold"
-                    android:textAlignment="textEnd"
                     android:textSize="12sp"
-                    android:paddingStart="5dp"
                     android:layout_width="80dp"
-                    android:gravity="center_vertical" />
+                    android:gravity="center_vertical|end"
+                    android:minHeight="34dp" />
 
                 <Button
                     android:text="telefono"
                     android:layout_width="match_parent"
                     android:id="@+id/btTelefono"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     android:layout_gravity="center"
                     android:layout_height="34dp"
                     android:textAllCaps="false" />
@@ -98,20 +95,19 @@
 
                 <TextView
                     android:text="@string/fax"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimaryText"
                     android:textStyle="normal|bold"
-                    android:textAlignment="textEnd"
                     android:textSize="12sp"
-                    android:paddingStart="5dp"
                     android:layout_width="80dp"
-                    android:gravity="center_vertical" />
+                    android:gravity="center_vertical|end"
+                    android:minHeight="34dp" />
 
                 <Button
                     android:text="fax"
                     android:layout_width="match_parent"
                     android:id="@+id/btFax"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     android:layout_gravity="center"
                     android:layout_height="34dp"
                     android:textAllCaps="false" />
@@ -125,20 +121,19 @@
 
                 <TextView
                     android:text="@string/cellulare"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimaryText"
                     android:textStyle="normal|bold"
-                    android:textAlignment="textEnd"
                     android:textSize="12sp"
-                    android:paddingStart="5dp"
                     android:layout_width="80dp"
-                    android:gravity="center_vertical" />
+                    android:gravity="center_vertical|end"
+                    android:minHeight="34dp" />
 
                 <Button
                     android:text="cellulare"
                     android:layout_width="match_parent"
                     android:id="@+id/btCellulare"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     android:layout_gravity="center"
                     android:layout_height="34dp"
                     android:textAllCaps="false" />
@@ -152,20 +147,19 @@
 
                 <TextView
                     android:text="@string/email"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimaryText"
                     android:textStyle="normal|bold"
-                    android:textAlignment="textEnd"
                     android:textSize="12sp"
-                    android:paddingStart="5dp"
                     android:layout_width="80dp"
-                    android:gravity="center_vertical" />
+                    android:gravity="center_vertical|end"
+                    android:minHeight="34dp" />
 
                 <Button
                     android:text="email"
                     android:layout_width="match_parent"
                     android:id="@+id/btEmail"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     android:layout_gravity="center"
                     android:layout_height="34dp"
                     android:textAllCaps="false" />
@@ -175,25 +169,24 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/llLink">
+                android:id="@+id/llLink1">
 
                 <TextView
-                    android:text="titoloLink"
-                    android:layout_height="match_parent"
+                    android:text="titoloLink1"
+                    android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimaryText"
                     android:textStyle="normal|bold"
-                    android:textAlignment="textEnd"
                     android:textSize="12sp"
-                    android:id="@+id/tvIntestazioneLink"
-                    android:paddingStart="5dp"
+                    android:id="@+id/tvIntestazioneLink1"
                     android:layout_width="80dp"
-                    android:gravity="center_vertical" />
+                    android:gravity="center_vertical|end"
+                    android:minHeight="34dp" />
 
                 <Button
-                    android:text="link"
+                    android:text="link1"
                     android:layout_width="match_parent"
-                    android:id="@+id/btLink"
-                    android:textSize="11sp"
+                    android:id="@+id/btLink1"
+                    android:textSize="12sp"
                     android:layout_gravity="center"
                     android:layout_height="34dp"
                     android:textAllCaps="false" />
@@ -203,24 +196,78 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/llVideo">
+                android:id="@+id/llLink2">
 
                 <TextView
-                    android:text="@string/video"
-                    android:layout_height="match_parent"
+                    android:text="titoloLink2"
+                    android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimaryText"
                     android:textStyle="normal|bold"
-                    android:textAlignment="textEnd"
                     android:textSize="12sp"
-                    android:paddingStart="5dp"
+                    android:id="@+id/tvIntestazioneLink2"
                     android:layout_width="80dp"
-                    android:gravity="center_vertical" />
+                    android:gravity="center_vertical|end"
+                    android:minHeight="34dp" />
 
                 <Button
-                    android:text="video"
+                    android:text="link2"
                     android:layout_width="match_parent"
-                    android:id="@+id/btVideo"
-                    android:textSize="11sp"
+                    android:id="@+id/btLink2"
+                    android:textSize="12sp"
+                    android:layout_gravity="center"
+                    android:layout_height="34dp"
+                    android:textAllCaps="false" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/llLink3">
+
+                <TextView
+                    android:text="titoloLink3 testo molto molto lungo e articolato"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textStyle="normal|bold"
+                    android:textSize="12sp"
+                    android:id="@+id/tvIntestazioneLink3"
+                    android:layout_width="80dp"
+                    android:gravity="center_vertical|end"
+                    android:minHeight="34dp" />
+
+                <Button
+                    android:text="link3"
+                    android:layout_width="match_parent"
+                    android:id="@+id/btLink3"
+                    android:textSize="12sp"
+                    android:layout_gravity="center"
+                    android:layout_height="34dp"
+                    android:textAllCaps="false" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/llLink4">
+
+                <TextView
+                    android:text="titoloLink4"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textStyle="normal|bold"
+                    android:textSize="12sp"
+                    android:id="@+id/tvIntestazioneLink4"
+                    android:layout_width="80dp"
+                    android:gravity="center_vertical|end"
+                    android:minHeight="34dp" />
+
+                <Button
+                    android:text="link4"
+                    android:layout_width="match_parent"
+                    android:id="@+id/btLink4"
+                    android:textSize="12sp"
                     android:layout_gravity="center"
                     android:layout_height="34dp"
                     android:textAllCaps="false" />
@@ -232,9 +279,9 @@
                 android:layout_height="wrap_content"
                 android:textStyle="normal|bold"
                 android:textColor="@color/colorPrimaryText"
-                android:paddingStart="10dp"
-                android:paddingTop="20dp"
-                android:textAlignment="center" />
+                android:paddingTop="10dp"
+                android:textAlignment="center"
+                android:paddingBottom="10dp" />
 
             <Button
                 android:text="Google Maps"

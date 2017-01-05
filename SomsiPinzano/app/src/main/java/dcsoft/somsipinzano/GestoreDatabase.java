@@ -230,26 +230,35 @@ class GestoreDatabase extends SQLiteOpenHelper {
                 Pdi pdi = new Pdi(
                         cursor.getInt(0),      // idPdi
                         cursor.getInt(1),      // idPdi_idCategoria
-                        cursor.getInt(2),      // ordinamento
-                        cursor.getString(3),   // titoloItaliano
-                        cursor.getString(4),   // titoloInglese
-                        cursor.getString(5),   // descrizioneItaliano
-                        cursor.getString(6),   // descrizioneInglese
-                        cursor.getString(7),   // citta
-                        cursor.getString(8),   // via
-                        cursor.getInt(9),      // numeroCivico
-                        cursor.getString(10),  // interno
-                        cursor.getInt(11),     // cap
-                        cursor.getDouble(12),  // latitudine
-                        cursor.getDouble(13),  // longitudine
-                        cursor.getString(14),  // telefono
-                        cursor.getString(15),  // fax
-                        cursor.getString(16),  // cellulare
-                        cursor.getString(17),  // email
-                        cursor.getString(18),  // titoloLinkGenericoItaliano
-                        cursor.getString(19),  // titoloLinkGenericoInglese
-                        cursor.getString(20),  // linkGenerico
-                        cursor.getString(21)); // linkVideo
+                        cursor.getInt(2),      // idPdi_idRaggruppamento
+                        cursor.getInt(3),      // ordinamento
+                        cursor.getString(4),   // titoloItaliano
+                        cursor.getString(5),   // titoloInglese
+                        cursor.getString(6),   // descrizioneItaliano
+                        cursor.getString(7),   // descrizioneInglese
+                        cursor.getString(8),   // citta
+                        cursor.getString(9),   // via
+                        cursor.getInt(10),      // numeroCivico
+                        cursor.getString(11),  // interno
+                        cursor.getInt(12),     // cap
+                        cursor.getDouble(13),  // latitudine
+                        cursor.getDouble(14),  // longitudine
+                        cursor.getString(15),  // telefono
+                        cursor.getString(16),  // fax
+                        cursor.getString(17),  // cellulare
+                        cursor.getString(18),  // email
+                        cursor.getString(19),  // titoloLinkGenerico1Italiano
+                        cursor.getString(20),  // titoloLinkGenerico1Inglese
+                        cursor.getString(21),  // linkGenerico1
+                        cursor.getString(22),  // titoloLinkGenerico2Italiano
+                        cursor.getString(23),  // titoloLinkGenerico2Inglese
+                        cursor.getString(24),  // linkGenerico2
+                        cursor.getString(25),  // titoloLinkGenerico3Italiano
+                        cursor.getString(26),  // titoloLinkGenerico3Inglese
+                        cursor.getString(27),  // linkGenerico3
+                        cursor.getString(28),  // titoloLinkGenerico4Italiano
+                        cursor.getString(29),  // titoloLinkGenerico4Inglese
+                        cursor.getString(30)); // linkGenerico4
 
                 list.add(pdi);
 
@@ -279,26 +288,35 @@ class GestoreDatabase extends SQLiteOpenHelper {
                 Pdi pdi = new Pdi(
                         cursor.getInt(0),      // idPdi
                         cursor.getInt(1),      // idPdi_idCategoria
-                        cursor.getInt(2),      // ordinamento
-                        cursor.getString(3),   // titoloItaliano
-                        cursor.getString(4),   // titoloInglese
-                        cursor.getString(5),   // descrizioneItaliano
-                        cursor.getString(6),   // descrizioneInglese
-                        cursor.getString(7),   // citta
-                        cursor.getString(8),   // via
-                        cursor.getInt(9),      // numeroCivico
-                        cursor.getString(10),  // interno
-                        cursor.getInt(11),     // cap
-                        cursor.getDouble(12),  // latitudine
-                        cursor.getDouble(13),  // longitudine
-                        cursor.getString(14),  // telefono
-                        cursor.getString(15),  // fax
-                        cursor.getString(16),  // cellulare
-                        cursor.getString(17),  // email
-                        cursor.getString(18),  // titoloLinkGenericoItaliano
-                        cursor.getString(19),  // titoloLinkGenericoInglese
-                        cursor.getString(20),  // linkGenerico
-                        cursor.getString(21)); // linkVideo
+                        cursor.getInt(2),      // idPdi_idRaggruppamento
+                        cursor.getInt(3),      // ordinamento
+                        cursor.getString(4),   // titoloItaliano
+                        cursor.getString(5),   // titoloInglese
+                        cursor.getString(6),   // descrizioneItaliano
+                        cursor.getString(7),   // descrizioneInglese
+                        cursor.getString(8),   // citta
+                        cursor.getString(9),   // via
+                        cursor.getInt(10),      // numeroCivico
+                        cursor.getString(11),  // interno
+                        cursor.getInt(12),     // cap
+                        cursor.getDouble(13),  // latitudine
+                        cursor.getDouble(14),  // longitudine
+                        cursor.getString(15),  // telefono
+                        cursor.getString(16),  // fax
+                        cursor.getString(17),  // cellulare
+                        cursor.getString(18),  // email
+                        cursor.getString(19),  // titoloLinkGenerico1Italiano
+                        cursor.getString(20),  // titoloLinkGenerico1Inglese
+                        cursor.getString(21),  // linkGenerico1
+                        cursor.getString(22),  // titoloLinkGenerico2Italiano
+                        cursor.getString(23),  // titoloLinkGenerico2Inglese
+                        cursor.getString(24),  // linkGenerico2
+                        cursor.getString(25),  // titoloLinkGenerico3Italiano
+                        cursor.getString(26),  // titoloLinkGenerico3Inglese
+                        cursor.getString(27),  // linkGenerico3
+                        cursor.getString(28),  // titoloLinkGenerico4Italiano
+                        cursor.getString(29),  // titoloLinkGenerico4Inglese
+                        cursor.getString(30)); // linkGenerico4
 
                 list.add(pdi);
 

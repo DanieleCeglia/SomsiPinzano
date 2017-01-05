@@ -48,12 +48,21 @@ public class PdiDettaglioFragment extends Fragment {
     private LinearLayout llEmail;
     private Button btEmail;
 
-    private LinearLayout llLink;
-    private TextView tvIntestazioneLink;
-    private Button btLink;
+    private LinearLayout llLink1;
+    private TextView tvIntestazioneLink1;
+    private Button btLink1;
 
-    private LinearLayout llVideo;
-    private Button btVideo;
+    private LinearLayout llLink2;
+    private TextView tvIntestazioneLink2;
+    private Button btLink2;
+
+    private LinearLayout llLink3;
+    private TextView tvIntestazioneLink3;
+    private Button btLink3;
+
+    private LinearLayout llLink4;
+    private TextView tvIntestazioneLink4;
+    private Button btLink4;
 
     private Button bVediSuGM;
     private Button bVediSuOSM;
@@ -165,31 +174,64 @@ public class PdiDettaglioFragment extends Fragment {
             );
         }
 
-        llLink                    = (LinearLayout) pdiDettaglioFragmentView.findViewById(R.id.llLink);
-        tvIntestazioneLink        = (TextView)     pdiDettaglioFragmentView.findViewById(R.id.tvIntestazioneLink);
-        btLink                    = (Button)       pdiDettaglioFragmentView.findViewById(R.id.btLink);
-        if (btLink != null) {
-            btLink.setOnClickListener(
+        llLink1                   = (LinearLayout) pdiDettaglioFragmentView.findViewById(R.id.llLink1);
+        tvIntestazioneLink1       = (TextView)     pdiDettaglioFragmentView.findViewById(R.id.tvIntestazioneLink1);
+        btLink1                   = (Button)       pdiDettaglioFragmentView.findViewById(R.id.btLink1);
+        if (btLink1 != null) {
+            btLink1.setOnClickListener(
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Intent i = new Intent(Intent.ACTION_VIEW);
-                            i.setData(Uri.parse((String) btLink.getText()));
+                            i.setData(Uri.parse((String) btLink1.getText()));
                             startActivity(i);
                         }
                     }
             );
         }
 
-        llVideo                   = (LinearLayout) pdiDettaglioFragmentView.findViewById(R.id.llVideo);
-        btVideo                   = (Button)       pdiDettaglioFragmentView.findViewById(R.id.btVideo);
-        if (btVideo != null) {
-            btVideo.setOnClickListener(
+        llLink2                   = (LinearLayout) pdiDettaglioFragmentView.findViewById(R.id.llLink2);
+        tvIntestazioneLink2       = (TextView)     pdiDettaglioFragmentView.findViewById(R.id.tvIntestazioneLink2);
+        btLink2                   = (Button)       pdiDettaglioFragmentView.findViewById(R.id.btLink2);
+        if (btLink2 != null) {
+            btLink2.setOnClickListener(
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Intent i = new Intent(Intent.ACTION_VIEW);
-                            i.setData(Uri.parse((String) btVideo.getText()));
+                            i.setData(Uri.parse((String) btLink2.getText()));
+                            startActivity(i);
+                        }
+                    }
+            );
+        }
+
+        llLink3                   = (LinearLayout) pdiDettaglioFragmentView.findViewById(R.id.llLink3);
+        tvIntestazioneLink3       = (TextView)     pdiDettaglioFragmentView.findViewById(R.id.tvIntestazioneLink3);
+        btLink3                   = (Button)       pdiDettaglioFragmentView.findViewById(R.id.btLink3);
+        if (btLink3 != null) {
+            btLink3.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent i = new Intent(Intent.ACTION_VIEW);
+                            i.setData(Uri.parse((String) btLink3.getText()));
+                            startActivity(i);
+                        }
+                    }
+            );
+        }
+
+        llLink4                   = (LinearLayout) pdiDettaglioFragmentView.findViewById(R.id.llLink4);
+        tvIntestazioneLink4       = (TextView)     pdiDettaglioFragmentView.findViewById(R.id.tvIntestazioneLink4);
+        btLink4                   = (Button)       pdiDettaglioFragmentView.findViewById(R.id.btLink4);
+        if (btLink4 != null) {
+            btLink4.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent i = new Intent(Intent.ACTION_VIEW);
+                            i.setData(Uri.parse((String) btLink4.getText()));
                             startActivity(i);
                         }
                     }
@@ -283,8 +325,17 @@ public class PdiDettaglioFragment extends Fragment {
                     tvDescrizione.setVisibility(View.GONE);
                 }
 
-                if (mainActivity.pdiScelto.getTitoloLinkGenericoItaliano() != null) {
-                    tvIntestazioneLink.setText(mainActivity.pdiScelto.getTitoloLinkGenericoItaliano() + ":");
+                if (mainActivity.pdiScelto.getTitoloLinkGenerico1Italiano() != null) {
+                    tvIntestazioneLink1.setText(mainActivity.pdiScelto.getTitoloLinkGenerico1Italiano() + ":");
+                }
+                if (mainActivity.pdiScelto.getTitoloLinkGenerico2Italiano() != null) {
+                    tvIntestazioneLink2.setText(mainActivity.pdiScelto.getTitoloLinkGenerico2Italiano() + ":");
+                }
+                if (mainActivity.pdiScelto.getTitoloLinkGenerico3Italiano() != null) {
+                    tvIntestazioneLink3.setText(mainActivity.pdiScelto.getTitoloLinkGenerico3Italiano() + ":");
+                }
+                if (mainActivity.pdiScelto.getTitoloLinkGenerico4Italiano() != null) {
+                    tvIntestazioneLink4.setText(mainActivity.pdiScelto.getTitoloLinkGenerico4Italiano() + ":");
                 }
             }
             break;
@@ -297,8 +348,17 @@ public class PdiDettaglioFragment extends Fragment {
                     tvDescrizione.setVisibility(View.GONE);
                 }
 
-                if (mainActivity.pdiScelto.getTitoloLinkGenericoInglese() != null) {
-                    tvIntestazioneLink.setText(mainActivity.pdiScelto.getTitoloLinkGenericoInglese() + ":");
+                if (mainActivity.pdiScelto.getTitoloLinkGenerico1Inglese() != null) {
+                    tvIntestazioneLink1.setText(mainActivity.pdiScelto.getTitoloLinkGenerico1Inglese() + ":");
+                }
+                if (mainActivity.pdiScelto.getTitoloLinkGenerico2Inglese() != null) {
+                    tvIntestazioneLink2.setText(mainActivity.pdiScelto.getTitoloLinkGenerico2Inglese() + ":");
+                }
+                if (mainActivity.pdiScelto.getTitoloLinkGenerico3Inglese() != null) {
+                    tvIntestazioneLink3.setText(mainActivity.pdiScelto.getTitoloLinkGenerico3Inglese() + ":");
+                }
+                if (mainActivity.pdiScelto.getTitoloLinkGenerico4Inglese() != null) {
+                    tvIntestazioneLink4.setText(mainActivity.pdiScelto.getTitoloLinkGenerico4Inglese() + ":");
                 }
             }
         }
@@ -327,16 +387,28 @@ public class PdiDettaglioFragment extends Fragment {
             llEmail.setVisibility(View.GONE);
         }
 
-        if (mainActivity.pdiScelto.getLinkGenerico() != null) {
-            btLink.setText(mainActivity.pdiScelto.getLinkGenerico());
+        if (mainActivity.pdiScelto.getLinkGenerico1() != null) {
+            btLink1.setText(mainActivity.pdiScelto.getLinkGenerico1());
         } else {
-            llLink.setVisibility(View.GONE);
+            llLink1.setVisibility(View.GONE);
         }
 
-        if (mainActivity.pdiScelto.getLinkVideo() != null) {
-            btVideo.setText(mainActivity.pdiScelto.getLinkVideo());
+        if (mainActivity.pdiScelto.getLinkGenerico2() != null) {
+            btLink2.setText(mainActivity.pdiScelto.getLinkGenerico2());
         } else {
-            llVideo.setVisibility(View.GONE);
+            llLink2.setVisibility(View.GONE);
+        }
+
+        if (mainActivity.pdiScelto.getLinkGenerico3() != null) {
+            btLink3.setText(mainActivity.pdiScelto.getLinkGenerico3());
+        } else {
+            llLink3.setVisibility(View.GONE);
+        }
+
+        if (mainActivity.pdiScelto.getLinkGenerico4() != null) {
+            btLink4.setText(mainActivity.pdiScelto.getLinkGenerico4());
+        } else {
+            llLink4.setVisibility(View.GONE);
         }
     }
 
