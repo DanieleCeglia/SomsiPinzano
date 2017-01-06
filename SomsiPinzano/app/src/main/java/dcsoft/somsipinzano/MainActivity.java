@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     public BottomNavigationView bottomNavigation;
     public int tabSelezionato;
     public Categoria categoriaScelta;
-    public RagruppamentoPdi ragruppamentoPdiScelto;
+    public RaggruppamentoPdi raggruppamentoPdiScelto;
     public Pdi pdiScelto;
     public Boolean vediPdiSceltoSuGM;
     public Boolean vediPdiSceltoSuOSM;
@@ -69,9 +69,9 @@ public class MainActivity extends AppCompatActivity {
             vediPdiSceltoSuGM  = false;
             vediPdiSceltoSuOSM = false;
 
-            categoriaScelta        = null;
-            ragruppamentoPdiScelto = null;
-            pdiScelto              = null;
+            categoriaScelta         = null;
+            raggruppamentoPdiScelto = null;
+            pdiScelto               = null;
 
             categoriaFragment = new CategoriaFragment();
             pdiFragment       = null;
@@ -86,9 +86,9 @@ public class MainActivity extends AppCompatActivity {
             vediPdiSceltoSuGM  = savedInstanceState.getBoolean("vediPdiSceltoSuGM");
             vediPdiSceltoSuOSM = savedInstanceState.getBoolean("vediPdiSceltoSuOSM");
 
-            categoriaScelta        = savedInstanceState.getParcelable("categoriaScelta");
-            ragruppamentoPdiScelto = savedInstanceState.getParcelable("ragruppamentoPdiScelto");
-            pdiScelto              = savedInstanceState.getParcelable("pdiScelto");
+            categoriaScelta         = savedInstanceState.getParcelable("categoriaScelta");
+            raggruppamentoPdiScelto = savedInstanceState.getParcelable("raggruppamentoPdiScelto");
+            pdiScelto               = savedInstanceState.getParcelable("pdiScelto");
 
             categoriaFragment     = (CategoriaFragment)     fragmentManager.findFragmentByTag("categoriaFragment");
             pdiFragment           = (PdiFragment)           fragmentManager.findFragmentByTag("pdiFragment");
@@ -226,7 +226,7 @@ public class MainActivity extends AppCompatActivity {
         savedInstanceState.putBoolean("toastGmVisualizzato", toastGmVisualizzato);
         savedInstanceState.putBoolean("toastOsmVisualizzato", toastOsmVisualizzato);
         savedInstanceState.putParcelable("categoriaScelta", categoriaScelta);
-        savedInstanceState.putParcelable("ragruppamentoPdiScelto", ragruppamentoPdiScelto);
+        savedInstanceState.putParcelable("raggruppamentoPdiScelto", raggruppamentoPdiScelto);
         savedInstanceState.putParcelable("pdiScelto", pdiScelto);
     }
 
@@ -235,12 +235,7 @@ public class MainActivity extends AppCompatActivity {
         if (pdiDettaglioFragment != null && pdiDettaglioFragment.isVisible()) {
             rimuoviPdiDettaglioFragment();
         } else if (pdiFragment != null && pdiFragment.isVisible()) {
-            if (ragruppamentoPdiScelto != null) {
-                ragruppamentoPdiScelto = null;
-                pdiFragment.ricarica();
-            } else {
-                rimuoviPdiFragment();
-            }
+            gestisciBackSuPdiFragment();
         } else {
             this.finishAffinity();
         }
@@ -253,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
                 if (pdiDettaglioFragment != null && pdiDettaglioFragment.isVisible()) {
                     rimuoviPdiDettaglioFragment();
                 } else {
-                    rimuoviPdiFragment();
+                    gestisciBackSuPdiFragment();
                 }
             }
             break;
@@ -334,8 +329,9 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    public void ragruppamentoPdiScelto(RagruppamentoPdi ragruppamentoPdi) {
-        ragruppamentoPdiScelto = ragruppamentoPdi;
+    public void raggruppamentoPdiScelto(RaggruppamentoPdi raggruppamentoPdi) {
+        raggruppamentoPdiScelto = raggruppamentoPdi;
+        pdiFragment.ricarica();
     }
 
     public void pdiScelto(Pdi pdi) {
@@ -374,8 +370,8 @@ public class MainActivity extends AppCompatActivity {
         Categoria categoria = gestoreDatabaseCondiviso.dammiCategoria(pdi.getIdPdi_idCategoria());
         categoriaScelta(categoria);
 
-        RagruppamentoPdi ragruppamentoPdi = gestoreDatabaseCondiviso.dammiRagruppamentoPdi(pdi.getIdPdi_idRaggruppamento());
-        ragruppamentoPdiScelto(ragruppamentoPdi);
+        RaggruppamentoPdi raggruppamentoPdi = gestoreDatabaseCondiviso.dammiRaggruppamentoPdi(pdi.getIdPdi_idRaggruppamento());
+        raggruppamentoPdiScelto(raggruppamentoPdi);
 
         pdiScelto(pdi);
     }
@@ -547,6 +543,15 @@ public class MainActivity extends AppCompatActivity {
             default: {
                 impostaActionBar(true, categoriaScelta.getNomeInglese());
             }
+        }
+    }
+
+    private void gestisciBackSuPdiFragment() {
+        if (raggruppamentoPdiScelto != null) {
+            raggruppamentoPdiScelto = null;
+            pdiFragment.ricarica();
+        } else {
+            rimuoviPdiFragment();
         }
     }
     //endregion

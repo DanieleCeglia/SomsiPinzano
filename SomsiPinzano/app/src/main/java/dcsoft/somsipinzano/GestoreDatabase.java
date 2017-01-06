@@ -217,8 +217,8 @@ class GestoreDatabase extends SQLiteOpenHelper {
         return categoria;
     }
 
-    RagruppamentoPdi dammiRagruppamentoPdi(int idRaggruppamentoPdi) {
-        RagruppamentoPdi ragruppamentoPdi = null;
+    RaggruppamentoPdi dammiRaggruppamentoPdi(int idRaggruppamentoPdi) {
+        RaggruppamentoPdi raggruppamentoPdi = null;
 
         SQLiteDatabase database = getReadableDatabase();
 
@@ -227,11 +227,11 @@ class GestoreDatabase extends SQLiteOpenHelper {
             cursor.moveToFirst();
 
             while (!cursor.isAfterLast()) {
-                ragruppamentoPdi = new RagruppamentoPdi(
+                raggruppamentoPdi = new RaggruppamentoPdi(
                         cursor.getInt(0),     // idRaggruppamentoPdi
                         cursor.getInt(1),     // ordinamento
-                        cursor.getString(2),  // nomeRagruppamentoItaliano
-                        cursor.getString(3)); // nomeRagruppamentoInglese
+                        cursor.getString(2),  // nomeRaggruppamentoItaliano
+                        cursor.getString(3)); // nomeRaggruppamentoInglese
 
                 cursor.moveToNext();
             }
@@ -240,14 +240,14 @@ class GestoreDatabase extends SQLiteOpenHelper {
 
             database.close();
         } else {
-            Log.d("DEBUGAPP", TAG + " [dammiRagruppamentoPdi] Connessione NON aperta!");
+            Log.d("DEBUGAPP", TAG + " [dammiRaggruppamentoPdi] Connessione NON aperta!");
         }
 
-        return ragruppamentoPdi;
+        return raggruppamentoPdi;
     }
 
-    ArrayList<RagruppamentoPdi> dammiRagruppamentiPdiPerCategoria(int idCategoria) {
-        ArrayList<RagruppamentoPdi> list = new ArrayList<>();
+    ArrayList<RaggruppamentoPdi> dammiRaggruppamentiPdiPerCategoria(int idCategoria) {
+        ArrayList<RaggruppamentoPdi> list = new ArrayList<>();
 
         SQLiteDatabase database = getReadableDatabase();
 
@@ -256,8 +256,8 @@ class GestoreDatabase extends SQLiteOpenHelper {
                     "SELECT \n" +
                     "    idRaggruppamentoPdi, \n" +
                     "    RAGGRUPPAMENTO_PDI.ordinamento, \n" +
-                    "    nomeRagruppamentoItaliano, \n" +
-                    "    nomeRagruppamentoInglese \n" +
+                    "    nomeRaggruppamentoItaliano, \n" +
+                    "    nomeRaggruppamentoInglese \n" +
                     "FROM \n" +
                     "    RAGGRUPPAMENTO_PDI \n" +
                     "    JOIN PDI ON idRaggruppamentoPdi = idPdi_idRaggruppamento \n" +
@@ -270,13 +270,13 @@ class GestoreDatabase extends SQLiteOpenHelper {
             cursor.moveToFirst();
 
             while (!cursor.isAfterLast()) {
-                RagruppamentoPdi ragruppamentoPdi = new RagruppamentoPdi(
+                RaggruppamentoPdi raggruppamentoPdi = new RaggruppamentoPdi(
                         cursor.getInt(0),     // idRaggruppamentoPdi
                         cursor.getInt(1),     // ordinamento
-                        cursor.getString(2),  // nomeRagruppamentoItaliano
-                        cursor.getString(3)); // nomeRagruppamentoInglese
+                        cursor.getString(2),  // nomeRaggruppamentoItaliano
+                        cursor.getString(3)); // nomeRaggruppamentoInglese
 
-                list.add(ragruppamentoPdi);
+                list.add(raggruppamentoPdi);
 
                 cursor.moveToNext();
             }
@@ -285,7 +285,7 @@ class GestoreDatabase extends SQLiteOpenHelper {
 
             database.close();
         } else {
-            Log.d("DEBUGAPP", TAG + " [dammiRagruppamentiPdiPerCategoria] Connessione NON aperta!");
+            Log.d("DEBUGAPP", TAG + " [dammiRaggruppamentiPdiPerCategoria] Connessione NON aperta!");
         }
 
         return list;
@@ -402,6 +402,64 @@ class GestoreDatabase extends SQLiteOpenHelper {
             database.close();
         } else {
             Log.d("DEBUGAPP", TAG + " [dammiPdiPerCategoria] Connessione NON aperta!");
+        }
+
+        return list;
+    }
+
+    ArrayList<Pdi> dammiPdiPerRaggruppamento(int idRaggruppamentoPdi) {
+        ArrayList<Pdi> list = new ArrayList<>();
+
+        SQLiteDatabase database = getReadableDatabase();
+
+        if (database != null) {
+            Cursor cursor = database.rawQuery("SELECT * FROM PDI WHERE idPdi_idRaggruppamento = " + idRaggruppamentoPdi + " ORDER BY ordinamento", null);
+            cursor.moveToFirst();
+
+            while (!cursor.isAfterLast()) {
+                Pdi pdi = new Pdi(
+                        cursor.getInt(0),      // idPdi
+                        cursor.getInt(1),      // idPdi_idCategoria
+                        cursor.getInt(2),      // idPdi_idRaggruppamento
+                        cursor.getInt(3),      // ordinamento
+                        cursor.getString(4),   // titoloItaliano
+                        cursor.getString(5),   // titoloInglese
+                        cursor.getString(6),   // descrizioneItaliano
+                        cursor.getString(7),   // descrizioneInglese
+                        cursor.getString(8),   // citta
+                        cursor.getString(9),   // via
+                        cursor.getInt(10),     // numeroCivico
+                        cursor.getString(11),  // interno
+                        cursor.getInt(12),     // cap
+                        cursor.getDouble(13),  // latitudine
+                        cursor.getDouble(14),  // longitudine
+                        cursor.getString(15),  // telefono
+                        cursor.getString(16),  // fax
+                        cursor.getString(17),  // cellulare
+                        cursor.getString(18),  // email
+                        cursor.getString(19),  // titoloLinkGenerico1Italiano
+                        cursor.getString(20),  // titoloLinkGenerico1Inglese
+                        cursor.getString(21),  // linkGenerico1
+                        cursor.getString(22),  // titoloLinkGenerico2Italiano
+                        cursor.getString(23),  // titoloLinkGenerico2Inglese
+                        cursor.getString(24),  // linkGenerico2
+                        cursor.getString(25),  // titoloLinkGenerico3Italiano
+                        cursor.getString(26),  // titoloLinkGenerico3Inglese
+                        cursor.getString(27),  // linkGenerico3
+                        cursor.getString(28),  // titoloLinkGenerico4Italiano
+                        cursor.getString(29),  // titoloLinkGenerico4Inglese
+                        cursor.getString(30)); // linkGenerico4
+
+                list.add(pdi);
+
+                cursor.moveToNext();
+            }
+
+            cursor.close();
+
+            database.close();
+        } else {
+            Log.d("DEBUGAPP", TAG + " [dammiPdiPerRaggruppamento] Connessione NON aperta!");
         }
 
         return list;

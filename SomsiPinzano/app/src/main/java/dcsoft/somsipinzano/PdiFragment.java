@@ -17,7 +17,9 @@ import java.util.ArrayList;
 public class PdiFragment extends Fragment {
     private final String TAG = getClass().getSimpleName();
     private MainActivity mainActivity;
+    private ArrayList<RaggruppamentoPdi> raggruppamentiPdi;
     private ArrayList<Pdi> pdi;
+    private RecyclerView recyclerView;
 
     public PdiFragment() {
         // Required empty public constructor
@@ -83,20 +85,21 @@ public class PdiFragment extends Fragment {
             }
         }
 
-        RecyclerView recyclerView  = (RecyclerView) view.findViewById(R.id.listPdi);
+        recyclerView = (RecyclerView) view.findViewById(R.id.listPdi);
 
         Context context = view.getContext();
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
         if (savedInstanceState == null) {
-            pdi = mainActivity.gestoreDatabaseCondiviso.dammiPdiPerCategoria(mainActivity.categoriaScelta.getIdCategoria());
+            raggruppamentiPdi = mainActivity.gestoreDatabaseCondiviso.dammiRaggruppamentiPdiPerCategoria(mainActivity.categoriaScelta.getIdCategoria());
         } else {
             //Log.d("DEBUGAPP", TAG + " onCreateView savedInstanceState != null");
 
-            pdi = savedInstanceState.getParcelableArrayList("pdi"); // @SuppressWarnings("unchecked")
+            raggruppamentiPdi = savedInstanceState.getParcelableArrayList("raggruppamentiPdi");
+            pdi = savedInstanceState.getParcelableArrayList("pdi");
         }
 
-        recyclerView.setAdapter(new PdiRecyclerViewAdapter(pdi, mainActivity));
+        ricarica();
 
         return view;
     }
@@ -107,6 +110,7 @@ public class PdiFragment extends Fragment {
 
         //Log.d("DEBUGAPP", TAG + " onSaveInstanceState");
 
+        outState.putParcelableArrayList("raggruppamentiPdi", raggruppamentiPdi);
         outState.putParcelableArrayList("pdi", pdi);
     }
 
@@ -140,6 +144,16 @@ public class PdiFragment extends Fragment {
     }
 
     public void ricarica() {
-        // TODO!!!
+        if (raggruppamentiPdi.size() > 0 && mainActivity.raggruppamentoPdiScelto == null) {
+            recyclerView.setAdapter(new RaggruppamentoPdiRecyclerViewAdapter(raggruppamentiPdi, mainActivity));
+        } else {
+            if (raggruppamentiPdi.size() == 0) {
+                pdi = mainActivity.gestoreDatabaseCondiviso.dammiPdiPerCategoria(mainActivity.categoriaScelta.getIdCategoria());
+            } else {
+                pdi = mainActivity.gestoreDatabaseCondiviso.dammiPdiPerRaggruppamento(mainActivity.raggruppamentoPdiScelto.getIdRaggruppamentoPdi());
+            }
+
+            recyclerView.setAdapter(new PdiRecyclerViewAdapter(pdi, mainActivity));
+        }
     }
 }

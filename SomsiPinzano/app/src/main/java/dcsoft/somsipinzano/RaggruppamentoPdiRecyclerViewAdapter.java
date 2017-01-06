@@ -7,13 +7,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import java.util.ArrayList;
 
-class PdiRecyclerViewAdapter extends RecyclerView.Adapter<PdiRecyclerViewAdapter.ViewHolder> {
+class RaggruppamentoPdiRecyclerViewAdapter extends RecyclerView.Adapter<RaggruppamentoPdiRecyclerViewAdapter.ViewHolder> {
     private final String TAG = getClass().getSimpleName();
-    private ArrayList<Pdi> pdi;
+    private ArrayList<RaggruppamentoPdi> raggruppamentiPdi;
     private MainActivity mainActivity;
 
-    PdiRecyclerViewAdapter(ArrayList<Pdi> pdi, MainActivity mainActivity) {
-        this.pdi = pdi;
+    RaggruppamentoPdiRecyclerViewAdapter(ArrayList<RaggruppamentoPdi> raggruppamentiPdi, MainActivity mainActivity) {
+        this.raggruppamentiPdi = raggruppamentiPdi;
         this.mainActivity = mainActivity;
     }
 
@@ -28,21 +28,21 @@ class PdiRecyclerViewAdapter extends RecyclerView.Adapter<PdiRecyclerViewAdapter
     public void onBindViewHolder(final ViewHolder holder, int position) {
         switch (mainActivity.gestoreDatabaseCondiviso.getLingua()) {
             case "italiano": {
-                holder.tvTitoloPdi.setText(pdi.get(position).getTitoloItaliano());
+                holder.tvRaggruppamentoPdi.setText(raggruppamentiPdi.get(position).getNomeRaggruppamentoItaliano());
             }
             break;
 
             default: {
-                holder.tvTitoloPdi.setText(pdi.get(position).getTitoloInglese());
+                holder.tvRaggruppamentoPdi.setText(raggruppamentiPdi.get(position).getNomeRaggruppamentoInglese());
             }
         }
-        holder.pdi = pdi.get(position);
+        holder.raggruppamentoPdi = raggruppamentiPdi.get(position);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (null != mainActivity) {
-                    mainActivity.pdiScelto(holder.pdi);
+                    mainActivity.raggruppamentoPdiScelto(holder.raggruppamentoPdi);
                 }
             }
         });
@@ -50,24 +50,24 @@ class PdiRecyclerViewAdapter extends RecyclerView.Adapter<PdiRecyclerViewAdapter
 
     @Override
     public int getItemCount() {
-        return pdi.size();
+        return raggruppamentiPdi.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         final View mView;
-        final TextView tvTitoloPdi;
-        Pdi pdi;
+        final TextView tvRaggruppamentoPdi;
+        RaggruppamentoPdi raggruppamentoPdi;
 
         ViewHolder(View view) {
             super(view);
 
             mView = view;
-            tvTitoloPdi = (TextView) view.findViewById(R.id.tvTitoloPdi);
+            tvRaggruppamentoPdi = (TextView) view.findViewById(R.id.tvTitoloPdi);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + tvTitoloPdi.getText() + "'";
+            return super.toString() + " '" + tvRaggruppamentoPdi.getText() + "'";
         }
     }
 }
