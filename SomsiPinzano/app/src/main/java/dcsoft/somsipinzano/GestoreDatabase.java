@@ -189,7 +189,7 @@ class GestoreDatabase extends SQLiteOpenHelper {
         SQLiteDatabase database = getReadableDatabase();
 
         if (database != null) {
-            Cursor cursor = database.rawQuery("SELECT * FROM CATEGORIA WHERE idCategoria = " + idCategoria + " ORDER BY ordinamento", null);
+            Cursor cursor = database.rawQuery("SELECT * FROM CATEGORIA WHERE idCategoria = " + idCategoria, null);
             cursor.moveToFirst();
 
             while (!cursor.isAfterLast()) {
@@ -217,6 +217,80 @@ class GestoreDatabase extends SQLiteOpenHelper {
         return categoria;
     }
 
+    RagruppamentoPdi dammiRagruppamentoPdi(int idRaggruppamentoPdi) {
+        RagruppamentoPdi ragruppamentoPdi = null;
+
+        SQLiteDatabase database = getReadableDatabase();
+
+        if (database != null) {
+            Cursor cursor = database.rawQuery("SELECT * FROM RAGGRUPPAMENTO_PDI WHERE idRaggruppamentoPdi = " + idRaggruppamentoPdi, null);
+            cursor.moveToFirst();
+
+            while (!cursor.isAfterLast()) {
+                ragruppamentoPdi = new RagruppamentoPdi(
+                        cursor.getInt(0),     // idRaggruppamentoPdi
+                        cursor.getInt(1),     // ordinamento
+                        cursor.getString(2),  // nomeRagruppamentoItaliano
+                        cursor.getString(3)); // nomeRagruppamentoInglese
+
+                cursor.moveToNext();
+            }
+
+            cursor.close();
+
+            database.close();
+        } else {
+            Log.d("DEBUGAPP", TAG + " [dammiRagruppamentoPdi] Connessione NON aperta!");
+        }
+
+        return ragruppamentoPdi;
+    }
+
+    ArrayList<RagruppamentoPdi> dammiRagruppamentiPdiPerCategoria(int idCategoria) {
+        ArrayList<RagruppamentoPdi> list = new ArrayList<>();
+
+        SQLiteDatabase database = getReadableDatabase();
+
+        if (database != null) {
+            Cursor cursor = database.rawQuery("" +
+                    "SELECT \n" +
+                    "    idRaggruppamentoPdi, \n" +
+                    "    RAGGRUPPAMENTO_PDI.ordinamento, \n" +
+                    "    nomeRagruppamentoItaliano, \n" +
+                    "    nomeRagruppamentoInglese \n" +
+                    "FROM \n" +
+                    "    RAGGRUPPAMENTO_PDI \n" +
+                    "    JOIN PDI ON idRaggruppamentoPdi = idPdi_idRaggruppamento \n" +
+                    "WHERE \n" +
+                    "    idPdi_idCategoria = " + idCategoria + " \n" +
+                    "GROUP BY \n" +
+                    "    idRaggruppamentoPdi \n" +
+                    "ORDER BY \n" +
+                    "    RAGGRUPPAMENTO_PDI.ordinamento", null);
+            cursor.moveToFirst();
+
+            while (!cursor.isAfterLast()) {
+                RagruppamentoPdi ragruppamentoPdi = new RagruppamentoPdi(
+                        cursor.getInt(0),     // idRaggruppamentoPdi
+                        cursor.getInt(1),     // ordinamento
+                        cursor.getString(2),  // nomeRagruppamentoItaliano
+                        cursor.getString(3)); // nomeRagruppamentoInglese
+
+                list.add(ragruppamentoPdi);
+
+                cursor.moveToNext();
+            }
+
+            cursor.close();
+
+            database.close();
+        } else {
+            Log.d("DEBUGAPP", TAG + " [dammiRagruppamentiPdiPerCategoria] Connessione NON aperta!");
+        }
+
+        return list;
+    }
+
     ArrayList<Pdi> dammiPdi() {
         ArrayList<Pdi> list = new ArrayList<>();
 
@@ -238,7 +312,7 @@ class GestoreDatabase extends SQLiteOpenHelper {
                         cursor.getString(7),   // descrizioneInglese
                         cursor.getString(8),   // citta
                         cursor.getString(9),   // via
-                        cursor.getInt(10),      // numeroCivico
+                        cursor.getInt(10),     // numeroCivico
                         cursor.getString(11),  // interno
                         cursor.getInt(12),     // cap
                         cursor.getDouble(13),  // latitudine
@@ -296,7 +370,7 @@ class GestoreDatabase extends SQLiteOpenHelper {
                         cursor.getString(7),   // descrizioneInglese
                         cursor.getString(8),   // citta
                         cursor.getString(9),   // via
-                        cursor.getInt(10),      // numeroCivico
+                        cursor.getInt(10),     // numeroCivico
                         cursor.getString(11),  // interno
                         cursor.getInt(12),     // cap
                         cursor.getDouble(13),  // latitudine

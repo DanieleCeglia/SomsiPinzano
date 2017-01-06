@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     public BottomNavigationView bottomNavigation;
     public int tabSelezionato;
     public Categoria categoriaScelta;
+    public RagruppamentoPdi ragruppamentoPdiScelto;
     public Pdi pdiScelto;
     public Boolean vediPdiSceltoSuGM;
     public Boolean vediPdiSceltoSuOSM;
@@ -68,10 +69,12 @@ public class MainActivity extends AppCompatActivity {
             vediPdiSceltoSuGM  = false;
             vediPdiSceltoSuOSM = false;
 
-            categoriaScelta = null;
+            categoriaScelta        = null;
+            ragruppamentoPdiScelto = null;
+            pdiScelto              = null;
 
-            categoriaFragment     = new CategoriaFragment();
-            pdiFragment           = null;
+            categoriaFragment = new CategoriaFragment();
+            pdiFragment       = null;
 
             tabSelezionato = 0;
 
@@ -83,8 +86,9 @@ public class MainActivity extends AppCompatActivity {
             vediPdiSceltoSuGM  = savedInstanceState.getBoolean("vediPdiSceltoSuGM");
             vediPdiSceltoSuOSM = savedInstanceState.getBoolean("vediPdiSceltoSuOSM");
 
-            categoriaScelta = savedInstanceState.getParcelable("categoriaScelta");
-            pdiScelto       = savedInstanceState.getParcelable("pdiScelto");
+            categoriaScelta        = savedInstanceState.getParcelable("categoriaScelta");
+            ragruppamentoPdiScelto = savedInstanceState.getParcelable("ragruppamentoPdiScelto");
+            pdiScelto              = savedInstanceState.getParcelable("pdiScelto");
 
             categoriaFragment     = (CategoriaFragment)     fragmentManager.findFragmentByTag("categoriaFragment");
             pdiFragment           = (PdiFragment)           fragmentManager.findFragmentByTag("pdiFragment");
@@ -106,9 +110,9 @@ public class MainActivity extends AppCompatActivity {
         googleMapsFragment.eseguiAlOnHiddenChanged = new GoogleMapsFragmentEseguiAlOnHiddenChanged() {
             @Override
             public void esegui(boolean hidden) {
-                if (!hidden) {
-                    //Log.d("DEBUGAPP", TAG + " GoogleMapsFragmentEseguiAlOnHiddenChanged");
-                }
+                //if (!hidden) {
+                //    Log.d("DEBUGAPP", TAG + " GoogleMapsFragmentEseguiAlOnHiddenChanged");
+                //}
             }
         };
 
@@ -118,9 +122,9 @@ public class MainActivity extends AppCompatActivity {
         openStreetMapFragment.eseguiAlOnHiddenChanged = new OpenStreetMapFragmentEseguiAlOnHiddenChanged() {
             @Override
             public void esegui(boolean hidden) {
-                if (!hidden) {
-                    //Log.d("DEBUGAPP", TAG + " OpenStreetMapFragmentEseguiAlOnHiddenChanged");
-                }
+                //if (!hidden) {
+                //    Log.d("DEBUGAPP", TAG + " OpenStreetMapFragmentEseguiAlOnHiddenChanged");
+                //}
             }
         };
 
@@ -222,6 +226,7 @@ public class MainActivity extends AppCompatActivity {
         savedInstanceState.putBoolean("toastGmVisualizzato", toastGmVisualizzato);
         savedInstanceState.putBoolean("toastOsmVisualizzato", toastOsmVisualizzato);
         savedInstanceState.putParcelable("categoriaScelta", categoriaScelta);
+        savedInstanceState.putParcelable("ragruppamentoPdiScelto", ragruppamentoPdiScelto);
         savedInstanceState.putParcelable("pdiScelto", pdiScelto);
     }
 
@@ -230,7 +235,12 @@ public class MainActivity extends AppCompatActivity {
         if (pdiDettaglioFragment != null && pdiDettaglioFragment.isVisible()) {
             rimuoviPdiDettaglioFragment();
         } else if (pdiFragment != null && pdiFragment.isVisible()) {
-            rimuoviPdiFragment();
+            if (ragruppamentoPdiScelto != null) {
+                ragruppamentoPdiScelto = null;
+                pdiFragment.ricarica();
+            } else {
+                rimuoviPdiFragment();
+            }
         } else {
             this.finishAffinity();
         }
@@ -324,6 +334,10 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    public void ragruppamentoPdiScelto(RagruppamentoPdi ragruppamentoPdi) {
+        ragruppamentoPdiScelto = ragruppamentoPdi;
+    }
+
     public void pdiScelto(Pdi pdi) {
         pdiScelto = pdi;
         pdiDettaglioFragment = new PdiDettaglioFragment();
@@ -359,6 +373,9 @@ public class MainActivity extends AppCompatActivity {
 
         Categoria categoria = gestoreDatabaseCondiviso.dammiCategoria(pdi.getIdPdi_idCategoria());
         categoriaScelta(categoria);
+
+        RagruppamentoPdi ragruppamentoPdi = gestoreDatabaseCondiviso.dammiRagruppamentoPdi(pdi.getIdPdi_idRaggruppamento());
+        ragruppamentoPdiScelto(ragruppamentoPdi);
 
         pdiScelto(pdi);
     }
@@ -506,6 +523,8 @@ public class MainActivity extends AppCompatActivity {
 
         pdiFragment = null;
 
+        categoriaScelta = null;
+
         impostaActionBar(false, getResources().getString(R.string.Categorie));
     }
 
@@ -516,6 +535,8 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
 
         pdiDettaglioFragment = null;
+
+        pdiScelto = null;
 
         switch (gestoreDatabaseCondiviso.getLingua()) {
             case "italiano": {

@@ -138,4 +138,8 @@ public class PdiFragment extends Fragment {
 
         mainActivity = null;
     }
+
+    public void ricarica() {
+        // TODO!!!
+    }
 }
