@@ -316,6 +316,7 @@ public class MainActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(backAttivo);
             actionBar.setTitle(titolo);
+            impostaSottotitoloActionBar();
         }
     }
 
@@ -331,6 +332,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void raggruppamentoPdiScelto(RaggruppamentoPdi raggruppamentoPdi) {
         raggruppamentoPdiScelto = raggruppamentoPdi;
+        impostaSottotitoloActionBar();
         pdiFragment.ricarica();
     }
 
@@ -427,6 +429,8 @@ public class MainActivity extends AppCompatActivity {
             // poi vedo chi mostrare o addirittura aggiungere...
             switch (itemId) {
                 case R.id.item_pdi: {
+                    tabSelezionato = 0;
+
                     if (pdiDettaglioFragment != null && pdiDettaglioFragment.isAdded()) {
                         fragmentTransaction.show(pdiDettaglioFragment);
 
@@ -462,12 +466,12 @@ public class MainActivity extends AppCompatActivity {
 
                         impostaActionBar(false, getResources().getString(R.string.Categorie));
                     }
-
-                    tabSelezionato = 0;
                 }
                 break;
 
                 case R.id.item_google_maps: {
+                    tabSelezionato = 1;
+
                     if (googleMapsFragment != null && googleMapsFragment.isAdded()) {
                         fragmentTransaction.show(googleMapsFragment);
                     } else {
@@ -475,12 +479,12 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     impostaActionBar(false, "Google Maps");
-
-                    tabSelezionato = 1;
                 }
                 break;
 
                 case R.id.item_open_street_map: {
+                    tabSelezionato = 2;
+
                     if (openStreetMapFragment != null && openStreetMapFragment.isAdded()) {
                         fragmentTransaction.show(openStreetMapFragment);
                     } else {
@@ -488,8 +492,6 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     impostaActionBar(false, "OpenStreetMap");
-
-                    tabSelezionato = 2;
                 }
             }
 
@@ -546,9 +548,27 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void impostaSottotitoloActionBar() {
+        if (raggruppamentoPdiScelto != null && tabSelezionato == 0) {
+            switch (gestoreDatabaseCondiviso.getLingua()) {
+                case "italiano": {
+                    actionBar.setSubtitle(raggruppamentoPdiScelto.getNomeRaggruppamentoItaliano());
+                }
+                break;
+
+                default: {
+                    actionBar.setSubtitle(raggruppamentoPdiScelto.getNomeRaggruppamentoInglese());
+                }
+            }
+        } else {
+            actionBar.setSubtitle(null);
+        }
+    }
+
     private void gestisciBackSuPdiFragment() {
         if (raggruppamentoPdiScelto != null) {
             raggruppamentoPdiScelto = null;
+            impostaSottotitoloActionBar();
             pdiFragment.ricarica();
         } else {
             rimuoviPdiFragment();
