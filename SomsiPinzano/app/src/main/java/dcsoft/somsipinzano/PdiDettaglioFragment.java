@@ -271,36 +271,10 @@ public class PdiDettaglioFragment extends Fragment {
             svContenitore.setY(savedInstanceState.getFloat("svContenitoreY"));
         }
 
-        return pdiDettaglioFragmentView;
-    }
+        if (immaginiPdi.size() > 0) {
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        //Log.d("DEBUGAPP", TAG + " onSaveInstanceState");
-
-        outState.putParcelableArrayList("immaginiPdi", immaginiPdi);
-        outState.putFloat("svContenitoreY", svContenitore.getY());
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        //Log.d("DEBUGAPP", TAG + " onResume");
-
-        if (mainActivity.tabSelezionato == 0) {
-            switch (mainActivity.gestoreDatabaseCondiviso.getLingua()) {
-                case "italiano": {
-                    mainActivity.impostaActionBar(true, mainActivity.pdiScelto.getTitoloItaliano());
-                }
-                break;
-
-                default: {
-                    mainActivity.impostaActionBar(true, mainActivity.pdiScelto.getTitoloInglese());
-                }
-            }
+        } else {
+            
         }
 
         String indirizzo = mainActivity.pdiScelto.getCitta() + ", " + mainActivity.pdiScelto.getVia();
@@ -409,6 +383,38 @@ public class PdiDettaglioFragment extends Fragment {
             btLink4.setText(mainActivity.pdiScelto.getLinkGenerico4());
         } else {
             llLink4.setVisibility(View.GONE);
+        }
+
+        return pdiDettaglioFragmentView;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        //Log.d("DEBUGAPP", TAG + " onSaveInstanceState");
+
+        outState.putParcelableArrayList("immaginiPdi", immaginiPdi);
+        outState.putFloat("svContenitoreY", svContenitore.getY());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        //Log.d("DEBUGAPP", TAG + " onResume");
+
+        if (mainActivity.tabSelezionato == 0) {
+            switch (mainActivity.gestoreDatabaseCondiviso.getLingua()) {
+                case "italiano": {
+                    mainActivity.impostaActionBar(true, mainActivity.pdiScelto.getTitoloItaliano());
+                }
+                break;
+
+                default: {
+                    mainActivity.impostaActionBar(true, mainActivity.pdiScelto.getTitoloInglese());
+                }
+            }
         }
     }
 

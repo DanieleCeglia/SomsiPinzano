@@ -144,16 +144,18 @@ public class PdiFragment extends Fragment {
     }
 
     public void ricarica() {
-        if (raggruppamentiPdi.size() > 0 && mainActivity.raggruppamentoPdiScelto == null) {
-            recyclerView.setAdapter(new RaggruppamentoPdiRecyclerViewAdapter(raggruppamentiPdi, mainActivity));
-        } else {
-            if (raggruppamentiPdi.size() == 0) {
-                pdi = mainActivity.gestoreDatabaseCondiviso.dammiPdiPerCategoria(mainActivity.categoriaScelta.getIdCategoria());
+        if (raggruppamentiPdi != null) {
+            if (raggruppamentiPdi.size() > 0 && mainActivity.raggruppamentoPdiScelto == null) {
+                recyclerView.setAdapter(new RaggruppamentoPdiRecyclerViewAdapter(raggruppamentiPdi, mainActivity));
             } else {
-                pdi = mainActivity.gestoreDatabaseCondiviso.dammiPdiPerRaggruppamento(mainActivity.raggruppamentoPdiScelto.getIdRaggruppamentoPdi());
-            }
+                if (raggruppamentiPdi.size() == 0) {
+                    pdi = mainActivity.gestoreDatabaseCondiviso.dammiPdiPerCategoria(mainActivity.categoriaScelta.getIdCategoria());
+                } else {
+                    pdi = mainActivity.gestoreDatabaseCondiviso.dammiPdiPerRaggruppamento(mainActivity.raggruppamentoPdiScelto.getIdRaggruppamentoPdi());
+                }
 
-            recyclerView.setAdapter(new PdiRecyclerViewAdapter(pdi, mainActivity));
+                recyclerView.setAdapter(new PdiRecyclerViewAdapter(pdi, mainActivity));
+            }
         }
     }
 }

@@ -332,8 +332,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void raggruppamentoPdiScelto(RaggruppamentoPdi raggruppamentoPdi) {
         raggruppamentoPdiScelto = raggruppamentoPdi;
-        impostaSottotitoloActionBar();
-        pdiFragment.ricarica();
+
+        if (raggruppamentoPdi != null) {
+            impostaSottotitoloActionBar();
+            pdiFragment.ricarica();
+        }
     }
 
     public void pdiScelto(Pdi pdi) {
