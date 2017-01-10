@@ -116,6 +116,9 @@ public class PdiDettaglioFragment extends Fragment {
                         @Override
                         public void onClick(View v) {
                             Log.d("DEBUGAPP", TAG + " btGalleria");
+
+                            Intent intent = new Intent(mainActivity, Galleria.class);
+                            startActivity(intent);
                         }
                     }
             );
