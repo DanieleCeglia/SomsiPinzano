@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,8 @@ public class PdiDettaglioFragment extends Fragment {
 
     private TextView tvIntestazioneDescrizione;
     private TextView tvDescrizione;
+
+    private Button btGalleria;
 
     private LinearLayout llIndirizzo;
     private Button btIndirizzo;
@@ -105,6 +108,18 @@ public class PdiDettaglioFragment extends Fragment {
 
         tvIntestazioneDescrizione = (TextView)     pdiDettaglioFragmentView.findViewById(R.id.tvIntestazioneDescrizione);
         tvDescrizione             = (TextView)     pdiDettaglioFragmentView.findViewById(R.id.tvDescrizione);
+
+        btGalleria                = (Button)       pdiDettaglioFragmentView.findViewById(R.id.btGalleria);
+        if (btGalleria != null) {
+            btGalleria.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Log.d("DEBUGAPP", TAG + " btGalleria");
+                        }
+                    }
+            );
+        }
 
         llIndirizzo               = (LinearLayout) pdiDettaglioFragmentView.findViewById(R.id.llIndirizzo);
         btIndirizzo               = (Button)       pdiDettaglioFragmentView.findViewById(R.id.btIndirizzo);
@@ -274,7 +289,7 @@ public class PdiDettaglioFragment extends Fragment {
         if (immaginiPdi.size() > 0) {
 
         } else {
-            
+            btGalleria.setVisibility(View.GONE);
         }
 
         String indirizzo = mainActivity.pdiScelto.getCitta() + ", " + mainActivity.pdiScelto.getVia();
