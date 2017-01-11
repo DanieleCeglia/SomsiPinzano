@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -115,11 +116,9 @@ public class PdiDettaglioFragment extends Fragment {
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Log.d("DEBUGAPP", TAG + " btGalleria");
-
                             Intent intent = new Intent(mainActivity, Galleria.class);
                             intent.putParcelableArrayListExtra("immaginiPdi", immaginiPdi);
-                            startActivity(intent);
+                            startActivityForResult(intent, 1);
                         }
                     }
             );
@@ -435,6 +434,11 @@ public class PdiDettaglioFragment extends Fragment {
                 }
             }
         }
+
+        SharedPreferences sharedPreferences = mainActivity.getSharedPreferences("Galleria", 0);
+        String indiceImmagine = sharedPreferences.getString("indiceImmagine", "0");
+
+        Log.d("DEBUGAPP", TAG + " indiceImmagine: " + indiceImmagine);
     }
 
     @Override
