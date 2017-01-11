@@ -118,6 +118,7 @@ public class PdiDettaglioFragment extends Fragment {
                             Log.d("DEBUGAPP", TAG + " btGalleria");
 
                             Intent intent = new Intent(mainActivity, Galleria.class);
+                            intent.putParcelableArrayListExtra("immaginiPdi", immaginiPdi);
                             startActivity(intent);
                         }
                     }
