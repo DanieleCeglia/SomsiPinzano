@@ -36,11 +36,10 @@
                 android:paddingEnd="10dp"
                 android:paddingStart="10dp" />
 
-            <Button
-                android:text="TEST GALLERIA"
+            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/btGalleria" />
+                android:id="@+id/ivGalleria" />
 
             <LinearLayout
                 android:orientation="horizontal"

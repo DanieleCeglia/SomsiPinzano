@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -35,7 +36,7 @@ public class PdiDettaglioFragment extends Fragment {
     private TextView tvIntestazioneDescrizione;
     private TextView tvDescrizione;
 
-    private Button btGalleria;
+    private ImageView ivGalleria;
 
     private LinearLayout llIndirizzo;
     private Button btIndirizzo;
@@ -72,6 +73,8 @@ public class PdiDettaglioFragment extends Fragment {
     private Button bVediSuOSM;
 
     private ArrayList<ImmaginePdi> immaginiPdi;
+    private int indiceImmagine = 0;
+    private boolean galleriaAperta = false;
 
     public PdiDettaglioFragment() {
         // Required empty public constructor
@@ -110,15 +113,18 @@ public class PdiDettaglioFragment extends Fragment {
         tvIntestazioneDescrizione = (TextView)     pdiDettaglioFragmentView.findViewById(R.id.tvIntestazioneDescrizione);
         tvDescrizione             = (TextView)     pdiDettaglioFragmentView.findViewById(R.id.tvDescrizione);
 
-        btGalleria                = (Button)       pdiDettaglioFragmentView.findViewById(R.id.btGalleria);
-        if (btGalleria != null) {
-            btGalleria.setOnClickListener(
+        ivGalleria                = (ImageView)    pdiDettaglioFragmentView.findViewById(R.id.ivGalleria);
+        if (ivGalleria != null) {
+            ivGalleria.setOnClickListener(
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent(mainActivity, Galleria.class);
                             intent.putParcelableArrayListExtra("immaginiPdi", immaginiPdi);
+                            intent.putExtra("indiceImmagine", indiceImmagine);
                             startActivityForResult(intent, 1);
+
+                            galleriaAperta = true;
                         }
                     }
             );
@@ -290,9 +296,9 @@ public class PdiDettaglioFragment extends Fragment {
         }
 
         if (immaginiPdi.size() > 0) {
-
+            impostaImmagine();
         } else {
-            btGalleria.setVisibility(View.GONE);
+            ivGalleria.setVisibility(View.GONE);
         }
 
         String indirizzo = mainActivity.pdiScelto.getCitta() + ", " + mainActivity.pdiScelto.getVia();
@@ -435,10 +441,13 @@ public class PdiDettaglioFragment extends Fragment {
             }
         }
 
-        SharedPreferences sharedPreferences = mainActivity.getSharedPreferences("Galleria", 0);
-        String indiceImmagine = sharedPreferences.getString("indiceImmagine", "0");
+        if (galleriaAperta) {
+            SharedPreferences sharedPreferences = mainActivity.getSharedPreferences("Galleria", 0);
+            String stringaIndiceImmagine = sharedPreferences.getString("indiceImmagine", "0");
 
-        Log.d("DEBUGAPP", TAG + " indiceImmagine: " + indiceImmagine);
+            indiceImmagine = Integer.parseInt(stringaIndiceImmagine);
+            impostaImmagine();
+        }
     }
 
     @Override
@@ -475,5 +484,14 @@ public class PdiDettaglioFragment extends Fragment {
         }
 
         Toast.makeText(mainActivity, etichetta, Toast.LENGTH_SHORT).show();
+    }
+
+    private void impostaImmagine() {
+        ImmaginePdi immaginePdi = immaginiPdi.get(indiceImmagine);
+
+        String nomeFileSenzaEstensione = immaginePdi.getFileImmagine().substring(0, immaginePdi.getFileImmagine().lastIndexOf('.'));
+        String packageName = mainActivity.getPackageName();
+
+        ivGalleria.setImageResource(mainActivity.getResources().getIdentifier(nomeFileSenzaEstensione, "drawable", packageName));
     }
 }

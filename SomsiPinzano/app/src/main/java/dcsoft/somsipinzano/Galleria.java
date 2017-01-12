@@ -27,6 +27,8 @@ public class Galleria extends AppCompatActivity {
                 .setFragmentManager(getSupportFragmentManager());
 
         ArrayList<ImmaginePdi> immaginiPdi = getIntent().getParcelableArrayListExtra("immaginiPdi");
+        int indiceImmagine = getIntent().getExtras().getInt("indiceImmagine");
+
         int dimensione = immaginiPdi.size();
 
         for (int i = 0; i < dimensione; i++) {
@@ -37,6 +39,8 @@ public class Galleria extends AppCompatActivity {
 
             scrollGalleryView.addMedia(MediaInfo.mediaLoader(new DefaultImageLoader(getApplicationContext().getResources().getIdentifier(nomeFileSenzaEstensione, "drawable", packageName))));
         }
+
+        scrollGalleryView.setCurrentItem(indiceImmagine);
     }
 
     @Override
