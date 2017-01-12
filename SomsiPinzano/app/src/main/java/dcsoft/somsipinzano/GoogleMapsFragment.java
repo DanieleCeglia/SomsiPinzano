@@ -5,9 +5,9 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -259,11 +259,21 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
             gmMap.moveCamera(CameraUpdateFactory.newLatLng(pdiDaZoommare));
             gmMap.animateCamera(CameraUpdateFactory.zoomTo(18));
 
-            for (int i = 0; i < listaMarker.size(); i++) {
-                Marker marker = listaMarker.get(i);
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    for (int i = 0; i < listaMarker.size(); i++) {
+                        Marker marker = listaMarker.get(i);
 
-                marker.hideInfoWindow();
-            }
+                        if (marker.getPosition().latitude == mainActivity.pdiScelto.getLatitudine() && marker.getPosition().longitude == mainActivity.pdiScelto.getLongitudine()) {
+                            marker.showInfoWindow();
+                        } else {
+                            marker.hideInfoWindow();
+                        }
+                    }
+                }
+            }, 500);
 
             return true;
         }

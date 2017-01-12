@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,6 +40,7 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
     private IMapController mapController;
     private ArrayList<Pdi> listaPdi;
     private int tipoMappa = -1;
+    private ArrayList<Marker> listaMarker;
 
     public OpenStreetMapFragmentEseguiAlOnHiddenChanged eseguiAlOnHiddenChanged;
 
@@ -127,6 +129,7 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
         }
 
         listaPdi = mainActivity.gestoreDatabaseCondiviso.dammiPdi();
+        listaMarker = new ArrayList<Marker>();
 
         for (int i = 0; i < listaPdi.size(); i++) {
             Pdi pdi = listaPdi.get(i);
@@ -162,6 +165,8 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
             marker.setInfoWindow(markerInfoWindow);
 
             osmMap.getOverlays().add(marker);
+
+            listaMarker.add(marker);
         }
 
         return openStreetMapFragmentView;
@@ -224,6 +229,22 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
             mapController.setCenter(startPoint);
 
             InfoWindow.closeAllInfoWindowsOn(osmMap);
+
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    for (int i = 0; i < listaMarker.size(); i++) {
+                        Marker marker = listaMarker.get(i);
+
+                        if (marker.getPosition().getLatitude() == mainActivity.pdiScelto.getLatitudine() && marker.getPosition().getLongitude() == mainActivity.pdiScelto.getLongitudine()) {
+                            marker.showInfoWindow();
+
+                            break;
+                        }
+                    }
+                }
+            }, 500);
 
             return true;
         }
