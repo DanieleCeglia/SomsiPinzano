@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,7 @@ public class PdiDettaglioFragment extends Fragment {
     private TextView tvIntestazioneDescrizione;
     private TextView tvDescrizione;
 
+    private RelativeLayout rlGalleria;
     private ImageView ivGalleria;
 
     private LinearLayout llIndirizzo;
@@ -107,12 +109,13 @@ public class PdiDettaglioFragment extends Fragment {
 
         pdiDettaglioFragmentView = inflater.inflate(R.layout.fragment_pdi_dettaglio, container, false);
 
-        svContenitore             = (ScrollView)   pdiDettaglioFragmentView.findViewById(R.id.svContenitore);
+        svContenitore             = (ScrollView)     pdiDettaglioFragmentView.findViewById(R.id.svContenitore);
 
-        tvIntestazioneDescrizione = (TextView)     pdiDettaglioFragmentView.findViewById(R.id.tvIntestazioneDescrizione);
-        tvDescrizione             = (TextView)     pdiDettaglioFragmentView.findViewById(R.id.tvDescrizione);
+        tvIntestazioneDescrizione = (TextView)       pdiDettaglioFragmentView.findViewById(R.id.tvIntestazioneDescrizione);
+        tvDescrizione             = (TextView)       pdiDettaglioFragmentView.findViewById(R.id.tvDescrizione);
 
-        ivGalleria                = (ImageView)    pdiDettaglioFragmentView.findViewById(R.id.ivGalleria);
+        rlGalleria                = (RelativeLayout) pdiDettaglioFragmentView.findViewById(R.id.rlGalleria);
+        ivGalleria                = (ImageView)      pdiDettaglioFragmentView.findViewById(R.id.ivGalleria);
         if (ivGalleria != null) {
             ivGalleria.setOnClickListener(
                     new View.OnClickListener() {
@@ -129,8 +132,8 @@ public class PdiDettaglioFragment extends Fragment {
             );
         }
 
-        llIndirizzo               = (LinearLayout) pdiDettaglioFragmentView.findViewById(R.id.llIndirizzo);
-        btIndirizzo               = (Button)       pdiDettaglioFragmentView.findViewById(R.id.btIndirizzo);
+        llIndirizzo               = (LinearLayout)   pdiDettaglioFragmentView.findViewById(R.id.llIndirizzo);
+        btIndirizzo               = (Button)         pdiDettaglioFragmentView.findViewById(R.id.btIndirizzo);
         if (btIndirizzo != null) {
             btIndirizzo.setOnClickListener(
                     new View.OnClickListener() {
@@ -142,8 +145,8 @@ public class PdiDettaglioFragment extends Fragment {
             );
         }
 
-        llTelefono                = (LinearLayout) pdiDettaglioFragmentView.findViewById(R.id.llTelefono);
-        btTelefono                = (Button)       pdiDettaglioFragmentView.findViewById(R.id.btTelefono);
+        llTelefono                = (LinearLayout)   pdiDettaglioFragmentView.findViewById(R.id.llTelefono);
+        btTelefono                = (Button)         pdiDettaglioFragmentView.findViewById(R.id.btTelefono);
         if (btTelefono != null) {
             btTelefono.setOnClickListener(
                     new View.OnClickListener() {
@@ -155,8 +158,8 @@ public class PdiDettaglioFragment extends Fragment {
             );
         }
 
-        llFax                     = (LinearLayout) pdiDettaglioFragmentView.findViewById(R.id.llFax);
-        btFax                     = (Button)       pdiDettaglioFragmentView.findViewById(R.id.btFax);
+        llFax                     = (LinearLayout)   pdiDettaglioFragmentView.findViewById(R.id.llFax);
+        btFax                     = (Button)         pdiDettaglioFragmentView.findViewById(R.id.btFax);
         if (btFax != null) {
             btFax.setOnClickListener(
                     new View.OnClickListener() {
@@ -168,8 +171,8 @@ public class PdiDettaglioFragment extends Fragment {
             );
         }
 
-        llCellulare               = (LinearLayout) pdiDettaglioFragmentView.findViewById(R.id.llCellulare);
-        btCellulare               = (Button)       pdiDettaglioFragmentView.findViewById(R.id.btCellulare);
+        llCellulare               = (LinearLayout)   pdiDettaglioFragmentView.findViewById(R.id.llCellulare);
+        btCellulare               = (Button)         pdiDettaglioFragmentView.findViewById(R.id.btCellulare);
         if (btCellulare != null) {
             btCellulare.setOnClickListener(
                     new View.OnClickListener() {
@@ -181,8 +184,8 @@ public class PdiDettaglioFragment extends Fragment {
             );
         }
 
-        llEmail                   = (LinearLayout) pdiDettaglioFragmentView.findViewById(R.id.llEmail);
-        btEmail                   = (Button)       pdiDettaglioFragmentView.findViewById(R.id.btEmail);
+        llEmail                   = (LinearLayout)   pdiDettaglioFragmentView.findViewById(R.id.llEmail);
+        btEmail                   = (Button)         pdiDettaglioFragmentView.findViewById(R.id.btEmail);
         if (btEmail != null) {
             btEmail.setOnClickListener(
                     new View.OnClickListener() {
@@ -197,9 +200,9 @@ public class PdiDettaglioFragment extends Fragment {
             );
         }
 
-        llLink1                   = (LinearLayout) pdiDettaglioFragmentView.findViewById(R.id.llLink1);
-        tvIntestazioneLink1       = (TextView)     pdiDettaglioFragmentView.findViewById(R.id.tvIntestazioneLink1);
-        btLink1                   = (Button)       pdiDettaglioFragmentView.findViewById(R.id.btLink1);
+        llLink1                   = (LinearLayout)   pdiDettaglioFragmentView.findViewById(R.id.llLink1);
+        tvIntestazioneLink1       = (TextView)       pdiDettaglioFragmentView.findViewById(R.id.tvIntestazioneLink1);
+        btLink1                   = (Button)         pdiDettaglioFragmentView.findViewById(R.id.btLink1);
         if (btLink1 != null) {
             btLink1.setOnClickListener(
                     new View.OnClickListener() {
@@ -213,9 +216,9 @@ public class PdiDettaglioFragment extends Fragment {
             );
         }
 
-        llLink2                   = (LinearLayout) pdiDettaglioFragmentView.findViewById(R.id.llLink2);
-        tvIntestazioneLink2       = (TextView)     pdiDettaglioFragmentView.findViewById(R.id.tvIntestazioneLink2);
-        btLink2                   = (Button)       pdiDettaglioFragmentView.findViewById(R.id.btLink2);
+        llLink2                   = (LinearLayout)   pdiDettaglioFragmentView.findViewById(R.id.llLink2);
+        tvIntestazioneLink2       = (TextView)       pdiDettaglioFragmentView.findViewById(R.id.tvIntestazioneLink2);
+        btLink2                   = (Button)         pdiDettaglioFragmentView.findViewById(R.id.btLink2);
         if (btLink2 != null) {
             btLink2.setOnClickListener(
                     new View.OnClickListener() {
@@ -229,9 +232,9 @@ public class PdiDettaglioFragment extends Fragment {
             );
         }
 
-        llLink3                   = (LinearLayout) pdiDettaglioFragmentView.findViewById(R.id.llLink3);
-        tvIntestazioneLink3       = (TextView)     pdiDettaglioFragmentView.findViewById(R.id.tvIntestazioneLink3);
-        btLink3                   = (Button)       pdiDettaglioFragmentView.findViewById(R.id.btLink3);
+        llLink3                   = (LinearLayout)   pdiDettaglioFragmentView.findViewById(R.id.llLink3);
+        tvIntestazioneLink3       = (TextView)       pdiDettaglioFragmentView.findViewById(R.id.tvIntestazioneLink3);
+        btLink3                   = (Button)         pdiDettaglioFragmentView.findViewById(R.id.btLink3);
         if (btLink3 != null) {
             btLink3.setOnClickListener(
                     new View.OnClickListener() {
@@ -245,9 +248,9 @@ public class PdiDettaglioFragment extends Fragment {
             );
         }
 
-        llLink4                   = (LinearLayout) pdiDettaglioFragmentView.findViewById(R.id.llLink4);
-        tvIntestazioneLink4       = (TextView)     pdiDettaglioFragmentView.findViewById(R.id.tvIntestazioneLink4);
-        btLink4                   = (Button)       pdiDettaglioFragmentView.findViewById(R.id.btLink4);
+        llLink4                   = (LinearLayout)   pdiDettaglioFragmentView.findViewById(R.id.llLink4);
+        tvIntestazioneLink4       = (TextView)       pdiDettaglioFragmentView.findViewById(R.id.tvIntestazioneLink4);
+        btLink4                   = (Button)         pdiDettaglioFragmentView.findViewById(R.id.btLink4);
         if (btLink4 != null) {
             btLink4.setOnClickListener(
                     new View.OnClickListener() {
@@ -261,7 +264,7 @@ public class PdiDettaglioFragment extends Fragment {
             );
         }
 
-        bVediSuGM                 = (Button)       pdiDettaglioFragmentView.findViewById(R.id.bVediSuGM);
+        bVediSuGM                 = (Button)         pdiDettaglioFragmentView.findViewById(R.id.bVediSuGM);
         if (bVediSuGM != null) {
             bVediSuGM.setOnClickListener(
                     new View.OnClickListener() {
@@ -273,7 +276,7 @@ public class PdiDettaglioFragment extends Fragment {
             );
         }
 
-        bVediSuOSM                = (Button)       pdiDettaglioFragmentView.findViewById(R.id.bVediSuOSM);
+        bVediSuOSM                = (Button)         pdiDettaglioFragmentView.findViewById(R.id.bVediSuOSM);
         if (bVediSuOSM != null) {
             bVediSuOSM.setOnClickListener(
                     new View.OnClickListener() {
@@ -297,9 +300,8 @@ public class PdiDettaglioFragment extends Fragment {
         if (immaginiPdi.size() > 0) {
             impostaImmagine();
         } else {
-            ivGalleria.setVisibility(View.GONE);
+            rlGalleria.setVisibility(View.GONE);
         }
-
 
         if (mainActivity.pdiScelto.getVia().length() > 0) {
             String indirizzo = mainActivity.pdiScelto.getCitta() + ", " + mainActivity.pdiScelto.getVia();

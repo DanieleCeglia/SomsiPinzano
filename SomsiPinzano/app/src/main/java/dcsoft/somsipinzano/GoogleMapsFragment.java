@@ -251,7 +251,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
 
     //region Metodi privati
     private boolean zoommaSuPdiSceltoSeNecessario() {
-        if (mainActivity.vediPdiSceltoSuGM) {
+        if (mainActivity.vediPdiSceltoSuGM && gmMap != null) {
             mainActivity.vediPdiSceltoSuGM = false;
 
             LatLng pdiDaZoommare = new LatLng(mainActivity.pdiScelto.getLatitudine(), mainActivity.pdiScelto.getLongitudine());

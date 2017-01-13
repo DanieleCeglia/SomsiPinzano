@@ -36,16 +36,36 @@
                 android:paddingEnd="10dp"
                 android:paddingStart="10dp" />
 
-            <ImageView
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/ivGalleria" />
+                android:id="@+id/rlGalleria">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ivGalleria"
+                    android:scaleType="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_full_screen"
+                    android:id="@+id/ivFullScreen"
+                    android:layout_alignEnd="@id/ivGalleria"
+                    android:layout_alignBottom="@id/ivGalleria" />
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/llIndirizzo">
+                android:id="@+id/llIndirizzo"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp">
 
                 <TextView
                     android:text="@string/indirizzo"
@@ -64,14 +84,18 @@
                     android:textSize="12sp"
                     android:layout_gravity="center"
                     android:layout_height="34dp"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorIcons"
+                    android:backgroundTint="@color/colorPrimary" />
             </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/llTelefono">
+                android:id="@+id/llTelefono"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp">
 
                 <TextView
                     android:text="@string/telefono"
@@ -90,14 +114,18 @@
                     android:textSize="12sp"
                     android:layout_gravity="center"
                     android:layout_height="34dp"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorIcons"
+                    android:backgroundTint="@color/colorPrimary" />
             </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/llFax">
+                android:id="@+id/llFax"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp">
 
                 <TextView
                     android:text="@string/fax"
@@ -116,14 +144,18 @@
                     android:textSize="12sp"
                     android:layout_gravity="center"
                     android:layout_height="34dp"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorIcons"
+                    android:backgroundTint="@color/colorPrimary" />
             </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/llCellulare">
+                android:id="@+id/llCellulare"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp">
 
                 <TextView
                     android:text="@string/cellulare"
@@ -142,14 +174,18 @@
                     android:textSize="12sp"
                     android:layout_gravity="center"
                     android:layout_height="34dp"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorIcons"
+                    android:backgroundTint="@color/colorPrimary" />
             </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/llEmail">
+                android:id="@+id/llEmail"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp">
 
                 <TextView
                     android:text="@string/email"
@@ -168,14 +204,18 @@
                     android:textSize="12sp"
                     android:layout_gravity="center"
                     android:layout_height="34dp"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorIcons"
+                    android:backgroundTint="@color/colorPrimary" />
             </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/llLink1">
+                android:id="@+id/llLink1"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp">
 
                 <TextView
                     android:text="titoloLink1"
@@ -195,14 +235,18 @@
                     android:textSize="12sp"
                     android:layout_gravity="center"
                     android:layout_height="34dp"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorIcons"
+                    android:backgroundTint="@color/colorPrimary" />
             </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/llLink2">
+                android:id="@+id/llLink2"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp">
 
                 <TextView
                     android:text="titoloLink2"
@@ -222,14 +266,18 @@
                     android:textSize="12sp"
                     android:layout_gravity="center"
                     android:layout_height="34dp"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorIcons"
+                    android:backgroundTint="@color/colorPrimary" />
             </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/llLink3">
+                android:id="@+id/llLink3"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp">
 
                 <TextView
                     android:text="titoloLink3 testo molto molto lungo e articolato"
@@ -249,14 +297,18 @@
                     android:textSize="12sp"
                     android:layout_gravity="center"
                     android:layout_height="34dp"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorIcons"
+                    android:backgroundTint="@color/colorPrimary" />
             </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/llLink4">
+                android:id="@+id/llLink4"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp">
 
                 <TextView
                     android:text="titoloLink4"
@@ -276,7 +328,9 @@
                     android:textSize="12sp"
                     android:layout_gravity="center"
                     android:layout_height="34dp"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorIcons"
+                    android:backgroundTint="@color/colorPrimary" />
             </LinearLayout>
 
             <TextView
@@ -294,14 +348,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/bVediSuGM"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:elevation="0dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:textColor="@color/colorIcons"/>
 
             <Button
                 android:text="OpenStreetMap"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/bVediSuOSM"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/colorIcons"
+                android:backgroundTint="@color/colorPrimary" />
         </LinearLayout>>
     </ScrollView>
 </FrameLayout>

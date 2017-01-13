@@ -24,6 +24,7 @@ public class Galleria extends AppCompatActivity {
         scrollGalleryView
                 .setThumbnailSize(100)
                 .setZoom(true)
+                .hideThumbnails(true)
                 .setFragmentManager(getSupportFragmentManager());
 
         ArrayList<ImmaginePdi> immaginiPdi = getIntent().getParcelableArrayListExtra("immaginiPdi");
