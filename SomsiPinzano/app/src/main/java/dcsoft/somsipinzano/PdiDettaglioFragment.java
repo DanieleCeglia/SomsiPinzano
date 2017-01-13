@@ -11,7 +11,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -301,18 +300,23 @@ public class PdiDettaglioFragment extends Fragment {
             ivGalleria.setVisibility(View.GONE);
         }
 
-        String indirizzo = mainActivity.pdiScelto.getCitta() + ", " + mainActivity.pdiScelto.getVia();
 
-        if (mainActivity.pdiScelto.getNumeroCivico() > 0) {
-            indirizzo = indirizzo + ", " + mainActivity.pdiScelto.getNumeroCivico();
+        if (mainActivity.pdiScelto.getVia().length() > 0) {
+            String indirizzo = mainActivity.pdiScelto.getCitta() + ", " + mainActivity.pdiScelto.getVia();
+
+            if (mainActivity.pdiScelto.getNumeroCivico() > 0) {
+                indirizzo = indirizzo + ", " + mainActivity.pdiScelto.getNumeroCivico();
+            }
+
+            if (mainActivity.pdiScelto.getInterno() != null) {
+                indirizzo = indirizzo + "/" + mainActivity.pdiScelto.getInterno();
+            }
+
+            indirizzo = indirizzo + ", " + mainActivity.pdiScelto.getCap();
+            btIndirizzo.setText(indirizzo);
+        } else {
+            llIndirizzo.setVisibility(View.GONE);
         }
-
-        if (mainActivity.pdiScelto.getInterno() != null) {
-            indirizzo = indirizzo + "/" + mainActivity.pdiScelto.getInterno();
-        }
-
-        indirizzo = indirizzo + ", " + mainActivity.pdiScelto.getCap();
-        btIndirizzo.setText(indirizzo);
 
         switch (mainActivity.gestoreDatabaseCondiviso.getLingua()) {
             case "italiano": {
