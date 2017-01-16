@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -11,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -471,9 +473,34 @@ public class PdiDettaglioFragment extends Fragment {
         }
 
         if (ContextCompat.checkSelfPermission(mainActivity, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
-            Intent i = new Intent(Intent.ACTION_CALL);
-            i.setData(Uri.parse("tel:" + numeroDaChiamare));
-            startActivity(i);
+
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mainActivity);
+            alertDialogBuilder.setCancelable(true);
+
+            alertDialogBuilder.setMessage(getResources().getString(R.string.chiamare_il_numero) + " " + numeroDaChiamare + "?");
+
+            alertDialogBuilder.setNegativeButton(
+                    getResources().getString(R.string.no),
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+            alertDialogBuilder.setPositiveButton(
+                    getResources().getString(R.string.chiama),
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+
+                            Intent i = new Intent(Intent.ACTION_CALL);
+                            i.setData(Uri.parse("tel:" + numeroDaChiamare));
+                            startActivity(i);
+                        }
+                    });
+
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
         } else {
             ActivityCompat.requestPermissions(mainActivity, new String[]{Manifest.permission.CALL_PHONE}, mainActivity.MY_PERMISSIONS_REQUEST_CALL_PHONE);
         }

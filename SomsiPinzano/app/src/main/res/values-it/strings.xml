@@ -26,4 +26,7 @@
     <string name="invia_email_a">"Invia email a "</string>
     <string name="usando">" usando:"</string>
     <string name="messaggio_permesso_di_chiamata_non_accettato">PERMESSO DI CHIAMATA NON ACCETTATO\n\nÈ necessario per chiamare il numero telefonico appena richiesto.</string>
+    <string name="chiamare_il_numero">Chiamare il numero </string>
+    <string name="chiama">Chiama</string>
+    <string name="no">No</string>
 </resources>

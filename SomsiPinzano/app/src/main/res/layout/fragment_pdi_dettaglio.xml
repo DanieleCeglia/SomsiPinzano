@@ -83,10 +83,10 @@
                     android:id="@+id/btIndirizzo"
                     android:textSize="12sp"
                     android:layout_gravity="center"
-                    android:layout_height="34dp"
                     android:textAllCaps="false"
                     android:textColor="@color/colorIcons"
-                    android:backgroundTint="@color/colorPrimary" />
+                    android:backgroundTint="@color/colorPrimary"
+                    android:layout_height="38dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -113,10 +113,10 @@
                     android:id="@+id/btTelefono"
                     android:textSize="12sp"
                     android:layout_gravity="center"
-                    android:layout_height="34dp"
                     android:textAllCaps="false"
                     android:textColor="@color/colorIcons"
-                    android:backgroundTint="@color/colorPrimary" />
+                    android:backgroundTint="@color/colorPrimary"
+                    android:layout_height="38dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -143,10 +143,10 @@
                     android:id="@+id/btFax"
                     android:textSize="12sp"
                     android:layout_gravity="center"
-                    android:layout_height="34dp"
                     android:textAllCaps="false"
                     android:textColor="@color/colorIcons"
-                    android:backgroundTint="@color/colorPrimary" />
+                    android:backgroundTint="@color/colorPrimary"
+                    android:layout_height="38dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -173,10 +173,10 @@
                     android:id="@+id/btCellulare"
                     android:textSize="12sp"
                     android:layout_gravity="center"
-                    android:layout_height="34dp"
                     android:textAllCaps="false"
                     android:textColor="@color/colorIcons"
-                    android:backgroundTint="@color/colorPrimary" />
+                    android:backgroundTint="@color/colorPrimary"
+                    android:layout_height="38dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -203,10 +203,10 @@
                     android:id="@+id/btEmail"
                     android:textSize="12sp"
                     android:layout_gravity="center"
-                    android:layout_height="34dp"
                     android:textAllCaps="false"
                     android:textColor="@color/colorIcons"
-                    android:backgroundTint="@color/colorPrimary" />
+                    android:backgroundTint="@color/colorPrimary"
+                    android:layout_height="38dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -234,10 +234,10 @@
                     android:id="@+id/btLink1"
                     android:textSize="12sp"
                     android:layout_gravity="center"
-                    android:layout_height="34dp"
                     android:textAllCaps="false"
                     android:textColor="@color/colorIcons"
-                    android:backgroundTint="@color/colorPrimary" />
+                    android:backgroundTint="@color/colorPrimary"
+                    android:layout_height="38dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -265,10 +265,10 @@
                     android:id="@+id/btLink2"
                     android:textSize="12sp"
                     android:layout_gravity="center"
-                    android:layout_height="34dp"
                     android:textAllCaps="false"
                     android:textColor="@color/colorIcons"
-                    android:backgroundTint="@color/colorPrimary" />
+                    android:backgroundTint="@color/colorPrimary"
+                    android:layout_height="38dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -296,10 +296,10 @@
                     android:id="@+id/btLink3"
                     android:textSize="12sp"
                     android:layout_gravity="center"
-                    android:layout_height="34dp"
                     android:textAllCaps="false"
                     android:textColor="@color/colorIcons"
-                    android:backgroundTint="@color/colorPrimary" />
+                    android:backgroundTint="@color/colorPrimary"
+                    android:layout_height="38dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -327,10 +327,10 @@
                     android:id="@+id/btLink4"
                     android:textSize="12sp"
                     android:layout_gravity="center"
-                    android:layout_height="34dp"
                     android:textAllCaps="false"
                     android:textColor="@color/colorIcons"
-                    android:backgroundTint="@color/colorPrimary" />
+                    android:backgroundTint="@color/colorPrimary"
+                    android:layout_height="38dp" />
             </LinearLayout>
 
             <TextView
