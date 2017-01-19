@@ -332,7 +332,8 @@ class GestoreDatabase extends SQLiteOpenHelper {
                         cursor.getString(27),  // linkGenerico3
                         cursor.getString(28),  // titoloLinkGenerico4Italiano
                         cursor.getString(29),  // titoloLinkGenerico4Inglese
-                        cursor.getString(30)); // linkGenerico4
+                        cursor.getString(30),  // linkGenerico4
+                        cursor.getString(31)); // fileTracciaGps
 
                 list.add(pdi);
 
@@ -390,7 +391,8 @@ class GestoreDatabase extends SQLiteOpenHelper {
                         cursor.getString(27),  // linkGenerico3
                         cursor.getString(28),  // titoloLinkGenerico4Italiano
                         cursor.getString(29),  // titoloLinkGenerico4Inglese
-                        cursor.getString(30)); // linkGenerico4
+                        cursor.getString(30),  // linkGenerico4
+                        cursor.getString(31)); // fileTracciaGps
 
                 list.add(pdi);
 
@@ -448,7 +450,8 @@ class GestoreDatabase extends SQLiteOpenHelper {
                         cursor.getString(27),  // linkGenerico3
                         cursor.getString(28),  // titoloLinkGenerico4Italiano
                         cursor.getString(29),  // titoloLinkGenerico4Inglese
-                        cursor.getString(30)); // linkGenerico4
+                        cursor.getString(30),  // linkGenerico4
+                        cursor.getString(31)); // fileTracciaGps
 
                 list.add(pdi);
 
@@ -479,7 +482,8 @@ class GestoreDatabase extends SQLiteOpenHelper {
                         cursor.getInt(0),     // idImmaginePdi
                         cursor.getInt(1),     // idImmaginePdi_idPdi
                         cursor.getInt(2),     // ordinamento
-                        cursor.getString(3)); // fileImmagine
+                        cursor.getString(3),  // fileImmagine
+                        cursor.getString(4)); // url
 
                 list.add(immaginePdi);
 

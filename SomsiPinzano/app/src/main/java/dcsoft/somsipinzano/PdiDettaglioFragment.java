@@ -38,8 +38,9 @@ public class PdiDettaglioFragment extends Fragment {
     private TextView tvIntestazioneDescrizione;
     private TextView tvDescrizione;
 
-    private RelativeLayout rlGalleria;
+    private LinearLayout llGalleria;
     private ImageView ivGalleria;
+    private TextView tvDescrizioneImmagine;
 
     private LinearLayout llIndirizzo;
     private Button btIndirizzo;
@@ -116,8 +117,9 @@ public class PdiDettaglioFragment extends Fragment {
         tvIntestazioneDescrizione = (TextView)       pdiDettaglioFragmentView.findViewById(R.id.tvIntestazioneDescrizione);
         tvDescrizione             = (TextView)       pdiDettaglioFragmentView.findViewById(R.id.tvDescrizione);
 
-        rlGalleria                = (RelativeLayout) pdiDettaglioFragmentView.findViewById(R.id.rlGalleria);
+        llGalleria                = (LinearLayout)   pdiDettaglioFragmentView.findViewById(R.id.llGalleria);
         ivGalleria                = (ImageView)      pdiDettaglioFragmentView.findViewById(R.id.ivGalleria);
+        tvDescrizioneImmagine     = (TextView)       pdiDettaglioFragmentView.findViewById(R.id.tvDescrizioneImmagine);
         if (ivGalleria != null) {
             ivGalleria.setOnClickListener(
                     new View.OnClickListener() {
@@ -302,7 +304,7 @@ public class PdiDettaglioFragment extends Fragment {
         if (immaginiPdi.size() > 0) {
             impostaImmagine();
         } else {
-            rlGalleria.setVisibility(View.GONE);
+            llGalleria.setVisibility(View.GONE);
         }
 
         if (mainActivity.pdiScelto.getVia().length() > 0) {
@@ -526,5 +528,7 @@ public class PdiDettaglioFragment extends Fragment {
         String packageName = mainActivity.getPackageName();
 
         ivGalleria.setImageResource(mainActivity.getResources().getIdentifier(nomeFileSenzaEstensione, "drawable", packageName));
+
+        tvDescrizioneImmagine.setText("Immagine " + (indiceImmagine + 1) + " di " + immaginiPdi.size());
     }
 }

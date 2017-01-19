@@ -36,28 +36,47 @@
                 android:paddingEnd="10dp"
                 android:paddingStart="10dp" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/rlGalleria">
+                android:id="@+id/llGalleria"
+                android:orientation="vertical">
 
-                <ImageView
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/ivGalleria"
+                        android:scaleType="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@mipmap/ic_full_screen"
+                        android:id="@+id/ivFullScreen"
+                        android:layout_alignEnd="@id/ivGalleria"
+                        android:layout_alignBottom="@id/ivGalleria" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:text="Immagine 1 di N"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/ivGalleria"
-                    android:scaleType="center"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp" />
+                    android:id="@+id/tvDescrizioneImmagine"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="normal|bold"
+                    android:textSize="12sp"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@mipmap/ic_full_screen"
-                    android:id="@+id/ivFullScreen"
-                    android:layout_alignEnd="@id/ivGalleria"
-                    android:layout_alignBottom="@id/ivGalleria" />
-
-            </RelativeLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
