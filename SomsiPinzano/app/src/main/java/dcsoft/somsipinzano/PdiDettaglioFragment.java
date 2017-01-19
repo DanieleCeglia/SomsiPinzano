@@ -24,6 +24,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 public class PdiDettaglioFragment extends Fragment {
@@ -524,10 +526,7 @@ public class PdiDettaglioFragment extends Fragment {
     private void impostaImmagine() {
         ImmaginePdi immaginePdi = immaginiPdi.get(indiceImmagine);
 
-        String nomeFileSenzaEstensione = immaginePdi.getFileImmagine().substring(0, immaginePdi.getFileImmagine().lastIndexOf('.'));
-        String packageName = mainActivity.getPackageName();
-
-        ivGalleria.setImageResource(mainActivity.getResources().getIdentifier(nomeFileSenzaEstensione, "drawable", packageName));
+        Glide.with(this).load(immaginePdi.getUrl()).into(ivGalleria);
 
         tvDescrizioneImmagine.setText("Immagine " + (indiceImmagine + 1) + " di " + immaginiPdi.size());
     }
