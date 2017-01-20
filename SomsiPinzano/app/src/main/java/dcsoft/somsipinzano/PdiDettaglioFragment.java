@@ -19,7 +19,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -79,8 +78,8 @@ public class PdiDettaglioFragment extends Fragment {
     private Button bVediSuOSM;
 
     private ArrayList<ImmaginePdi> immaginiPdi;
-    private int indiceImmagine = 0;
-    private boolean galleriaAperta = false;
+    private int indiceImmagine;
+    private boolean galleriaAperta;
 
     public PdiDettaglioFragment() {
         // Required empty public constructor
@@ -111,6 +110,18 @@ public class PdiDettaglioFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //Log.d("DEBUGAPP", TAG + " onCreateView");
+
+        if (savedInstanceState == null) {
+            immaginiPdi = mainActivity.gestoreDatabaseCondiviso.dammiImmaginiPdiPerPdi(mainActivity.pdiScelto.getIdPdi());
+            indiceImmagine = 0;
+            galleriaAperta = false;
+        } else {
+            //Log.d("DEBUGAPP", TAG + " onCreateView savedInstanceState != null");
+
+            immaginiPdi = savedInstanceState.getParcelableArrayList("immaginiPdi"); // @SuppressWarnings("unchecked")
+            indiceImmagine = savedInstanceState.getInt("indiceImmagine");
+            galleriaAperta = savedInstanceState.getBoolean("galleriaAperta");
+        }
 
         pdiDettaglioFragmentView = inflater.inflate(R.layout.fragment_pdi_dettaglio, container, false);
 
@@ -294,15 +305,6 @@ public class PdiDettaglioFragment extends Fragment {
             );
         }
 
-        if (savedInstanceState == null) {
-            immaginiPdi = mainActivity.gestoreDatabaseCondiviso.dammiImmaginiPdiPerPdi(mainActivity.pdiScelto.getIdPdi());
-        } else {
-            //Log.d("DEBUGAPP", TAG + " onCreateView savedInstanceState != null");
-
-            immaginiPdi = savedInstanceState.getParcelableArrayList("immaginiPdi"); // @SuppressWarnings("unchecked")
-            svContenitore.setY(savedInstanceState.getFloat("svContenitoreY"));
-        }
-
         if (immaginiPdi.size() > 0) {
             impostaImmagine();
         } else {
@@ -431,7 +433,8 @@ public class PdiDettaglioFragment extends Fragment {
         //Log.d("DEBUGAPP", TAG + " onSaveInstanceState");
 
         outState.putParcelableArrayList("immaginiPdi", immaginiPdi);
-        outState.putFloat("svContenitoreY", svContenitore.getY());
+        outState.putInt("indiceImmagine", indiceImmagine);
+        outState.putBoolean("galleriaAperta", galleriaAperta);
     }
 
     @Override
