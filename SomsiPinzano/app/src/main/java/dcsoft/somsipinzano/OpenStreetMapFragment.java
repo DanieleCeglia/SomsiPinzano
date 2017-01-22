@@ -33,13 +33,10 @@ interface OpenStreetMapFragmentEseguiAlOnHiddenChanged {
 public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver {
     private final String TAG = getClass().getSimpleName();
     private MainActivity mainActivity;
-    private View openStreetMapFragmentView;
     private MapView osmMap;
-    private CompassOverlay compassOverlay;
-    private MyLocationNewOverlay locationOverlay;
     private IMapController mapController;
     private ArrayList<Pdi> listaPdi;
-    private int tipoMappa = -1;
+    private int tipoMappa;
     private ArrayList<Marker> listaMarker;
 
     public OpenStreetMapFragmentEseguiAlOnHiddenChanged eseguiAlOnHiddenChanged;
@@ -75,7 +72,7 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //Log.d("DEBUGAPP", TAG + " onCreateView");
 
-        openStreetMapFragmentView = inflater.inflate(R.layout.fragment_open_street_map, container, false);
+        View openStreetMapFragmentView = inflater.inflate(R.layout.fragment_open_street_map, container, false);
 
         osmMap = (MapView) openStreetMapFragmentView.findViewById(R.id.osmMap);
         osmMap.setTileSource(TileSourceFactory.MAPNIK);
@@ -86,7 +83,7 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
         MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(mainActivity, this);
         osmMap.getOverlays().add(0, mapEventsOverlay);
 
-        compassOverlay = new CompassOverlay(mainActivity, new InternalCompassOrientationProvider(mainActivity), osmMap);
+        CompassOverlay compassOverlay = new CompassOverlay(mainActivity, new InternalCompassOrientationProvider(mainActivity), osmMap);
         compassOverlay.enableCompass();
         osmMap.getOverlays().add(compassOverlay);
 
@@ -94,7 +91,7 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
         //gpsLocationProvider.setLocationUpdateMinTime(1000);
         //gpsLocationProvider.setLocationUpdateMinDistance(1);
 
-        locationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(mainActivity), osmMap);
+        MyLocationNewOverlay locationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(mainActivity), osmMap);
         locationOverlay.enableMyLocation();
         osmMap.getOverlays().add(locationOverlay);
 
@@ -108,6 +105,8 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
                 GeoPoint startPoint = new GeoPoint(46.1822, 12.9452);
                 mapController.setCenter(startPoint);
             }
+
+            tipoMappa = -1;
         } else {
             Log.d("DEBUGAPP", TAG + " onCreateView savedInstanceState != null");
 
@@ -118,14 +117,14 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
             }
 
             tipoMappa = savedInstanceState.getInt("tipoMappa");
+        }
 
-            if (tipoMappa == 1) {
-                osmMap.setTileSource(TileSourceFactory.MAPNIK);
-            } else if (tipoMappa == 2) {
-                osmMap.setTileSource(TileSourceFactory.CYCLEMAP);
-            } else if (tipoMappa == 3) {
-                osmMap.setTileSource(TileSourceFactory.PUBLIC_TRANSPORT);
-            }
+        if (tipoMappa == 1) {
+            osmMap.setTileSource(TileSourceFactory.MAPNIK);
+        } else if (tipoMappa == 2) {
+            osmMap.setTileSource(TileSourceFactory.CYCLEMAP);
+        } else if (tipoMappa == 3) {
+            osmMap.setTileSource(TileSourceFactory.PUBLIC_TRANSPORT);
         }
 
         listaPdi = mainActivity.gestoreDatabaseCondiviso.dammiPdi();
