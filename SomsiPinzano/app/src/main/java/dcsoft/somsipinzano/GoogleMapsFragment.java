@@ -38,8 +38,6 @@ interface GoogleMapsFragmentEseguiAlOnHiddenChanged {
 public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
     private final String TAG = getClass().getSimpleName();
     private MainActivity mainActivity;
-    private View googleMapsFragmentView;
-    private MapView mMapView;
     private GoogleMap gmMap;
     private float zoom = -1;
     private double lat = -1;
@@ -81,9 +79,9 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //Log.d("DEBUGAPP", TAG + " onCreateView");
 
-        googleMapsFragmentView = inflater.inflate(R.layout.fragment_google_maps, container, false);
+        View googleMapsFragmentView = inflater.inflate(R.layout.fragment_google_maps, container, false);
 
-        mMapView = (MapView) googleMapsFragmentView.findViewById(R.id.gmMapView);
+        MapView mMapView = (MapView) googleMapsFragmentView.findViewById(R.id.gmMapView);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume(); // serve per far vedere la mappa immediatamente
         mMapView.getMapAsync(this);
