@@ -7,16 +7,14 @@ public class ImmaginePdi implements Parcelable {
     private int idImmaginePdi;
     private int idImmaginePdi_idPdi;
     private int ordinamento;
-    private String fileImmagine;
     private String url;
 
-    public ImmaginePdi(int idImmaginePdi, int idImmaginePdi_idPdi, int ordinamento, String fileImmagine, String url) {
+    public ImmaginePdi(int idImmaginePdi, int idImmaginePdi_idPdi, int ordinamento, String url) {
         super();
 
         this.idImmaginePdi       = idImmaginePdi;
         this.idImmaginePdi_idPdi = idImmaginePdi_idPdi;
         this.ordinamento         = ordinamento;
-        this.fileImmagine        = fileImmagine;
         this.url                 = url;
     }
 
@@ -26,7 +24,6 @@ public class ImmaginePdi implements Parcelable {
         this.idImmaginePdi       = parcel.readInt();
         this.idImmaginePdi_idPdi = parcel.readInt();
         this.ordinamento         = parcel.readInt();
-        this.fileImmagine        = parcel.readString();
         this.url                 = parcel.readString();
     }
 
@@ -40,10 +37,6 @@ public class ImmaginePdi implements Parcelable {
 
     public int getOrdinamento() {
         return ordinamento;
-    }
-
-    public String getFileImmagine() {
-        return fileImmagine;
     }
 
     public String getUrl() {
@@ -62,10 +55,6 @@ public class ImmaginePdi implements Parcelable {
         this.ordinamento = ordinamento;
     }
 
-    public void setFileImmagine(String fileImmagine) {
-        this.fileImmagine = fileImmagine;
-    }
-
     public void setUrl(String url) {
         this.url = url;
     }
@@ -80,7 +69,6 @@ public class ImmaginePdi implements Parcelable {
         dest.writeInt(idImmaginePdi);
         dest.writeInt(idImmaginePdi_idPdi);
         dest.writeInt(ordinamento);
-        dest.writeString(fileImmagine);
         dest.writeString(url);
     }
 
@@ -103,7 +91,6 @@ public class ImmaginePdi implements Parcelable {
                 "\nidImmaginePdi: " + idImmaginePdi +
                 "\nidImmaginePdi_idPdi: " + idImmaginePdi_idPdi +
                 "\nordinamento: " + ordinamento +
-                "\nfileImmagine: " + fileImmagine +
                 "\nurl: " + url +
                 "\n\n";
     }

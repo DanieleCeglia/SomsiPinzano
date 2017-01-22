@@ -311,10 +311,10 @@ public class PdiDettaglioFragment extends Fragment {
             llGalleria.setVisibility(View.GONE);
         }
 
-        if (mainActivity.pdiScelto.getVia().length() > 0) {
+        if (mainActivity.pdiScelto.getVia() != null) {
             String indirizzo = mainActivity.pdiScelto.getCitta() + ", " + mainActivity.pdiScelto.getVia();
 
-            if (mainActivity.pdiScelto.getNumeroCivico() > 0) {
+            if (mainActivity.pdiScelto.getNumeroCivico() != 0) {
                 indirizzo = indirizzo + ", " + mainActivity.pdiScelto.getNumeroCivico();
             }
 
