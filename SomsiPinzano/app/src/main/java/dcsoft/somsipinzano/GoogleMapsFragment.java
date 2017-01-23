@@ -271,7 +271,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
                         }
                     }
                 }
-            }, 500);
+            }, 100);
 
             return true;
         }

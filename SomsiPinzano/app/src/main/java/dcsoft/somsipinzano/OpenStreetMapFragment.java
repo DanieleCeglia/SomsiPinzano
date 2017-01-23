@@ -12,10 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.osmdroid.api.IMapController;
+import org.osmdroid.bonuspack.kml.KmlDocument;
 import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.util.BoundingBox;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.FolderOverlay;
 import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.compass.CompassOverlay;
@@ -24,6 +27,11 @@ import org.osmdroid.views.overlay.infowindow.InfoWindow;
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 interface OpenStreetMapFragmentEseguiAlOnHiddenChanged {
@@ -38,6 +46,7 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
     private ArrayList<Pdi> listaPdi;
     private int tipoMappa;
     private ArrayList<Marker> listaMarker;
+    private FolderOverlay overlayTracciato;
 
     public OpenStreetMapFragmentEseguiAlOnHiddenChanged eseguiAlOnHiddenChanged;
 
@@ -219,15 +228,39 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
     //endregion
 
     //region Metodi privati
+    private File creaFileDaInputStream(InputStream inputStream, String nomeFile) {
+        String percorsoFile = mainActivity.getApplicationInfo().dataDir + "/" + nomeFile;
+
+        try {
+            File file = new File(percorsoFile);
+            OutputStream outputStream = new FileOutputStream(file);
+            byte[] buffer = new byte[1024];
+            int lunghezza;
+
+            while ((lunghezza = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, lunghezza);
+            }
+
+            outputStream.close();
+            inputStream.close();
+
+            return file;
+        } catch (IOException e) {
+            Log.d("DEBUGAPP", TAG + " Fallita la copia del file " + percorsoFile + " con errore: " + e);
+        }
+
+        return null;
+    }
+
     private boolean zoommaSuPdiSceltoSeNecessario() {
         if (mainActivity.vediPdiSceltoSuOSM) {
             mainActivity.vediPdiSceltoSuOSM = false;
 
+            InfoWindow.closeAllInfoWindowsOn(osmMap);
+
             mapController.setZoom(18);
             GeoPoint startPoint = new GeoPoint(mainActivity.pdiScelto.getLatitudine(), mainActivity.pdiScelto.getLongitudine());
             mapController.setCenter(startPoint);
-
-            InfoWindow.closeAllInfoWindowsOn(osmMap);
 
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
@@ -239,11 +272,39 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
                         if (marker.getPosition().getLatitude() == mainActivity.pdiScelto.getLatitudine() && marker.getPosition().getLongitude() == mainActivity.pdiScelto.getLongitudine()) {
                             marker.showInfoWindow();
 
+                            OsmdroidMarkerInfoWindow markerInfoWindow = (OsmdroidMarkerInfoWindow) marker.getInfoWindow();
+
+                            if (markerInfoWindow.pdi.getFileTracciaGps() == null) {
+                                if (overlayTracciato != null) {
+                                    osmMap.getOverlays().remove(overlayTracciato);
+                                    osmMap.invalidate();
+                                }
+                            } else  {
+                                try {
+                                    InputStream inputStream = mainActivity.getAssets().open(markerInfoWindow.pdi.getFileTracciaGps());
+                                    File file = creaFileDaInputStream(inputStream, markerInfoWindow.pdi.getFileTracciaGps());
+
+                                    KmlDocument kmlDocument = new KmlDocument();
+                                    kmlDocument.parseKMZFile(file);
+
+                                    overlayTracciato = (FolderOverlay) kmlDocument.mKmlRoot.buildOverlay(osmMap, null, null, kmlDocument);
+
+                                    osmMap.getOverlays().add(overlayTracciato);
+                                    osmMap.invalidate();
+
+                                    BoundingBox boundingBox = kmlDocument.mKmlRoot.getBoundingBox();
+                                    osmMap.zoomToBoundingBox(boundingBox, true);
+                                    osmMap.getController().setCenter(boundingBox.getCenter());
+                                } catch(IOException e) {
+                                    Log.d("DEBUGAPP", TAG + " Fallita lettura del file " + markerInfoWindow.pdi.getFileTracciaGps() + " con errore: " + e);
+                                }
+                            }
+
                             break;
                         }
                     }
                 }
-            }, 500);
+            }, 100);
 
             return true;
         }
