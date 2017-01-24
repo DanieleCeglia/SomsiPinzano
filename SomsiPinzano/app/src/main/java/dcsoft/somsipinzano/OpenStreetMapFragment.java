@@ -47,6 +47,7 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
     private int tipoMappa;
     private ArrayList<Marker> listaMarker;
     private FolderOverlay overlayTracciato;
+    private Pdi pdiTracciatoAttivo;
 
     public OpenStreetMapFragmentEseguiAlOnHiddenChanged eseguiAlOnHiddenChanged;
 
@@ -116,6 +117,8 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
             }
 
             tipoMappa = -1;
+
+            pdiTracciatoAttivo = null;
         } else {
             Log.d("DEBUGAPP", TAG + " onCreateView savedInstanceState != null");
 
@@ -126,6 +129,8 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
             }
 
             tipoMappa = savedInstanceState.getInt("tipoMappa");
+
+            pdiTracciatoAttivo = savedInstanceState.getParcelable("pdiTracciatoAttivo");
         }
 
         if (tipoMappa == 1) {
@@ -177,6 +182,16 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
             listaMarker.add(marker);
         }
 
+        if (pdiTracciatoAttivo != null) {
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    impostaTracciatoSuMappa(pdiTracciatoAttivo);
+                }
+            }, 100);
+        }
+
         return openStreetMapFragmentView;
     }
 
@@ -202,6 +217,7 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
         outState.putDouble("lat", osmMap.getMapCenter().getLatitude());
         outState.putDouble("lon", osmMap.getMapCenter().getLongitude());
         outState.putInt("tipoMappa", tipoMappa);
+        outState.putParcelable("pdiTracciatoAttivo", pdiTracciatoAttivo);
     }
 
     @Override
@@ -252,6 +268,32 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
         return null;
     }
 
+    private void impostaTracciatoSuMappa(Pdi pdi) {
+        try {
+            InputStream inputStream = mainActivity.getAssets().open(pdi.getFileTracciaGps());
+            File file = creaFileDaInputStream(inputStream, pdi.getFileTracciaGps());
+
+            KmlDocument kmlDocument = new KmlDocument();
+            kmlDocument.parseKMZFile(file);
+
+            overlayTracciato = (FolderOverlay) kmlDocument.mKmlRoot.buildOverlay(osmMap, null, null, kmlDocument);
+
+            osmMap.getOverlays().add(overlayTracciato);
+            osmMap.invalidate();
+
+            BoundingBox boundingBox = kmlDocument.mKmlRoot.getBoundingBox();
+            osmMap.zoomToBoundingBox(boundingBox, true);
+            osmMap.getController().setCenter(boundingBox.getCenter());
+
+            pdiTracciatoAttivo = pdi;
+        } catch(IOException e) {
+            Log.d("DEBUGAPP", TAG + " Fallita lettura del file " + pdi.getFileTracciaGps() + " con errore: " + e);
+            
+            overlayTracciato = null;
+            pdiTracciatoAttivo = null;
+        }
+    }
+
     private boolean zoommaSuPdiSceltoSeNecessario() {
         if (mainActivity.vediPdiSceltoSuOSM) {
             mainActivity.vediPdiSceltoSuOSM = false;
@@ -276,28 +318,15 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
 
                             if (markerInfoWindow.pdi.getFileTracciaGps() == null) {
                                 if (overlayTracciato != null) {
+                                    pdiTracciatoAttivo = null;
+
                                     osmMap.getOverlays().remove(overlayTracciato);
                                     osmMap.invalidate();
+
+                                    overlayTracciato = null;
                                 }
                             } else  {
-                                try {
-                                    InputStream inputStream = mainActivity.getAssets().open(markerInfoWindow.pdi.getFileTracciaGps());
-                                    File file = creaFileDaInputStream(inputStream, markerInfoWindow.pdi.getFileTracciaGps());
-
-                                    KmlDocument kmlDocument = new KmlDocument();
-                                    kmlDocument.parseKMZFile(file);
-
-                                    overlayTracciato = (FolderOverlay) kmlDocument.mKmlRoot.buildOverlay(osmMap, null, null, kmlDocument);
-
-                                    osmMap.getOverlays().add(overlayTracciato);
-                                    osmMap.invalidate();
-
-                                    BoundingBox boundingBox = kmlDocument.mKmlRoot.getBoundingBox();
-                                    osmMap.zoomToBoundingBox(boundingBox, true);
-                                    osmMap.getController().setCenter(boundingBox.getCenter());
-                                } catch(IOException e) {
-                                    Log.d("DEBUGAPP", TAG + " Fallita lettura del file " + markerInfoWindow.pdi.getFileTracciaGps() + " con errore: " + e);
-                                }
+                                impostaTracciatoSuMappa(markerInfoWindow.pdi);
                             }
 
                             break;
