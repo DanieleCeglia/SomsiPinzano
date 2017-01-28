@@ -283,6 +283,8 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
             kmlLayer = new KmlLayer(gmMap, inputStream, mainActivity.getApplicationContext());
             kmlLayer.addLayerToMap();
 
+            gmMap.animateCamera(CameraUpdateFactory.zoomTo(13));
+
             pdiTracciatoAttivo = pdi;
         } catch(IOException e) {
             Log.d("DEBUGAPP", TAG + " Fallita lettura del file " + nomeFileKml + " con errore: " + e);
