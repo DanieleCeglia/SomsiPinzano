@@ -28,7 +28,16 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.kml.KmlLayer;
 
+import org.osmdroid.bonuspack.kml.KmlDocument;
+import org.osmdroid.util.BoundingBox;
+import org.osmdroid.views.overlay.FolderOverlay;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 interface GoogleMapsFragmentEseguiAlOnHiddenChanged {
@@ -39,12 +48,14 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
     private final String TAG = getClass().getSimpleName();
     private MainActivity mainActivity;
     private GoogleMap gmMap;
-    private float zoom = -1;
-    private double lat = -1;
-    private double lon = -1;
-    private int mapType = -1;
+    private float zoom;
+    private double lat;
+    private double lon;
+    private int mapType;
     private ArrayList<Pdi> listaPdi;
     private ArrayList<Marker> listaMarker;
+    private KmlLayer kmlLayer;
+    private Pdi pdiTracciatoAttivo;
 
     public GoogleMapsFragmentEseguiAlOnHiddenChanged eseguiAlOnHiddenChanged;
 
@@ -86,13 +97,22 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
         mMapView.onResume(); // serve per far vedere la mappa immediatamente
         mMapView.getMapAsync(this);
 
-        if (savedInstanceState != null) {
+        if (savedInstanceState == null) {
+            zoom = -1;
+            lat = -1;
+            lon = -1;
+            mapType = -1;
+
+            pdiTracciatoAttivo = null;
+        } else {
             Log.d("DEBUGAPP", TAG + " onCreateView savedInstanceState != null");
 
             zoom    = savedInstanceState.getFloat("zoom");
             lat     = savedInstanceState.getDouble("lat");
             lon     = savedInstanceState.getDouble("lon");
             mapType = savedInstanceState.getInt("mapType");
+
+            pdiTracciatoAttivo = savedInstanceState.getParcelable("pdiTracciatoAttivo");
         }
 
         return googleMapsFragmentView;
@@ -114,6 +134,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
             }
 
             outState.putInt("mapType", gmMap.getMapType());
+            outState.putParcelable("pdiTracciatoAttivo", pdiTracciatoAttivo);
         }
     }
 
@@ -235,6 +256,10 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
         if (mapType != -1) {
             gmMap.setMapType(mapType);
         }
+
+        if (pdiTracciatoAttivo != null) {
+            impostaTracciatoSuMappa(pdiTracciatoAttivo);
+        }
     }
 
     @Override
@@ -248,6 +273,31 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
     //endregion
 
     //region Metodi privati
+
+    private void impostaTracciatoSuMappa(Pdi pdi) {
+        String nomeFileKml = pdi.getFileTracciaGps() + ".kml";
+
+        try {
+            InputStream inputStream = mainActivity.getAssets().open(nomeFileKml);
+
+            kmlLayer = new KmlLayer(gmMap, inputStream, mainActivity.getApplicationContext());
+            kmlLayer.addLayerToMap();
+
+            pdiTracciatoAttivo = pdi;
+        } catch(IOException e) {
+            Log.d("DEBUGAPP", TAG + " Fallita lettura del file " + nomeFileKml + " con errore: " + e);
+
+            kmlLayer = null;
+            pdiTracciatoAttivo = null;
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+            Log.d("DEBUGAPP", TAG + " Fallito parsing XML del file " + nomeFileKml + " con errore: " + e);
+
+            kmlLayer = null;
+            pdiTracciatoAttivo = null;
+        }
+    }
+
     private boolean zoommaSuPdiSceltoSeNecessario() {
         if (mainActivity.vediPdiSceltoSuGM && gmMap != null) {
             mainActivity.vediPdiSceltoSuGM = false;
@@ -266,6 +316,20 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
 
                         if (marker.getPosition().latitude == mainActivity.pdiScelto.getLatitudine() && marker.getPosition().longitude == mainActivity.pdiScelto.getLongitudine()) {
                             marker.showInfoWindow();
+
+                            Pdi pdi = (Pdi) marker.getTag();
+
+                            if (pdi.getFileTracciaGps() == null) {
+                                if (kmlLayer != null) {
+                                    pdiTracciatoAttivo = null;
+
+                                    kmlLayer.removeLayerFromMap();
+
+                                    kmlLayer = null;
+                                }
+                            } else {
+                                impostaTracciatoSuMappa(pdi);
+                            }
                         } else {
                             marker.hideInfoWindow();
                         }

@@ -269,8 +269,10 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
     }
 
     private void impostaTracciatoSuMappa(Pdi pdi) {
+        String nomeFileKmz = pdi.getFileTracciaGps() + ".kmz";
+
         try {
-            InputStream inputStream = mainActivity.getAssets().open(pdi.getFileTracciaGps());
+            InputStream inputStream = mainActivity.getAssets().open(nomeFileKmz);
             File file = creaFileDaInputStream(inputStream, pdi.getFileTracciaGps());
 
             KmlDocument kmlDocument = new KmlDocument();
@@ -287,7 +289,7 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
 
             pdiTracciatoAttivo = pdi;
         } catch(IOException e) {
-            Log.d("DEBUGAPP", TAG + " Fallita lettura del file " + pdi.getFileTracciaGps() + " con errore: " + e);
+            Log.d("DEBUGAPP", TAG + " Fallita lettura del file " + nomeFileKmz + " con errore: " + e);
 
             overlayTracciato = null;
             pdiTracciatoAttivo = null;
