@@ -288,7 +288,7 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
             pdiTracciatoAttivo = pdi;
         } catch(IOException e) {
             Log.d("DEBUGAPP", TAG + " Fallita lettura del file " + pdi.getFileTracciaGps() + " con errore: " + e);
-            
+
             overlayTracciato = null;
             pdiTracciatoAttivo = null;
         }
