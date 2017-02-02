@@ -145,11 +145,11 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
         listaMarker = new ArrayList<Marker>();
 
         for (int i = 0; i < listaPdi.size(); i++) {
-            Pdi pdi = listaPdi.get(i);
+            final Pdi pdi = listaPdi.get(i);
 
             GeoPoint posizione = new GeoPoint(pdi.getLatitudine(), pdi.getLongitudine());
 
-            Marker marker = new Marker(osmMap);
+            final Marker marker = new Marker(osmMap);
             marker.setPosition(posizione);
             marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
 
@@ -167,6 +167,8 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
                     InfoWindow.closeAllInfoWindowsOn(osmMap);
                     item.showInfoWindow();
                     mapController.animateTo(item.getPosition());
+
+                    gestisciTracciato(pdi, false);
 
                     return true;
                 }
@@ -187,7 +189,7 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    impostaTracciatoSuMappa(pdiTracciatoAttivo);
+                    impostaTracciatoSuMappa(pdiTracciatoAttivo, false);
                 }
             }, 100);
         }
@@ -268,7 +270,7 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
         return null;
     }
 
-    private void impostaTracciatoSuMappa(Pdi pdi) {
+    private void impostaTracciatoSuMappa(Pdi pdi, Boolean zoom) {
         String nomeFileKmz = pdi.getFileTracciaGps() + ".kmz";
 
         try {
@@ -283,9 +285,11 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
             osmMap.getOverlays().add(overlayTracciato);
             osmMap.invalidate();
 
-            BoundingBox boundingBox = kmlDocument.mKmlRoot.getBoundingBox();
-            osmMap.zoomToBoundingBox(boundingBox, true);
-            osmMap.getController().setCenter(boundingBox.getCenter());
+            if (zoom) {
+                BoundingBox boundingBox = kmlDocument.mKmlRoot.getBoundingBox();
+                osmMap.zoomToBoundingBox(boundingBox, true);
+                osmMap.getController().setCenter(boundingBox.getCenter());
+            }
 
             pdiTracciatoAttivo = pdi;
         } catch(IOException e) {
@@ -293,6 +297,25 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
 
             overlayTracciato = null;
             pdiTracciatoAttivo = null;
+        }
+    }
+
+    private void rimuoviTracciatoSeNecessario() {
+        if (overlayTracciato != null) {
+            pdiTracciatoAttivo = null;
+
+            osmMap.getOverlays().remove(overlayTracciato);
+            osmMap.invalidate();
+
+            overlayTracciato = null;
+        }
+    }
+
+    private void gestisciTracciato(Pdi pdi, Boolean zoom) {
+        if (pdi.getFileTracciaGps() == null) {
+            rimuoviTracciatoSeNecessario();
+        } else  {
+            impostaTracciatoSuMappa(pdi, zoom);
         }
     }
 
@@ -317,19 +340,7 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
                             marker.showInfoWindow();
 
                             OsmdroidMarkerInfoWindow markerInfoWindow = (OsmdroidMarkerInfoWindow) marker.getInfoWindow();
-
-                            if (markerInfoWindow.pdi.getFileTracciaGps() == null) {
-                                if (overlayTracciato != null) {
-                                    pdiTracciatoAttivo = null;
-
-                                    osmMap.getOverlays().remove(overlayTracciato);
-                                    osmMap.invalidate();
-
-                                    overlayTracciato = null;
-                                }
-                            } else  {
-                                impostaTracciatoSuMappa(markerInfoWindow.pdi);
-                            }
+                            gestisciTracciato(markerInfoWindow.pdi, true);
 
                             break;
                         }

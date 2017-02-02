@@ -30,12 +30,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.kml.KmlLayer;
 
-import org.osmdroid.bonuspack.kml.KmlDocument;
-import org.osmdroid.util.BoundingBox;
-import org.osmdroid.views.overlay.FolderOverlay;
 import org.xmlpull.v1.XmlPullParserException;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -191,6 +187,8 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
                 info.addView(title);
                 info.addView(snippet);
 
+                gestisciTracciato(marker, false);
+
                 return info;
             }
         });
@@ -258,7 +256,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
         }
 
         if (pdiTracciatoAttivo != null) {
-            impostaTracciatoSuMappa(pdiTracciatoAttivo);
+            impostaTracciatoSuMappa(pdiTracciatoAttivo, false);
         }
     }
 
@@ -273,8 +271,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
     //endregion
 
     //region Metodi privati
-
-    private void impostaTracciatoSuMappa(Pdi pdi) {
+    private void impostaTracciatoSuMappa(Pdi pdi, Boolean zoom) {
         String nomeFileKml = pdi.getFileTracciaGps() + ".kml";
 
         try {
@@ -283,7 +280,9 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
             kmlLayer = new KmlLayer(gmMap, inputStream, mainActivity.getApplicationContext());
             kmlLayer.addLayerToMap();
 
-            gmMap.animateCamera(CameraUpdateFactory.zoomTo(13));
+            if (zoom) {
+                gmMap.animateCamera(CameraUpdateFactory.zoomTo(13));
+            }
 
             pdiTracciatoAttivo = pdi;
         } catch(IOException e) {
@@ -297,6 +296,26 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
 
             kmlLayer = null;
             pdiTracciatoAttivo = null;
+        }
+    }
+
+    private void rimuoviTracciatoSeNecessario() {
+        if (kmlLayer != null) {
+            pdiTracciatoAttivo = null;
+
+            kmlLayer.removeLayerFromMap();
+
+            kmlLayer = null;
+        }
+    }
+
+    private void gestisciTracciato(Marker marker, Boolean zoom) {
+        Pdi pdi = (Pdi) marker.getTag();
+
+        if (pdi.getFileTracciaGps() == null) {
+            rimuoviTracciatoSeNecessario();
+        } else {
+            impostaTracciatoSuMappa(pdi, zoom);
         }
     }
 
@@ -319,19 +338,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
                         if (marker.getPosition().latitude == mainActivity.pdiScelto.getLatitudine() && marker.getPosition().longitude == mainActivity.pdiScelto.getLongitudine()) {
                             marker.showInfoWindow();
 
-                            Pdi pdi = (Pdi) marker.getTag();
-
-                            if (pdi.getFileTracciaGps() == null) {
-                                if (kmlLayer != null) {
-                                    pdiTracciatoAttivo = null;
-
-                                    kmlLayer.removeLayerFromMap();
-
-                                    kmlLayer = null;
-                                }
-                            } else {
-                                impostaTracciatoSuMappa(pdi);
-                            }
+                            gestisciTracciato(marker, true);
                         } else {
                             marker.hideInfoWindow();
                         }
