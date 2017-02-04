@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <Document>
-	<name>Anello_Pinzano</name>
-	<open>1</open>
-	<description>Anello_Pinzano</description>
+	<name>anello_pinzano_ge.kml</name>
+	<StyleMap id="bluID1">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#bluID</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#bluID0</styleUrl>
+		</Pair>
+	</StyleMap>
 	<Style id="bluID">
 		<LineStyle>
 			<color>99ff0000</color>
@@ -16,115 +24,13 @@
 			<width>12</width>
 		</LineStyle>
 	</Style>
-	<StyleMap id="bluID1">
-		<Pair>
-			<key>normal</key>
-			<styleUrl>#bluID</styleUrl>
-		</Pair>
-		<Pair>
-			<key>highlight</key>
-			<styleUrl>#bluID0</styleUrl>
-		</Pair>
-	</StyleMap>
 	<Placemark>
-		<name>Anello_Pinzano</name>
+		<name>Anello Pinzano</name>
 		<Snippet maxLines="2">Anello_Pinzano</Snippet>
-		<description><![CDATA[<table style="width: 120; margin: 6px 0" border="0">                                  
-		                                  <tr>
-			<td style="font-weight: bold; width: 60px;">Distanza totale:</td>
-	<td ALIGN=right>8.7 km</td>
-		</tr>                                  
-		                                  <tr>
-			<td COLSPAN="2"><hr></td>
-		</tr>                                  
-		                                  <tr>
-			<td style="font-weight: bold; width: 60px;">Tempo totale:</td>
-	<td ALIGN=right>2:11:38</td>
-		</tr>                                  
-		                                  <tr>
-			<td style="font-weight: bold; width: 60px;">Tempo totale in movimento:</td>
-	<td ALIGN=right>2:11:12</td>
-		</tr>                                  
-		                                  <tr>
-			<td COLSPAN="2"><hr></td>
-		</tr>                                  
-		                                  <tr>
-			                                  <tr>
-			<td style="font-weight: bold; width: 60px;">Velocità media:</td>
-	<td ALIGN=right>3.9 km/h</td>
-		</tr>                                  
-		                                  <tr>
-			<td style="font-weight: bold; width: 60px;">Velocità massima:</td>
-	<td ALIGN=right>12 km/h</td>
-		</tr>                                  
-	</table>]]></description>
 		<styleUrl>#bluID1</styleUrl>
 		<ExtendedData>
-			<Data name="distanceTotal">
-				<value>8658.7890625</value>
-			</Data>
-			<Data name="timeMoving">
-				<value>7872.761060547087</value>
-			</Data>
-			<Data name="maxSpeed">
-				<value>3.235775</value>
-			</Data>
-			<Data name="createdDate">
-				<value>1445341143.001000</value>
-			</Data>
-			<Data name="endDate">
-				<value>1445349042.000000</value>
-			</Data>
-			<Data name="distanceTotalUp">
-				<value>3576.93378429205</value>
-			</Data>
-			<Data name="distanceTotalDown">
-				<value>2781.448729348016</value>
-			</Data>
-			<Data name="timeMovingDown">
-				<value>1981.640182668205</value>
-			</Data>
-			<Data name="timeMovingUp">
-				<value>2524.863540034416</value>
-			</Data>
-			<Data name="downTotal">
-				<value>250.2503967285156</value>
-			</Data>
-			<Data name="upTotal">
-				<value>251.09423828125</value>
-			</Data>
-			<Data name="altitudeMax">
-				<value>338.8461</value>
-			</Data>
-			<Data name="altitudeMin">
-				<value>144.3838</value>
-			</Data>
-			<Data name="altitudeStart">
-				<value>228</value>
-			</Data>
-			<Data name="altitudeStop">
-				<value>225.4301</value>
-			</Data>
-			<Data name="averageKmPace">
-				<value>888.6251</value>
-			</Data>
-			<Data name="averageMiPace">
-				<value>1434.8</value>
-			</Data>
-			<Data name="lastKmPace">
-				<value>1233.006</value>
-			</Data>
-			<Data name="lastMiPace">
-				<value>1776.004</value>
-			</Data>
-			<Data name="maxKmPace">
-				<value>676.996</value>
-			</Data>
-			<Data name="maxMiPace">
-				<value>1158.995</value>
-			</Data>
-			<Data name="typeOfObject">
-				<value>TRACK</value>
+			<Data name="Km">
+				<value>8.659</value>
 			</Data>
 		</ExtendedData>
 		<LineString>
