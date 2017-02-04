@@ -19,12 +19,10 @@ import org.osmdroid.util.BoundingBox;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.FolderOverlay;
-import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.compass.CompassOverlay;
 import org.osmdroid.views.overlay.compass.InternalCompassOrientationProvider;
 import org.osmdroid.views.overlay.infowindow.InfoWindow;
-import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.io.File;
@@ -90,26 +88,18 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
         osmMap.setMultiTouchControls(true);
         osmMap.setTilesScaledToDpi(true);
 
-        MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(mainActivity, this);
-        osmMap.getOverlays().add(0, mapEventsOverlay);
-
         CompassOverlay compassOverlay = new CompassOverlay(mainActivity, new InternalCompassOrientationProvider(mainActivity), osmMap);
         compassOverlay.enableCompass();
         osmMap.getOverlays().add(compassOverlay);
 
-        //GpsMyLocationProvider gpsLocationProvider = new GpsMyLocationProvider(mainActivity);
-        //gpsLocationProvider.setLocationUpdateMinTime(1000);
-        //gpsLocationProvider.setLocationUpdateMinDistance(1);
-
-        MyLocationNewOverlay locationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(mainActivity), osmMap);
+        MyLocationNewOverlay locationOverlay = new MyLocationNewOverlay(osmMap);
         locationOverlay.enableMyLocation();
+        locationOverlay.setDrawAccuracyEnabled(true);
         osmMap.getOverlays().add(locationOverlay);
 
         mapController = osmMap.getController();
 
         if (savedInstanceState == null) {
-            org.osmdroid.tileprovider.constants.OpenStreetMapTileProviderConstants.setUserAgentValue(BuildConfig.APPLICATION_ID);
-
             if (!zoommaSuPdiSceltoSeNecessario()) {
                 mapController.setZoom(15);
                 GeoPoint startPoint = new GeoPoint(46.1822, 12.9452);
