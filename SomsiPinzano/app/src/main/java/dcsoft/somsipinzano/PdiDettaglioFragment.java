@@ -333,7 +333,9 @@ public class PdiDettaglioFragment extends Fragment {
         switch (mainActivity.gestoreDatabaseCondiviso.getLingua()) {
             case "italiano": {
                 if (mainActivity.pdiScelto.getDescrizioneItaliano() != null) {
-                    final Handler handler = new Handler();
+                    dvDescrizione.setText(mainActivity.pdiScelto.getDescrizioneItaliano());
+
+                    final Handler handler = new Handler(); // serve per sistemare la rotazione di dvDescrizione che in landscape non prende tutta l'area orrizzontale
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -362,7 +364,9 @@ public class PdiDettaglioFragment extends Fragment {
 
             default: {
                 if (mainActivity.pdiScelto.getDescrizioneInglese() != null) {
-                    final Handler handler = new Handler();
+                    dvDescrizione.setText(mainActivity.pdiScelto.getDescrizioneInglese());
+
+                    final Handler handler = new Handler(); // serve per sistemare la rotazione di dvDescrizione che in landscape non prende tutta l'area orrizzontale
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {

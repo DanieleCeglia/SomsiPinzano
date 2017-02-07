@@ -95,11 +95,11 @@ public class Categoria implements Parcelable {
     }
 
     public void setDescrizioneItaliano(String nomeItaliano) {
-        this.descrizioneItaliano = descrizioneItaliano;
+        this.descrizioneItaliano = nomeItaliano;
     }
 
     public void setDescrizioneInglese(String nomeInglese) {
-        this.descrizioneInglese = descrizioneInglese;
+        this.descrizioneInglese = nomeInglese;
     }
 
     public void setFileImmagine(String fileImmagine) {

@@ -396,6 +396,6 @@
                 android:textColor="@color/colorIcons"
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:theme="@style/ColorPrimary.Button"/>
-        </LinearLayout>>
+        </LinearLayout>
     </ScrollView>
 </FrameLayout>
