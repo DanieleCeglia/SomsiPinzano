@@ -106,8 +106,9 @@
                     android:layout_gravity="center"
                     android:textAllCaps="false"
                     android:textColor="@color/colorIcons"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:layout_height="37dp" />
+                    android:layout_height="37dp"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:theme="@style/ColorPrimary.Button" />
             </LinearLayout>
 
             <LinearLayout
@@ -136,8 +137,9 @@
                     android:layout_gravity="center"
                     android:textAllCaps="false"
                     android:textColor="@color/colorIcons"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:layout_height="37dp" />
+                    android:layout_height="37dp"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:theme="@style/ColorPrimary.Button" />
             </LinearLayout>
 
             <LinearLayout
@@ -166,8 +168,9 @@
                     android:layout_gravity="center"
                     android:textAllCaps="false"
                     android:textColor="@color/colorIcons"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:layout_height="37dp" />
+                    android:layout_height="37dp"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:theme="@style/ColorPrimary.Button" />
             </LinearLayout>
 
             <LinearLayout
@@ -196,8 +199,9 @@
                     android:layout_gravity="center"
                     android:textAllCaps="false"
                     android:textColor="@color/colorIcons"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:layout_height="37dp" />
+                    android:layout_height="37dp"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:theme="@style/ColorPrimary.Button" />
             </LinearLayout>
 
             <LinearLayout
@@ -226,8 +230,9 @@
                     android:layout_gravity="center"
                     android:textAllCaps="false"
                     android:textColor="@color/colorIcons"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:layout_height="37dp" />
+                    android:layout_height="37dp"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:theme="@style/ColorPrimary.Button" />
             </LinearLayout>
 
             <LinearLayout
@@ -257,8 +262,9 @@
                     android:layout_gravity="center"
                     android:textAllCaps="false"
                     android:textColor="@color/colorIcons"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:layout_height="37dp" />
+                    android:layout_height="37dp"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:theme="@style/ColorPrimary.Button" />
             </LinearLayout>
 
             <LinearLayout
@@ -288,8 +294,9 @@
                     android:layout_gravity="center"
                     android:textAllCaps="false"
                     android:textColor="@color/colorIcons"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:layout_height="37dp" />
+                    android:layout_height="37dp"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:theme="@style/ColorPrimary.Button" />
             </LinearLayout>
 
             <LinearLayout
@@ -319,8 +326,9 @@
                     android:layout_gravity="center"
                     android:textAllCaps="false"
                     android:textColor="@color/colorIcons"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:layout_height="37dp" />
+                    android:layout_height="37dp"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:theme="@style/ColorPrimary.Button" />
             </LinearLayout>
 
             <LinearLayout
@@ -350,8 +358,9 @@
                     android:layout_gravity="center"
                     android:textAllCaps="false"
                     android:textColor="@color/colorIcons"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:layout_height="37dp" />
+                    android:layout_height="37dp"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:theme="@style/ColorPrimary.Button" />
             </LinearLayout>
 
             <TextView
@@ -372,8 +381,9 @@
                 android:textAllCaps="false"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:backgroundTint="@color/colorPrimary"
-                android:textColor="@color/colorIcons"/>
+                android:textColor="@color/colorIcons"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:theme="@style/ColorPrimary.Button"/>
 
             <Button
                 android:text="OpenStreetMap"
@@ -384,7 +394,8 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/colorIcons"
-                android:backgroundTint="@color/colorPrimary" />
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:theme="@style/ColorPrimary.Button"/>
         </LinearLayout>>
     </ScrollView>
 </FrameLayout>
