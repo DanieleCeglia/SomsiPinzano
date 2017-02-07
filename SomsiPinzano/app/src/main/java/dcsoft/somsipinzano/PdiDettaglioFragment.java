@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -332,7 +333,13 @@ public class PdiDettaglioFragment extends Fragment {
         switch (mainActivity.gestoreDatabaseCondiviso.getLingua()) {
             case "italiano": {
                 if (mainActivity.pdiScelto.getDescrizioneItaliano() != null) {
-                    dvDescrizione.setText(mainActivity.pdiScelto.getDescrizioneItaliano());
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            dvDescrizione.setText(mainActivity.pdiScelto.getDescrizioneItaliano());
+                        }
+                    }, 50);
                 } else {
                     tvIntestazioneDescrizione.setVisibility(View.GONE);
                     dvDescrizione.setVisibility(View.GONE);
@@ -355,7 +362,13 @@ public class PdiDettaglioFragment extends Fragment {
 
             default: {
                 if (mainActivity.pdiScelto.getDescrizioneInglese() != null) {
-                    dvDescrizione.setText(mainActivity.pdiScelto.getDescrizioneInglese());
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            dvDescrizione.setText(mainActivity.pdiScelto.getDescrizioneInglese());
+                        }
+                    }, 50);
                 } else {
                     tvIntestazioneDescrizione.setVisibility(View.GONE);
                     dvDescrizione.setVisibility(View.GONE);
@@ -481,7 +494,6 @@ public class PdiDettaglioFragment extends Fragment {
         }
 
         if (ContextCompat.checkSelfPermission(mainActivity, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
-
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mainActivity);
             alertDialogBuilder.setCancelable(true);
 
@@ -515,14 +527,9 @@ public class PdiDettaglioFragment extends Fragment {
     }
 
     private void copiaInClipboard(String etichetta, String testo) {
-        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB) {
-            android.text.ClipboardManager clipboard = (android.text.ClipboardManager) mainActivity.getSystemService(Context.CLIPBOARD_SERVICE);
-            clipboard.setText(testo);
-        } else {
-            android.content.ClipboardManager clipboard = (android.content.ClipboardManager) mainActivity.getSystemService(Context.CLIPBOARD_SERVICE);
-            android.content.ClipData clip = android.content.ClipData.newPlainText(etichetta, testo);
-            clipboard.setPrimaryClip(clip);
-        }
+        android.content.ClipboardManager clipboard = (android.content.ClipboardManager) mainActivity.getSystemService(Context.CLIPBOARD_SERVICE);
+        android.content.ClipData clip = android.content.ClipData.newPlainText(etichetta, testo);
+        clipboard.setPrimaryClip(clip);
 
         Toast.makeText(mainActivity, etichetta, Toast.LENGTH_SHORT).show();
     }
