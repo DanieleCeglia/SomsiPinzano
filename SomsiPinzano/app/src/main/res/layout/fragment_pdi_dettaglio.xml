@@ -26,15 +26,17 @@
                 android:id="@+id/tvIntestazioneDescrizione"
                 android:textAlignment="center" />
 
-            <TextView
+            <com.bluejamesbond.text.DocumentView xmlns:ext="http://schemas.android.com/apk/res-auto"
                 android:text="TextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvDescrizione"
-                android:textColor="@color/colorPrimaryText"
-                android:paddingBottom="10dp"
-                android:paddingEnd="10dp"
-                android:paddingStart="10dp" />
+                android:id="@+id/dvDescrizione"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                ext:documentView_textAlignment="justified"
+                ext:documentView_textColor="@color/colorPrimaryText"
+                ext:documentView_antialias="true" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -370,7 +372,6 @@
                 android:textAllCaps="false"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:elevation="0dp"
                 android:backgroundTint="@color/colorPrimary"
                 android:textColor="@color/colorIcons"/>
 

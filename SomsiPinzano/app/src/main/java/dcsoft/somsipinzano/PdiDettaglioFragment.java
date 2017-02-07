@@ -23,6 +23,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bluejamesbond.text.DocumentView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class PdiDettaglioFragment extends Fragment {
     private ScrollView svContenitore;
 
     private TextView tvIntestazioneDescrizione;
-    private TextView tvDescrizione;
+    private DocumentView dvDescrizione;
 
     private LinearLayout llGalleria;
     private ImageView ivGalleria;
@@ -128,7 +129,7 @@ public class PdiDettaglioFragment extends Fragment {
         svContenitore             = (ScrollView)     pdiDettaglioFragmentView.findViewById(R.id.svContenitore);
 
         tvIntestazioneDescrizione = (TextView)       pdiDettaglioFragmentView.findViewById(R.id.tvIntestazioneDescrizione);
-        tvDescrizione             = (TextView)       pdiDettaglioFragmentView.findViewById(R.id.tvDescrizione);
+        dvDescrizione             = (DocumentView)   pdiDettaglioFragmentView.findViewById(R.id.dvDescrizione);
 
         llGalleria                = (LinearLayout)   pdiDettaglioFragmentView.findViewById(R.id.llGalleria);
         ivGalleria                = (ImageView)      pdiDettaglioFragmentView.findViewById(R.id.ivGalleria);
@@ -331,10 +332,10 @@ public class PdiDettaglioFragment extends Fragment {
         switch (mainActivity.gestoreDatabaseCondiviso.getLingua()) {
             case "italiano": {
                 if (mainActivity.pdiScelto.getDescrizioneItaliano() != null) {
-                    tvDescrizione.setText(mainActivity.pdiScelto.getDescrizioneItaliano());
+                    dvDescrizione.setText(mainActivity.pdiScelto.getDescrizioneItaliano());
                 } else {
                     tvIntestazioneDescrizione.setVisibility(View.GONE);
-                    tvDescrizione.setVisibility(View.GONE);
+                    dvDescrizione.setVisibility(View.GONE);
                 }
 
                 if (mainActivity.pdiScelto.getTitoloLinkGenerico1Italiano() != null) {
@@ -354,10 +355,10 @@ public class PdiDettaglioFragment extends Fragment {
 
             default: {
                 if (mainActivity.pdiScelto.getDescrizioneInglese() != null) {
-                    tvDescrizione.setText(mainActivity.pdiScelto.getDescrizioneInglese());
+                    dvDescrizione.setText(mainActivity.pdiScelto.getDescrizioneInglese());
                 } else {
                     tvIntestazioneDescrizione.setVisibility(View.GONE);
-                    tvDescrizione.setVisibility(View.GONE);
+                    dvDescrizione.setVisibility(View.GONE);
                 }
 
                 if (mainActivity.pdiScelto.getTitoloLinkGenerico1Inglese() != null) {
