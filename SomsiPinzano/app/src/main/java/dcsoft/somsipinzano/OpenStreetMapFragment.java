@@ -40,6 +40,9 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
     private final String TAG = getClass().getSimpleName();
     private MainActivity mainActivity;
     private MapView osmMap;
+    private int zoom;
+    private double lat;
+    private double lon;
     private IMapController mapController;
     private ArrayList<Pdi> listaPdi;
     private int tipoMappa;
@@ -110,11 +113,15 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
 
             pdiTracciatoAttivo = null;
         } else {
-            Log.d("DEBUGAPP", TAG + " onCreateView savedInstanceState != null");
+            //Log.d("DEBUGAPP", TAG + " onCreateView savedInstanceState != null zoom: " + savedInstanceState.getInt("zoom") + " lat: " + savedInstanceState.getDouble("lat") + " lon: " + savedInstanceState.getDouble("lon") + " tipoMappa: " + savedInstanceState.getInt("tipoMappa") + " pdiTracciatoAttivo: " + savedInstanceState.getParcelable("pdiTracciatoAttivo"));
+
+            zoom = savedInstanceState.getInt("zoom");
+            lat  = savedInstanceState.getDouble("lat");
+            lon  = savedInstanceState.getDouble("lon");
 
             if (!zoommaSuPdiSceltoSeNecessario()) {
-                mapController.setZoom(savedInstanceState.getInt("zoom"));
-                GeoPoint startPoint = new GeoPoint(savedInstanceState.getDouble("lat"), savedInstanceState.getDouble("lon"));
+                mapController.setZoom(zoom);
+                GeoPoint startPoint = new GeoPoint(lat, lon);
                 mapController.setCenter(startPoint);
             }
 
@@ -203,13 +210,13 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        Log.d("DEBUGAPP", TAG + " onSaveInstanceState");
-
         outState.putInt("zoom", osmMap.getZoomLevel());
-        outState.putDouble("lat", osmMap.getMapCenter().getLatitude());
-        outState.putDouble("lon", osmMap.getMapCenter().getLongitude());
+        outState.putDouble("lat", osmMap.getMapCenter().getLatitude() < 80 ? osmMap.getMapCenter().getLatitude()  : lat);
+        outState.putDouble("lon", osmMap.getMapCenter().getLongitude() > 0 ? osmMap.getMapCenter().getLongitude() : lon);
         outState.putInt("tipoMappa", tipoMappa);
         outState.putParcelable("pdiTracciatoAttivo", pdiTracciatoAttivo);
+
+        //Log.d("DEBUGAPP", TAG + " onSaveInstanceState zoom: " + osmMap.getZoomLevel() + " lat: " + osmMap.getMapCenter().getLatitude() + " lon: " + osmMap.getMapCenter().getLongitude() + " tipoMappa: " + tipoMappa + " pdiTracciatoAttivo: " + pdiTracciatoAttivo);
     }
 
     @Override

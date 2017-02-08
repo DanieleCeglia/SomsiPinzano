@@ -94,14 +94,14 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
         mMapView.getMapAsync(this);
 
         if (savedInstanceState == null) {
-            zoom = -1;
-            lat = -1;
-            lon = -1;
+            zoom    = -1;
+            lat     = -1;
+            lon     = -1;
             mapType = -1;
 
             pdiTracciatoAttivo = null;
         } else {
-            Log.d("DEBUGAPP", TAG + " onCreateView savedInstanceState != null");
+            //Log.d("DEBUGAPP", TAG + " onCreateView savedInstanceState zoom: " + savedInstanceState.getFloat("zoom") + " lat: " + savedInstanceState.getDouble("lat") + " lon: " + savedInstanceState.getDouble("lon") + " mapType: " + savedInstanceState.getInt("mapType") + " pdiTracciatoAttivo: " + savedInstanceState.getParcelable("pdiTracciatoAttivo"));
 
             zoom    = savedInstanceState.getFloat("zoom");
             lat     = savedInstanceState.getDouble("lat");
@@ -118,19 +118,19 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        Log.d("DEBUGAPP", TAG + " onSaveInstanceState");
-
         if (gmMap != null) {
             CameraPosition cameraPosition = gmMap.getCameraPosition();
 
             if (cameraPosition != null) {
-                outState.putFloat("zoom", gmMap.getCameraPosition().zoom);
+                outState.putFloat("zoom", !isHidden() || zoom < 0 ? gmMap.getCameraPosition().zoom : zoom);
                 outState.putDouble("lat", gmMap.getCameraPosition().target.latitude);
                 outState.putDouble("lon", gmMap.getCameraPosition().target.longitude);
             }
 
             outState.putInt("mapType", gmMap.getMapType());
             outState.putParcelable("pdiTracciatoAttivo", pdiTracciatoAttivo);
+
+            //Log.d("DEBUGAPP", TAG + " onSaveInstanceState zoom: " + gmMap.getCameraPosition().zoom + " lat: " + gmMap.getCameraPosition().target.latitude + " lon: " + gmMap.getCameraPosition().target.longitude + " mapType: " + gmMap.getMapType() + " pdiTracciatoAttivo: " + pdiTracciatoAttivo);
         }
     }
 
