@@ -32,6 +32,16 @@ class RaggruppamentoPdiRecyclerViewAdapter extends RecyclerView.Adapter<Raggrupp
             }
             break;
 
+            case "Deutsch": {
+                holder.tvRaggruppamentoPdi.setText(raggruppamentiPdi.get(position).getNomeRaggruppamentoTedesco());
+            }
+            break;
+
+            case "français": {
+                holder.tvRaggruppamentoPdi.setText(raggruppamentiPdi.get(position).getNomeRaggruppamentoFrancese());
+            }
+            break;
+
             default: {
                 holder.tvRaggruppamentoPdi.setText(raggruppamentiPdi.get(position).getNomeRaggruppamentoInglese());
             }

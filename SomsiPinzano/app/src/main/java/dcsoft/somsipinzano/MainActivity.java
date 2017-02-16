@@ -560,6 +560,16 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
 
+                case "Deutsch": {
+                    actionBar.setSubtitle(raggruppamentoPdiScelto.getNomeRaggruppamentoTedesco());
+                }
+                break;
+
+                case "français": {
+                    actionBar.setSubtitle(raggruppamentoPdiScelto.getNomeRaggruppamentoFrancese());
+                }
+                break;
+
                 default: {
                     actionBar.setSubtitle(raggruppamentoPdiScelto.getNomeRaggruppamentoInglese());
                 }

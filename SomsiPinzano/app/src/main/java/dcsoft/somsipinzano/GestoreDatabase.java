@@ -231,7 +231,9 @@ class GestoreDatabase extends SQLiteOpenHelper {
                         cursor.getInt(0),     // idRaggruppamentoPdi
                         cursor.getInt(1),     // ordinamento
                         cursor.getString(2),  // nomeRaggruppamentoItaliano
-                        cursor.getString(3)); // nomeRaggruppamentoInglese
+                        cursor.getString(3),  // nomeRaggruppamentoInglese
+                        cursor.getString(4),  // nomeRaggruppamentoTedesco
+                        cursor.getString(5)); // nomeRaggruppamentoFrancese
 
                 cursor.moveToNext();
             }
@@ -257,7 +259,9 @@ class GestoreDatabase extends SQLiteOpenHelper {
                     "    idRaggruppamentoPdi, \n" +
                     "    RAGGRUPPAMENTO_PDI.ordinamento, \n" +
                     "    nomeRaggruppamentoItaliano, \n" +
-                    "    nomeRaggruppamentoInglese \n" +
+                    "    nomeRaggruppamentoInglese, \n" +
+                    "    nomeRaggruppamentoTedesco, \n" +
+                    "    nomeRaggruppamentoFrancese \n" +
                     "FROM \n" +
                     "    RAGGRUPPAMENTO_PDI \n" +
                     "    JOIN PDI ON idRaggruppamentoPdi = idPdi_idRaggruppamento \n" +
@@ -274,7 +278,9 @@ class GestoreDatabase extends SQLiteOpenHelper {
                         cursor.getInt(0),     // idRaggruppamentoPdi
                         cursor.getInt(1),     // ordinamento
                         cursor.getString(2),  // nomeRaggruppamentoItaliano
-                        cursor.getString(3)); // nomeRaggruppamentoInglese
+                        cursor.getString(3),  // nomeRaggruppamentoInglese
+                        cursor.getString(4),  // nomeRaggruppamentoTedesco
+                        cursor.getString(5)); // nomeRaggruppamentoFrancese
 
                 list.add(raggruppamentoPdi);
 
