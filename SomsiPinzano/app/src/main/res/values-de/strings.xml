@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Vivi Pinzano</string>
+    <string name="punti_di_interesse">Sehenswürdigkeiten</string>
+    <string name="Categorie">Kategorien</string>
+    <string name="messaggio_permessi_accettati">App alle erforderlichen Genehmigungen akzeptiert wurden!</string>
+    <string name="messaggio_permesso_di_archiviazione_non_accettato">GENEHMIGUNG Anmeldetag AKZEPTIERT\n\nEs ist notwendig, die Fliesen von der Karte zu speichern, um die Nutzung des Internets und die Daten für die Offline-Nutzung zu reduzieren.\n*** Nicht die Annahme dieser Genehmigung Karte OpenStreetMap wird nicht verfügbar sein. ***</string>
+    <string name="messaggio_permesso_di_localizzazione_non_accettato">PERMIT LAGE NICHT ANGENOMMEN\n\nSie müssen Ihre Position auf der Karte anzuzeigen.</string>
+    <string name="normale">Normal</string>
+    <string name="satellitare">Satellit</string>
+    <string name="ibrida">Hybrid</string>
+    <string name="rilievo">Erleichterung</string>
+    <string name="ciclabile">Fahrrad</string>
+    <string name="trasporti">Transport</string>
+    <string name="tocca_qui_per_maggiori_dettagli">Tippen Sie hier, um weitere Informationen zu…</string>
+    <string name="tocca_pin_per_maggiori_dettagli">Berührt die Stifte, um weitere Informationen…</string>
+    <string name="indirizzo">Adresse:</string>
+    <string name="telefono">Telefon:</string>
+    <string name="fax">Fax:</string>
+    <string name="cellulare">Zellular:</string>
+    <string name="email">Email:</string>
+    <string name="video">Video:</string>
+    <string name="vedi_su">SIEHE</string>
+    <string name="descrizione">BESCHREIBUNG</string>
+    <string name="indirizzo_copiato_negli_appunti">Adresse in die Zwischenablage kopiert!</string>
+    <string name="fax_copiato_negli_appunti">Fax in die Zwischenablage kopiert!</string>
+    <string name="invia_email_a">"Senden Sie eine email an "</string>
+    <string name="usando">" mit:"</string>
+    <string name="messaggio_permesso_di_chiamata_non_accettato">ERLAUBNIS ANRUF NICHT ANGENOMMEN\n\nSie müssen so schnell die Telefonnummer anzurufen, wie verlangt.</string>
+    <string name="chiamare_il_numero">Rufen Sie die </string>
+    <string name="chiama">Anruf</string>
+    <string name="no">Keine</string>
+</resources>
