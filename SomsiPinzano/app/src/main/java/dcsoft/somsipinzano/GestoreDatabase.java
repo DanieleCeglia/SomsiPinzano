@@ -158,15 +158,19 @@ class GestoreDatabase extends SQLiteOpenHelper {
 
             while (!cursor.isAfterLast()) {
                 Categoria categoria = new Categoria(
-                        cursor.getInt(0),     // idCategoria
-                        cursor.getInt(1),     // ordinamento
-                        cursor.getString(2),  // nomeItaliano
-                        cursor.getString(3),  // nomeInglese
-                        cursor.getString(4),  // descrizioneItaliano
-                        cursor.getString(5),  // descrizioneInglese
-                        cursor.getString(6),  // fileImmagine
-                        cursor.getString(7),  // fileImmagineCopertina
-                        cursor.getString(8)); // filePin
+                        cursor.getInt(0),      // idCategoria
+                        cursor.getInt(1),      // ordinamento
+                        cursor.getString(2),   // nomeItaliano
+                        cursor.getString(3),   // nomeInglese
+                        cursor.getString(4),   // nomeTedesco
+                        cursor.getString(5),   // nomeFrancese
+                        cursor.getString(6),   // descrizioneItaliano
+                        cursor.getString(7),   // descrizioneInglese
+                        cursor.getString(8),   // descrizioneTedesco
+                        cursor.getString(9),   // descrizioneFrancese
+                        cursor.getString(10),  // fileImmagine
+                        cursor.getString(11),  // fileImmagineCopertina
+                        cursor.getString(12)); // filePin
 
                 list.add(categoria);
 
@@ -194,15 +198,19 @@ class GestoreDatabase extends SQLiteOpenHelper {
 
             while (!cursor.isAfterLast()) {
                 categoria = new Categoria(
-                        cursor.getInt(0),     // idCategoria
-                        cursor.getInt(1),     // ordinamento
-                        cursor.getString(2),  // nomeItaliano
-                        cursor.getString(3),  // nomeInglese
-                        cursor.getString(4),  // descrizioneItaliano
-                        cursor.getString(5),  // descrizioneInglese
-                        cursor.getString(6),  // fileImmagine
-                        cursor.getString(7),  // fileImmagineCopertina
-                        cursor.getString(8)); // filePin
+                        cursor.getInt(0),      // idCategoria
+                        cursor.getInt(1),      // ordinamento
+                        cursor.getString(2),   // nomeItaliano
+                        cursor.getString(3),   // nomeInglese
+                        cursor.getString(4),   // nomeTedesco
+                        cursor.getString(5),   // nomeFrancese
+                        cursor.getString(6),   // descrizioneItaliano
+                        cursor.getString(7),   // descrizioneInglese
+                        cursor.getString(8),   // descrizioneTedesco
+                        cursor.getString(9),   // descrizioneFrancese
+                        cursor.getString(10),  // fileImmagine
+                        cursor.getString(11),  // fileImmagineCopertina
+                        cursor.getString(12)); // filePin
 
                 cursor.moveToNext();
             }

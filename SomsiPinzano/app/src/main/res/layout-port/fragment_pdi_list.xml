@@ -43,7 +43,8 @@
                     android:fontFamily="sans-serif-condensed"
                     android:textAllCaps="false"
                     android:textAlignment="viewStart"
-                    android:textColor="@color/colorSecondaryText" />
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 

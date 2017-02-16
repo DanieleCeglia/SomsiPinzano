@@ -457,6 +457,16 @@ public class MainActivity extends AppCompatActivity {
                             }
                             break;
 
+                            case "Deutsch": {
+                                impostaActionBar(true, categoriaScelta.getNomeTedesco());
+                            }
+                            break;
+
+                            case "français": {
+                                impostaActionBar(true, categoriaScelta.getNomeFrancese());
+                            }
+                            break;
+
                             default: {
                                 impostaActionBar(true, categoriaScelta.getNomeInglese());
                             }
@@ -543,6 +553,16 @@ public class MainActivity extends AppCompatActivity {
         switch (gestoreDatabaseCondiviso.getLingua()) {
             case "italiano": {
                 impostaActionBar(true, categoriaScelta.getNomeItaliano());
+            }
+            break;
+
+            case "Deutsch": {
+                impostaActionBar(true, categoriaScelta.getNomeTedesco());
+            }
+            break;
+
+            case "français": {
+                impostaActionBar(true, categoriaScelta.getNomeFrancese());
             }
             break;
 

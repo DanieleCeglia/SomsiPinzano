@@ -34,6 +34,18 @@ class CategoriaRecyclerViewAdapter extends RecyclerView.Adapter<CategoriaRecycle
             }
             break;
 
+            case "Deutsch": {
+                holder.tvTitoloCategoria.setText(categorie.get(position).getNomeTedesco());
+                holder.tvDescrizioneCategoria.setText(categorie.get(position).getDescrizioneTedesco());
+            }
+            break;
+
+            case "français": {
+                holder.tvTitoloCategoria.setText(categorie.get(position).getNomeFrancese());
+                holder.tvDescrizioneCategoria.setText(categorie.get(position).getDescrizioneFrancese());
+            }
+            break;
+
             default: {
                 holder.tvTitoloCategoria.setText(categorie.get(position).getNomeInglese());
                 holder.tvDescrizioneCategoria.setText(categorie.get(position).getDescrizioneInglese());

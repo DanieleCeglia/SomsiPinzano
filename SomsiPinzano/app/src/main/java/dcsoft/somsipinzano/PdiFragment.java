@@ -79,6 +79,16 @@ public class PdiFragment extends Fragment {
                 }
                 break;
 
+                case "Deutsch": {
+                    tvDescrizioneCategoriaPdi.setText(mainActivity.categoriaScelta.getDescrizioneTedesco());
+                }
+                break;
+
+                case "français": {
+                    tvDescrizioneCategoriaPdi.setText(mainActivity.categoriaScelta.getDescrizioneFrancese());
+                }
+                break;
+
                 default: {
                     tvDescrizioneCategoriaPdi.setText(mainActivity.categoriaScelta.getDescrizioneInglese());
                 }
@@ -124,6 +134,16 @@ public class PdiFragment extends Fragment {
             switch (mainActivity.gestoreDatabaseCondiviso.getLingua()) {
                 case "italiano": {
                     mainActivity.impostaActionBar(true, mainActivity.categoriaScelta.getNomeItaliano());
+                }
+                break;
+
+                case "Deutsch": {
+                    mainActivity.impostaActionBar(true, mainActivity.categoriaScelta.getNomeTedesco());
+                }
+                break;
+
+                case "français": {
+                    mainActivity.impostaActionBar(true, mainActivity.categoriaScelta.getNomeFrancese());
                 }
                 break;
 
