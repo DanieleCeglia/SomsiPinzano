@@ -202,7 +202,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
             gmMap.setMyLocationEnabled(true);
         }
 
-        LatLng pinzano = new LatLng(46.1822, 12.9452);
+        final LatLng pinzano = new LatLng(46.1822, 12.9452);
 
         if (!zoommaSuPdiSceltoSeNecessario()) {
             if (lat == -1) {
@@ -214,6 +214,23 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
                 gmMap.moveCamera(CameraUpdateFactory.newLatLng(centroMappaSalvato));
                 gmMap.animateCamera(CameraUpdateFactory.zoomTo(zoom));
             }
+
+            // workaround: ripeto il codice 100 ms dopo per Nexus 5X che non centra bene al primo colpo con mappa aperta per la prima volta...
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (lat == -1) {
+                        gmMap.moveCamera(CameraUpdateFactory.newLatLng(pinzano));
+                        gmMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+                    } else {
+                        LatLng centroMappaSalvato = new LatLng(lat, lon);
+
+                        gmMap.moveCamera(CameraUpdateFactory.newLatLng(centroMappaSalvato));
+                        gmMap.animateCamera(CameraUpdateFactory.zoomTo(zoom));
+                    }
+                }
+            }, 100);
         }
 
         for (int i = 0; i < listaPdi.size(); i++) {
@@ -323,7 +340,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
         if (mainActivity.vediPdiSceltoSuGM && gmMap != null) {
             mainActivity.vediPdiSceltoSuGM = false;
 
-            LatLng pdiDaZoommare = new LatLng(mainActivity.pdiScelto.getLatitudine(), mainActivity.pdiScelto.getLongitudine());
+            final LatLng pdiDaZoommare = new LatLng(mainActivity.pdiScelto.getLatitudine(), mainActivity.pdiScelto.getLongitudine());
 
             gmMap.moveCamera(CameraUpdateFactory.newLatLng(pdiDaZoommare));
             gmMap.animateCamera(CameraUpdateFactory.zoomTo(18));
@@ -332,6 +349,10 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    // workaround: ripeto il queste due istruzioni 100 ms dopo per Nexus 5X che non centra bene al primo colpo con mappa aperta per la prima volta...
+                    gmMap.moveCamera(CameraUpdateFactory.newLatLng(pdiDaZoommare));
+                    gmMap.animateCamera(CameraUpdateFactory.zoomTo(18));
+
                     for (int i = 0; i < listaMarker.size(); i++) {
                         Marker marker = listaMarker.get(i);
 
