@@ -24,6 +24,16 @@ public class OsmdroidMarkerInfoWindow extends InfoWindow {
             }
             break;
 
+            case "Deutsch": {
+                txtTitle.setText(pdi.getTitoloTedesco());
+            }
+            break;
+
+            case "français": {
+                txtTitle.setText(pdi.getTitoloFrancese());
+            }
+            break;
+
             default: {
                 txtTitle.setText(pdi.getTitoloInglese());
             }

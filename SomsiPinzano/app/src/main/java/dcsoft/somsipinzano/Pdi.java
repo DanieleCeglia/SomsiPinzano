@@ -10,8 +10,12 @@ public class Pdi implements Parcelable {
     private int ordinamento;
     private String titoloItaliano;
     private String titoloInglese;
+    private String titoloTedesco;
+    private String titoloFrancese;
     private String descrizioneItaliano;
     private String descrizioneInglese;
+    private String descrizioneTedesco;
+    private String descrizioneFrancese;
     private String citta;
     private String via;
     private int numeroCivico;
@@ -23,17 +27,25 @@ public class Pdi implements Parcelable {
     private String fax;
     private String cellulare;
     private String email;
-    private String titoloLinkGenerico1Italiano;
-    private String titoloLinkGenerico1Inglese;
+    private String titoloLink1GenericoItaliano;
+    private String titoloLink1GenericoInglese;
+    private String titoloLink1GenericoTedesco;
+    private String titoloLink1GenericoFrancese;
     private String linkGenerico1;
-    private String titoloLinkGenerico2Italiano;
-    private String titoloLinkGenerico2Inglese;
+    private String titoloLink2GenericoItaliano;
+    private String titoloLink2GenericoInglese;
+    private String titoloLink2GenericoTedesco;
+    private String titoloLink2GenericoFrancese;
     private String linkGenerico2;
-    private String titoloLinkGenerico3Italiano;
-    private String titoloLinkGenerico3Inglese;
+    private String titoloLink3GenericoItaliano;
+    private String titoloLink3GenericoInglese;
+    private String titoloLink3GenericoTedesco;
+    private String titoloLink3GenericoFrancese;
     private String linkGenerico3;
-    private String titoloLinkGenerico4Italiano;
-    private String titoloLinkGenerico4Inglese;
+    private String titoloLink4GenericoItaliano;
+    private String titoloLink4GenericoInglese;
+    private String titoloLink4GenericoTedesco;
+    private String titoloLink4GenericoFrancese;
     private String linkGenerico4;
     private String fileTracciaGps;
 
@@ -43,8 +55,12 @@ public class Pdi implements Parcelable {
                int ordinamento,
                String titoloItaliano,
                String titoloInglese,
+               String titoloTedesco,
+               String titoloFrancese,
                String descrizioneItaliano,
                String descrizioneInglese,
+               String descrizioneTedesco,
+               String descrizioneFrancese,
                String citta,
                String via,
                int numeroCivico,
@@ -56,17 +72,25 @@ public class Pdi implements Parcelable {
                String fax,
                String cellulare,
                String email,
-               String titoloLinkGenerico1Italiano,
-               String titoloLinkGenerico1Inglese,
+               String titoloLink1GenericoItaliano,
+               String titoloLink1GenericoInglese,
+               String titoloLink1GenericoTedesco,
+               String titoloLink1GenericoFrancese,
                String linkGenerico1,
-               String titoloLinkGenerico2Italiano,
-               String titoloLinkGenerico2Inglese,
+               String titoloLink2GenericoItaliano,
+               String titoloLink2GenericoInglese,
+               String titoloLink2GenericoTedesco,
+               String titoloLink2GenericoFrancese,
                String linkGenerico2,
-               String titoloLinkGenerico3Italiano,
-               String titoloLinkGenerico3Inglese,
+               String titoloLink3GenericoItaliano,
+               String titoloLink3GenericoInglese,
+               String titoloLink3GenericoTedesco,
+               String titoloLink3GenericoFrancese,
                String linkGenerico3,
-               String titoloLinkGenerico4Italiano,
-               String titoloLinkGenerico4Inglese,
+               String titoloLink4GenericoItaliano,
+               String titoloLink4GenericoInglese,
+               String titoloLink4GenericoTedesco,
+               String titoloLink4GenericoFrancese,
                String linkGenerico4,
                String fileTracciaGps) {
         super();
@@ -77,8 +101,12 @@ public class Pdi implements Parcelable {
         this.ordinamento                 = ordinamento;
         this.titoloItaliano              = titoloItaliano;
         this.titoloInglese               = titoloInglese;
+        this.titoloTedesco               = titoloTedesco;
+        this.titoloFrancese              = titoloFrancese;
         this.descrizioneItaliano         = descrizioneItaliano;
         this.descrizioneInglese          = descrizioneInglese;
+        this.descrizioneTedesco          = descrizioneTedesco;
+        this.descrizioneFrancese         = descrizioneFrancese;
         this.citta                       = citta;
         this.via                         = via;
         this.numeroCivico                = numeroCivico;
@@ -90,17 +118,25 @@ public class Pdi implements Parcelable {
         this.fax                         = fax;
         this.cellulare                   = cellulare;
         this.email                       = email;
-        this.titoloLinkGenerico1Italiano = titoloLinkGenerico1Italiano;
-        this.titoloLinkGenerico1Inglese  = titoloLinkGenerico1Inglese;
+        this.titoloLink1GenericoItaliano = titoloLink1GenericoItaliano;
+        this.titoloLink1GenericoInglese  = titoloLink1GenericoInglese;
+        this.titoloLink1GenericoTedesco  = titoloLink1GenericoTedesco;
+        this.titoloLink1GenericoFrancese = titoloLink1GenericoFrancese;
         this.linkGenerico1               = linkGenerico1;
-        this.titoloLinkGenerico2Italiano = titoloLinkGenerico2Italiano;
-        this.titoloLinkGenerico2Inglese  = titoloLinkGenerico2Inglese;
+        this.titoloLink2GenericoItaliano = titoloLink2GenericoItaliano;
+        this.titoloLink2GenericoInglese  = titoloLink2GenericoInglese;
+        this.titoloLink2GenericoTedesco  = titoloLink2GenericoTedesco;
+        this.titoloLink2GenericoFrancese = titoloLink2GenericoFrancese;
         this.linkGenerico2               = linkGenerico2;
-        this.titoloLinkGenerico3Italiano = titoloLinkGenerico3Italiano;
-        this.titoloLinkGenerico3Inglese  = titoloLinkGenerico3Inglese;
+        this.titoloLink3GenericoItaliano = titoloLink3GenericoItaliano;
+        this.titoloLink3GenericoInglese  = titoloLink3GenericoInglese;
+        this.titoloLink3GenericoTedesco  = titoloLink3GenericoTedesco;
+        this.titoloLink3GenericoFrancese = titoloLink3GenericoFrancese;
         this.linkGenerico3               = linkGenerico3;
-        this.titoloLinkGenerico4Italiano = titoloLinkGenerico4Italiano;
-        this.titoloLinkGenerico4Inglese  = titoloLinkGenerico4Inglese;
+        this.titoloLink4GenericoItaliano = titoloLink4GenericoItaliano;
+        this.titoloLink4GenericoInglese  = titoloLink4GenericoInglese;
+        this.titoloLink4GenericoTedesco  = titoloLink4GenericoTedesco;
+        this.titoloLink4GenericoFrancese = titoloLink4GenericoFrancese;
         this.linkGenerico4               = linkGenerico4;
         this.fileTracciaGps              = fileTracciaGps;
     }
@@ -114,8 +150,12 @@ public class Pdi implements Parcelable {
         this.ordinamento                 = parcel.readInt();
         this.titoloItaliano              = parcel.readString();
         this.titoloInglese               = parcel.readString();
+        this.titoloTedesco               = parcel.readString();
+        this.titoloFrancese              = parcel.readString();
         this.descrizioneItaliano         = parcel.readString();
         this.descrizioneInglese          = parcel.readString();
+        this.descrizioneTedesco          = parcel.readString();
+        this.descrizioneFrancese         = parcel.readString();
         this.citta                       = parcel.readString();
         this.via                         = parcel.readString();
         this.numeroCivico                = parcel.readInt();
@@ -127,17 +167,25 @@ public class Pdi implements Parcelable {
         this.fax                         = parcel.readString();
         this.cellulare                   = parcel.readString();
         this.email                       = parcel.readString();
-        this.titoloLinkGenerico1Italiano = parcel.readString();
-        this.titoloLinkGenerico1Inglese  = parcel.readString();
+        this.titoloLink1GenericoItaliano = parcel.readString();
+        this.titoloLink1GenericoInglese  = parcel.readString();
+        this.titoloLink1GenericoTedesco  = parcel.readString();
+        this.titoloLink1GenericoFrancese = parcel.readString();
         this.linkGenerico1               = parcel.readString();
-        this.titoloLinkGenerico2Italiano = parcel.readString();
-        this.titoloLinkGenerico2Inglese  = parcel.readString();
+        this.titoloLink2GenericoItaliano = parcel.readString();
+        this.titoloLink2GenericoInglese  = parcel.readString();
+        this.titoloLink2GenericoTedesco  = parcel.readString();
+        this.titoloLink2GenericoFrancese = parcel.readString();
         this.linkGenerico2               = parcel.readString();
-        this.titoloLinkGenerico3Italiano = parcel.readString();
-        this.titoloLinkGenerico3Inglese  = parcel.readString();
+        this.titoloLink3GenericoItaliano = parcel.readString();
+        this.titoloLink3GenericoInglese  = parcel.readString();
+        this.titoloLink3GenericoTedesco  = parcel.readString();
+        this.titoloLink3GenericoFrancese = parcel.readString();
         this.linkGenerico3               = parcel.readString();
-        this.titoloLinkGenerico4Italiano = parcel.readString();
-        this.titoloLinkGenerico4Inglese  = parcel.readString();
+        this.titoloLink4GenericoItaliano = parcel.readString();
+        this.titoloLink4GenericoInglese  = parcel.readString();
+        this.titoloLink4GenericoTedesco  = parcel.readString();
+        this.titoloLink4GenericoFrancese = parcel.readString();
         this.linkGenerico4               = parcel.readString();
         this.fileTracciaGps              = parcel.readString();
     }
@@ -166,12 +214,28 @@ public class Pdi implements Parcelable {
         return titoloInglese;
     }
 
+    public String getTitoloTedesco() {
+        return titoloTedesco;
+    }
+
+    public String getTitoloFrancese() {
+        return titoloFrancese;
+    }
+
     public String getDescrizioneItaliano() {
         return descrizioneItaliano;
     }
 
     public String getDescrizioneInglese() {
         return descrizioneInglese;
+    }
+
+    public String getDescrizioneTedesco() {
+        return descrizioneTedesco;
+    }
+
+    public String getDescrizioneFrancese() {
+        return descrizioneFrancese;
     }
 
     public String getCitta() {
@@ -218,48 +282,80 @@ public class Pdi implements Parcelable {
         return email;
     }
 
-    public String getTitoloLinkGenerico1Italiano() {
-        return titoloLinkGenerico1Italiano;
+    public String getTitoloLink1GenericoItaliano() {
+        return titoloLink1GenericoItaliano;
     }
 
-    public String getTitoloLinkGenerico1Inglese() {
-        return titoloLinkGenerico1Inglese;
+    public String getTitoloLink1GenericoInglese() {
+        return titoloLink1GenericoInglese;
+    }
+
+    public String getTitoloLink1GenericoTedesco() {
+        return titoloLink1GenericoTedesco;
+    }
+
+    public String getTitoloLink1GenericoFrancese() {
+        return titoloLink1GenericoFrancese;
     }
 
     public String getLinkGenerico1() {
         return linkGenerico1;
     }
 
-    public String getTitoloLinkGenerico2Italiano() {
-        return titoloLinkGenerico2Italiano;
+    public String getTitoloLink2GenericoItaliano() {
+        return titoloLink2GenericoItaliano;
     }
 
-    public String getTitoloLinkGenerico2Inglese() {
-        return titoloLinkGenerico2Inglese;
+    public String getTitoloLink2GenericoInglese() {
+        return titoloLink2GenericoInglese;
+    }
+
+    public String getTitoloLink2GenericoTedesco() {
+        return titoloLink2GenericoTedesco;
+    }
+
+    public String getTitoloLink2GenericoFrancese() {
+        return titoloLink2GenericoFrancese;
     }
 
     public String getLinkGenerico2() {
         return linkGenerico2;
     }
 
-    public String getTitoloLinkGenerico3Italiano() {
-        return titoloLinkGenerico3Italiano;
+    public String getTitoloLink3GenericoItaliano() {
+        return titoloLink3GenericoItaliano;
     }
 
-    public String getTitoloLinkGenerico3Inglese() {
-        return titoloLinkGenerico3Inglese;
+    public String getTitoloLink3GenericoInglese() {
+        return titoloLink3GenericoInglese;
+    }
+
+    public String getTitoloLink3GenericoTedesco() {
+        return titoloLink3GenericoTedesco;
+    }
+
+    public String getTitoloLink3GenericoFrancese() {
+        return titoloLink3GenericoFrancese;
     }
 
     public String getLinkGenerico3() {
         return linkGenerico3;
     }
 
-    public String getTitoloLinkGenerico4Italiano() {
-        return titoloLinkGenerico4Italiano;
+    public String getTitoloLink4GenericoItaliano() {
+        return titoloLink4GenericoItaliano;
     }
 
-    public String getTitoloLinkGenerico4Inglese() {
-        return titoloLinkGenerico4Inglese;
+    public String getTitoloLink4GenericoInglese() {
+        return titoloLink4GenericoInglese;
+    }
+
+    public String getTitoloLink4GenericoTedesco() {
+        return titoloLink4GenericoTedesco;
+    }
+
+    public String getTitoloLink4GenericoFrancese() {
+        return titoloLink4GenericoFrancese;
     }
 
     public String getLinkGenerico4() {
@@ -294,12 +390,28 @@ public class Pdi implements Parcelable {
         this.titoloInglese = titoloInglese;
     }
 
+    public void setTitoloTedesco(String titoloTedesco) {
+        this.titoloTedesco = titoloTedesco;
+    }
+
+    public void setTitoloFrancese(String titoloFrancese) {
+        this.titoloFrancese = titoloFrancese;
+    }
+
     public void setDescrizioneItaliano(String descrizioneItaliano) {
         this.descrizioneItaliano = descrizioneItaliano;
     }
 
     public void setDescrizioneInglese(String descrizioneInglese) {
         this.descrizioneInglese = descrizioneInglese;
+    }
+
+    public void setDescrizioneTedesco(String descrizioneTedesco) {
+        this.descrizioneTedesco = descrizioneTedesco;
+    }
+
+    public void setDescrizioneFrancese(String descrizioneFrancese) {
+        this.descrizioneFrancese = descrizioneFrancese;
     }
 
     public void setCitta(String citta) {
@@ -346,48 +458,80 @@ public class Pdi implements Parcelable {
         this.email = email;
     }
 
-    public void setTitoloLinkGenerico1Italiano(String titoloLinkGenerico1Italiano) {
-        this.titoloLinkGenerico1Italiano = titoloLinkGenerico1Italiano;
+    public void setTitoloLink1GenericoItaliano(String titoloLink1GenericoItaliano) {
+        this.titoloLink1GenericoItaliano = titoloLink1GenericoItaliano;
     }
 
-    public void setTitoloLinkGenerico1Inglese(String titoloLinkGenerico1Inglese) {
-        this.titoloLinkGenerico1Inglese = titoloLinkGenerico1Inglese;
+    public void setTitoloLink1GenericoInglese(String titoloLink1GenericoInglese) {
+        this.titoloLink1GenericoInglese = titoloLink1GenericoInglese;
+    }
+
+    public void setTitoloLink1GenericoTedesco(String titoloLink1GenericoTedesco) {
+        this.titoloLink1GenericoTedesco = titoloLink1GenericoTedesco;
+    }
+
+    public void setTitoloLink1GenericoFrancese(String titoloLink1GenericoFrancese) {
+        this.titoloLink1GenericoFrancese = titoloLink1GenericoFrancese;
     }
 
     public void setLinkGenerico1(String linkGenerico1) {
         this.linkGenerico1 = linkGenerico1;
     }
 
-    public void setTitoloLinkGenerico2Italiano(String titoloLinkGenerico2Italiano) {
-        this.titoloLinkGenerico2Italiano = titoloLinkGenerico2Italiano;
+    public void setTitoloLink2GenericoItaliano(String titoloLink2GenericoItaliano) {
+        this.titoloLink2GenericoItaliano = titoloLink2GenericoItaliano;
     }
 
-    public void setTitoloLinkGenerico2Inglese(String titoloLinkGenerico2Inglese) {
-        this.titoloLinkGenerico2Inglese = titoloLinkGenerico2Inglese;
+    public void setTitoloLink2GenericoInglese(String titoloLink2GenericoInglese) {
+        this.titoloLink2GenericoInglese = titoloLink2GenericoInglese;
+    }
+
+    public void setTitoloLink2GenericoTedesco(String titoloLink2GenericoTedesco) {
+        this.titoloLink2GenericoTedesco = titoloLink2GenericoTedesco;
+    }
+
+    public void setTitoloLink2GenericoFrancese(String titoloLink2GenericoFrancese) {
+        this.titoloLink2GenericoFrancese = titoloLink2GenericoFrancese;
     }
 
     public void setLinkGenerico2(String linkGenerico2) {
         this.linkGenerico1 = linkGenerico2;
     }
 
-    public void setTitoloLinkGenerico3Italiano(String titoloLinkGenerico3Italiano) {
-        this.titoloLinkGenerico3Italiano = titoloLinkGenerico3Italiano;
+    public void setTitoloLink3GenericoItaliano(String titoloLink3GenericoItaliano) {
+        this.titoloLink3GenericoItaliano = titoloLink3GenericoItaliano;
     }
 
-    public void setTitoloLinkGenerico3Inglese(String titoloLinkGenerico3Inglese) {
-        this.titoloLinkGenerico3Inglese = titoloLinkGenerico3Inglese;
+    public void setTitoloLink3GenericoInglese(String titoloLink3GenericoInglese) {
+        this.titoloLink3GenericoInglese = titoloLink3GenericoInglese;
+    }
+
+    public void setTitoloLink3GenericoTedesco(String titoloLink3GenericoTedesco) {
+        this.titoloLink3GenericoTedesco = titoloLink3GenericoTedesco;
+    }
+
+    public void setTitoloLink3GenericoFrancese(String titoloLink3GenericoFrancese) {
+        this.titoloLink3GenericoFrancese = titoloLink3GenericoFrancese;
     }
 
     public void setLinkGenerico3(String linkGenerico3) {
         this.linkGenerico3 = linkGenerico3;
     }
 
-    public void setTitoloLinkGenerico4Italiano(String titoloLinkGenerico4Italiano) {
-        this.titoloLinkGenerico4Italiano = titoloLinkGenerico4Italiano;
+    public void setTitoloLink4GenericoItaliano(String titoloLink4GenericoItaliano) {
+        this.titoloLink4GenericoItaliano = titoloLink4GenericoItaliano;
     }
 
-    public void setTitoloLinkGenerico4Inglese(String titoloLinkGenerico4Inglese) {
-        this.titoloLinkGenerico4Inglese = titoloLinkGenerico4Inglese;
+    public void setTitoloLink4GenericoInglese(String titoloLink4GenericoInglese) {
+        this.titoloLink4GenericoInglese = titoloLink4GenericoInglese;
+    }
+
+    public void setTitoloLink4GenericoTedesco(String titoloLink4GenericoTedesco) {
+        this.titoloLink4GenericoTedesco = titoloLink4GenericoTedesco;
+    }
+
+    public void setTitoloLink4GenericoFrancese(String titoloLink4GenericoFrancese) {
+        this.titoloLink4GenericoFrancese = titoloLink4GenericoFrancese;
     }
 
     public void setLinkGenerico4(String linkGenerico4) {
@@ -411,8 +555,12 @@ public class Pdi implements Parcelable {
         dest.writeInt(ordinamento);
         dest.writeString(titoloItaliano);
         dest.writeString(titoloInglese);
+        dest.writeString(titoloTedesco);
+        dest.writeString(titoloFrancese);
         dest.writeString(descrizioneItaliano);
         dest.writeString(descrizioneInglese);
+        dest.writeString(descrizioneTedesco);
+        dest.writeString(descrizioneFrancese);
         dest.writeString(citta);
         dest.writeString(via);
         dest.writeInt(numeroCivico);
@@ -424,17 +572,25 @@ public class Pdi implements Parcelable {
         dest.writeString(fax);
         dest.writeString(cellulare);
         dest.writeString(email);
-        dest.writeString(titoloLinkGenerico1Italiano);
-        dest.writeString(titoloLinkGenerico1Inglese);
+        dest.writeString(titoloLink1GenericoItaliano);
+        dest.writeString(titoloLink1GenericoInglese);
+        dest.writeString(titoloLink1GenericoTedesco);
+        dest.writeString(titoloLink1GenericoFrancese);
         dest.writeString(linkGenerico1);
-        dest.writeString(titoloLinkGenerico2Italiano);
-        dest.writeString(titoloLinkGenerico2Inglese);
+        dest.writeString(titoloLink2GenericoItaliano);
+        dest.writeString(titoloLink2GenericoInglese);
+        dest.writeString(titoloLink2GenericoTedesco);
+        dest.writeString(titoloLink2GenericoFrancese);
         dest.writeString(linkGenerico2);
-        dest.writeString(titoloLinkGenerico3Italiano);
-        dest.writeString(titoloLinkGenerico3Inglese);
+        dest.writeString(titoloLink3GenericoItaliano);
+        dest.writeString(titoloLink3GenericoInglese);
+        dest.writeString(titoloLink3GenericoTedesco);
+        dest.writeString(titoloLink3GenericoFrancese);
         dest.writeString(linkGenerico3);
-        dest.writeString(titoloLinkGenerico4Italiano);
-        dest.writeString(titoloLinkGenerico4Inglese);
+        dest.writeString(titoloLink4GenericoItaliano);
+        dest.writeString(titoloLink4GenericoInglese);
+        dest.writeString(titoloLink4GenericoTedesco);
+        dest.writeString(titoloLink4GenericoFrancese);
         dest.writeString(linkGenerico4);
         dest.writeString(fileTracciaGps);
     }
@@ -460,8 +616,12 @@ public class Pdi implements Parcelable {
                 "\nordinamento: " + ordinamento +
                 "\ntitoloItaliano: " + titoloItaliano +
                 "\ntitoloInglese: " + titoloInglese +
+                "\ntitoloTedesco: " + titoloTedesco +
+                "\ntitoloFrancese: " + titoloFrancese +
                 "\ndescrizioneItaliano: " + descrizioneItaliano +
                 "\ndescrizioneInglese: " + descrizioneInglese +
+                "\ndescrizioneTedesco: " + descrizioneTedesco +
+                "\ndescrizioneFrancese: " + descrizioneFrancese +
                 "\ncitta: " + citta +
                 "\nvia: " + via +
                 "\nnumeroCivico: " + numeroCivico +
@@ -473,17 +633,25 @@ public class Pdi implements Parcelable {
                 "\nfax: " + fax +
                 "\ncellulare: " + cellulare +
                 "\nemail: " + email +
-                "\ntitoloLinkGenerico1Italiano: " + titoloLinkGenerico1Italiano +
-                "\ntitoloLinkGenerico1Inglese: " + titoloLinkGenerico1Inglese +
+                "\ntitoloLink1GenericoItaliano: " + titoloLink1GenericoItaliano +
+                "\ntitoloLink1GenericoInglese: " + titoloLink1GenericoInglese +
+                "\ntitoloLink1GenericoTedesco: " + titoloLink1GenericoTedesco +
+                "\ntitoloLink1GenericoFrancese: " + titoloLink1GenericoFrancese +
                 "\nlinkGenerico1: " + linkGenerico1 +
-                "\ntitoloLinkGenerico2Italiano: " + titoloLinkGenerico2Italiano +
-                "\ntitoloLinkGenerico2Inglese: " + titoloLinkGenerico2Inglese +
+                "\ntitoloLink2GenericoItaliano: " + titoloLink2GenericoItaliano +
+                "\ntitoloLink2GenericoInglese: " + titoloLink2GenericoInglese +
+                "\ntitoloLink2GenericoTedesco: " + titoloLink2GenericoTedesco +
+                "\ntitoloLink2GenericoFrancese: " + titoloLink2GenericoFrancese +
                 "\nlinkGenerico2: " + linkGenerico2 +
-                "\ntitoloLinkGenerico3Italiano: " + titoloLinkGenerico3Italiano +
-                "\ntitoloLinkGenerico3Inglese: " + titoloLinkGenerico3Inglese +
+                "\ntitoloLink3GenericoItaliano: " + titoloLink3GenericoItaliano +
+                "\ntitoloLink3GenericoInglese: " + titoloLink3GenericoInglese +
+                "\ntitoloLink3GenericoTedesco: " + titoloLink3GenericoTedesco +
+                "\ntitoloLink3GenericoFrancese: " + titoloLink3GenericoFrancese +
                 "\nlinkGenerico3: " + linkGenerico3 +
-                "\ntitoloLinkGenerico4Italiano: " + titoloLinkGenerico4Italiano +
-                "\ntitoloLinkGenerico4Inglese: " + titoloLinkGenerico4Inglese +
+                "\ntitoloLink4GenericoItaliano: " + titoloLink4GenericoItaliano +
+                "\ntitoloLink4GenericoInglese: " + titoloLink4GenericoInglese +
+                "\ntitoloLink4GenericoTedesco: " + titoloLink4GenericoTedesco +
+                "\ntitoloLink4GenericoFrancese: " + titoloLink4GenericoFrancese +
                 "\nlinkGenerico4: " + linkGenerico4 +
                 "\nfileTracciaGps: " + fileTracciaGps +
                 "\n\n";

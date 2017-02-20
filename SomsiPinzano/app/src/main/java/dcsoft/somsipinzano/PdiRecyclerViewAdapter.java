@@ -32,6 +32,16 @@ class PdiRecyclerViewAdapter extends RecyclerView.Adapter<PdiRecyclerViewAdapter
             }
             break;
 
+            case "Deutsch": {
+                holder.tvTitoloPdi.setText(pdi.get(position).getTitoloTedesco());
+            }
+            break;
+
+            case "français": {
+                holder.tvTitoloPdi.setText(pdi.get(position).getTitoloFrancese());
+            }
+            break;
+
             default: {
                 holder.tvTitoloPdi.setText(pdi.get(position).getTitoloInglese());
             }

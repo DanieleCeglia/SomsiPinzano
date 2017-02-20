@@ -335,7 +335,7 @@ public class PdiDettaglioFragment extends Fragment {
                 if (mainActivity.pdiScelto.getDescrizioneItaliano() != null) {
                     dvDescrizione.setText(mainActivity.pdiScelto.getDescrizioneItaliano());
 
-                    final Handler handler = new Handler(); // serve per sistemare la rotazione di dvDescrizione che in landscape non prende tutta l'area orrizzontale
+                    final Handler handler = new Handler(); // serve per sistemare la rotazione di dvDescrizione che in landscape non prende tutta l'area orizzontale
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -347,17 +347,79 @@ public class PdiDettaglioFragment extends Fragment {
                     dvDescrizione.setVisibility(View.GONE);
                 }
 
-                if (mainActivity.pdiScelto.getTitoloLinkGenerico1Italiano() != null) {
-                    tvIntestazioneLink1.setText(mainActivity.pdiScelto.getTitoloLinkGenerico1Italiano() + ":");
+                if (mainActivity.pdiScelto.getTitoloLink1GenericoItaliano() != null) {
+                    tvIntestazioneLink1.setText(mainActivity.pdiScelto.getTitoloLink1GenericoItaliano() + ":");
                 }
-                if (mainActivity.pdiScelto.getTitoloLinkGenerico2Italiano() != null) {
-                    tvIntestazioneLink2.setText(mainActivity.pdiScelto.getTitoloLinkGenerico2Italiano() + ":");
+                if (mainActivity.pdiScelto.getTitoloLink2GenericoItaliano() != null) {
+                    tvIntestazioneLink2.setText(mainActivity.pdiScelto.getTitoloLink2GenericoItaliano() + ":");
                 }
-                if (mainActivity.pdiScelto.getTitoloLinkGenerico3Italiano() != null) {
-                    tvIntestazioneLink3.setText(mainActivity.pdiScelto.getTitoloLinkGenerico3Italiano() + ":");
+                if (mainActivity.pdiScelto.getTitoloLink3GenericoItaliano() != null) {
+                    tvIntestazioneLink3.setText(mainActivity.pdiScelto.getTitoloLink3GenericoItaliano() + ":");
                 }
-                if (mainActivity.pdiScelto.getTitoloLinkGenerico4Italiano() != null) {
-                    tvIntestazioneLink4.setText(mainActivity.pdiScelto.getTitoloLinkGenerico4Italiano() + ":");
+                if (mainActivity.pdiScelto.getTitoloLink4GenericoItaliano() != null) {
+                    tvIntestazioneLink4.setText(mainActivity.pdiScelto.getTitoloLink4GenericoItaliano() + ":");
+                }
+            }
+            break;
+
+            case "Deutsch": {
+                if (mainActivity.pdiScelto.getDescrizioneTedesco() != null) {
+                    dvDescrizione.setText(mainActivity.pdiScelto.getDescrizioneTedesco());
+
+                    final Handler handler = new Handler(); // serve per sistemare la rotazione di dvDescrizione che in landscape non prende tutta l'area orizzontale
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            dvDescrizione.setText(mainActivity.pdiScelto.getDescrizioneTedesco());
+                        }
+                    }, 50);
+                } else {
+                    tvIntestazioneDescrizione.setVisibility(View.GONE);
+                    dvDescrizione.setVisibility(View.GONE);
+                }
+
+                if (mainActivity.pdiScelto.getTitoloLink1GenericoTedesco() != null) {
+                    tvIntestazioneLink1.setText(mainActivity.pdiScelto.getTitoloLink1GenericoTedesco() + ":");
+                }
+                if (mainActivity.pdiScelto.getTitoloLink2GenericoTedesco() != null) {
+                    tvIntestazioneLink2.setText(mainActivity.pdiScelto.getTitoloLink2GenericoTedesco() + ":");
+                }
+                if (mainActivity.pdiScelto.getTitoloLink3GenericoTedesco() != null) {
+                    tvIntestazioneLink3.setText(mainActivity.pdiScelto.getTitoloLink3GenericoTedesco() + ":");
+                }
+                if (mainActivity.pdiScelto.getTitoloLink4GenericoTedesco() != null) {
+                    tvIntestazioneLink4.setText(mainActivity.pdiScelto.getTitoloLink4GenericoTedesco() + ":");
+                }
+            }
+            break;
+
+            case "français": {
+                if (mainActivity.pdiScelto.getDescrizioneFrancese() != null) {
+                    dvDescrizione.setText(mainActivity.pdiScelto.getDescrizioneFrancese());
+
+                    final Handler handler = new Handler(); // serve per sistemare la rotazione di dvDescrizione che in landscape non prende tutta l'area orizzontale
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            dvDescrizione.setText(mainActivity.pdiScelto.getDescrizioneFrancese());
+                        }
+                    }, 50);
+                } else {
+                    tvIntestazioneDescrizione.setVisibility(View.GONE);
+                    dvDescrizione.setVisibility(View.GONE);
+                }
+
+                if (mainActivity.pdiScelto.getTitoloLink1GenericoFrancese() != null) {
+                    tvIntestazioneLink1.setText(mainActivity.pdiScelto.getTitoloLink1GenericoFrancese() + ":");
+                }
+                if (mainActivity.pdiScelto.getTitoloLink2GenericoFrancese() != null) {
+                    tvIntestazioneLink2.setText(mainActivity.pdiScelto.getTitoloLink2GenericoFrancese() + ":");
+                }
+                if (mainActivity.pdiScelto.getTitoloLink3GenericoFrancese() != null) {
+                    tvIntestazioneLink3.setText(mainActivity.pdiScelto.getTitoloLink3GenericoFrancese() + ":");
+                }
+                if (mainActivity.pdiScelto.getTitoloLink4GenericoFrancese() != null) {
+                    tvIntestazioneLink4.setText(mainActivity.pdiScelto.getTitoloLink4GenericoFrancese() + ":");
                 }
             }
             break;
@@ -366,7 +428,7 @@ public class PdiDettaglioFragment extends Fragment {
                 if (mainActivity.pdiScelto.getDescrizioneInglese() != null) {
                     dvDescrizione.setText(mainActivity.pdiScelto.getDescrizioneInglese());
 
-                    final Handler handler = new Handler(); // serve per sistemare la rotazione di dvDescrizione che in landscape non prende tutta l'area orrizzontale
+                    final Handler handler = new Handler(); // serve per sistemare la rotazione di dvDescrizione che in landscape non prende tutta l'area orizzontale
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -378,17 +440,17 @@ public class PdiDettaglioFragment extends Fragment {
                     dvDescrizione.setVisibility(View.GONE);
                 }
 
-                if (mainActivity.pdiScelto.getTitoloLinkGenerico1Inglese() != null) {
-                    tvIntestazioneLink1.setText(mainActivity.pdiScelto.getTitoloLinkGenerico1Inglese() + ":");
+                if (mainActivity.pdiScelto.getTitoloLink1GenericoInglese() != null) {
+                    tvIntestazioneLink1.setText(mainActivity.pdiScelto.getTitoloLink1GenericoInglese() + ":");
                 }
-                if (mainActivity.pdiScelto.getTitoloLinkGenerico2Inglese() != null) {
-                    tvIntestazioneLink2.setText(mainActivity.pdiScelto.getTitoloLinkGenerico2Inglese() + ":");
+                if (mainActivity.pdiScelto.getTitoloLink2GenericoInglese() != null) {
+                    tvIntestazioneLink2.setText(mainActivity.pdiScelto.getTitoloLink2GenericoInglese() + ":");
                 }
-                if (mainActivity.pdiScelto.getTitoloLinkGenerico3Inglese() != null) {
-                    tvIntestazioneLink3.setText(mainActivity.pdiScelto.getTitoloLinkGenerico3Inglese() + ":");
+                if (mainActivity.pdiScelto.getTitoloLink3GenericoInglese() != null) {
+                    tvIntestazioneLink3.setText(mainActivity.pdiScelto.getTitoloLink3GenericoInglese() + ":");
                 }
-                if (mainActivity.pdiScelto.getTitoloLinkGenerico4Inglese() != null) {
-                    tvIntestazioneLink4.setText(mainActivity.pdiScelto.getTitoloLinkGenerico4Inglese() + ":");
+                if (mainActivity.pdiScelto.getTitoloLink4GenericoInglese() != null) {
+                    tvIntestazioneLink4.setText(mainActivity.pdiScelto.getTitoloLink4GenericoInglese() + ":");
                 }
             }
         }
@@ -465,6 +527,16 @@ public class PdiDettaglioFragment extends Fragment {
             switch (mainActivity.gestoreDatabaseCondiviso.getLingua()) {
                 case "italiano": {
                     mainActivity.impostaActionBar(true, mainActivity.pdiScelto.getTitoloItaliano());
+                }
+                break;
+
+                case "Deutsch": {
+                    mainActivity.impostaActionBar(true, mainActivity.pdiScelto.getTitoloTedesco());
+                }
+                break;
+
+                case "français": {
+                    mainActivity.impostaActionBar(true, mainActivity.pdiScelto.getTitoloFrancese());
                 }
                 break;
 

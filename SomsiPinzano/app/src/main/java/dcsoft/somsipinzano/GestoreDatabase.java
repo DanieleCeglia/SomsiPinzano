@@ -322,32 +322,44 @@ class GestoreDatabase extends SQLiteOpenHelper {
                         cursor.getInt(3),      // ordinamento
                         cursor.getString(4),   // titoloItaliano
                         cursor.getString(5),   // titoloInglese
-                        cursor.getString(6),   // descrizioneItaliano
-                        cursor.getString(7),   // descrizioneInglese
-                        cursor.getString(8),   // citta
-                        cursor.getString(9),   // via
-                        cursor.getInt(10),     // numeroCivico
-                        cursor.getString(11),  // interno
-                        cursor.getInt(12),     // cap
-                        cursor.getDouble(13),  // latitudine
-                        cursor.getDouble(14),  // longitudine
-                        cursor.getString(15),  // telefono
-                        cursor.getString(16),  // fax
-                        cursor.getString(17),  // cellulare
-                        cursor.getString(18),  // email
-                        cursor.getString(19),  // titoloLinkGenerico1Italiano
-                        cursor.getString(20),  // titoloLinkGenerico1Inglese
-                        cursor.getString(21),  // linkGenerico1
-                        cursor.getString(22),  // titoloLinkGenerico2Italiano
-                        cursor.getString(23),  // titoloLinkGenerico2Inglese
-                        cursor.getString(24),  // linkGenerico2
-                        cursor.getString(25),  // titoloLinkGenerico3Italiano
-                        cursor.getString(26),  // titoloLinkGenerico3Inglese
-                        cursor.getString(27),  // linkGenerico3
-                        cursor.getString(28),  // titoloLinkGenerico4Italiano
-                        cursor.getString(29),  // titoloLinkGenerico4Inglese
-                        cursor.getString(30),  // linkGenerico4
-                        cursor.getString(31)); // fileTracciaGps
+                        cursor.getString(6),   // titoloTedesco
+                        cursor.getString(7),   // titoloFrancese
+                        cursor.getString(8),   // descrizioneItaliano
+                        cursor.getString(9),   // descrizioneInglese
+                        cursor.getString(10),  // descrizioneTedesco
+                        cursor.getString(11),  // descrizioneFrancese
+                        cursor.getString(12),  // citta
+                        cursor.getString(13),  // via
+                        cursor.getInt(14),     // numeroCivico
+                        cursor.getString(15),  // interno
+                        cursor.getInt(16),     // cap
+                        cursor.getDouble(17),  // latitudine
+                        cursor.getDouble(18),  // longitudine
+                        cursor.getString(19),  // telefono
+                        cursor.getString(20),  // fax
+                        cursor.getString(21),  // cellulare
+                        cursor.getString(22),  // email
+                        cursor.getString(23),  // titoloLinkGenerico1Italiano
+                        cursor.getString(24),  // titoloLinkGenerico1Inglese
+                        cursor.getString(25),  // titoloLink1GenericoTedesco
+                        cursor.getString(26),  // titoloLink1GenericoFrancese
+                        cursor.getString(27),  // linkGenerico1
+                        cursor.getString(28),  // titoloLinkGenerico2Italiano
+                        cursor.getString(29),  // titoloLinkGenerico2Inglese
+                        cursor.getString(30),  // titoloLink2GenericoTedesco
+                        cursor.getString(31),  // titoloLink2GenericoFrancese
+                        cursor.getString(32),  // linkGenerico2
+                        cursor.getString(33),  // titoloLinkGenerico3Italiano
+                        cursor.getString(34),  // titoloLinkGenerico3Inglese
+                        cursor.getString(35),  // titoloLink3GenericoTedesco
+                        cursor.getString(36),  // titoloLink3GenericoFrancese
+                        cursor.getString(37),  // linkGenerico3
+                        cursor.getString(38),  // titoloLinkGenerico4Italiano
+                        cursor.getString(39),  // titoloLinkGenerico4Inglese
+                        cursor.getString(40),  // titoloLink4GenericoTedesco
+                        cursor.getString(41),  // titoloLink4GenericoFrancese
+                        cursor.getString(42),  // linkGenerico4
+                        cursor.getString(43)); // fileTracciaGps
 
                 list.add(pdi);
 
@@ -381,32 +393,44 @@ class GestoreDatabase extends SQLiteOpenHelper {
                         cursor.getInt(3),      // ordinamento
                         cursor.getString(4),   // titoloItaliano
                         cursor.getString(5),   // titoloInglese
-                        cursor.getString(6),   // descrizioneItaliano
-                        cursor.getString(7),   // descrizioneInglese
-                        cursor.getString(8),   // citta
-                        cursor.getString(9),   // via
-                        cursor.getInt(10),     // numeroCivico
-                        cursor.getString(11),  // interno
-                        cursor.getInt(12),     // cap
-                        cursor.getDouble(13),  // latitudine
-                        cursor.getDouble(14),  // longitudine
-                        cursor.getString(15),  // telefono
-                        cursor.getString(16),  // fax
-                        cursor.getString(17),  // cellulare
-                        cursor.getString(18),  // email
-                        cursor.getString(19),  // titoloLinkGenerico1Italiano
-                        cursor.getString(20),  // titoloLinkGenerico1Inglese
-                        cursor.getString(21),  // linkGenerico1
-                        cursor.getString(22),  // titoloLinkGenerico2Italiano
-                        cursor.getString(23),  // titoloLinkGenerico2Inglese
-                        cursor.getString(24),  // linkGenerico2
-                        cursor.getString(25),  // titoloLinkGenerico3Italiano
-                        cursor.getString(26),  // titoloLinkGenerico3Inglese
-                        cursor.getString(27),  // linkGenerico3
-                        cursor.getString(28),  // titoloLinkGenerico4Italiano
-                        cursor.getString(29),  // titoloLinkGenerico4Inglese
-                        cursor.getString(30),  // linkGenerico4
-                        cursor.getString(31)); // fileTracciaGps
+                        cursor.getString(6),   // titoloTedesco
+                        cursor.getString(7),   // titoloFrancese
+                        cursor.getString(8),   // descrizioneItaliano
+                        cursor.getString(9),   // descrizioneInglese
+                        cursor.getString(10),  // descrizioneTedesco
+                        cursor.getString(11),  // descrizioneFrancese
+                        cursor.getString(12),  // citta
+                        cursor.getString(13),  // via
+                        cursor.getInt(14),     // numeroCivico
+                        cursor.getString(15),  // interno
+                        cursor.getInt(16),     // cap
+                        cursor.getDouble(17),  // latitudine
+                        cursor.getDouble(18),  // longitudine
+                        cursor.getString(19),  // telefono
+                        cursor.getString(20),  // fax
+                        cursor.getString(21),  // cellulare
+                        cursor.getString(22),  // email
+                        cursor.getString(23),  // titoloLinkGenerico1Italiano
+                        cursor.getString(24),  // titoloLinkGenerico1Inglese
+                        cursor.getString(25),  // titoloLink1GenericoTedesco
+                        cursor.getString(26),  // titoloLink1GenericoFrancese
+                        cursor.getString(27),  // linkGenerico1
+                        cursor.getString(28),  // titoloLinkGenerico2Italiano
+                        cursor.getString(29),  // titoloLinkGenerico2Inglese
+                        cursor.getString(30),  // titoloLink2GenericoTedesco
+                        cursor.getString(31),  // titoloLink2GenericoFrancese
+                        cursor.getString(32),  // linkGenerico2
+                        cursor.getString(33),  // titoloLinkGenerico3Italiano
+                        cursor.getString(34),  // titoloLinkGenerico3Inglese
+                        cursor.getString(35),  // titoloLink3GenericoTedesco
+                        cursor.getString(36),  // titoloLink3GenericoFrancese
+                        cursor.getString(37),  // linkGenerico3
+                        cursor.getString(38),  // titoloLinkGenerico4Italiano
+                        cursor.getString(39),  // titoloLinkGenerico4Inglese
+                        cursor.getString(40),  // titoloLink4GenericoTedesco
+                        cursor.getString(41),  // titoloLink4GenericoFrancese
+                        cursor.getString(42),  // linkGenerico4
+                        cursor.getString(43)); // fileTracciaGps
 
                 list.add(pdi);
 
@@ -440,32 +464,44 @@ class GestoreDatabase extends SQLiteOpenHelper {
                         cursor.getInt(3),      // ordinamento
                         cursor.getString(4),   // titoloItaliano
                         cursor.getString(5),   // titoloInglese
-                        cursor.getString(6),   // descrizioneItaliano
-                        cursor.getString(7),   // descrizioneInglese
-                        cursor.getString(8),   // citta
-                        cursor.getString(9),   // via
-                        cursor.getInt(10),     // numeroCivico
-                        cursor.getString(11),  // interno
-                        cursor.getInt(12),     // cap
-                        cursor.getDouble(13),  // latitudine
-                        cursor.getDouble(14),  // longitudine
-                        cursor.getString(15),  // telefono
-                        cursor.getString(16),  // fax
-                        cursor.getString(17),  // cellulare
-                        cursor.getString(18),  // email
-                        cursor.getString(19),  // titoloLinkGenerico1Italiano
-                        cursor.getString(20),  // titoloLinkGenerico1Inglese
-                        cursor.getString(21),  // linkGenerico1
-                        cursor.getString(22),  // titoloLinkGenerico2Italiano
-                        cursor.getString(23),  // titoloLinkGenerico2Inglese
-                        cursor.getString(24),  // linkGenerico2
-                        cursor.getString(25),  // titoloLinkGenerico3Italiano
-                        cursor.getString(26),  // titoloLinkGenerico3Inglese
-                        cursor.getString(27),  // linkGenerico3
-                        cursor.getString(28),  // titoloLinkGenerico4Italiano
-                        cursor.getString(29),  // titoloLinkGenerico4Inglese
-                        cursor.getString(30),  // linkGenerico4
-                        cursor.getString(31)); // fileTracciaGps
+                        cursor.getString(6),   // titoloTedesco
+                        cursor.getString(7),   // titoloFrancese
+                        cursor.getString(8),   // descrizioneItaliano
+                        cursor.getString(9),   // descrizioneInglese
+                        cursor.getString(10),  // descrizioneTedesco
+                        cursor.getString(11),  // descrizioneFrancese
+                        cursor.getString(12),  // citta
+                        cursor.getString(13),  // via
+                        cursor.getInt(14),     // numeroCivico
+                        cursor.getString(15),  // interno
+                        cursor.getInt(16),     // cap
+                        cursor.getDouble(17),  // latitudine
+                        cursor.getDouble(18),  // longitudine
+                        cursor.getString(19),  // telefono
+                        cursor.getString(20),  // fax
+                        cursor.getString(21),  // cellulare
+                        cursor.getString(22),  // email
+                        cursor.getString(23),  // titoloLinkGenerico1Italiano
+                        cursor.getString(24),  // titoloLinkGenerico1Inglese
+                        cursor.getString(25),  // titoloLink1GenericoTedesco
+                        cursor.getString(26),  // titoloLink1GenericoFrancese
+                        cursor.getString(27),  // linkGenerico1
+                        cursor.getString(28),  // titoloLinkGenerico2Italiano
+                        cursor.getString(29),  // titoloLinkGenerico2Inglese
+                        cursor.getString(30),  // titoloLink2GenericoTedesco
+                        cursor.getString(31),  // titoloLink2GenericoFrancese
+                        cursor.getString(32),  // linkGenerico2
+                        cursor.getString(33),  // titoloLinkGenerico3Italiano
+                        cursor.getString(34),  // titoloLinkGenerico3Inglese
+                        cursor.getString(35),  // titoloLink3GenericoTedesco
+                        cursor.getString(36),  // titoloLink3GenericoFrancese
+                        cursor.getString(37),  // linkGenerico3
+                        cursor.getString(38),  // titoloLinkGenerico4Italiano
+                        cursor.getString(39),  // titoloLinkGenerico4Inglese
+                        cursor.getString(40),  // titoloLink4GenericoTedesco
+                        cursor.getString(41),  // titoloLink4GenericoFrancese
+                        cursor.getString(42),  // linkGenerico4
+                        cursor.getString(43)); // fileTracciaGps
 
                 list.add(pdi);
 

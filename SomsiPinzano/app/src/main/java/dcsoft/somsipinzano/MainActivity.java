@@ -444,6 +444,16 @@ public class MainActivity extends AppCompatActivity {
                             }
                             break;
 
+                            case "Deutsch": {
+                                impostaActionBar(true, pdiScelto.getTitoloTedesco());
+                            }
+                            break;
+
+                            case "français": {
+                                impostaActionBar(true, pdiScelto.getTitoloFrancese());
+                            }
+                            break;
+
                             default: {
                                 impostaActionBar(true, pdiScelto.getTitoloInglese());
                             }

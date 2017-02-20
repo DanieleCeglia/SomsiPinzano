@@ -255,6 +255,16 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
                 }
                 break;
 
+                case "Deutsch": {
+                    markerOptions.title(pdi.getTitoloTedesco());
+                }
+                break;
+
+                case "français": {
+                    markerOptions.title(pdi.getTitoloFrancese());
+                }
+                break;
+
                 default: {
                     markerOptions.title(pdi.getTitoloInglese());
                 }
