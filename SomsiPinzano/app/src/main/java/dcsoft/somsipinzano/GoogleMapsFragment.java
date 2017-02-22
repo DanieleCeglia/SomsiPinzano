@@ -187,7 +187,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
                 info.addView(title);
                 info.addView(snippet);
 
-                gestisciTracciato(marker, false);
+                gestisciTracciato(marker);
 
                 return info;
             }
@@ -202,35 +202,14 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
             gmMap.setMyLocationEnabled(true);
         }
 
-        final LatLng pinzano = new LatLng(46.1822, 12.9452);
-
         if (!zoommaSuPdiSceltoSeNecessario()) {
             if (lat == -1) {
-                gmMap.moveCamera(CameraUpdateFactory.newLatLng(pinzano));
-                gmMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+                LatLng pinzano = new LatLng(46.1822, 12.9452);
+                gmMap.animateCamera(CameraUpdateFactory.newLatLngZoom(pinzano, 15), 1, null);
             } else {
                 LatLng centroMappaSalvato = new LatLng(lat, lon);
-
-                gmMap.moveCamera(CameraUpdateFactory.newLatLng(centroMappaSalvato));
-                gmMap.animateCamera(CameraUpdateFactory.zoomTo(zoom));
+                gmMap.animateCamera(CameraUpdateFactory.newLatLngZoom(centroMappaSalvato, zoom), 1, null);
             }
-
-            // workaround: ripeto il codice 100 ms dopo per Nexus 5X che non centra bene al primo colpo con mappa aperta per la prima volta...
-            final Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    if (lat == -1) {
-                        gmMap.moveCamera(CameraUpdateFactory.newLatLng(pinzano));
-                        gmMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-                    } else {
-                        LatLng centroMappaSalvato = new LatLng(lat, lon);
-
-                        gmMap.moveCamera(CameraUpdateFactory.newLatLng(centroMappaSalvato));
-                        gmMap.animateCamera(CameraUpdateFactory.zoomTo(zoom));
-                    }
-                }
-            }, 100);
         }
 
         for (int i = 0; i < listaPdi.size(); i++) {
@@ -283,7 +262,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
         }
 
         if (pdiTracciatoAttivo != null) {
-            impostaTracciatoSuMappa(pdiTracciatoAttivo, false);
+            impostaTracciatoSuMappa(pdiTracciatoAttivo);
         }
     }
 
@@ -298,7 +277,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
     //endregion
 
     //region Metodi privati
-    private void impostaTracciatoSuMappa(Pdi pdi, Boolean zoom) {
+    private void impostaTracciatoSuMappa(Pdi pdi) {
         String nomeFileKml = pdi.getFileTracciaGps() + ".kml";
 
         try {
@@ -306,10 +285,6 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
 
             kmlLayer = new KmlLayer(gmMap, inputStream, mainActivity.getApplicationContext());
             kmlLayer.addLayerToMap();
-
-            if (zoom) {
-                gmMap.animateCamera(CameraUpdateFactory.zoomTo(13));
-            }
 
             pdiTracciatoAttivo = pdi;
         } catch(IOException e) {
@@ -336,13 +311,13 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
         }
     }
 
-    private void gestisciTracciato(Marker marker, Boolean zoom) {
+    private void gestisciTracciato(Marker marker) {
         Pdi pdi = (Pdi) marker.getTag();
 
         if (pdi.getFileTracciaGps() == null) {
             rimuoviTracciatoSeNecessario();
         } else {
-            impostaTracciatoSuMappa(pdi, zoom);
+            impostaTracciatoSuMappa(pdi);
         }
     }
 
@@ -351,25 +326,19 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
             mainActivity.vediPdiSceltoSuGM = false;
 
             final LatLng pdiDaZoommare = new LatLng(mainActivity.pdiScelto.getLatitudine(), mainActivity.pdiScelto.getLongitudine());
-
-            gmMap.moveCamera(CameraUpdateFactory.newLatLng(pdiDaZoommare));
-            gmMap.animateCamera(CameraUpdateFactory.zoomTo(18));
+            gmMap.animateCamera(CameraUpdateFactory.newLatLngZoom(pdiDaZoommare, 18), 1, null);
 
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    // workaround: ripeto il queste due istruzioni 100 ms dopo per Nexus 5X che non centra bene al primo colpo con mappa aperta per la prima volta...
-                    gmMap.moveCamera(CameraUpdateFactory.newLatLng(pdiDaZoommare));
-                    gmMap.animateCamera(CameraUpdateFactory.zoomTo(18));
-
                     for (int i = 0; i < listaMarker.size(); i++) {
                         Marker marker = listaMarker.get(i);
 
                         if (marker.getPosition().latitude == mainActivity.pdiScelto.getLatitudine() && marker.getPosition().longitude == mainActivity.pdiScelto.getLongitudine()) {
                             marker.showInfoWindow();
 
-                            gestisciTracciato(marker, true);
+                            gmMap.animateCamera(CameraUpdateFactory.zoomTo(13));
                         } else {
                             marker.hideInfoWindow();
                         }
