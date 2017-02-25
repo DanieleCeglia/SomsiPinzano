@@ -338,7 +338,9 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
                         if (marker.getPosition().latitude == mainActivity.pdiScelto.getLatitudine() && marker.getPosition().longitude == mainActivity.pdiScelto.getLongitudine()) {
                             marker.showInfoWindow();
 
-                            gmMap.animateCamera(CameraUpdateFactory.zoomTo(13));
+                            if (mainActivity.pdiScelto.getFileTracciaGps() != null) {
+                                gmMap.animateCamera(CameraUpdateFactory.zoomTo(13));
+                            }
                         } else {
                             marker.hideInfoWindow();
                         }
