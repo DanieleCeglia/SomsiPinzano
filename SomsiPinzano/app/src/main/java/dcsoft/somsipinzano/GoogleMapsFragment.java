@@ -314,9 +314,9 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
     private void gestisciTracciato(Marker marker) {
         Pdi pdi = (Pdi) marker.getTag();
 
-        if (pdi.getFileTracciaGps() == null) {
-            rimuoviTracciatoSeNecessario();
-        } else {
+        rimuoviTracciatoSeNecessario();
+
+        if (pdi.getFileTracciaGps() != null) {
             impostaTracciatoSuMappa(pdi);
         }
     }
