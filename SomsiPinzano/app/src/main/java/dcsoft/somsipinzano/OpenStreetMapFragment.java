@@ -289,7 +289,7 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
             }
 
             pdiTracciatoAttivo = pdi;
-        } catch(IOException e) {
+        } catch(Exception e) {
             Log.d("DEBUGAPP", TAG + " Fallita lettura del file " + nomeFileKmz + " con errore: " + e);
 
             overlayTracciato = null;
