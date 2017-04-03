@@ -309,9 +309,9 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
     }
 
     private void gestisciTracciato(Pdi pdi, Boolean zoom) {
-        if (pdi.getFileTracciaGps() == null) {
-            rimuoviTracciatoSeNecessario();
-        } else  {
+        rimuoviTracciatoSeNecessario();
+
+        if (pdi.getFileTracciaGps() != null) {
             impostaTracciatoSuMappa(pdi, zoom);
         }
     }
