@@ -19,6 +19,7 @@ import org.osmdroid.util.BoundingBox;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.FolderOverlay;
+import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.compass.CompassOverlay;
 import org.osmdroid.views.overlay.compass.InternalCompassOrientationProvider;
@@ -36,7 +37,7 @@ interface OpenStreetMapFragmentEseguiAlOnHiddenChanged {
     void esegui(boolean hidden);
 }
 
-public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver {
+public class OpenStreetMapFragment extends Fragment {
     private final String TAG = getClass().getSimpleName();
     private MainActivity mainActivity;
     private MapView osmMap;
@@ -101,6 +102,22 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
         osmMap.getOverlays().add(locationOverlay);
 
         mapController = osmMap.getController();
+
+        MapEventsReceiver mapEventsReceiver = new MapEventsReceiver() {
+            @Override
+            public boolean singleTapConfirmedHelper(GeoPoint geoPoint) {
+                InfoWindow.closeAllInfoWindowsOn(osmMap);
+
+                return false;
+            }
+
+            @Override
+            public boolean longPressHelper(GeoPoint geoPoint) {
+                return false;
+            }
+        };
+        MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(mapEventsReceiver);
+        osmMap.getOverlays().add(mapEventsOverlay);
 
         if (savedInstanceState == null) {
             if (!zoommaSuPdiSceltoSeNecessario()) {
@@ -192,18 +209,6 @@ public class OpenStreetMapFragment extends Fragment implements MapEventsReceiver
         }
 
         return openStreetMapFragmentView;
-    }
-
-    @Override
-    public boolean singleTapConfirmedHelper(GeoPoint geoPoint) {
-        InfoWindow.closeAllInfoWindowsOn(osmMap);
-
-        return false;
-    }
-
-    @Override
-    public boolean longPressHelper(GeoPoint geoPoint) {
-        return false;
     }
 
     @Override
