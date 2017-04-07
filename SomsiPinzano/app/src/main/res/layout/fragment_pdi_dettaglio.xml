@@ -16,28 +16,6 @@
             android:orientation="vertical"
             android:paddingTop="10dp">
 
-            <TextView
-                android:text="@string/descrizione"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="normal|bold"
-                android:textColor="@color/colorPrimaryText"
-                android:paddingBottom="10dp"
-                android:id="@+id/tvIntestazioneDescrizione"
-                android:textAlignment="center" />
-
-            <com.bluejamesbond.text.DocumentView xmlns:ext="http://schemas.android.com/apk/res-auto"
-                android:text="TextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/dvDescrizione"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                ext:documentView_textAlignment="justified"
-                ext:documentView_textColor="@color/colorPrimaryText"
-                ext:documentView_antialias="true" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -79,6 +57,28 @@
                     android:paddingTop="5dp" />
 
             </LinearLayout>
+
+            <TextView
+                android:text="@string/descrizione"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="normal|bold"
+                android:textColor="@color/colorPrimaryText"
+                android:paddingBottom="10dp"
+                android:id="@+id/tvIntestazioneDescrizione"
+                android:textAlignment="center" />
+
+            <com.bluejamesbond.text.DocumentView xmlns:ext="http://schemas.android.com/apk/res-auto"
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/dvDescrizione"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                ext:documentView_textAlignment="justified"
+                ext:documentView_textColor="@color/colorPrimaryText"
+                ext:documentView_antialias="true" />
 
             <LinearLayout
                 android:orientation="horizontal"
