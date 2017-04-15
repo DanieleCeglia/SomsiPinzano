@@ -16,48 +16,61 @@
             android:orientation="vertical"
             android:paddingTop="10dp">
 
-            <LinearLayout
+            <android.support.percent.PercentRelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/llGalleria"
-                android:orientation="vertical">
+                android:layout_marginBottom="10dp">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/llGalleria"
+                    android:orientation="vertical"
+                    app:layout_widthPercent="100%"
+                    app:layout_aspectRatio="350%">
 
-                    <ImageView
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/ivGalleria"
-                        android:scaleType="center"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp" />
+                        android:layout_height="wrap_content">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@mipmap/ic_full_screen"
-                        android:id="@+id/ivFullScreen"
-                        android:layout_alignEnd="@id/ivGalleria"
-                        android:layout_alignBottom="@id/ivGalleria" />
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/ivGalleria"
+                            android:scaleType="center"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp" />
 
-                </RelativeLayout>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@mipmap/ic_full_screen"
+                            android:id="@+id/ivFullScreen"
+                            android:layout_alignBottom="@id/ivGalleria"
+                            android:layout_alignEnd="@id/ivGalleria" />
 
-                <TextView
-                    android:id="@+id/tvDescrizioneImmagine"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
-                    android:text="Immagine 1 di N"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="12sp"
-                    android:textStyle="normal|bold"
-                    android:visibility="gone" />
+                        <TextView
+                            android:id="@+id/tvDescrizioneImmagine"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="5dp"
+                            android:paddingTop="5dp"
+                            android:text="Immagine 1 di N"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="13sp"
+                            android:textStyle="normal|bold"
+                            android:visibility="gone"
+                            android:layout_centerInParent="true"
+                            android:layout_alignBottom="@id/ivGalleria"
+                            android:background="@drawable/rounded_corner"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:layout_marginBottom="4dp" />
 
-            </LinearLayout>
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </android.support.percent.PercentRelativeLayout>
 
             <TextView
                 android:text="@string/descrizione"

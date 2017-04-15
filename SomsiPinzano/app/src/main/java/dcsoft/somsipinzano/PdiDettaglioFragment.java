@@ -139,6 +139,7 @@ public class PdiDettaglioFragment extends Fragment {
         llGalleria                = (LinearLayout)   pdiDettaglioFragmentView.findViewById(R.id.llGalleria);
         ivGalleria                = (ImageView)      pdiDettaglioFragmentView.findViewById(R.id.ivGalleria);
         tvDescrizioneImmagine     = (TextView)       pdiDettaglioFragmentView.findViewById(R.id.tvDescrizioneImmagine);
+        tvDescrizioneImmagine.setAlpha(0.75f);
         if (ivGalleria != null) {
             ivGalleria.setOnClickListener(
                     new View.OnClickListener() {
