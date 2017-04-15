@@ -26,7 +26,11 @@ import android.widget.Toast;
 
 import com.bluejamesbond.text.DocumentView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 public class PdiDettaglioFragment extends Fragment {
@@ -613,8 +617,24 @@ public class PdiDettaglioFragment extends Fragment {
     private void impostaImmagine() {
         ImmaginePdi immaginePdi = immaginiPdi.get(indiceImmagine);
 
-        Glide.with(this).load(immaginePdi.getUrl()).into(ivGalleria);
+        Glide.with(this).load(immaginePdi.getUrl())
+                .listener(new RequestListener<String, GlideDrawable>() {
+                    @Override
+                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                        if (e instanceof UnknownHostException) {
+                            tvDescrizioneImmagine.setVisibility(View.GONE);
+                        }
 
-        tvDescrizioneImmagine.setText("Immagine " + (indiceImmagine + 1) + " di " + immaginiPdi.size());
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                        tvDescrizioneImmagine.setText("Immagine " + (indiceImmagine + 1) + " di " + immaginiPdi.size());
+                        tvDescrizioneImmagine.setVisibility(View.VISIBLE);
+
+                        return false;
+                    }
+                }).into(ivGalleria);
     }
 }

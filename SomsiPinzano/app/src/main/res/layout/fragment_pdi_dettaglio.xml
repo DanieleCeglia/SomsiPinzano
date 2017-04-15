@@ -45,16 +45,17 @@
                 </RelativeLayout>
 
                 <TextView
-                    android:text="Immagine 1 di N"
+                    android:id="@+id/tvDescrizioneImmagine"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tvDescrizioneImmagine"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:text="Immagine 1 di N"
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimary"
-                    android:textStyle="normal|bold"
                     android:textSize="12sp"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp" />
+                    android:textStyle="normal|bold"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
