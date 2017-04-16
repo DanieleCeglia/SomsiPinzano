@@ -51,20 +51,20 @@
                             android:id="@+id/tvDescrizioneImmagine"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingBottom="5dp"
-                            android:paddingTop="5dp"
+                            android:layout_alignBottom="@id/ivGalleria"
+                            android:layout_centerInParent="true"
+                            android:layout_marginBottom="4dp"
+                            android:background="@drawable/rounded_corner"
+                            android:paddingStart="6dp"
+                            android:paddingTop="1dp"
+                            android:paddingEnd="6dp"
+                            android:paddingBottom="3dp"
                             android:text="Immagine 1 di N"
                             android:textAlignment="center"
                             android:textColor="@color/colorPrimary"
-                            android:textSize="13sp"
+                            android:textSize="12sp"
                             android:textStyle="normal|bold"
-                            android:visibility="gone"
-                            android:layout_centerInParent="true"
-                            android:layout_alignBottom="@id/ivGalleria"
-                            android:background="@drawable/rounded_corner"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
-                            android:layout_marginBottom="4dp" />
+                            android:visibility="gone" />
 
                     </RelativeLayout>
 
