@@ -54,7 +54,7 @@
                             android:layout_alignBottom="@id/ivGalleria"
                             android:layout_centerInParent="true"
                             android:layout_marginBottom="4dp"
-                            android:background="@drawable/rounded_corner"
+                            android:background="@drawable/white_rounded_corner"
                             android:paddingStart="6dp"
                             android:paddingTop="1dp"
                             android:paddingEnd="6dp"
@@ -113,15 +113,15 @@
                     android:minHeight="34dp" />
 
                 <Button
-                    android:text="indirizzo"
-                    android:layout_width="match_parent"
                     android:id="@+id/btIndirizzo"
-                    android:textSize="12sp"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="37dp"
                     android:layout_gravity="center"
+                    android:text="indirizzo"
                     android:textAllCaps="false"
                     android:textColor="@color/colorIcons"
-                    android:layout_height="37dp"
-                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:textSize="12sp"
                     android:theme="@style/ColorPrimary.Button" />
             </LinearLayout>
 
