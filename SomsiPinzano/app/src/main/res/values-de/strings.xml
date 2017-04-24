@@ -29,4 +29,6 @@
     <string name="chiamare_il_numero">Rufen Sie der Telefonnummer </string>
     <string name="chiama">Anruf</string>
     <string name="no">Keine</string>
+    <string name="immagine">Bild</string>
+    <string name="di">von</string>
 </resources>

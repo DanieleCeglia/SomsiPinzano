@@ -631,7 +631,7 @@ public class PdiDettaglioFragment extends Fragment {
 
                     @Override
                     public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                        tvDescrizioneImmagine.setText("Immagine " + (indiceImmagine + 1) + " di " + immaginiPdi.size());
+                        tvDescrizioneImmagine.setText(getResources().getString(R.string.immagine) + " " + (indiceImmagine + 1) + " " + getResources().getString(R.string.di) + " " + immaginiPdi.size());
                         tvDescrizioneImmagine.setVisibility(View.VISIBLE);
 
                         return false;
