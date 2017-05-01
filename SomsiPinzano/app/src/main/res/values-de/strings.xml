@@ -3,7 +3,7 @@
     <string name="punti_di_interesse">Sehenswürdigkeiten</string>
     <string name="Categorie">Kategorien</string>
     <string name="messaggio_permessi_accettati">Alle notwendige Genehmigungen akzeptiert wurden!</string>
-    <string name="messaggio_permesso_di_archiviazione_non_accettato">GENEHMIGUNG FÜR EINSTELLUNG NICHT AKZEPTIERT\n\nEs ist notwendig für die Fliessen von der Karte zu speichern, um die Nutzung des Internets und der Daten für die Offline-Nutzung zu einschränken.\n*** Wenn die Annahme dieser Genehmigung nicht akzeptiert wurden, wird die Karte OpenStreetMap nicht verfügbar sein. ***</string>
+    <string name="messaggio_permesso_di_archiviazione_non_accettato">GENEHMIGUNG FÜR EINSTELLUNG NICHT AKZEPTIERT\n\nEs ist notwendig für die Fließen von der Karte zu speichern, um die Nutzung des Internets und der Daten für die Offline-Nutzung zu einschränken.\n*** Wenn die Annahme dieser Genehmigung nicht akzeptiert wurden, wird die Karte OpenStreetMap nicht verfügbar sein. ***</string>
     <string name="messaggio_permesso_di_localizzazione_non_accettato">GENEHMIGUNG von LOKALISIERUNG NICHT ANGENOMMEN\n\nEs ist notwendig um Ihre Position auf der Karte anzuzeigen.</string>
     <string name="normale">Normal</string>
     <string name="satellitare">Satellit</string>
