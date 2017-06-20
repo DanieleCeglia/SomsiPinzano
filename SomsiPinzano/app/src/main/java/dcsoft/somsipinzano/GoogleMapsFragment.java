@@ -123,8 +123,8 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
 
             if (cameraPosition != null) {
                 outState.putFloat("zoom", !isHidden() || zoom < 0 ? gmMap.getCameraPosition().zoom : zoom);
-                outState.putDouble("lat", gmMap.getCameraPosition().target.latitude);
-                outState.putDouble("lon", gmMap.getCameraPosition().target.longitude);
+                outState.putDouble("lat", gmMap.getCameraPosition().target.latitude > 0 ? gmMap.getCameraPosition().target.latitude : lat);
+                outState.putDouble("lon", gmMap.getCameraPosition().target.longitude > 0 ? gmMap.getCameraPosition().target.longitude : lon);
             }
 
             outState.putInt("mapType", gmMap.getMapType());
