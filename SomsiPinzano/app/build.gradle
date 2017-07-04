@@ -59,3 +59,5 @@ dependencies {
     compile 'com.google.maps.android:android-maps-utils:0.5+'
     compile 'com.github.bluejamesbond:textjustify-android:2.1.6'
 }
+
+apply plugin: 'com.google.gms.google-services'

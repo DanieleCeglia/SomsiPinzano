@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "33300827773",
+    "firebase_url": "https://vivi-pinzano.firebaseio.com",
+    "project_id": "vivi-pinzano",
+    "storage_bucket": "vivi-pinzano.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:33300827773:android:c00b572b0f90d81d",
+        "android_client_info": {
+          "package_name": "dcsoft.somsipinzano"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "33300827773-l235ech5kgtjlbeqan2b04fmsbuqsr41.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dcsoft.somsipinzano",
+            "certificate_hash": "9cc1e7c0040c068ba7699d36f17ef8eb2e9766c2"
+          }
+        },
+        {
+          "client_id": "33300827773-ldb1v7gfaoqlf03c0ra8t2n0ufqohpql.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYosZFtnexm1EHAIO3LnJQ_W4lBi1VG70"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "33300827773-ldb1v7gfaoqlf03c0ra8t2n0ufqohpql.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
