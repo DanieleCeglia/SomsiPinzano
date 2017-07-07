@@ -33,10 +33,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
-interface OpenStreetMapFragmentEseguiAlOnHiddenChanged {
-    void esegui(boolean hidden);
-}
-
 public class OpenStreetMapFragment extends Fragment {
     private final String TAG = getClass().getSimpleName();
     private MainActivity mainActivity;
@@ -50,8 +46,6 @@ public class OpenStreetMapFragment extends Fragment {
     private ArrayList<Marker> listaMarker;
     private FolderOverlay overlayTracciato;
     private Pdi pdiTracciatoAttivo;
-
-    public OpenStreetMapFragmentEseguiAlOnHiddenChanged eseguiAlOnHiddenChanged;
 
     public OpenStreetMapFragment() {
         // Required empty public constructor
@@ -231,10 +225,6 @@ public class OpenStreetMapFragment extends Fragment {
         //Log.d("DEBUGAPP", TAG + " onHiddenChanged");
 
         zoommaSuPdiSceltoSeNecessario();
-
-        if (eseguiAlOnHiddenChanged != null) {
-            eseguiAlOnHiddenChanged.esegui(hidden);
-        }
     }
 
     @Override

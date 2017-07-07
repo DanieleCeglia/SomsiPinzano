@@ -36,10 +36,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-interface GoogleMapsFragmentEseguiAlOnHiddenChanged {
-    void esegui(boolean hidden);
-}
-
 public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
     private final String TAG = getClass().getSimpleName();
     private MainActivity mainActivity;
@@ -52,8 +48,6 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
     private ArrayList<Marker> listaMarker;
     private KmlLayer kmlLayer;
     private Pdi pdiTracciatoAttivo;
-
-    public GoogleMapsFragmentEseguiAlOnHiddenChanged eseguiAlOnHiddenChanged;
 
     public GoogleMapsFragment() {
         // Required empty public constructor
@@ -141,10 +135,6 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
         //Log.d("DEBUGAPP", TAG + " onHiddenChanged");
 
         zoommaSuPdiSceltoSeNecessario();
-
-        if (eseguiAlOnHiddenChanged != null) {
-            eseguiAlOnHiddenChanged.esegui(hidden);
-        }
     }
 
     @Override
