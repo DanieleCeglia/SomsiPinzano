@@ -325,14 +325,18 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
                     for (int i = 0; i < listaMarker.size(); i++) {
                         Marker marker = listaMarker.get(i);
 
-                        if (marker.getPosition().latitude == mainActivity.pdiScelto.getLatitudine() && marker.getPosition().longitude == mainActivity.pdiScelto.getLongitudine()) {
-                            marker.showInfoWindow();
+                        if (mainActivity != null && mainActivity.pdiScelto != null) {
+                            if (marker.getPosition().latitude == mainActivity.pdiScelto.getLatitudine() && marker.getPosition().longitude == mainActivity.pdiScelto.getLongitudine()) {
+                                marker.showInfoWindow();
 
-                            if (mainActivity.pdiScelto.getFileTracciaGps() != null) {
-                                gmMap.animateCamera(CameraUpdateFactory.zoomTo(13));
+                                if (mainActivity.pdiScelto.getFileTracciaGps() != null) {
+                                    gmMap.animateCamera(CameraUpdateFactory.zoomTo(13));
+                                }
+                            } else {
+                                marker.hideInfoWindow();
                             }
                         } else {
-                            marker.hideInfoWindow();
+                            Log.d("DEBUGAPP", TAG + " [zoommaSuPdiSceltoSeNecessario - handler] mainActivity.pdiScelto nullo! ");
                         }
                     }
                 }

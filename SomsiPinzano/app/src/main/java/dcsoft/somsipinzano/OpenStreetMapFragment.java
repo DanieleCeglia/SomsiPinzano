@@ -197,7 +197,11 @@ public class OpenStreetMapFragment extends Fragment {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    impostaTracciatoSuMappa(pdiTracciatoAttivo, false);
+                    if (pdiTracciatoAttivo != null) {
+                        impostaTracciatoSuMappa(pdiTracciatoAttivo, false);
+                    } else {
+                        Log.d("DEBUGAPP", TAG + " [onCreateView - handler] pdiTracciatoAttivo nullo! ");
+                    }
                 }
             }, 100);
         }
@@ -328,13 +332,17 @@ public class OpenStreetMapFragment extends Fragment {
                     for (int i = 0; i < listaMarker.size(); i++) {
                         Marker marker = listaMarker.get(i);
 
-                        if (marker.getPosition().getLatitude() == mainActivity.pdiScelto.getLatitudine() && marker.getPosition().getLongitude() == mainActivity.pdiScelto.getLongitudine()) {
-                            marker.showInfoWindow();
+                        if (mainActivity != null && mainActivity.pdiScelto != null) {
+                            if (marker.getPosition().getLatitude() == mainActivity.pdiScelto.getLatitudine() && marker.getPosition().getLongitude() == mainActivity.pdiScelto.getLongitudine()) {
+                                marker.showInfoWindow();
 
-                            OsmdroidMarkerInfoWindow markerInfoWindow = (OsmdroidMarkerInfoWindow) marker.getInfoWindow();
-                            gestisciTracciato(markerInfoWindow.pdi, true);
+                                OsmdroidMarkerInfoWindow markerInfoWindow = (OsmdroidMarkerInfoWindow) marker.getInfoWindow();
+                                gestisciTracciato(markerInfoWindow.pdi, true);
 
-                            break;
+                                break;
+                            }
+                        } else {
+                            Log.d("DEBUGAPP", TAG + " [zoommaSuPdiSceltoSeNecessario - handler] mainActivity.pdiScelto nullo! ");
                         }
                     }
                 }

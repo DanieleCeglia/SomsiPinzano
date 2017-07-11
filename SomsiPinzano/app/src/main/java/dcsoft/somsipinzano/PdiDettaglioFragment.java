@@ -14,6 +14,7 @@ import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -344,7 +345,11 @@ public class PdiDettaglioFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            dvDescrizione.setText(mainActivity.pdiScelto.getDescrizioneItaliano());
+                            if (dvDescrizione != null && mainActivity != null && mainActivity.pdiScelto != null) {
+                                dvDescrizione.setText(mainActivity.pdiScelto.getDescrizioneItaliano());
+                            } else {
+                                Log.d("DEBUGAPP", TAG + " [onCreateView - handler] dvDescrizione o mainActivity.pdiScelto nullo! ");
+                            }
                         }
                     }, 50);
                 } else {
@@ -375,7 +380,11 @@ public class PdiDettaglioFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            dvDescrizione.setText(mainActivity.pdiScelto.getDescrizioneTedesco());
+                            if (dvDescrizione != null && mainActivity != null && mainActivity.pdiScelto != null) {
+                                dvDescrizione.setText(mainActivity.pdiScelto.getDescrizioneTedesco());
+                            } else {
+                                Log.d("DEBUGAPP", TAG + " [onCreateView - handler] dvDescrizione o mainActivity.pdiScelto nullo! ");
+                            }
                         }
                     }, 50);
                 } else {
@@ -406,7 +415,11 @@ public class PdiDettaglioFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            dvDescrizione.setText(mainActivity.pdiScelto.getDescrizioneFrancese());
+                            if (dvDescrizione != null && mainActivity != null && mainActivity.pdiScelto != null) {
+                                dvDescrizione.setText(mainActivity.pdiScelto.getDescrizioneFrancese());
+                            } else {
+                                Log.d("DEBUGAPP", TAG + " [onCreateView - handler] dvDescrizione o mainActivity.pdiScelto nullo! ");
+                            }
                         }
                     }, 50);
                 } else {
@@ -437,7 +450,11 @@ public class PdiDettaglioFragment extends Fragment {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            dvDescrizione.setText(mainActivity.pdiScelto.getDescrizioneInglese());
+                            if (dvDescrizione != null && mainActivity != null && mainActivity.pdiScelto != null) {
+                                dvDescrizione.setText(mainActivity.pdiScelto.getDescrizioneInglese());
+                            } else {
+                                Log.d("DEBUGAPP", TAG + " [onCreateView - handler] dvDescrizione o mainActivity.pdiScelto nullo! ");
+                            }
                         }
                     }, 50);
                 } else {
