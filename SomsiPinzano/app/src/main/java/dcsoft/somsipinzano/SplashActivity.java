@@ -27,10 +27,10 @@ public class SplashActivity extends AppCompatActivity {
             Fabric.with(this, new Crashlytics());
         }
 
-        final FirebaseHelper firebaseHelperCondiviso = FirebaseHelper.dammiFirebaseHelperCondiviso();
-        firebaseHelperCondiviso.scaricaDatabase();
-
         timeout = false;
+
+        /*final FirebaseHelper firebaseHelperCondiviso = FirebaseHelper.dammiFirebaseHelperCondiviso();
+        firebaseHelperCondiviso.iniziaScaricareDb();
 
         firebaseHelperCondiviso.eseguiAlScaricamentoCompletato = new FirebaseHelperEseguiAlScaricamentoCompletato() {
             @Override
@@ -47,7 +47,9 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 caricaMainActivity();
             }
-        }, 10000); // attendo 10 secondi
+        }, 10000); // attendo 10 secondi*/
+
+        caricaMainActivity();
     }
 
     void caricaMainActivity() {
