@@ -2,7 +2,9 @@ package dcsoft.somsipinzano;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -10,11 +12,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 
@@ -79,17 +84,25 @@ public class Galleria extends AppCompatActivity {
             View itemView = layoutInflater.inflate(R.layout.pagine_galleria, container, false);
             container.addView(itemView);
 
-            final SubsamplingScaleImageView imageView = (SubsamplingScaleImageView) itemView.findViewById(R.id.image);
+            final ImageView immagineGalleria = (ImageView) itemView.findViewById(R.id.immagineGalleria);
+            final SubsamplingScaleImageView immagineRidimensionabileGalleria = (SubsamplingScaleImageView) itemView.findViewById(R.id.immagineRidimensionabileGalleria);
 
             Glide.with(contesto)
                     .load(immaginiPdi.get(position).getUrl())
-                    .asBitmap()
-                    .into(new SimpleTarget<Bitmap>() {
+                    .listener(new RequestListener<Drawable>() {
                         @Override
-                        public void onResourceReady(Bitmap bitmap, GlideAnimation anim) {
-                            imageView.setImage(ImageSource.bitmap(bitmap));
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            return false;
                         }
-                    });
+
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                            immagineRidimensionabileGalleria.setImage(ImageSource.bitmap(((BitmapDrawable)resource).getBitmap()));
+                            immagineGalleria.setVisibility(View.GONE);
+
+                            return false;
+                        }
+                    }).into(immagineGalleria);
 
             return itemView;
         }

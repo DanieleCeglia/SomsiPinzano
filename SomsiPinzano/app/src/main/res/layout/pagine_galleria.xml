@@ -4,9 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/immagineGalleria" />
+
     <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/image" />
+        android:id="@+id/immagineRidimensionabileGalleria" />
 
 </LinearLayout>

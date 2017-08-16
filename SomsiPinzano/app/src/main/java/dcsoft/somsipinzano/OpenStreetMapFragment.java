@@ -14,7 +14,9 @@ import android.view.ViewGroup;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.bonuspack.kml.KmlDocument;
 import org.osmdroid.events.MapEventsReceiver;
+import org.osmdroid.tileprovider.tilesource.OnlineTileSourceBase;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.tileprovider.tilesource.XYTileSource;
 import org.osmdroid.util.BoundingBox;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
@@ -46,6 +48,12 @@ public class OpenStreetMapFragment extends Fragment {
     private ArrayList<Marker> listaMarker;
     private FolderOverlay overlayTracciato;
     private Pdi pdiTracciatoAttivo;
+    private static final OnlineTileSourceBase CYCLEMAP = new XYTileSource("CycleMap",
+            0, 17, 256, ".png", new String[] {
+            "http://a.tile.opencyclemap.org/cycle/",
+            "http://b.tile.opencyclemap.org/cycle/",
+            "http://c.tile.opencyclemap.org/cycle/" },
+            "Maps © Thunderforest, Data © OpenStreetMap contributors.");
 
     public OpenStreetMapFragment() {
         // Required empty public constructor
@@ -144,7 +152,7 @@ public class OpenStreetMapFragment extends Fragment {
         if (tipoMappa == 1) {
             osmMap.setTileSource(TileSourceFactory.MAPNIK);
         } else if (tipoMappa == 2) {
-            osmMap.setTileSource(TileSourceFactory.CYCLEMAP);
+            osmMap.setTileSource(CYCLEMAP);
         } else if (tipoMappa == 3) {
             osmMap.setTileSource(TileSourceFactory.PUBLIC_TRANSPORT);
         }
@@ -362,7 +370,7 @@ public class OpenStreetMapFragment extends Fragment {
     }
 
     public void impostaMappaCiclabile () {
-        osmMap.setTileSource(TileSourceFactory.CYCLEMAP);
+        osmMap.setTileSource(CYCLEMAP);
         tipoMappa = 2;
     }
 
