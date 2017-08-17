@@ -4,97 +4,97 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Pdi implements Parcelable {
-    private int idPdi;
-    private int idPdi_idCategoria;
-    private int idPdi_idRaggruppamento;
-    private int ordinamento;
-    private String titoloItaliano;
-    private String titoloInglese;
-    private String titoloTedesco;
-    private String titoloFrancese;
-    private String descrizioneItaliano;
-    private String descrizioneInglese;
-    private String descrizioneTedesco;
-    private String descrizioneFrancese;
-    private String citta;
-    private String via;
-    private int numeroCivico;
-    private String interno;
-    private int cap;
-    private double latitudine;
-    private double longitudine;
-    private String telefono;
-    private String fax;
-    private String cellulare;
-    private String email;
-    private String titoloLink1GenericoItaliano;
-    private String titoloLink1GenericoInglese;
-    private String titoloLink1GenericoTedesco;
-    private String titoloLink1GenericoFrancese;
-    private String linkGenerico1;
-    private String titoloLink2GenericoItaliano;
-    private String titoloLink2GenericoInglese;
-    private String titoloLink2GenericoTedesco;
-    private String titoloLink2GenericoFrancese;
-    private String linkGenerico2;
-    private String titoloLink3GenericoItaliano;
-    private String titoloLink3GenericoInglese;
-    private String titoloLink3GenericoTedesco;
-    private String titoloLink3GenericoFrancese;
-    private String linkGenerico3;
-    private String titoloLink4GenericoItaliano;
-    private String titoloLink4GenericoInglese;
-    private String titoloLink4GenericoTedesco;
-    private String titoloLink4GenericoFrancese;
-    private String linkGenerico4;
-    private String fileTracciaGps;
-    private String urlTracciaGps;
+    private Integer idPdi;
+    private Integer idPdi_idCategoria;
+    private Integer idPdi_idRaggruppamento;
+    private Integer ordinamento;
+    private String  titoloItaliano;
+    private String  titoloInglese;
+    private String  titoloTedesco;
+    private String  titoloFrancese;
+    private String  descrizioneItaliano;
+    private String  descrizioneInglese;
+    private String  descrizioneTedesco;
+    private String  descrizioneFrancese;
+    private String  citta;
+    private String  via;
+    private Integer numeroCivico;
+    private String  interno;
+    private Integer cap;
+    private double  latitudine;
+    private double  longitudine;
+    private String  telefono;
+    private String  fax;
+    private String  cellulare;
+    private String  email;
+    private String  titoloLink1GenericoItaliano;
+    private String  titoloLink1GenericoInglese;
+    private String  titoloLink1GenericoTedesco;
+    private String  titoloLink1GenericoFrancese;
+    private String  linkGenerico1;
+    private String  titoloLink2GenericoItaliano;
+    private String  titoloLink2GenericoInglese;
+    private String  titoloLink2GenericoTedesco;
+    private String  titoloLink2GenericoFrancese;
+    private String  linkGenerico2;
+    private String  titoloLink3GenericoItaliano;
+    private String  titoloLink3GenericoInglese;
+    private String  titoloLink3GenericoTedesco;
+    private String  titoloLink3GenericoFrancese;
+    private String  linkGenerico3;
+    private String  titoloLink4GenericoItaliano;
+    private String  titoloLink4GenericoInglese;
+    private String  titoloLink4GenericoTedesco;
+    private String  titoloLink4GenericoFrancese;
+    private String  linkGenerico4;
+    private String  fileTracciaGps;
+    private String  urlTracciaGps;
 
-    public Pdi(int idPdi,
-               int idPdi_idCategoria,
-               int idPdi_idRaggruppamento,
-               int ordinamento,
-               String titoloItaliano,
-               String titoloInglese,
-               String titoloTedesco,
-               String titoloFrancese,
-               String descrizioneItaliano,
-               String descrizioneInglese,
-               String descrizioneTedesco,
-               String descrizioneFrancese,
-               String citta,
-               String via,
-               int numeroCivico,
-               String interno,
-               int cap,
-               double latitudine,
-               double longitudine,
-               String telefono,
-               String fax,
-               String cellulare,
-               String email,
-               String titoloLink1GenericoItaliano,
-               String titoloLink1GenericoInglese,
-               String titoloLink1GenericoTedesco,
-               String titoloLink1GenericoFrancese,
-               String linkGenerico1,
-               String titoloLink2GenericoItaliano,
-               String titoloLink2GenericoInglese,
-               String titoloLink2GenericoTedesco,
-               String titoloLink2GenericoFrancese,
-               String linkGenerico2,
-               String titoloLink3GenericoItaliano,
-               String titoloLink3GenericoInglese,
-               String titoloLink3GenericoTedesco,
-               String titoloLink3GenericoFrancese,
-               String linkGenerico3,
-               String titoloLink4GenericoItaliano,
-               String titoloLink4GenericoInglese,
-               String titoloLink4GenericoTedesco,
-               String titoloLink4GenericoFrancese,
-               String linkGenerico4,
-               String fileTracciaGps,
-               String urlTracciaGps) {
+    public Pdi(Integer idPdi,
+               Integer idPdi_idCategoria,
+               Integer idPdi_idRaggruppamento,
+               Integer ordinamento,
+               String  titoloItaliano,
+               String  titoloInglese,
+               String  titoloTedesco,
+               String  titoloFrancese,
+               String  descrizioneItaliano,
+               String  descrizioneInglese,
+               String  descrizioneTedesco,
+               String  descrizioneFrancese,
+               String  citta,
+               String  via,
+               Integer numeroCivico,
+               String  interno,
+               Integer cap,
+               double  latitudine,
+               double  longitudine,
+               String  telefono,
+               String  fax,
+               String  cellulare,
+               String  email,
+               String  titoloLink1GenericoItaliano,
+               String  titoloLink1GenericoInglese,
+               String  titoloLink1GenericoTedesco,
+               String  titoloLink1GenericoFrancese,
+               String  linkGenerico1,
+               String  titoloLink2GenericoItaliano,
+               String  titoloLink2GenericoInglese,
+               String  titoloLink2GenericoTedesco,
+               String  titoloLink2GenericoFrancese,
+               String  linkGenerico2,
+               String  titoloLink3GenericoItaliano,
+               String  titoloLink3GenericoInglese,
+               String  titoloLink3GenericoTedesco,
+               String  titoloLink3GenericoFrancese,
+               String  linkGenerico3,
+               String  titoloLink4GenericoItaliano,
+               String  titoloLink4GenericoInglese,
+               String  titoloLink4GenericoTedesco,
+               String  titoloLink4GenericoFrancese,
+               String  linkGenerico4,
+               String  fileTracciaGps,
+               String  urlTracciaGps) {
         super();
 
         this.idPdi                       = idPdi;
@@ -194,19 +194,19 @@ public class Pdi implements Parcelable {
         this.urlTracciaGps               = parcel.readString();
     }
 
-    public int getIdPdi() {
+    public Integer getIdPdi() {
         return idPdi;
     }
 
-    public int getIdPdi_idCategoria() {
+    public Integer getIdPdi_idCategoria() {
         return idPdi_idCategoria;
     }
 
-    public int getIdPdi_idRaggruppamento() {
+    public Integer getIdPdi_idRaggruppamento() {
         return idPdi_idRaggruppamento;
     }
 
-    public int getOrdinamento() {
+    public Integer getOrdinamento() {
         return ordinamento;
     }
 
@@ -250,7 +250,7 @@ public class Pdi implements Parcelable {
         return via;
     }
 
-    public int getNumeroCivico() {
+    public Integer getNumeroCivico() {
         return numeroCivico;
     }
 
@@ -258,7 +258,7 @@ public class Pdi implements Parcelable {
         return interno;
     }
 
-    public int getCap() {
+    public Integer getCap() {
         return cap;
     }
 
@@ -374,19 +374,19 @@ public class Pdi implements Parcelable {
         return urlTracciaGps;
     }
 
-    public void setIdPdi(int idPdi) {
+    public void setIdPdi(Integer idPdi) {
         this.idPdi = idPdi;
     }
 
-    public void setIdPdi_idCategoria(int idPdi_idCategoria) {
+    public void setIdPdi_idCategoria(Integer idPdi_idCategoria) {
         this.idPdi_idCategoria = idPdi_idCategoria;
     }
 
-    public void setIdPdi_idRaggruppamento(int idPdi_idRaggruppamento) {
+    public void setIdPdi_idRaggruppamento(Integer idPdi_idRaggruppamento) {
         this.idPdi_idRaggruppamento = idPdi_idRaggruppamento;
     }
 
-    public void setOrdinamento(int ordinamento) {
+    public void setOrdinamento(Integer ordinamento) {
         this.ordinamento = ordinamento;
     }
 
@@ -430,7 +430,7 @@ public class Pdi implements Parcelable {
         this.via = via;
     }
 
-    public void setNumeroCivico(int numeroCivico) {
+    public void setNumeroCivico(Integer numeroCivico) {
         this.numeroCivico = numeroCivico;
     }
 
@@ -438,7 +438,7 @@ public class Pdi implements Parcelable {
         this.interno = interno;
     }
 
-    public void setCap(int cap) {
+    public void setCap(Integer cap) {
         this.cap = cap;
     }
 

@@ -4,14 +4,14 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class RaggruppamentoPdi implements Parcelable {
-    private int idRaggruppamentoPdi;
-    private int ordinamento;
-    private String nomeRaggruppamentoItaliano;
-    private String nomeRaggruppamentoInglese;
-    private String nomeRaggruppamentoTedesco;
-    private String nomeRaggruppamentoFrancese;
+    private Integer idRaggruppamentoPdi;
+    private Integer ordinamento;
+    private String  nomeRaggruppamentoItaliano;
+    private String  nomeRaggruppamentoInglese;
+    private String  nomeRaggruppamentoTedesco;
+    private String  nomeRaggruppamentoFrancese;
 
-    public RaggruppamentoPdi(int idRaggruppamentoPdi, int ordinamento, String nomeRaggruppamentoItaliano, String nomeRaggruppamentoInglese, String nomeRaggruppamentoTedesco, String nomeRaggruppamentoFrancese) {
+    public RaggruppamentoPdi(Integer idRaggruppamentoPdi, Integer ordinamento, String nomeRaggruppamentoItaliano, String nomeRaggruppamentoInglese, String nomeRaggruppamentoTedesco, String nomeRaggruppamentoFrancese) {
         super();
 
         this.idRaggruppamentoPdi        = idRaggruppamentoPdi;
@@ -33,11 +33,11 @@ public class RaggruppamentoPdi implements Parcelable {
         this.nomeRaggruppamentoFrancese = parcel.readString();
     }
 
-    public int getIdRaggruppamentoPdi() {
+    public Integer getIdRaggruppamentoPdi() {
         return idRaggruppamentoPdi;
     }
 
-    public int getOrdinamento() {
+    public Integer getOrdinamento() {
         return ordinamento;
     }
 
@@ -57,10 +57,10 @@ public class RaggruppamentoPdi implements Parcelable {
         return nomeRaggruppamentoFrancese;
     }
 
-    public void setIdRaggruppamentoPdi(int idRaggruppamentoPdi) {
+    public void setIdRaggruppamentoPdi(Integer idRaggruppamentoPdi) {
         this.idRaggruppamentoPdi = idRaggruppamentoPdi;
     }
-    public void setOrdinamento(int ordinamento) {
+    public void setOrdinamento(Integer ordinamento) {
         this.ordinamento = ordinamento;
     }
 

@@ -4,21 +4,21 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Categoria implements Parcelable {
-    private int idCategoria;
-    private int ordinamento;
-    private String nomeItaliano;
-    private String nomeInglese;
-    private String nomeTedesco;
-    private String nomeFrancese;
-    private String descrizioneItaliano;
-    private String descrizioneInglese;
-    private String descrizioneTedesco;
-    private String descrizioneFrancese;
-    private String fileImmagine;
-    private String fileImmagineCopertina;
-    private String filePin;
+    private Integer idCategoria;
+    private Integer ordinamento;
+    private String  nomeItaliano;
+    private String  nomeInglese;
+    private String  nomeTedesco;
+    private String  nomeFrancese;
+    private String  descrizioneItaliano;
+    private String  descrizioneInglese;
+    private String  descrizioneTedesco;
+    private String  descrizioneFrancese;
+    private String  fileImmagine;
+    private String  fileImmagineCopertina;
+    private String  filePin;
 
-    public Categoria(int idCategoria, int ordinamento, String nomeItaliano, String nomeInglese, String nomeTedesco, String nomeFrancese, String descrizioneItaliano, String descrizioneInglese, String descrizioneTedesco, String descrizioneFrancese, String fileImmagine, String fileImmagineCopertina, String filePin) {
+    public Categoria(Integer idCategoria, Integer ordinamento, String nomeItaliano, String nomeInglese, String nomeTedesco, String nomeFrancese, String descrizioneItaliano, String descrizioneInglese, String descrizioneTedesco, String descrizioneFrancese, String fileImmagine, String fileImmagineCopertina, String filePin) {
         super();
 
         this.idCategoria           = idCategoria;
@@ -54,11 +54,11 @@ public class Categoria implements Parcelable {
         this.filePin               = parcel.readString();
     }
 
-    public int getIdCategoria() {
+    public Integer getIdCategoria() {
         return idCategoria;
     }
 
-    public int getOrdinamento() {
+    public Integer getOrdinamento() {
         return ordinamento;
     }
 
@@ -106,11 +106,11 @@ public class Categoria implements Parcelable {
         return filePin;
     }
 
-    public void setIdCategoria(int idCategoria) {
+    public void setIdCategoria(Integer idCategoria) {
         this.idCategoria = idCategoria;
     }
 
-    public void setOrdinamento(int ordinamento) {
+    public void setOrdinamento(Integer ordinamento) {
         this.ordinamento = ordinamento;
     }
 

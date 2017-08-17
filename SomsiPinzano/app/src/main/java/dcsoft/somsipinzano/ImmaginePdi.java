@@ -4,12 +4,12 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class ImmaginePdi implements Parcelable {
-    private int idImmaginePdi;
-    private int idImmaginePdi_idPdi;
-    private int ordinamento;
-    private String url;
+    private Integer idImmaginePdi;
+    private Integer idImmaginePdi_idPdi;
+    private Integer ordinamento;
+    private String  url;
 
-    public ImmaginePdi(int idImmaginePdi, int idImmaginePdi_idPdi, int ordinamento, String url) {
+    public ImmaginePdi(Integer idImmaginePdi, Integer idImmaginePdi_idPdi, Integer ordinamento, String url) {
         super();
 
         this.idImmaginePdi       = idImmaginePdi;
@@ -27,15 +27,15 @@ public class ImmaginePdi implements Parcelable {
         this.url                 = parcel.readString();
     }
 
-    public int getIdImmaginePdi() {
+    public Integer getIdImmaginePdi() {
         return idImmaginePdi;
     }
 
-    public int getIdImmaginePdi_idPdi() {
+    public Integer getIdImmaginePdi_idPdi() {
         return idImmaginePdi_idPdi;
     }
 
-    public int getOrdinamento() {
+    public Integer getOrdinamento() {
         return ordinamento;
     }
 
@@ -43,15 +43,15 @@ public class ImmaginePdi implements Parcelable {
         return url;
     }
 
-    public void setIdImmaginePdi(int idImmaginePdi) {
+    public void setIdImmaginePdi(Integer idImmaginePdi) {
         this.idImmaginePdi = idImmaginePdi;
     }
 
-    public void setIdImmaginePdi_idPdi(int idImmaginePdi_idPdi) {
+    public void setIdImmaginePdi_idPdi(Integer idImmaginePdi_idPdi) {
         this.idImmaginePdi_idPdi = idImmaginePdi_idPdi;
     }
 
-    public void setOrdinamento(int ordinamento) {
+    public void setOrdinamento(Integer ordinamento) {
         this.ordinamento = ordinamento;
     }
 
