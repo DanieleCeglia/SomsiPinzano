@@ -359,7 +359,8 @@ class GestoreDatabase extends SQLiteOpenHelper {
                         cursor.getString(40),  // titoloLink4GenericoTedesco
                         cursor.getString(41),  // titoloLink4GenericoFrancese
                         cursor.getString(42),  // linkGenerico4
-                        cursor.getString(43)); // fileTracciaGps
+                        cursor.getString(43),  // fileTracciaGps
+                        cursor.getString(44)); // urlTracciaGps
 
                 list.add(pdi);
 
@@ -430,7 +431,8 @@ class GestoreDatabase extends SQLiteOpenHelper {
                         cursor.getString(40),  // titoloLink4GenericoTedesco
                         cursor.getString(41),  // titoloLink4GenericoFrancese
                         cursor.getString(42),  // linkGenerico4
-                        cursor.getString(43)); // fileTracciaGps
+                        cursor.getString(43),  // fileTracciaGps
+                        cursor.getString(44)); // urlTracciaGps
 
                 list.add(pdi);
 
@@ -501,7 +503,8 @@ class GestoreDatabase extends SQLiteOpenHelper {
                         cursor.getString(40),  // titoloLink4GenericoTedesco
                         cursor.getString(41),  // titoloLink4GenericoFrancese
                         cursor.getString(42),  // linkGenerico4
-                        cursor.getString(43)); // fileTracciaGps
+                        cursor.getString(43),  // fileTracciaGps
+                        cursor.getString(44)); // urlTracciaGps
 
                 list.add(pdi);
 

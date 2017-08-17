@@ -201,7 +201,8 @@ class FirebaseHelper {
                                             (String) snapshot.child("titoloLink4GenericoTedesco").getValue(),
                                             (String) snapshot.child("titoloLink4GenericoFrancese").getValue(),
                                             (String) snapshot.child("linkGenerico4").getValue(),
-                                            (String) snapshot.child("fileTracciaGps").getValue());
+                                            (String) snapshot.child("fileTracciaGps").getValue(),
+                                            (String) snapshot.child("urlTracciaGps").getValue());
 
                     listaPdi.add(pdi);
                 }

@@ -48,6 +48,7 @@ public class Pdi implements Parcelable {
     private String titoloLink4GenericoFrancese;
     private String linkGenerico4;
     private String fileTracciaGps;
+    private String urlTracciaGps;
 
     public Pdi(int idPdi,
                int idPdi_idCategoria,
@@ -92,7 +93,8 @@ public class Pdi implements Parcelable {
                String titoloLink4GenericoTedesco,
                String titoloLink4GenericoFrancese,
                String linkGenerico4,
-               String fileTracciaGps) {
+               String fileTracciaGps,
+               String urlTracciaGps) {
         super();
 
         this.idPdi                       = idPdi;
@@ -139,6 +141,7 @@ public class Pdi implements Parcelable {
         this.titoloLink4GenericoFrancese = titoloLink4GenericoFrancese;
         this.linkGenerico4               = linkGenerico4;
         this.fileTracciaGps              = fileTracciaGps;
+        this.urlTracciaGps               = urlTracciaGps;
     }
 
     public Pdi(Parcel parcel) {
@@ -188,6 +191,7 @@ public class Pdi implements Parcelable {
         this.titoloLink4GenericoFrancese = parcel.readString();
         this.linkGenerico4               = parcel.readString();
         this.fileTracciaGps              = parcel.readString();
+        this.urlTracciaGps               = parcel.readString();
     }
 
     public int getIdPdi() {
@@ -366,6 +370,10 @@ public class Pdi implements Parcelable {
         return fileTracciaGps;
     }
 
+    public String getUrlTracciaGps() {
+        return urlTracciaGps;
+    }
+
     public void setIdPdi(int idPdi) {
         this.idPdi = idPdi;
     }
@@ -542,6 +550,10 @@ public class Pdi implements Parcelable {
         this.fileTracciaGps = fileTracciaGps;
     }
 
+    public void setUrlTracciaGps(String urlTracciaGps) {
+        this.urlTracciaGps = urlTracciaGps;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -593,6 +605,7 @@ public class Pdi implements Parcelable {
         dest.writeString(titoloLink4GenericoFrancese);
         dest.writeString(linkGenerico4);
         dest.writeString(fileTracciaGps);
+        dest.writeString(urlTracciaGps);
     }
 
     public final static Parcelable.Creator CREATOR = new Parcelable.Creator() {
@@ -654,6 +667,7 @@ public class Pdi implements Parcelable {
                 "\ntitoloLink4GenericoFrancese: " + titoloLink4GenericoFrancese +
                 "\nlinkGenerico4: " + linkGenerico4 +
                 "\nfileTracciaGps: " + fileTracciaGps +
+                "\nurlTracciaGps: " + urlTracciaGps +
                 "\n\n";
     }
 }
