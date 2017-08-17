@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
@@ -67,6 +66,18 @@ class FirebaseHelper {
         return firebaseHelperCondiviso;
     }
 
+    private void gestisciErroreScaricamentoIniziale() {
+        scaricamentoRiuscito = false;
+
+        lanciaEventoScaricamentoCompletato();
+    }
+
+    private void lanciaEventoScaricamentoCompletato() {
+        if (eseguiAlScaricamentoCompletato != null) {
+            eseguiAlScaricamentoCompletato.esegui();
+        }
+    }
+
     void iniziaScaricareDb() {
         Log.d("DEBUGAPP", TAG + " [iniziaScaricareDb]");
 
@@ -76,20 +87,34 @@ class FirebaseHelper {
                 listaCategoria = new ArrayList<Categoria>();
 
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                    String idCategoria           = (String) snapshot.child("idCategoria").getValue();
+                    String ordinamento           = (String) snapshot.child("ordinamento").getValue();
+                    String nomeItaliano          = (String) snapshot.child("nomeItaliano").getValue();
+                    String nomeInglese           = (String) snapshot.child("nomeInglese").getValue();
+                    String nomeTedesco           = (String) snapshot.child("nomeTedesco").getValue();
+                    String nomeFrancese          = (String) snapshot.child("nomeFrancese").getValue();
+                    String descrizioneItaliano   = (String) snapshot.child("descrizioneItaliano").getValue();
+                    String descrizioneInglese    = (String) snapshot.child("descrizioneInglese").getValue();
+                    String descrizioneTedesco    = (String) snapshot.child("descrizioneTedesco").getValue();
+                    String descrizioneFrancese   = (String) snapshot.child("descrizioneFrancese").getValue();
+                    String fileImmagine          = (String) snapshot.child("fileImmagine").getValue();
+                    String fileImmagineCopertina = (String) snapshot.child("fileImmagineCopertina").getValue();
+                    String filePin               = (String) snapshot.child("filePin").getValue();
+
                     Categoria categoria = new Categoria(
-                            Integer.valueOf((String) snapshot.child("idCategoria").getValue()),
-                            Integer.valueOf((String) snapshot.child("ordinamento").getValue()),
-                                            (String) snapshot.child("nomeItaliano").getValue(),
-                                            (String) snapshot.child("nomeInglese").getValue(),
-                                            (String) snapshot.child("nomeTedesco").getValue(),
-                                            (String) snapshot.child("nomeFrancese").getValue(),
-                                            (String) snapshot.child("descrizioneItaliano").getValue(),
-                                            (String) snapshot.child("descrizioneInglese").getValue(),
-                                            (String) snapshot.child("descrizioneTedesco").getValue(),
-                                            (String) snapshot.child("descrizioneFrancese").getValue(),
-                                            (String) snapshot.child("fileImmagine").getValue(),
-                                            (String) snapshot.child("fileImmagineCopertina").getValue(),
-                                            (String) snapshot.child("filePin").getValue());
+                            idCategoria           == null || idCategoria.equals("<null>")           ? null : Integer.valueOf(idCategoria),
+                            ordinamento           == null || ordinamento.equals("<null>")           ? null : Integer.valueOf(ordinamento),
+                            nomeItaliano          == null || nomeItaliano.equals("<null>")          ? null : nomeItaliano,
+                            nomeInglese           == null || nomeInglese.equals("<null>")           ? null : nomeInglese,
+                            nomeTedesco           == null || nomeTedesco.equals("<null>")           ? null : nomeTedesco,
+                            nomeFrancese          == null || nomeFrancese.equals("<null>")          ? null : nomeFrancese,
+                            descrizioneItaliano   == null || descrizioneItaliano.equals("<null>")   ? null : descrizioneItaliano,
+                            descrizioneInglese    == null || descrizioneInglese.equals("<null>")    ? null : descrizioneInglese,
+                            descrizioneTedesco    == null || descrizioneTedesco.equals("<null>")    ? null : descrizioneTedesco,
+                            descrizioneFrancese   == null || descrizioneFrancese.equals("<null>")   ? null : descrizioneFrancese,
+                            fileImmagine          == null || fileImmagine.equals("<null>")          ? null : fileImmagine,
+                            fileImmagineCopertina == null || fileImmagineCopertina.equals("<null>") ? null : fileImmagineCopertina,
+                            filePin               == null || filePin.equals("<null>")               ? null : filePin);
 
                     listaCategoria.add(categoria);
                 }
@@ -103,11 +128,7 @@ class FirebaseHelper {
             public void onCancelled(DatabaseError databaseError) {
                 Log.d("DEBUGAPP", TAG + "[iniziaScaricareDb - onCancelled] databaseError: " + databaseError.toException());
 
-                scaricamentoRiuscito = false;
-
-                if (eseguiAlScaricamentoCompletato != null) {
-                    eseguiAlScaricamentoCompletato.esegui();
-                }
+                gestisciErroreScaricamentoIniziale();
             }
         });
     }
@@ -121,11 +142,16 @@ class FirebaseHelper {
                 listaImmaginePdi = new ArrayList<ImmaginePdi>();
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String idImmaginePdi       = (String) snapshot.child("idImmaginePdi").getValue();
+                    String idImmaginePdi_idPdi = (String) snapshot.child("idImmaginePdi_idPdi").getValue();
+                    String ordinamento         = (String) snapshot.child("ordinamento").getValue();
+                    String url                 = (String) snapshot.child("url").getValue();
+
                     ImmaginePdi immaginePdi = new ImmaginePdi(
-                            Integer.valueOf((String) snapshot.child("idImmaginePdi").getValue()),
-                            Integer.valueOf((String) snapshot.child("idImmaginePdi_idPdi").getValue()),
-                            Integer.valueOf((String) snapshot.child("ordinamento").getValue()),
-                            (String) snapshot.child("url").getValue());
+                            idImmaginePdi       == null || idImmaginePdi.equals("<null>")       ? null : Integer.valueOf(idImmaginePdi),
+                            idImmaginePdi_idPdi == null || idImmaginePdi_idPdi.equals("<null>") ? null : Integer.valueOf(idImmaginePdi_idPdi),
+                            ordinamento         == null || ordinamento.equals("<null>")         ? null : Integer.valueOf(ordinamento),
+                            url                 == null || url.equals("<null>")                 ? null : url);
 
                     listaImmaginePdi.add(immaginePdi);
                 }
@@ -139,11 +165,7 @@ class FirebaseHelper {
             public void onCancelled(DatabaseError databaseError) {
                 Log.d("DEBUGAPP", TAG + "[scaricaImmaginePdi - onCancelled] databaseError: " + databaseError.toException());
 
-                scaricamentoRiuscito = false;
-
-                if (eseguiAlScaricamentoCompletato != null) {
-                    eseguiAlScaricamentoCompletato.esegui();
-                }
+                gestisciErroreScaricamentoIniziale();
             }
         });
     }
@@ -157,52 +179,98 @@ class FirebaseHelper {
                 listaPdi = new ArrayList<Pdi>();
 
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                    String idPdi                       = (String) snapshot.child("idPdi").getValue();
+                    String idPdi_idCategoria           = (String) snapshot.child("idPdi_idCategoria").getValue();
+                    String idPdi_idRaggruppamento      = (String) snapshot.child("idPdi_idRaggruppamento").getValue();
+                    String ordinamento                 = (String) snapshot.child("ordinamento").getValue();
+                    String titoloItaliano              = (String) snapshot.child("titoloItaliano").getValue();
+                    String titoloInglese               = (String) snapshot.child("titoloInglese").getValue();
+                    String titoloTedesco               = (String) snapshot.child("titoloTedesco").getValue();
+                    String titoloFrancese              = (String) snapshot.child("titoloFrancese").getValue();
+                    String descrizioneItaliano         = (String) snapshot.child("descrizioneItaliano").getValue();
+                    String descrizioneInglese          = (String) snapshot.child("descrizioneInglese").getValue();
+                    String descrizioneTedesco          = (String) snapshot.child("descrizioneTedesco").getValue();
+                    String descrizioneFrancese         = (String) snapshot.child("descrizioneFrancese").getValue();
+                    String citta                       = (String) snapshot.child("citta").getValue();
+                    String via                         = (String) snapshot.child("via").getValue();
+                    String numeroCivico                = (String) snapshot.child("numeroCivico").getValue();
+                    String interno                     = (String) snapshot.child("interno").getValue();
+                    String cap                         = (String) snapshot.child("cap").getValue();
+                    String latitudine                  = (String) snapshot.child("latitudine").getValue();
+                    String longitudine                 = (String) snapshot.child("longitudine").getValue();
+                    String telefono                    = (String) snapshot.child("telefono").getValue();
+                    String fax                         = (String) snapshot.child("fax").getValue();
+                    String cellulare                   = (String) snapshot.child("cellulare").getValue();
+                    String email                       = (String) snapshot.child("email").getValue();
+                    String titoloLink1GenericoItaliano = (String) snapshot.child("titoloLink1GenericoItaliano").getValue();
+                    String titoloLink1GenericoInglese  = (String) snapshot.child("titoloLink1GenericoInglese").getValue();
+                    String titoloLink1GenericoTedesco  = (String) snapshot.child("titoloLink1GenericoTedesco").getValue();
+                    String titoloLink1GenericoFrancese = (String) snapshot.child("titoloLink1GenericoFrancese").getValue();
+                    String linkGenerico1               = (String) snapshot.child("linkGenerico1").getValue();
+                    String titoloLink2GenericoItaliano = (String) snapshot.child("titoloLink2GenericoItaliano").getValue();
+                    String titoloLink2GenericoInglese  = (String) snapshot.child("titoloLink2GenericoInglese").getValue();
+                    String titoloLink2GenericoTedesco  = (String) snapshot.child("titoloLink2GenericoTedesco").getValue();
+                    String titoloLink2GenericoFrancese = (String) snapshot.child("titoloLink2GenericoFrancese").getValue();
+                    String linkGenerico2               = (String) snapshot.child("linkGenerico2").getValue();
+                    String titoloLink3GenericoItaliano = (String) snapshot.child("titoloLink3GenericoItaliano").getValue();
+                    String titoloLink3GenericoInglese  = (String) snapshot.child("titoloLink3GenericoInglese").getValue();
+                    String titoloLink3GenericoTedesco  = (String) snapshot.child("titoloLink3GenericoTedesco").getValue();
+                    String titoloLink3GenericoFrancese = (String) snapshot.child("titoloLink3GenericoFrancese").getValue();
+                    String linkGenerico3               = (String) snapshot.child("linkGenerico3").getValue();
+                    String titoloLink4GenericoItaliano = (String) snapshot.child("titoloLink4GenericoItaliano").getValue();
+                    String titoloLink4GenericoInglese  = (String) snapshot.child("titoloLink4GenericoInglese").getValue();
+                    String titoloLink4GenericoTedesco  = (String) snapshot.child("titoloLink4GenericoTedesco").getValue();
+                    String titoloLink4GenericoFrancese = (String) snapshot.child("titoloLink4GenericoFrancese").getValue();
+                    String linkGenerico4               = (String) snapshot.child("linkGenerico4").getValue();
+                    String fileTracciaGps              = (String) snapshot.child("fileTracciaGps").getValue();
+                    String urlTracciaGps               = (String) snapshot.child("urlTracciaGps").getValue();
+
                     Pdi pdi = new Pdi(
-                            Integer.valueOf((String) snapshot.child("idPdi").getValue()),
-                            Integer.valueOf((String) snapshot.child("idPdi_idCategoria").getValue()),
-                            Integer.valueOf((String) snapshot.child("idPdi_idRaggruppamento").getValue()),
-                            Integer.valueOf((String) snapshot.child("ordinamento").getValue()),
-                                            (String) snapshot.child("titoloItaliano").getValue(),
-                                            (String) snapshot.child("titoloInglese").getValue(),
-                                            (String) snapshot.child("titoloTedesco").getValue(),
-                                            (String) snapshot.child("titoloFrancese").getValue(),
-                                            (String) snapshot.child("descrizioneItaliano").getValue(),
-                                            (String) snapshot.child("descrizioneInglese").getValue(),
-                                            (String) snapshot.child("descrizioneTedesco").getValue(),
-                                            (String) snapshot.child("descrizioneFrancese").getValue(),
-                                            (String) snapshot.child("citta").getValue(),
-                                            (String) snapshot.child("via").getValue(),
-                            Integer.valueOf((String) snapshot.child("numeroCivico").getValue()),
-                                            (String) snapshot.child("interno").getValue(),
-                            Integer.valueOf((String) snapshot.child("cap").getValue()),
-                             Double.valueOf((String) snapshot.child("latitudine").getValue()),
-                             Double.valueOf((String) snapshot.child("longitudine").getValue()),
-                                            (String) snapshot.child("telefono").getValue(),
-                                            (String) snapshot.child("fax").getValue(),
-                                            (String) snapshot.child("cellulare").getValue(),
-                                            (String) snapshot.child("email").getValue(),
-                                            (String) snapshot.child("titoloLinkGenerico1Italiano").getValue(),
-                                            (String) snapshot.child("titoloLinkGenerico1Inglese").getValue(),
-                                            (String) snapshot.child("titoloLink1GenericoTedesco").getValue(),
-                                            (String) snapshot.child("titoloLink1GenericoFrancese").getValue(),
-                                            (String) snapshot.child("linkGenerico1").getValue(),
-                                            (String) snapshot.child("titoloLinkGenerico2Italiano").getValue(),
-                                            (String) snapshot.child("titoloLinkGenerico2Inglese").getValue(),
-                                            (String) snapshot.child("titoloLink2GenericoTedesco").getValue(),
-                                            (String) snapshot.child("titoloLink2GenericoFrancese").getValue(),
-                                            (String) snapshot.child("linkGenerico2").getValue(),
-                                            (String) snapshot.child("titoloLinkGenerico3Italiano").getValue(),
-                                            (String) snapshot.child("titoloLinkGenerico3Inglese").getValue(),
-                                            (String) snapshot.child("titoloLink3GenericoTedesco").getValue(),
-                                            (String) snapshot.child("titoloLink3GenericoFrancese").getValue(),
-                                            (String) snapshot.child("linkGenerico3").getValue(),
-                                            (String) snapshot.child("titoloLinkGenerico4Italiano").getValue(),
-                                            (String) snapshot.child("titoloLinkGenerico4Inglese").getValue(),
-                                            (String) snapshot.child("titoloLink4GenericoTedesco").getValue(),
-                                            (String) snapshot.child("titoloLink4GenericoFrancese").getValue(),
-                                            (String) snapshot.child("linkGenerico4").getValue(),
-                                            (String) snapshot.child("fileTracciaGps").getValue(),
-                                            (String) snapshot.child("urlTracciaGps").getValue());
+                            idPdi                       == null || idPdi.equals("<null>")                       ? null : Integer.valueOf(idPdi),
+                            idPdi_idCategoria           == null || idPdi_idCategoria.equals("<null>")           ? null : Integer.valueOf(idPdi_idCategoria),
+                            idPdi_idRaggruppamento      == null || idPdi_idRaggruppamento.equals("<null>")      ? null : Integer.valueOf(idPdi_idRaggruppamento),
+                            ordinamento                 == null || ordinamento.equals("<null>")                 ? null : Integer.valueOf(ordinamento),
+                            titoloItaliano              == null || titoloItaliano.equals("<null>")              ? null : titoloItaliano,
+                            titoloInglese               == null || titoloInglese.equals("<null>")               ? null : titoloInglese,
+                            titoloTedesco               == null || titoloTedesco.equals("<null>")               ? null : titoloTedesco,
+                            titoloFrancese              == null || titoloFrancese.equals("<null>")              ? null : titoloFrancese,
+                            descrizioneItaliano         == null || descrizioneItaliano.equals("<null>")         ? null : descrizioneItaliano,
+                            descrizioneInglese          == null || descrizioneInglese.equals("<null>")          ? null : descrizioneInglese,
+                            descrizioneTedesco          == null || descrizioneTedesco.equals("<null>")          ? null : descrizioneTedesco,
+                            descrizioneFrancese         == null || descrizioneFrancese.equals("<null>")         ? null : descrizioneFrancese,
+                            citta                       == null || citta.equals("<null>")                       ? null : citta,
+                            via                         == null || via.equals("<null>")                         ? null : via,
+                            numeroCivico                == null || numeroCivico.equals("<null>")                ? null : Integer.valueOf(numeroCivico),
+                            interno                     == null || interno.equals("<null>")                     ? null : interno,
+                            cap                         == null || cap.equals("<null>")                         ? null : Integer.valueOf(cap),
+                            latitudine                  == null || latitudine.equals("<null>")                  ? null : Double.valueOf(latitudine),
+                            longitudine                 == null || longitudine.equals("<null>")                 ? null : Double.valueOf(longitudine),
+                            telefono                    == null || telefono.equals("<null>")                    ? null : telefono,
+                            fax                         == null || fax.equals("<null>")                         ? null : fax,
+                            cellulare                   == null || cellulare.equals("<null>")                   ? null : cellulare,
+                            email                       == null || email.equals("<null>")                       ? null : email,
+                            titoloLink1GenericoItaliano == null || titoloLink1GenericoItaliano.equals("<null>") ? null : titoloLink1GenericoItaliano,
+                            titoloLink1GenericoInglese  == null || titoloLink1GenericoInglese.equals("<null>")  ? null : titoloLink1GenericoInglese,
+                            titoloLink1GenericoTedesco  == null || titoloLink1GenericoTedesco.equals("<null>")  ? null : titoloLink1GenericoTedesco,
+                            titoloLink1GenericoFrancese == null || titoloLink1GenericoFrancese.equals("<null>") ? null : titoloLink1GenericoFrancese,
+                            linkGenerico1               == null || linkGenerico1.equals("<null>")               ? null : linkGenerico1,
+                            titoloLink2GenericoItaliano == null || titoloLink2GenericoItaliano.equals("<null>") ? null : titoloLink2GenericoItaliano,
+                            titoloLink2GenericoInglese  == null || titoloLink2GenericoInglese.equals("<null>")  ? null : titoloLink2GenericoInglese,
+                            titoloLink2GenericoTedesco  == null || titoloLink2GenericoTedesco.equals("<null>")  ? null : titoloLink2GenericoTedesco,
+                            titoloLink2GenericoFrancese == null || titoloLink2GenericoFrancese.equals("<null>") ? null : titoloLink2GenericoFrancese,
+                            linkGenerico2               == null || linkGenerico2.equals("<null>")               ? null : linkGenerico2,
+                            titoloLink3GenericoItaliano == null || titoloLink3GenericoItaliano.equals("<null>") ? null : titoloLink3GenericoItaliano,
+                            titoloLink3GenericoInglese  == null || titoloLink3GenericoInglese.equals("<null>")  ? null : titoloLink3GenericoInglese,
+                            titoloLink3GenericoTedesco  == null || titoloLink3GenericoTedesco.equals("<null>")  ? null : titoloLink3GenericoTedesco,
+                            titoloLink3GenericoFrancese == null || titoloLink3GenericoFrancese.equals("<null>") ? null : titoloLink3GenericoFrancese,
+                            linkGenerico2               == null || linkGenerico3.equals("<null>")               ? null : linkGenerico3,
+                            titoloLink4GenericoItaliano == null || titoloLink4GenericoItaliano.equals("<null>") ? null : titoloLink4GenericoItaliano,
+                            titoloLink4GenericoInglese  == null || titoloLink4GenericoInglese.equals("<null>")  ? null : titoloLink4GenericoInglese,
+                            titoloLink4GenericoTedesco  == null || titoloLink4GenericoTedesco.equals("<null>")  ? null : titoloLink4GenericoTedesco,
+                            titoloLink4GenericoFrancese == null || titoloLink4GenericoFrancese.equals("<null>") ? null : titoloLink4GenericoFrancese,
+                            linkGenerico4               == null || linkGenerico4.equals("<null>")               ? null : linkGenerico4,
+                            fileTracciaGps              == null || fileTracciaGps.equals("<null>")              ? null : fileTracciaGps,
+                            urlTracciaGps               == null || urlTracciaGps.equals("<null>")               ? null : urlTracciaGps);
 
                     listaPdi.add(pdi);
                 }
@@ -216,11 +284,7 @@ class FirebaseHelper {
             public void onCancelled(DatabaseError databaseError) {
                 Log.d("DEBUGAPP", TAG + "[scaricaPdi - onCancelled] databaseError: " + databaseError.toException());
 
-                scaricamentoRiuscito = false;
-
-                if (eseguiAlScaricamentoCompletato != null) {
-                    eseguiAlScaricamentoCompletato.esegui();
-                }
+                gestisciErroreScaricamentoIniziale();
             }
         });
     }
@@ -234,13 +298,20 @@ class FirebaseHelper {
                 listaRaggruppamentoPdi = new ArrayList<RaggruppamentoPdi>();
 
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                    String idRaggruppamentoPdi        = (String) snapshot.child("idRaggruppamentoPdi").getValue();
+                    String ordinamento                = (String) snapshot.child("ordinamento").getValue();
+                    String nomeRaggruppamentoItaliano = (String) snapshot.child("nomeRaggruppamentoItaliano").getValue();
+                    String nomeRaggruppamentoInglese  = (String) snapshot.child("nomeRaggruppamentoInglese").getValue();
+                    String nomeRaggruppamentoTedesco  = (String) snapshot.child("nomeRaggruppamentoTedesco").getValue();
+                    String nomeRaggruppamentoFrancese = (String) snapshot.child("nomeRaggruppamentoFrancese").getValue();
+
                     RaggruppamentoPdi raggruppamentoPdi = new RaggruppamentoPdi(
-                            Integer.valueOf((String) snapshot.child("idRaggruppamentoPdi").getValue()),
-                            Integer.valueOf((String) snapshot.child("ordinamento").getValue()),
-                                            (String) snapshot.child("nomeRaggruppamentoItaliano").getValue(),
-                                            (String) snapshot.child("nomeRaggruppamentoInglese").getValue(),
-                                            (String) snapshot.child("nomeRaggruppamentoTedesco").getValue(),
-                                            (String) snapshot.child("nomeRaggruppamentoFrancese").getValue());
+                            idRaggruppamentoPdi        == null || idRaggruppamentoPdi.equals("<null>")        ? null : Integer.valueOf(idRaggruppamentoPdi),
+                            ordinamento                == null || ordinamento.equals("<null>")                ? null : Integer.valueOf(ordinamento),
+                            nomeRaggruppamentoItaliano == null || nomeRaggruppamentoItaliano.equals("<null>") ? null : nomeRaggruppamentoItaliano,
+                            nomeRaggruppamentoInglese  == null || nomeRaggruppamentoInglese.equals("<null>")  ? null : nomeRaggruppamentoInglese,
+                            nomeRaggruppamentoTedesco  == null || nomeRaggruppamentoTedesco.equals("<null>")  ? null : nomeRaggruppamentoTedesco,
+                            nomeRaggruppamentoFrancese == null || nomeRaggruppamentoFrancese.equals("<null>") ? null : nomeRaggruppamentoFrancese);
 
                     listaRaggruppamentoPdi.add(raggruppamentoPdi);
                 }
@@ -249,20 +320,14 @@ class FirebaseHelper {
 
                 scaricamentoRiuscito = true;
 
-                if (eseguiAlScaricamentoCompletato != null) {
-                    eseguiAlScaricamentoCompletato.esegui();
-                }
+                lanciaEventoScaricamentoCompletato();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.d("DEBUGAPP", TAG + "[scaricaRaggruppamentoPdi - onCancelled] databaseError: " + databaseError.toException());
 
-                scaricamentoRiuscito = false;
-
-                if (eseguiAlScaricamentoCompletato != null) {
-                    eseguiAlScaricamentoCompletato.esegui();
-                }
+                gestisciErroreScaricamentoIniziale();
             }
         });
     }

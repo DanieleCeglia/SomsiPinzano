@@ -21,8 +21,8 @@ public class Pdi implements Parcelable {
     private Integer numeroCivico;
     private String  interno;
     private Integer cap;
-    private double  latitudine;
-    private double  longitudine;
+    private Double  latitudine;
+    private Double  longitudine;
     private String  telefono;
     private String  fax;
     private String  cellulare;
@@ -67,8 +67,8 @@ public class Pdi implements Parcelable {
                Integer numeroCivico,
                String  interno,
                Integer cap,
-               double  latitudine,
-               double  longitudine,
+               Double  latitudine,
+               Double  longitudine,
                String  telefono,
                String  fax,
                String  cellulare,
@@ -262,11 +262,11 @@ public class Pdi implements Parcelable {
         return cap;
     }
 
-    public double getLatitudine() {
+    public Double getLatitudine() {
         return latitudine;
     }
 
-    public double getLongitudine() {
+    public Double getLongitudine() {
         return longitudine;
     }
 
@@ -442,11 +442,11 @@ public class Pdi implements Parcelable {
         this.cap = cap;
     }
 
-    public void setLatitudine(double latitudine) {
+    public void setLatitudine(Double latitudine) {
         this.latitudine = latitudine;
     }
 
-    public void setLongitudine(double longitudine) {
+    public void setLongitudine(Double longitudine) {
         this.longitudine = longitudine;
     }
 

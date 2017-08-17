@@ -29,7 +29,13 @@ public class SplashActivity extends AppCompatActivity {
 
         timeout = false;
 
-        /*final FirebaseHelper firebaseHelperCondiviso = FirebaseHelper.dammiFirebaseHelperCondiviso();
+        caricaFirebase();
+
+        //caricaMainActivity();
+    }
+
+    void caricaFirebase() {
+        final FirebaseHelper firebaseHelperCondiviso = FirebaseHelper.dammiFirebaseHelperCondiviso();
         firebaseHelperCondiviso.iniziaScaricareDb();
 
         firebaseHelperCondiviso.eseguiAlScaricamentoCompletato = new FirebaseHelperEseguiAlScaricamentoCompletato() {
@@ -47,9 +53,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 caricaMainActivity();
             }
-        }, 10000); // attendo 10 secondi*/
-
-        caricaMainActivity();
+        }, 10000); // attendo un timeout di 10 secondi prima caricare il db squlite interno
     }
 
     void caricaMainActivity() {
