@@ -165,8 +165,8 @@ public class Categoria implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(idCategoria);
-        dest.writeInt(ordinamento);
+        dest.writeInt(idCategoria == null ? -1 : idCategoria);
+        dest.writeInt(ordinamento == null ? -1 : ordinamento);
         dest.writeString(nomeItaliano);
         dest.writeString(nomeInglese);
         dest.writeString(nomeTedesco);

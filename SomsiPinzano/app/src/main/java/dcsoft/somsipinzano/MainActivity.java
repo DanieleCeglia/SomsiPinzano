@@ -357,10 +357,20 @@ public class MainActivity extends AppCompatActivity {
             rimuoviPdiFragment();
         }
 
-        Categoria categoria = gestoreDatabaseCondiviso.dammiCategoria(pdi.getIdPdi_idCategoria());
+        Categoria categoria = null;
+        if (FirebaseHelper.dammiFirebaseHelperCondiviso().scaricamentoDatabaseRiuscitoConSuccesso()) {
+            categoria = FirebaseHelper.dammiFirebaseHelperCondiviso().dammiCategoria(pdi.getIdPdi_idCategoria());
+        } else {
+            categoria = gestoreDatabaseCondiviso.dammiCategoria(pdi.getIdPdi_idCategoria());
+        }
         categoriaScelta(categoria);
 
-        RaggruppamentoPdi raggruppamentoPdi = gestoreDatabaseCondiviso.dammiRaggruppamentoPdi(pdi.getIdPdi_idRaggruppamento());
+        RaggruppamentoPdi raggruppamentoPdi = null;
+        if (FirebaseHelper.dammiFirebaseHelperCondiviso().scaricamentoDatabaseRiuscitoConSuccesso()) {
+            raggruppamentoPdi = FirebaseHelper.dammiFirebaseHelperCondiviso().dammiRaggruppamentoPdi(pdi.getIdPdi_idRaggruppamento());
+        } else {
+            raggruppamentoPdi = gestoreDatabaseCondiviso.dammiRaggruppamentoPdi(pdi.getIdPdi_idRaggruppamento());
+        }
         raggruppamentoPdiScelto(raggruppamentoPdi);
 
         pdiScelto(pdi);

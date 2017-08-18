@@ -121,7 +121,11 @@ public class PdiDettaglioFragment extends Fragment {
         //Log.d("DEBUGAPP", TAG + " onCreateView");
 
         if (savedInstanceState == null) {
-            immaginiPdi = mainActivity.gestoreDatabaseCondiviso.dammiImmaginiPdiPerPdi(mainActivity.pdiScelto.getIdPdi());
+            if (FirebaseHelper.dammiFirebaseHelperCondiviso().scaricamentoDatabaseRiuscitoConSuccesso()) {
+                immaginiPdi = FirebaseHelper.dammiFirebaseHelperCondiviso().dammiImmaginiPdiPerPdi(mainActivity.pdiScelto.getIdPdi());
+            } else {
+                immaginiPdi = mainActivity.gestoreDatabaseCondiviso.dammiImmaginiPdiPerPdi(mainActivity.pdiScelto.getIdPdi());
+            }
             indiceImmagine = 0;
             galleriaAperta = false;
         } else {

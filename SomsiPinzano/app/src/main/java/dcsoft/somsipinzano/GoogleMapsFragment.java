@@ -183,7 +183,11 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
-        listaPdi = mainActivity.gestoreDatabaseCondiviso.dammiPdi();
+        if (FirebaseHelper.dammiFirebaseHelperCondiviso().scaricamentoDatabaseRiuscitoConSuccesso()) {
+            listaPdi = FirebaseHelper.dammiFirebaseHelperCondiviso().dammiPdi();
+        } else {
+            listaPdi = mainActivity.gestoreDatabaseCondiviso.dammiPdi();
+        }
         listaMarker = new ArrayList<Marker>();
 
         if (ActivityCompat.checkSelfPermission(mainActivity, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
@@ -208,7 +212,12 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
             LatLng posizione = new LatLng(pdi.getLatitudine(), pdi.getLongitudine());
             MarkerOptions markerOptions = new MarkerOptions().position(posizione);
 
-            Categoria categoria = mainActivity.gestoreDatabaseCondiviso.dammiCategoria(pdi.getIdPdi_idCategoria());
+            Categoria categoria = null;
+            if (FirebaseHelper.dammiFirebaseHelperCondiviso().scaricamentoDatabaseRiuscitoConSuccesso()) {
+                categoria = FirebaseHelper.dammiFirebaseHelperCondiviso().dammiCategoria(pdi.getIdPdi_idCategoria());
+            } else {
+                categoria = mainActivity.gestoreDatabaseCondiviso.dammiCategoria(pdi.getIdPdi_idCategoria());
+            }
             if (categoria != null) {
                 String nomeFileSenzaEstensione = categoria.getFilePin().substring(0, categoria.getFilePin().lastIndexOf('.'));
                 String packageName = mainActivity.getPackageName();

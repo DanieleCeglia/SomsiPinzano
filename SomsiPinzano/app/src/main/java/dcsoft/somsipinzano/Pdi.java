@@ -561,10 +561,10 @@ public class Pdi implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(idPdi);
-        dest.writeInt(idPdi_idCategoria);
-        dest.writeInt(idPdi_idRaggruppamento);
-        dest.writeInt(ordinamento);
+        dest.writeInt(idPdi                  == null ? -1 : idPdi);
+        dest.writeInt(idPdi_idCategoria      == null ? -1 : idPdi_idCategoria);
+        dest.writeInt(idPdi_idRaggruppamento == null ? -1 : idPdi_idRaggruppamento);
+        dest.writeInt(ordinamento            == null ? -1 : ordinamento);
         dest.writeString(titoloItaliano);
         dest.writeString(titoloInglese);
         dest.writeString(titoloTedesco);
@@ -575,11 +575,11 @@ public class Pdi implements Parcelable {
         dest.writeString(descrizioneFrancese);
         dest.writeString(citta);
         dest.writeString(via);
-        dest.writeInt(numeroCivico);
+        dest.writeInt(numeroCivico           == null ? -1 : numeroCivico);
         dest.writeString(interno);
-        dest.writeInt(cap);
-        dest.writeDouble(latitudine);
-        dest.writeDouble(longitudine);
+        dest.writeInt(cap                    == null ? -1 : cap);
+        dest.writeDouble(latitudine          == null ?  0 : latitudine);
+        dest.writeDouble(longitudine         == null ?  0 : longitudine);
         dest.writeString(telefono);
         dest.writeString(fax);
         dest.writeString(cellulare);

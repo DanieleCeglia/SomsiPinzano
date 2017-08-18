@@ -55,7 +55,11 @@ public class CategoriaFragment extends Fragment {
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
             if (savedInstanceState == null) {
-                categorie = mainActivity.gestoreDatabaseCondiviso.dammiCategorie();
+                if (FirebaseHelper.dammiFirebaseHelperCondiviso().scaricamentoDatabaseRiuscitoConSuccesso()) {
+                    categorie = FirebaseHelper.dammiFirebaseHelperCondiviso().dammiCategorie();
+                } else {
+                    categorie = mainActivity.gestoreDatabaseCondiviso.dammiCategorie();
+                }
             } else {
                 //Log.d("DEBUGAPP", TAG + " onCreateView savedInstanceState != null");
 

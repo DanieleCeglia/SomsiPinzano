@@ -66,9 +66,9 @@ public class ImmaginePdi implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(idImmaginePdi);
-        dest.writeInt(idImmaginePdi_idPdi);
-        dest.writeInt(ordinamento);
+        dest.writeInt(idImmaginePdi       == null ? -1 : idImmaginePdi);
+        dest.writeInt(idImmaginePdi_idPdi == null ? -1 : idImmaginePdi_idPdi);
+        dest.writeInt(ordinamento         == null ? -1 : ordinamento);
         dest.writeString(url);
     }
 

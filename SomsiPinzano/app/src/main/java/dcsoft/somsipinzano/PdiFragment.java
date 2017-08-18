@@ -101,7 +101,11 @@ public class PdiFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
         if (savedInstanceState == null) {
-            raggruppamentiPdi = mainActivity.gestoreDatabaseCondiviso.dammiRaggruppamentiPdiPerCategoria(mainActivity.categoriaScelta.getIdCategoria());
+            if (FirebaseHelper.dammiFirebaseHelperCondiviso().scaricamentoDatabaseRiuscitoConSuccesso()) {
+                raggruppamentiPdi = FirebaseHelper.dammiFirebaseHelperCondiviso().dammiRaggruppamentiPdiPerCategoria(mainActivity.categoriaScelta.getIdCategoria());
+            } else {
+                raggruppamentiPdi = mainActivity.gestoreDatabaseCondiviso.dammiRaggruppamentiPdiPerCategoria(mainActivity.categoriaScelta.getIdCategoria());
+            }
         } else {
             //Log.d("DEBUGAPP", TAG + " onCreateView savedInstanceState != null");
 
@@ -169,9 +173,17 @@ public class PdiFragment extends Fragment {
                 recyclerView.setAdapter(new RaggruppamentoPdiRecyclerViewAdapter(raggruppamentiPdi, mainActivity));
             } else {
                 if (raggruppamentiPdi.size() == 0) {
-                    pdi = mainActivity.gestoreDatabaseCondiviso.dammiPdiPerCategoria(mainActivity.categoriaScelta.getIdCategoria());
+                    if (FirebaseHelper.dammiFirebaseHelperCondiviso().scaricamentoDatabaseRiuscitoConSuccesso()) {
+                        pdi = FirebaseHelper.dammiFirebaseHelperCondiviso().dammiPdiPerCategoria(mainActivity.categoriaScelta.getIdCategoria());
+                    } else {
+                        pdi = mainActivity.gestoreDatabaseCondiviso.dammiPdiPerCategoria(mainActivity.categoriaScelta.getIdCategoria());
+                    }
                 } else {
-                    pdi = mainActivity.gestoreDatabaseCondiviso.dammiPdiPerRaggruppamento(mainActivity.raggruppamentoPdiScelto.getIdRaggruppamentoPdi());
+                    if (FirebaseHelper.dammiFirebaseHelperCondiviso().scaricamentoDatabaseRiuscitoConSuccesso()) {
+                        pdi = FirebaseHelper.dammiFirebaseHelperCondiviso().dammiPdiPerRaggruppamento(mainActivity.raggruppamentoPdiScelto.getIdRaggruppamentoPdi());
+                    } else {
+                        pdi = mainActivity.gestoreDatabaseCondiviso.dammiPdiPerRaggruppamento(mainActivity.raggruppamentoPdiScelto.getIdRaggruppamentoPdi());
+                    }
                 }
 
                 recyclerView.setAdapter(new PdiRecyclerViewAdapter(pdi, mainActivity));

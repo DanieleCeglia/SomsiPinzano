@@ -8,7 +8,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
+import javadz.beanutils.BeanComparator;
 
 interface FirebaseHelperEseguiAlScaricamentoCompletato {
     void esegui();
@@ -331,6 +338,112 @@ class FirebaseHelper {
                 gestisciErroreScaricamentoIniziale();
             }
         });
+    }
+
+    ArrayList<Categoria> dammiCategorie() {
+        return listaCategoria;
+    }
+
+    Categoria dammiCategoria(@NotNull Integer idCategoria) {
+        Categoria categoria = null;
+
+        for (Categoria c: listaCategoria) {
+            if (c.getIdCategoria().intValue() == idCategoria.intValue()) {
+                categoria = c;
+
+                break;
+            }
+        }
+
+        return categoria;
+    }
+
+    ArrayList<ImmaginePdi> dammiImmaginiPdiPerPdi(@NotNull Integer idPdi) {
+        ArrayList<ImmaginePdi> list = new ArrayList<>();
+
+        for (ImmaginePdi immPdi: listaImmaginePdi) {
+            if (immPdi.getIdImmaginePdi_idPdi().intValue() == idPdi.intValue()) {
+                list.add(immPdi);
+            }
+        }
+
+        Collections.sort(list, new BeanComparator("ordinamento"));
+
+        return list;
+    }
+
+    ArrayList<Pdi> dammiPdi() {
+        return listaPdi;
+    }
+
+    ArrayList<Pdi> dammiPdiPerCategoria(@NotNull Integer idCategoria) {
+        ArrayList<Pdi> list = new ArrayList<>();
+
+        for (Pdi p: listaPdi) {
+            if (p.getIdPdi_idCategoria() != null && p.getIdPdi_idCategoria().intValue() == idCategoria.intValue()) {
+                list.add(p);
+            }
+        }
+
+        Collections.sort(list, new BeanComparator("ordinamento"));
+
+        return list;
+    }
+
+    ArrayList<Pdi> dammiPdiPerRaggruppamento(@NotNull Integer idRaggruppamentoPdi) {
+        ArrayList<Pdi> list = new ArrayList<>();
+
+        for (Pdi p: listaPdi) {
+            if (p.getIdPdi_idRaggruppamento() != null && p.getIdPdi_idRaggruppamento().intValue() == idRaggruppamentoPdi.intValue()) {
+                list.add(p);
+            }
+        }
+
+        Collections.sort(list, new BeanComparator("ordinamento"));
+
+        return list;
+    }
+
+    RaggruppamentoPdi dammiRaggruppamentoPdi(@NotNull Integer idRaggruppamentoPdi) {
+        RaggruppamentoPdi raggruppamentoPdi = null;
+
+        for (RaggruppamentoPdi raggPdi: listaRaggruppamentoPdi) {
+            if (raggPdi.getIdRaggruppamentoPdi() != null && raggPdi.getIdRaggruppamentoPdi().intValue() == idRaggruppamentoPdi.intValue()) {
+                raggruppamentoPdi = raggPdi;
+
+                break;
+            }
+        }
+
+        return raggruppamentoPdi;
+    }
+
+    ArrayList<RaggruppamentoPdi> dammiRaggruppamentiPdiPerCategoria(@NotNull Integer idCategoria) {
+        Set<Integer> idRaggruppanetiPerCategoria = new HashSet<>();
+
+        for (Pdi p: listaPdi) {
+            if (p.getIdPdi_idCategoria() != null && p.getIdPdi_idCategoria().intValue() == idCategoria.intValue()) {
+                if (p.getIdPdi_idRaggruppamento() != null) {
+                    idRaggruppanetiPerCategoria.add(p.getIdPdi_idRaggruppamento());
+                }
+            }
+        }
+
+        ArrayList<RaggruppamentoPdi> list = new ArrayList<>();
+
+        for (Integer idRaggruppamento : idRaggruppanetiPerCategoria) {
+            for (RaggruppamentoPdi raggPdi: listaRaggruppamentoPdi) {
+                if (raggPdi.getIdRaggruppamentoPdi() != null && raggPdi.getIdRaggruppamentoPdi().intValue() == idRaggruppamento.intValue()) {
+                    list.add(raggPdi);
+
+                    break;
+                }
+            }
+        }
+
+        Collections.sort(list, new BeanComparator("ordinamento"));
+
+        return list;
     }
 
     Boolean scaricamentoDatabaseRiuscitoConSuccesso() {
