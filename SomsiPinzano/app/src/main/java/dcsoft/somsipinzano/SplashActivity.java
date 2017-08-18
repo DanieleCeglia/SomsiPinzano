@@ -53,7 +53,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 caricaMainActivity();
             }
-        }, 10000); // attendo un timeout di 10 secondi prima caricare il db squlite interno
+        }, 10000); // attendo un timeout di 10 secondi prima caricare il db sqlite interno
     }
 
     void caricaMainActivity() {

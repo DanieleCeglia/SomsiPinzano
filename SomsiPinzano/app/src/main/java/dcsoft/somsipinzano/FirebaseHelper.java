@@ -96,7 +96,7 @@ class FirebaseHelper {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.d("DEBUGAPP", TAG + "[scaricaImmaginePdi - onCancelled] databaseError: " + databaseError.toException());
+                Log.d("DEBUGAPP", TAG + "[scaricaImmaginePdi - onCancelled] databaseError: " + databaseError.toString());
 
                 gestisciErroreScaricamentoIniziale();
             }
@@ -215,7 +215,7 @@ class FirebaseHelper {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.d("DEBUGAPP", TAG + "[scaricaPdi - onCancelled] databaseError: " + databaseError.toException());
+                Log.d("DEBUGAPP", TAG + "[scaricaPdi - onCancelled] databaseError: " + databaseError.toString());
 
                 gestisciErroreScaricamentoIniziale();
             }
@@ -258,7 +258,7 @@ class FirebaseHelper {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.d("DEBUGAPP", TAG + "[scaricaRaggruppamentoPdi - onCancelled] databaseError: " + databaseError.toException());
+                Log.d("DEBUGAPP", TAG + "[scaricaRaggruppamentoPdi - onCancelled] databaseError: " + databaseError.toString());
 
                 gestisciErroreScaricamentoIniziale();
             }
@@ -326,7 +326,7 @@ class FirebaseHelper {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.d("DEBUGAPP", TAG + "[iniziaScaricareDb - onCancelled] databaseError: " + databaseError.toException());
+                Log.d("DEBUGAPP", TAG + "[iniziaScaricareDb - onCancelled] databaseError: " + databaseError.toString());
 
                 gestisciErroreScaricamentoIniziale();
             }
