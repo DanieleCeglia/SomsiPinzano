@@ -7,8 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -189,7 +187,7 @@ class GestoreDatabase extends SQLiteOpenHelper {
         return list;
     }
 
-    Categoria dammiCategoria(@NotNull Integer idCategoria) {
+    Categoria dammiCategoria(Integer idCategoria) {
         Categoria categoria = null;
 
         SQLiteDatabase database = getReadableDatabase();
@@ -227,7 +225,7 @@ class GestoreDatabase extends SQLiteOpenHelper {
         return categoria;
     }
 
-    RaggruppamentoPdi dammiRaggruppamentoPdi(@NotNull Integer idRaggruppamentoPdi) {
+    RaggruppamentoPdi dammiRaggruppamentoPdi(Integer idRaggruppamentoPdi) {
         RaggruppamentoPdi raggruppamentoPdi = null;
 
         SQLiteDatabase database = getReadableDatabase();
@@ -258,7 +256,7 @@ class GestoreDatabase extends SQLiteOpenHelper {
         return raggruppamentoPdi;
     }
 
-    ArrayList<RaggruppamentoPdi> dammiRaggruppamentiPdiPerCategoria(@NotNull Integer idCategoria) {
+    ArrayList<RaggruppamentoPdi> dammiRaggruppamentiPdiPerCategoria(Integer idCategoria) {
         ArrayList<RaggruppamentoPdi> list = new ArrayList<>();
 
         SQLiteDatabase database = getReadableDatabase();
@@ -379,7 +377,7 @@ class GestoreDatabase extends SQLiteOpenHelper {
         return list;
     }
 
-    ArrayList<Pdi> dammiPdiPerCategoria(@NotNull Integer idCategoria) {
+    ArrayList<Pdi> dammiPdiPerCategoria(Integer idCategoria) {
         ArrayList<Pdi> list = new ArrayList<>();
 
         SQLiteDatabase database = getReadableDatabase();
@@ -451,7 +449,7 @@ class GestoreDatabase extends SQLiteOpenHelper {
         return list;
     }
 
-    ArrayList<Pdi> dammiPdiPerRaggruppamento(@NotNull Integer idRaggruppamentoPdi) {
+    ArrayList<Pdi> dammiPdiPerRaggruppamento(Integer idRaggruppamentoPdi) {
         ArrayList<Pdi> list = new ArrayList<>();
 
         SQLiteDatabase database = getReadableDatabase();
@@ -523,7 +521,7 @@ class GestoreDatabase extends SQLiteOpenHelper {
         return list;
     }
 
-    ArrayList<ImmaginePdi> dammiImmaginiPdiPerPdi(@NotNull Integer idPdi) {
+    ArrayList<ImmaginePdi> dammiImmaginiPdiPerPdi(Integer idPdi) {
         ArrayList<ImmaginePdi> list = new ArrayList<>();
 
         SQLiteDatabase database = getReadableDatabase();

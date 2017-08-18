@@ -8,8 +8,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -344,11 +342,11 @@ class FirebaseHelper {
         return listaCategoria;
     }
 
-    Categoria dammiCategoria(@NotNull Integer idCategoria) {
+    Categoria dammiCategoria(Integer idCategoria) {
         Categoria categoria = null;
 
         for (Categoria c: listaCategoria) {
-            if (c.getIdCategoria().intValue() == idCategoria.intValue()) {
+            if (c.getIdCategoria() != null && idCategoria != null && c.getIdCategoria().intValue() == idCategoria.intValue()) {
                 categoria = c;
 
                 break;
@@ -358,11 +356,11 @@ class FirebaseHelper {
         return categoria;
     }
 
-    ArrayList<ImmaginePdi> dammiImmaginiPdiPerPdi(@NotNull Integer idPdi) {
+    ArrayList<ImmaginePdi> dammiImmaginiPdiPerPdi(Integer idPdi) {
         ArrayList<ImmaginePdi> list = new ArrayList<>();
 
         for (ImmaginePdi immPdi: listaImmaginePdi) {
-            if (immPdi.getIdImmaginePdi_idPdi().intValue() == idPdi.intValue()) {
+            if (immPdi.getIdImmaginePdi_idPdi() != null && idPdi != null && immPdi.getIdImmaginePdi_idPdi().intValue() == idPdi.intValue()) {
                 list.add(immPdi);
             }
         }
@@ -376,11 +374,11 @@ class FirebaseHelper {
         return listaPdi;
     }
 
-    ArrayList<Pdi> dammiPdiPerCategoria(@NotNull Integer idCategoria) {
+    ArrayList<Pdi> dammiPdiPerCategoria(Integer idCategoria) {
         ArrayList<Pdi> list = new ArrayList<>();
 
         for (Pdi p: listaPdi) {
-            if (p.getIdPdi_idCategoria() != null && p.getIdPdi_idCategoria().intValue() == idCategoria.intValue()) {
+            if (p.getIdPdi_idCategoria() != null && idCategoria != null && p.getIdPdi_idCategoria().intValue() == idCategoria.intValue()) {
                 list.add(p);
             }
         }
@@ -390,11 +388,11 @@ class FirebaseHelper {
         return list;
     }
 
-    ArrayList<Pdi> dammiPdiPerRaggruppamento(@NotNull Integer idRaggruppamentoPdi) {
+    ArrayList<Pdi> dammiPdiPerRaggruppamento(Integer idRaggruppamentoPdi) {
         ArrayList<Pdi> list = new ArrayList<>();
 
         for (Pdi p: listaPdi) {
-            if (p.getIdPdi_idRaggruppamento() != null && p.getIdPdi_idRaggruppamento().intValue() == idRaggruppamentoPdi.intValue()) {
+            if (p.getIdPdi_idRaggruppamento() != null && idRaggruppamentoPdi != null && p.getIdPdi_idRaggruppamento().intValue() == idRaggruppamentoPdi.intValue()) {
                 list.add(p);
             }
         }
@@ -404,11 +402,11 @@ class FirebaseHelper {
         return list;
     }
 
-    RaggruppamentoPdi dammiRaggruppamentoPdi(@NotNull Integer idRaggruppamentoPdi) {
+    RaggruppamentoPdi dammiRaggruppamentoPdi(Integer idRaggruppamentoPdi) {
         RaggruppamentoPdi raggruppamentoPdi = null;
 
         for (RaggruppamentoPdi raggPdi: listaRaggruppamentoPdi) {
-            if (raggPdi.getIdRaggruppamentoPdi() != null && raggPdi.getIdRaggruppamentoPdi().intValue() == idRaggruppamentoPdi.intValue()) {
+            if (raggPdi.getIdRaggruppamentoPdi() != null && idRaggruppamentoPdi != null && raggPdi.getIdRaggruppamentoPdi().intValue() == idRaggruppamentoPdi.intValue()) {
                 raggruppamentoPdi = raggPdi;
 
                 break;
@@ -418,11 +416,11 @@ class FirebaseHelper {
         return raggruppamentoPdi;
     }
 
-    ArrayList<RaggruppamentoPdi> dammiRaggruppamentiPdiPerCategoria(@NotNull Integer idCategoria) {
+    ArrayList<RaggruppamentoPdi> dammiRaggruppamentiPdiPerCategoria(Integer idCategoria) {
         Set<Integer> idRaggruppanetiPerCategoria = new HashSet<>();
 
         for (Pdi p: listaPdi) {
-            if (p.getIdPdi_idCategoria() != null && p.getIdPdi_idCategoria().intValue() == idCategoria.intValue()) {
+            if (p.getIdPdi_idCategoria() != null && idCategoria != null && p.getIdPdi_idCategoria().intValue() == idCategoria.intValue()) {
                 if (p.getIdPdi_idRaggruppamento() != null) {
                     idRaggruppanetiPerCategoria.add(p.getIdPdi_idRaggruppamento());
                 }
