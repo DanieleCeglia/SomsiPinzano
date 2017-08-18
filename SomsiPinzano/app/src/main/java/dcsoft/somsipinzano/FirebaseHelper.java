@@ -30,7 +30,8 @@ class FirebaseHelper {
     private Boolean scaricamentoRiuscito;
 
     // variabili pubbliche
-    public FirebaseHelperEseguiAlScaricamentoCompletato eseguiAlScaricamentoCompletato;
+
+    FirebaseHelperEseguiAlScaricamentoCompletato eseguiAlScaricamentoCompletato;
 
     //region Metodi privati
 
@@ -53,19 +54,6 @@ class FirebaseHelper {
         queryRaggruppamentoPdi.keepSynced(true);
     }
 
-    //endregion
-
-    //region Metodi pubblici
-
-    // singleton
-    static synchronized FirebaseHelper dammiFirebaseHelperCondiviso() {
-        if (firebaseHelperCondiviso == null) {
-            firebaseHelperCondiviso = new FirebaseHelper();
-        }
-
-        return firebaseHelperCondiviso;
-    }
-
     private void gestisciErroreScaricamentoIniziale() {
         scaricamentoRiuscito = false;
 
@@ -76,61 +64,6 @@ class FirebaseHelper {
         if (eseguiAlScaricamentoCompletato != null) {
             eseguiAlScaricamentoCompletato.esegui();
         }
-    }
-
-    void iniziaScaricareDb() {
-        Log.d("DEBUGAPP", TAG + " [iniziaScaricareDb]");
-
-        queryCategoria.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                listaCategoria = new ArrayList<Categoria>();
-
-                for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
-                    String idCategoria           = (String) snapshot.child("idCategoria").getValue();
-                    String ordinamento           = (String) snapshot.child("ordinamento").getValue();
-                    String nomeItaliano          = (String) snapshot.child("nomeItaliano").getValue();
-                    String nomeInglese           = (String) snapshot.child("nomeInglese").getValue();
-                    String nomeTedesco           = (String) snapshot.child("nomeTedesco").getValue();
-                    String nomeFrancese          = (String) snapshot.child("nomeFrancese").getValue();
-                    String descrizioneItaliano   = (String) snapshot.child("descrizioneItaliano").getValue();
-                    String descrizioneInglese    = (String) snapshot.child("descrizioneInglese").getValue();
-                    String descrizioneTedesco    = (String) snapshot.child("descrizioneTedesco").getValue();
-                    String descrizioneFrancese   = (String) snapshot.child("descrizioneFrancese").getValue();
-                    String fileImmagine          = (String) snapshot.child("fileImmagine").getValue();
-                    String fileImmagineCopertina = (String) snapshot.child("fileImmagineCopertina").getValue();
-                    String filePin               = (String) snapshot.child("filePin").getValue();
-
-                    Categoria categoria = new Categoria(
-                            idCategoria           == null || idCategoria.equals("<null>")           ? null : Integer.valueOf(idCategoria),
-                            ordinamento           == null || ordinamento.equals("<null>")           ? null : Integer.valueOf(ordinamento),
-                            nomeItaliano          == null || nomeItaliano.equals("<null>")          ? null : nomeItaliano,
-                            nomeInglese           == null || nomeInglese.equals("<null>")           ? null : nomeInglese,
-                            nomeTedesco           == null || nomeTedesco.equals("<null>")           ? null : nomeTedesco,
-                            nomeFrancese          == null || nomeFrancese.equals("<null>")          ? null : nomeFrancese,
-                            descrizioneItaliano   == null || descrizioneItaliano.equals("<null>")   ? null : descrizioneItaliano,
-                            descrizioneInglese    == null || descrizioneInglese.equals("<null>")    ? null : descrizioneInglese,
-                            descrizioneTedesco    == null || descrizioneTedesco.equals("<null>")    ? null : descrizioneTedesco,
-                            descrizioneFrancese   == null || descrizioneFrancese.equals("<null>")   ? null : descrizioneFrancese,
-                            fileImmagine          == null || fileImmagine.equals("<null>")          ? null : fileImmagine,
-                            fileImmagineCopertina == null || fileImmagineCopertina.equals("<null>") ? null : fileImmagineCopertina,
-                            filePin               == null || filePin.equals("<null>")               ? null : filePin);
-
-                    listaCategoria.add(categoria);
-                }
-
-                Log.d("DEBUGAPP", TAG + " [iniziaScaricareDb - onDataChange] listaCategoria: " + listaCategoria);
-
-                scaricaImmaginePdi();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.d("DEBUGAPP", TAG + "[iniziaScaricareDb - onCancelled] databaseError: " + databaseError.toException());
-
-                gestisciErroreScaricamentoIniziale();
-            }
-        });
     }
 
     private void scaricaImmaginePdi() {
@@ -326,6 +259,74 @@ class FirebaseHelper {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.d("DEBUGAPP", TAG + "[scaricaRaggruppamentoPdi - onCancelled] databaseError: " + databaseError.toException());
+
+                gestisciErroreScaricamentoIniziale();
+            }
+        });
+    }
+
+    //endregion
+
+    //region Metodi pubblici
+
+    // singleton
+    static synchronized FirebaseHelper dammiFirebaseHelperCondiviso() {
+        if (firebaseHelperCondiviso == null) {
+            firebaseHelperCondiviso = new FirebaseHelper();
+        }
+
+        return firebaseHelperCondiviso;
+    }
+
+    void iniziaScaricareDb() {
+        Log.d("DEBUGAPP", TAG + " [iniziaScaricareDb]");
+
+        queryCategoria.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                listaCategoria = new ArrayList<Categoria>();
+
+                for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                    String idCategoria           = (String) snapshot.child("idCategoria").getValue();
+                    String ordinamento           = (String) snapshot.child("ordinamento").getValue();
+                    String nomeItaliano          = (String) snapshot.child("nomeItaliano").getValue();
+                    String nomeInglese           = (String) snapshot.child("nomeInglese").getValue();
+                    String nomeTedesco           = (String) snapshot.child("nomeTedesco").getValue();
+                    String nomeFrancese          = (String) snapshot.child("nomeFrancese").getValue();
+                    String descrizioneItaliano   = (String) snapshot.child("descrizioneItaliano").getValue();
+                    String descrizioneInglese    = (String) snapshot.child("descrizioneInglese").getValue();
+                    String descrizioneTedesco    = (String) snapshot.child("descrizioneTedesco").getValue();
+                    String descrizioneFrancese   = (String) snapshot.child("descrizioneFrancese").getValue();
+                    String fileImmagine          = (String) snapshot.child("fileImmagine").getValue();
+                    String fileImmagineCopertina = (String) snapshot.child("fileImmagineCopertina").getValue();
+                    String filePin               = (String) snapshot.child("filePin").getValue();
+
+                    Categoria categoria = new Categoria(
+                            idCategoria           == null || idCategoria.equals("<null>")           ? null : Integer.valueOf(idCategoria),
+                            ordinamento           == null || ordinamento.equals("<null>")           ? null : Integer.valueOf(ordinamento),
+                            nomeItaliano          == null || nomeItaliano.equals("<null>")          ? null : nomeItaliano,
+                            nomeInglese           == null || nomeInglese.equals("<null>")           ? null : nomeInglese,
+                            nomeTedesco           == null || nomeTedesco.equals("<null>")           ? null : nomeTedesco,
+                            nomeFrancese          == null || nomeFrancese.equals("<null>")          ? null : nomeFrancese,
+                            descrizioneItaliano   == null || descrizioneItaliano.equals("<null>")   ? null : descrizioneItaliano,
+                            descrizioneInglese    == null || descrizioneInglese.equals("<null>")    ? null : descrizioneInglese,
+                            descrizioneTedesco    == null || descrizioneTedesco.equals("<null>")    ? null : descrizioneTedesco,
+                            descrizioneFrancese   == null || descrizioneFrancese.equals("<null>")   ? null : descrizioneFrancese,
+                            fileImmagine          == null || fileImmagine.equals("<null>")          ? null : fileImmagine,
+                            fileImmagineCopertina == null || fileImmagineCopertina.equals("<null>") ? null : fileImmagineCopertina,
+                            filePin               == null || filePin.equals("<null>")               ? null : filePin);
+
+                    listaCategoria.add(categoria);
+                }
+
+                Log.d("DEBUGAPP", TAG + " [iniziaScaricareDb - onDataChange] listaCategoria: " + listaCategoria);
+
+                scaricaImmaginePdi();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d("DEBUGAPP", TAG + "[iniziaScaricareDb - onCancelled] databaseError: " + databaseError.toException());
 
                 gestisciErroreScaricamentoIniziale();
             }
