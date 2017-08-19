@@ -121,10 +121,12 @@ public class PdiDettaglioFragment extends Fragment {
         //Log.d("DEBUGAPP", TAG + " onCreateView");
 
         if (savedInstanceState == null) {
-            if (FirebaseHelper.dammiFirebaseHelperCondiviso().scaricamentoDatabaseRiuscitoConSuccesso()) {
-                immaginiPdi = FirebaseHelper.dammiFirebaseHelperCondiviso().dammiImmaginiPdiPerPdi(mainActivity.pdiScelto.getIdPdi());
-            } else {
-                immaginiPdi = mainActivity.gestoreDatabaseCondiviso.dammiImmaginiPdiPerPdi(mainActivity.pdiScelto.getIdPdi());
+            if (mainActivity.pdiScelto.getIdPdi() != null) {
+                if (FirebaseHelper.dammiFirebaseHelperCondiviso().scaricamentoDatabaseRiuscitoConSuccesso()) {
+                    immaginiPdi = FirebaseHelper.dammiFirebaseHelperCondiviso().dammiImmaginiPdiPerPdi(mainActivity.pdiScelto.getIdPdi());
+                } else {
+                    immaginiPdi = mainActivity.gestoreDatabaseCondiviso.dammiImmaginiPdiPerPdi(mainActivity.pdiScelto.getIdPdi());
+                }
             }
             indiceImmagine = 0;
             galleriaAperta = false;
@@ -328,7 +330,7 @@ public class PdiDettaglioFragment extends Fragment {
         if (mainActivity.pdiScelto.getVia() != null) {
             String indirizzo = mainActivity.pdiScelto.getCitta() + ", " + mainActivity.pdiScelto.getVia();
 
-            if (mainActivity.pdiScelto.getNumeroCivico() != 0) {
+            if (mainActivity.pdiScelto.getNumeroCivico() != null && mainActivity.pdiScelto.getNumeroCivico() != 0) {
                 indirizzo = indirizzo + ", " + mainActivity.pdiScelto.getNumeroCivico();
             }
 
@@ -336,7 +338,11 @@ public class PdiDettaglioFragment extends Fragment {
                 indirizzo = indirizzo + "/" + mainActivity.pdiScelto.getInterno();
             }
 
-            indirizzo = indirizzo + ", " + mainActivity.pdiScelto.getCap();
+            if (mainActivity.pdiScelto.getCap() != null) {
+
+                indirizzo = indirizzo + ", " + mainActivity.pdiScelto.getCap();
+            }
+
             btIndirizzo.setText(indirizzo);
         } else {
             llIndirizzo.setVisibility(View.GONE);

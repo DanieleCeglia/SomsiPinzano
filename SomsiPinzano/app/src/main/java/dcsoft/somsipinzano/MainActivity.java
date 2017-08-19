@@ -358,18 +358,22 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Categoria categoria = null;
-        if (FirebaseHelper.dammiFirebaseHelperCondiviso().scaricamentoDatabaseRiuscitoConSuccesso()) {
-            categoria = FirebaseHelper.dammiFirebaseHelperCondiviso().dammiCategoria(pdi.getIdPdi_idCategoria());
-        } else {
-            categoria = gestoreDatabaseCondiviso.dammiCategoria(pdi.getIdPdi_idCategoria());
+        if (pdi.getIdPdi_idCategoria() != null) {
+            if (FirebaseHelper.dammiFirebaseHelperCondiviso().scaricamentoDatabaseRiuscitoConSuccesso()) {
+                categoria = FirebaseHelper.dammiFirebaseHelperCondiviso().dammiCategoria(pdi.getIdPdi_idCategoria());
+            } else {
+                categoria = gestoreDatabaseCondiviso.dammiCategoria(pdi.getIdPdi_idCategoria());
+            }
         }
         categoriaScelta(categoria);
 
         RaggruppamentoPdi raggruppamentoPdi = null;
-        if (FirebaseHelper.dammiFirebaseHelperCondiviso().scaricamentoDatabaseRiuscitoConSuccesso()) {
-            raggruppamentoPdi = FirebaseHelper.dammiFirebaseHelperCondiviso().dammiRaggruppamentoPdi(pdi.getIdPdi_idRaggruppamento());
-        } else {
-            raggruppamentoPdi = gestoreDatabaseCondiviso.dammiRaggruppamentoPdi(pdi.getIdPdi_idRaggruppamento());
+        if (pdi.getIdPdi_idRaggruppamento() != null) {
+            if (FirebaseHelper.dammiFirebaseHelperCondiviso().scaricamentoDatabaseRiuscitoConSuccesso()) {
+                raggruppamentoPdi = FirebaseHelper.dammiFirebaseHelperCondiviso().dammiRaggruppamentoPdi(pdi.getIdPdi_idRaggruppamento());
+            } else {
+                raggruppamentoPdi = gestoreDatabaseCondiviso.dammiRaggruppamentoPdi(pdi.getIdPdi_idRaggruppamento());
+            }
         }
         raggruppamentoPdiScelto(raggruppamentoPdi);
 

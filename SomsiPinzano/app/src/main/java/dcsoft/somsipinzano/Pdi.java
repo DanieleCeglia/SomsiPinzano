@@ -263,12 +263,12 @@ public class Pdi implements Parcelable {
     }
 
     public Double getLatitudine() {
-        return latitudine;
-    }
+        return latitudine == null ? 0 : latitudine;
+    } // non dovrebbe mai essere null sul DB, ma se succede lo inchiodo a 0
 
     public Double getLongitudine() {
-        return longitudine;
-    }
+        return longitudine == null ? 0 : longitudine;
+    } // non dovrebbe mai essere null sul DB, ma se succede lo inchiodo a 0
 
     public String getTelefono() {
         return telefono;

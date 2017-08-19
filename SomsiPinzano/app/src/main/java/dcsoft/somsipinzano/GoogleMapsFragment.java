@@ -213,10 +213,12 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
             MarkerOptions markerOptions = new MarkerOptions().position(posizione);
 
             Categoria categoria = null;
-            if (FirebaseHelper.dammiFirebaseHelperCondiviso().scaricamentoDatabaseRiuscitoConSuccesso()) {
-                categoria = FirebaseHelper.dammiFirebaseHelperCondiviso().dammiCategoria(pdi.getIdPdi_idCategoria());
-            } else {
-                categoria = mainActivity.gestoreDatabaseCondiviso.dammiCategoria(pdi.getIdPdi_idCategoria());
+            if (pdi.getIdPdi_idCategoria() != null) {
+                if (FirebaseHelper.dammiFirebaseHelperCondiviso().scaricamentoDatabaseRiuscitoConSuccesso()) {
+                    categoria = FirebaseHelper.dammiFirebaseHelperCondiviso().dammiCategoria(pdi.getIdPdi_idCategoria());
+                } else {
+                    categoria = mainActivity.gestoreDatabaseCondiviso.dammiCategoria(pdi.getIdPdi_idCategoria());
+                }
             }
             if (categoria != null) {
                 String nomeFileSenzaEstensione = categoria.getFilePin().substring(0, categoria.getFilePin().lastIndexOf('.'));
