@@ -339,6 +339,8 @@ class FirebaseHelper {
     }
 
     ArrayList<Categoria> dammiCategorie() {
+        Collections.sort(listaCategoria, new BeanComparator("ordinamento"));
+
         return listaCategoria;
     }
 
@@ -371,6 +373,8 @@ class FirebaseHelper {
     }
 
     ArrayList<Pdi> dammiPdi() {
+        Collections.sort(listaPdi, new BeanComparator("ordinamento"));
+
         return listaPdi;
     }
 
