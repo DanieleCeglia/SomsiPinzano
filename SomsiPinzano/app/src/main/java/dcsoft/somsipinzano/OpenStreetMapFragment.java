@@ -376,18 +376,24 @@ public class OpenStreetMapFragment extends Fragment {
 
     //region Metodi pubblici
     public void impostaMappaNormale () {
-        osmMap.setTileSource(TileSourceFactory.MAPNIK);
-        tipoMappa = 1;
+        if (osmMap != null) {
+            osmMap.setTileSource(TileSourceFactory.MAPNIK);
+            tipoMappa = 1;
+        }
     }
 
     public void impostaMappaCiclabile () {
-        osmMap.setTileSource(CYCLEMAP);
-        tipoMappa = 2;
+        if (osmMap != null) {
+            osmMap.setTileSource(CYCLEMAP);
+            tipoMappa = 2;
+        }
     }
 
     public void impostaMappaTrasporti () {
-        osmMap.setTileSource(TileSourceFactory.PUBLIC_TRANSPORT);
-        tipoMappa = 2;
+        if (osmMap != null) {
+            osmMap.setTileSource(TileSourceFactory.PUBLIC_TRANSPORT);
+            tipoMappa = 2;
+        }
     }
     //endregion
 }

@@ -362,19 +362,27 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
 
     //region Metodi pubblici
     public void impostaMappaNormale () {
-        gmMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        if (gmMap != null) {
+            gmMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        }
     }
 
     public void impostaMappaSatellitare () {
-        gmMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+        if (gmMap != null) {
+            gmMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+        }
     }
 
     public void impostaMappaIbrida () {
-        gmMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        if (gmMap != null) {
+            gmMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        }
     }
 
     public void impostaMapparilievo () {
-        gmMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+        if (gmMap != null) {
+            gmMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+        }
     }
     //endregion
 }
