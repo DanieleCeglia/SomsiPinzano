@@ -31,4 +31,7 @@
     <string name="no">Aucun</string>
     <string name="immagine">Image</string>
     <string name="di">sur</string>
+    <string name="esporta_traccia">EXPORTER PISTE GPS</string>
+    <string name="traccia_kml">Format KML</string>
+    <string name="traccia_kmz">Format KMZ</string>
 </resources>

@@ -86,6 +86,10 @@ public class PdiDettaglioFragment extends Fragment {
     private Button bVediSuGM;
     private Button bVediSuOSM;
 
+    private TextView tvEsportaTraccia;
+    private Button bEsportaKML;
+    private Button bEsportaKMZ;
+
     private ArrayList<ImmaginePdi> immaginiPdi;
     private int indiceImmagine;
     private boolean galleriaAperta;
@@ -321,6 +325,46 @@ public class PdiDettaglioFragment extends Fragment {
             );
         }
 
+        tvEsportaTraccia           = (TextView)       pdiDettaglioFragmentView.findViewById(R.id.tvEsportaTraccia);
+        bEsportaKML                = (Button)         pdiDettaglioFragmentView.findViewById(R.id.bEsportaKML);
+        bEsportaKMZ                = (Button)         pdiDettaglioFragmentView.findViewById(R.id.bEsportaKMZ);
+
+        String fileTracciaGps = mainActivity.pdiScelto.getFileTracciaGps();
+
+        if (fileTracciaGps != null) {
+            if (bEsportaKML != null) {
+                bEsportaKML.setOnClickListener(
+                        new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String nomeFile = mainActivity.pdiScelto.getFileTracciaGps() + ".kml";
+                                String type = "application/kml";
+
+                                Log.d("DEBUGAPP", TAG + " nomeFile: " + nomeFile + " type: " + type);
+                            }
+                        }
+                );
+            }
+
+            if (bEsportaKMZ != null) {
+                bEsportaKMZ.setOnClickListener(
+                        new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                String nomeFile = mainActivity.pdiScelto.getFileTracciaGps() + ".kmz";
+                                String type = "application/kmz";
+
+                                Log.d("DEBUGAPP", TAG + " nomeFile: " + nomeFile + " type: " + type);
+                            }
+                        }
+                );
+            }
+        } else {
+            tvEsportaTraccia.setVisibility(View.GONE);
+            bEsportaKML.setVisibility(View.GONE);
+            bEsportaKMZ.setVisibility(View.GONE);
+        }
+
         if (immaginiPdi.size() > 0) {
             impostaImmagine();
         } else {
@@ -360,7 +404,7 @@ public class PdiDettaglioFragment extends Fragment {
                             if (dvDescrizione != null && mainActivity != null && mainActivity.pdiScelto != null) {
                                 dvDescrizione.setText(mainActivity.pdiScelto.getDescrizioneItaliano());
                             } else {
-                                Log.d("DEBUGAPP", TAG + " [onCreateView - handler] dvDescrizione o mainActivity.pdiScelto nullo! ");
+                                Log.d("DEBUGAPP", TAG + " [onCreateView - handler] dvDescrizione o mainActivity.pdiScelto nullo!");
                             }
                         }
                     }, 50);

@@ -31,4 +31,7 @@
     <string name="no">No</string>
     <string name="immagine">Immagine</string>
     <string name="di">di</string>
+    <string name="esporta_traccia">ESPORTA TRACCIA GPS</string>
+    <string name="traccia_kml">Formato KML</string>
+    <string name="traccia_kmz">Formato KMZ</string>
 </resources>

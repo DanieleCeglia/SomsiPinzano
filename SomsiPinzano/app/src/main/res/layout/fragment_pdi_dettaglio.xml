@@ -410,6 +410,41 @@
                 android:textColor="@color/colorIcons"
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:theme="@style/ColorPrimary.Button"/>
+
+            <TextView
+                android:text="@string/esporta_traccia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvEsportaTraccia"
+                android:textStyle="normal|bold"
+                android:textColor="@color/colorPrimaryText"
+                android:paddingTop="10dp"
+                android:textAlignment="center"
+                android:paddingBottom="10dp" />
+
+            <Button
+                android:text="@string/traccia_kml"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/bEsportaKML"
+                android:textAllCaps="false"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/colorIcons"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:theme="@style/ColorPrimary.Button"/>
+
+            <Button
+                android:text="@string/traccia_kmz"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/bEsportaKMZ"
+                android:textAllCaps="false"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/colorIcons"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:theme="@style/ColorPrimary.Button"/>
         </LinearLayout>
     </ScrollView>
 </FrameLayout>
