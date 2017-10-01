@@ -34,4 +34,5 @@
     <string name="esporta_traccia">EXPORTER PISTE GPS</string>
     <string name="traccia_kml">Format KML</string>
     <string name="traccia_kmz">Format KMZ</string>
+    <string name="app_non_trovata">Aucune application n&#8217;a trouvé d&#8217;ouvrir ce type de fichier.</string>
 </resources>

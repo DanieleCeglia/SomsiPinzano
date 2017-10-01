@@ -3,6 +3,7 @@ package dcsoft.somsipinzano;
 import android.Manifest;
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,6 +36,12 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
+import java.io.Closeable;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 public class PdiDettaglioFragment extends Fragment {
@@ -93,6 +101,8 @@ public class PdiDettaglioFragment extends Fragment {
     private ArrayList<ImmaginePdi> immaginiPdi;
     private int indiceImmagine;
     private boolean galleriaAperta;
+    private static final int BUFFER_SIZE = 1024;
+    private File fileCache = null;
 
     public PdiDettaglioFragment() {
         // Required empty public constructor
@@ -341,6 +351,8 @@ public class PdiDettaglioFragment extends Fragment {
                                 String type = "application/kml";
 
                                 Log.d("DEBUGAPP", TAG + " nomeFile: " + nomeFile + " type: " + type);
+
+                                condividiFileConAltraApp(nomeFile);
                             }
                         }
                 );
@@ -355,6 +367,8 @@ public class PdiDettaglioFragment extends Fragment {
                                 String type = "application/kmz";
 
                                 Log.d("DEBUGAPP", TAG + " nomeFile: " + nomeFile + " type: " + type);
+
+                                condividiFileConAltraApp(nomeFile);
                             }
                         }
                 );
@@ -474,7 +488,7 @@ public class PdiDettaglioFragment extends Fragment {
                             if (dvDescrizione != null && mainActivity != null && mainActivity.pdiScelto != null) {
                                 dvDescrizione.setText(mainActivity.pdiScelto.getDescrizioneFrancese());
                             } else {
-                                Log.d("DEBUGAPP", TAG + " [onCreateView - handler] dvDescrizione o mainActivity.pdiScelto nullo! ");
+                                Log.d("DEBUGAPP", TAG + " [onCreateView - handler] dvDescrizione o mainActivity.pdiScelto nullo!");
                             }
                         }
                     }, 50);
@@ -707,5 +721,79 @@ public class PdiDettaglioFragment extends Fragment {
                 return false;
             }
         }).into(ivGalleria);
+    }
+
+    private void condividiFileConAltraApp(String nomeFile) {
+        if (fileCacheNonEsiste(nomeFile)) {
+            creaFileCache(nomeFile);
+        }
+
+        Uri uri = FileProvider.getUriForFile(mainActivity, mainActivity.getPackageName(), fileCache);
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(uri);
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+        try {
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Log.d("DEBUGAPP", TAG + " [creaFileCache] errore: " + e.toString());
+
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mainActivity);
+            alertDialogBuilder.setCancelable(true);
+
+            alertDialogBuilder.setMessage(getResources().getString(R.string.app_non_trovata));
+
+            alertDialogBuilder.setNeutralButton(
+                    "Ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+        }
+    }
+
+    private boolean fileCacheNonEsiste(String nomeFile) {
+        if (fileCache == null) {
+            fileCache = new File(mainActivity.getCacheDir(), nomeFile);
+        }
+
+        return !fileCache.exists();
+    }
+
+    private void creaFileCache(String nomeFile) {
+        InputStream inputStream = null;
+        OutputStream outputStream = null;
+
+        try {
+            inputStream = mainActivity.getAssets().open(nomeFile);
+            outputStream = new FileOutputStream(fileCache);
+            byte[] buf = new byte[BUFFER_SIZE];
+            int len;
+
+            while ((len = inputStream.read(buf)) > 0) {
+                outputStream.write(buf, 0, len);
+            }
+        } catch (IOException e) {
+            Log.d("DEBUGAPP", TAG + " [creaFileCache] errore: " + e.toString());
+        } finally {
+            chiudiStream(inputStream);
+            chiudiStream(outputStream);
+        }
+    }
+
+    private void chiudiStream(@Nullable Closeable closeable) {
+        if (closeable != null) {
+            try {
+                closeable.close();
+            } catch (IOException e) {
+                Log.d("DEBUGAPP", TAG + " [chiudiStream] errore: " + e.toString());
+            }
+        }
     }
 }
