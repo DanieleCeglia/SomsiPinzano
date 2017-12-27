@@ -286,6 +286,7 @@ public class OpenStreetMapFragment extends Fragment {
     }
 
     private void impostaTracciatoSuMappa(Pdi pdi, Boolean zoom) {
+        String urlFile = pdi.getUrlTracciaGps() + ".kmz";
         String nomeFileKmz = pdi.getFileTracciaGps() + ".kmz";
 
         try {

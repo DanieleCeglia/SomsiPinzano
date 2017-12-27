@@ -61,6 +61,7 @@ dependencies {
     compile 'com.github.bluejamesbond:textjustify-android:2.1.6'
     compile 'com.google.firebase:firebase-database:11.8.0'
     compile 'org.jetbrains:annotations-java5:15.0'
+    compile 'com.koushikdutta.ion:ion:2.+'
 }
 
 apply plugin: 'com.google.gms.google-services'

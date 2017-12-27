@@ -25,6 +25,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,9 +37,13 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
+import com.koushikdutta.ion.ProgressCallback;
 
 import java.io.Closeable;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -98,11 +104,16 @@ public class PdiDettaglioFragment extends Fragment {
     private Button bEsportaKML;
     private Button bEsportaKMZ;
 
+    private RelativeLayout rlProgressBar;
+    private ProgressBar pbDownload;
+
     private ArrayList<ImmaginePdi> immaginiPdi;
     private int indiceImmagine;
     private boolean galleriaAperta;
     private static final int BUFFER_SIZE = 1024;
     private File fileCache = null;
+    private Boolean downloadInCorso = false;
+    private String gpsTracksPath = null;
 
     public PdiDettaglioFragment() {
         // Required empty public constructor
@@ -150,6 +161,7 @@ public class PdiDettaglioFragment extends Fragment {
             immaginiPdi = savedInstanceState.getParcelableArrayList("immaginiPdi"); // @SuppressWarnings("unchecked")
             indiceImmagine = savedInstanceState.getInt("indiceImmagine");
             galleriaAperta = savedInstanceState.getBoolean("galleriaAperta");
+            downloadInCorso = savedInstanceState.getBoolean("downloadInCorso");
         }
 
         pdiDettaglioFragmentView = inflater.inflate(R.layout.fragment_pdi_dettaglio, container, false);
@@ -339,20 +351,55 @@ public class PdiDettaglioFragment extends Fragment {
         bEsportaKML                = (Button)         pdiDettaglioFragmentView.findViewById(R.id.bEsportaKML);
         bEsportaKMZ                = (Button)         pdiDettaglioFragmentView.findViewById(R.id.bEsportaKMZ);
 
-        String fileTracciaGps = mainActivity.pdiScelto.getFileTracciaGps();
+        rlProgressBar              = (RelativeLayout) pdiDettaglioFragmentView.findViewById(R.id.rlProgressBar);
+        pbDownload                 = (ProgressBar)    pdiDettaglioFragmentView.findViewById(R.id.pbDownload);
 
-        if (fileTracciaGps != null) {
+        gpsTracksPath = mainActivity.getApplicationInfo().dataDir + "/gpsTracks/";
+        File directory = new File(gpsTracksPath);
+
+        Boolean directoryEsistente = true;
+
+        if (!directory.exists()) {
+            directoryEsistente = directory.mkdir();
+        }
+
+        final String fileTracciaGps = mainActivity.pdiScelto.getFileTracciaGps();
+
+        if (fileTracciaGps != null && directoryEsistente) {
             if (bEsportaKML != null) {
                 bEsportaKML.setOnClickListener(
                         new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                String nomeFile = mainActivity.pdiScelto.getFileTracciaGps() + ".kml";
+                                String urlFile = mainActivity.pdiScelto.getUrlTracciaGps() + ".kml";
+                                final String nomeFile = fileTracciaGps + ".kml";
                                 String type = "application/kml";
 
                                 Log.d("DEBUGAPP", TAG + " nomeFile: " + nomeFile + " type: " + type);
 
-                                condividiFileConAltraApp(nomeFile);
+                                downloadInCorso = true;
+                                rlProgressBar.setVisibility(View.VISIBLE);
+                                pbDownload.setVisibility(View.VISIBLE);
+
+                                Ion.with(mainActivity)
+                                        .load(urlFile)
+                                        .progressBar(pbDownload)
+                                        .progress(new ProgressCallback() {@Override
+                                        public void onProgress(long downloaded, long total) {
+                                            System.out.println("" + downloaded + " / " + total);
+                                        }
+                                        })
+                                        .write(new File(gpsTracksPath + nomeFile))
+                                        .setCallback(new FutureCallback<File>() {
+                                            @Override
+                                            public void onCompleted(Exception e, File file) {
+                                                downloadInCorso = false;
+                                                rlProgressBar.setVisibility(View.GONE);
+                                                pbDownload.setVisibility(View.GONE);
+
+                                                condividiFileConAltraApp(nomeFile);
+                                            }
+                                        });
                             }
                         }
                 );
@@ -363,12 +410,35 @@ public class PdiDettaglioFragment extends Fragment {
                         new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                String nomeFile = mainActivity.pdiScelto.getFileTracciaGps() + ".kmz";
+                                String urlFile = mainActivity.pdiScelto.getUrlTracciaGps() + ".kmz";
+                                final String nomeFile = fileTracciaGps + ".kmz";
                                 String type = "application/kmz";
 
                                 Log.d("DEBUGAPP", TAG + " nomeFile: " + nomeFile + " type: " + type);
 
-                                condividiFileConAltraApp(nomeFile);
+                                downloadInCorso = true;
+                                rlProgressBar.setVisibility(View.VISIBLE);
+                                pbDownload.setVisibility(View.VISIBLE);
+
+                                Ion.with(mainActivity)
+                                        .load(urlFile)
+                                        .progressBar(pbDownload)
+                                        .progress(new ProgressCallback() {@Override
+                                        public void onProgress(long downloaded, long total) {
+                                            System.out.println("" + downloaded + " / " + total);
+                                        }
+                                        })
+                                        .write(new File(gpsTracksPath + nomeFile))
+                                        .setCallback(new FutureCallback<File>() {
+                                            @Override
+                                            public void onCompleted(Exception e, File file) {
+                                                downloadInCorso = false;
+                                                rlProgressBar.setVisibility(View.GONE);
+                                                pbDownload.setVisibility(View.GONE);
+
+                                                condividiFileConAltraApp(nomeFile);
+                                            }
+                                        });
                             }
                         }
                 );
@@ -607,6 +677,7 @@ public class PdiDettaglioFragment extends Fragment {
         outState.putParcelableArrayList("immaginiPdi", immaginiPdi);
         outState.putInt("indiceImmagine", indiceImmagine);
         outState.putBoolean("galleriaAperta", galleriaAperta);
+        outState.putBoolean("downloadInCorso", downloadInCorso);
     }
 
     @Override
@@ -644,6 +715,11 @@ public class PdiDettaglioFragment extends Fragment {
 
             indiceImmagine = Integer.parseInt(stringaIndiceImmagine);
             impostaImmagine();
+        }
+
+        if (downloadInCorso) {
+            rlProgressBar.setVisibility(View.VISIBLE);
+            pbDownload.setVisibility(View.VISIBLE);
         }
     }
 
@@ -752,7 +828,6 @@ public class PdiDettaglioFragment extends Fragment {
                         }
                     });
 
-
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
         }
@@ -771,7 +846,8 @@ public class PdiDettaglioFragment extends Fragment {
         OutputStream outputStream = null;
 
         try {
-            inputStream = mainActivity.getAssets().open(nomeFile);
+            inputStream = new FileInputStream(gpsTracksPath + nomeFile);
+            //inputStream = mainActivity.getAssets().open(nomeFile);
             outputStream = new FileOutputStream(fileCache);
             byte[] buf = new byte[BUFFER_SIZE];
             int len;

@@ -279,6 +279,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
 
     //region Metodi privati
     private void impostaTracciatoSuMappa(Pdi pdi) {
+        String urlFile = pdi.getUrlTracciaGps() + ".kml";
         String nomeFileKml = pdi.getFileTracciaGps() + ".kml";
 
         try {
