@@ -368,7 +368,7 @@ public class PdiDettaglioFragment extends Fragment {
                                         .progressBar(pbDownload)
                                         .progress(new ProgressCallback() {@Override
                                         public void onProgress(long downloaded, long total) {
-                                            System.out.println("" + downloaded + " / " + total);
+                                            Log.d("DEBUGAPP", TAG + " [bEsportaKML.setOnClickListener] errore: " + downloaded + " / " + total);
                                         }
                                         })
                                         .write(new File(GestoreFileTracciatiGps.dammiGestoreDatabaseCondiviso(mainActivity).getGpsTracksPath() + nomeFile))
@@ -407,7 +407,7 @@ public class PdiDettaglioFragment extends Fragment {
                                         .progressBar(pbDownload)
                                         .progress(new ProgressCallback() {@Override
                                         public void onProgress(long downloaded, long total) {
-                                            System.out.println("" + downloaded + " / " + total);
+                                            Log.d("DEBUGAPP", TAG + " [bEsportaKMZ.setOnClickListener] errore: " + downloaded + " / " + total);
                                         }
                                         })
                                         .write(new File(GestoreFileTracciatiGps.dammiGestoreDatabaseCondiviso(mainActivity).getGpsTracksPath() + nomeFile))
@@ -793,7 +793,7 @@ public class PdiDettaglioFragment extends Fragment {
         try {
             startActivity(intent);
         } catch (ActivityNotFoundException e) {
-            Log.d("DEBUGAPP", TAG + " [creaFileCache] errore: " + e.toString());
+            Log.d("DEBUGAPP", TAG + " [condividiFileConAltraApp] errore: " + e.toString());
 
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mainActivity);
             alertDialogBuilder.setCancelable(true);
