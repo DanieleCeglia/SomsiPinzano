@@ -41,13 +41,7 @@ import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.ProgressCallback;
 
-import java.io.Closeable;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 
 public class PdiDettaglioFragment extends Fragment {
@@ -110,10 +104,7 @@ public class PdiDettaglioFragment extends Fragment {
     private ArrayList<ImmaginePdi> immaginiPdi;
     private int indiceImmagine;
     private boolean galleriaAperta;
-    private static final int BUFFER_SIZE = 1024;
-    private File fileCache = null;
     private Boolean downloadInCorso = false;
-    private String gpsTracksPath = null;
 
     public PdiDettaglioFragment() {
         // Required empty public constructor
@@ -354,18 +345,9 @@ public class PdiDettaglioFragment extends Fragment {
         rlProgressBar              = (RelativeLayout) pdiDettaglioFragmentView.findViewById(R.id.rlProgressBar);
         pbDownload                 = (ProgressBar)    pdiDettaglioFragmentView.findViewById(R.id.pbDownload);
 
-        gpsTracksPath = mainActivity.getApplicationInfo().dataDir + "/gpsTracks/";
-        File directory = new File(gpsTracksPath);
-
-        Boolean directoryEsistente = true;
-
-        if (!directory.exists()) {
-            directoryEsistente = directory.mkdir();
-        }
-
         final String fileTracciaGps = mainActivity.pdiScelto.getFileTracciaGps();
 
-        if (fileTracciaGps != null && directoryEsistente) {
+        if (fileTracciaGps != null && GestoreFileTracciatiGps.dammiGestoreDatabaseCondiviso(mainActivity) != null) {
             if (bEsportaKML != null) {
                 bEsportaKML.setOnClickListener(
                         new View.OnClickListener() {
@@ -389,7 +371,7 @@ public class PdiDettaglioFragment extends Fragment {
                                             System.out.println("" + downloaded + " / " + total);
                                         }
                                         })
-                                        .write(new File(gpsTracksPath + nomeFile))
+                                        .write(new File(GestoreFileTracciatiGps.dammiGestoreDatabaseCondiviso(mainActivity).getGpsTracksPath() + nomeFile))
                                         .setCallback(new FutureCallback<File>() {
                                             @Override
                                             public void onCompleted(Exception e, File file) {
@@ -428,7 +410,7 @@ public class PdiDettaglioFragment extends Fragment {
                                             System.out.println("" + downloaded + " / " + total);
                                         }
                                         })
-                                        .write(new File(gpsTracksPath + nomeFile))
+                                        .write(new File(GestoreFileTracciatiGps.dammiGestoreDatabaseCondiviso(mainActivity).getGpsTracksPath() + nomeFile))
                                         .setCallback(new FutureCallback<File>() {
                                             @Override
                                             public void onCompleted(Exception e, File file) {
@@ -800,9 +782,7 @@ public class PdiDettaglioFragment extends Fragment {
     }
 
     private void condividiFileConAltraApp(String nomeFile) {
-        if (fileCacheNonEsiste(nomeFile)) {
-            creaFileCache(nomeFile);
-        }
+        File fileCache = GestoreFileTracciatiGps.dammiGestoreDatabaseCondiviso(mainActivity).dammiFileCacheCreaSeNecessario(nomeFile);
 
         Uri uri = FileProvider.getUriForFile(mainActivity, mainActivity.getPackageName(), fileCache);
 
@@ -830,46 +810,6 @@ public class PdiDettaglioFragment extends Fragment {
 
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
-        }
-    }
-
-    private boolean fileCacheNonEsiste(String nomeFile) {
-        if (fileCache == null) {
-            fileCache = new File(mainActivity.getCacheDir(), nomeFile);
-        }
-
-        return !fileCache.exists();
-    }
-
-    private void creaFileCache(String nomeFile) {
-        InputStream inputStream = null;
-        OutputStream outputStream = null;
-
-        try {
-            inputStream = new FileInputStream(gpsTracksPath + nomeFile);
-            //inputStream = mainActivity.getAssets().open(nomeFile);
-            outputStream = new FileOutputStream(fileCache);
-            byte[] buf = new byte[BUFFER_SIZE];
-            int len;
-
-            while ((len = inputStream.read(buf)) > 0) {
-                outputStream.write(buf, 0, len);
-            }
-        } catch (IOException e) {
-            Log.d("DEBUGAPP", TAG + " [creaFileCache] errore: " + e.toString());
-        } finally {
-            chiudiStream(inputStream);
-            chiudiStream(outputStream);
-        }
-    }
-
-    private void chiudiStream(@Nullable Closeable closeable) {
-        if (closeable != null) {
-            try {
-                closeable.close();
-            } catch (IOException e) {
-                Log.d("DEBUGAPP", TAG + " [chiudiStream] errore: " + e.toString());
-            }
         }
     }
 }
