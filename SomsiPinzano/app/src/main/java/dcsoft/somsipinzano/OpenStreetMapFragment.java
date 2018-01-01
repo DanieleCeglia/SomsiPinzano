@@ -11,6 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
+import com.koushikdutta.ion.ProgressCallback;
+
 import org.osmdroid.api.IMapController;
 import org.osmdroid.bonuspack.kml.KmlDocument;
 import org.osmdroid.events.MapEventsReceiver;
@@ -29,6 +33,7 @@ import org.osmdroid.views.overlay.infowindow.InfoWindow;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -285,12 +290,43 @@ public class OpenStreetMapFragment extends Fragment {
         return null;
     }
 
-    private void impostaTracciatoSuMappa(Pdi pdi, Boolean zoom) {
+    private void impostaTracciatoSuMappa(final Pdi pdi, final Boolean zoom) {
         String urlFile = pdi.getUrlTracciaGps() + ".kmz";
-        String nomeFileKmz = pdi.getFileTracciaGps() + ".kmz";
+        final String nomeFileKmz = pdi.getFileTracciaGps() + ".kmz";
+
+        if (GestoreFileTracciatiGps.dammiGestoreDatabaseCondiviso(mainActivity).fileCacheNonEsiste(nomeFileKmz)) {
+            Ion.with(mainActivity)
+                    .load(urlFile)
+                    .progress(new ProgressCallback() {@Override
+                    public void onProgress(long downloaded, long total) {
+                        Log.d("DEBUGAPP", TAG + " [impostaTracciatoSuMappa] errore: " + downloaded + " / " + total);
+                    }
+                    })
+                    .write(new File(GestoreFileTracciatiGps.dammiGestoreDatabaseCondiviso(mainActivity).getGpsTracksPath() + nomeFileKmz))
+                    .setCallback(new FutureCallback<File>() {
+                        @Override
+                        public void onCompleted(Exception e, File file) {
+                            if (e != null) {
+                                Log.d("DEBUGAPP", TAG + " Fallito download del file " + nomeFileKmz + " con errore: " + e);
+                            } else {
+                                impostaTracciatoSuMappaDaCache(pdi, nomeFileKmz, zoom);
+                            }
+                        }
+                    });
+        } else {
+            impostaTracciatoSuMappaDaCache(pdi, nomeFileKmz, zoom);
+        }
+    }
+
+    private void impostaTracciatoSuMappaDaCache(Pdi pdi, String nomeFileKmz, Boolean zoom) {
+        if (GestoreFileTracciatiGps.dammiGestoreDatabaseCondiviso(mainActivity).fileCacheNonEsiste(nomeFileKmz)) {
+            GestoreFileTracciatiGps.dammiGestoreDatabaseCondiviso(mainActivity).creaFileCache(nomeFileKmz);
+        }
+
+        File fileCache = GestoreFileTracciatiGps.dammiGestoreDatabaseCondiviso(mainActivity).getFileCache();
 
         try {
-            InputStream inputStream = mainActivity.getAssets().open(nomeFileKmz);
+            InputStream inputStream = new FileInputStream(fileCache);
             File file = creaFileDaInputStream(inputStream, pdi.getFileTracciaGps());
 
             KmlDocument kmlDocument = new KmlDocument();

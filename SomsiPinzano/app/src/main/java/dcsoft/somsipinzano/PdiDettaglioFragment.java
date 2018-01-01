@@ -359,29 +359,37 @@ public class PdiDettaglioFragment extends Fragment {
 
                                 Log.d("DEBUGAPP", TAG + " nomeFile: " + nomeFile + " type: " + type);
 
-                                downloadInCorso = true;
-                                rlProgressBar.setVisibility(View.VISIBLE);
-                                pbDownload.setVisibility(View.VISIBLE);
+                                if (GestoreFileTracciatiGps.dammiGestoreDatabaseCondiviso(mainActivity).fileCacheNonEsiste(nomeFile)) {
+                                    downloadInCorso = true;
+                                    rlProgressBar.setVisibility(View.VISIBLE);
+                                    pbDownload.setVisibility(View.VISIBLE);
 
-                                Ion.with(mainActivity)
-                                        .load(urlFile)
-                                        .progressBar(pbDownload)
-                                        .progress(new ProgressCallback() {@Override
-                                        public void onProgress(long downloaded, long total) {
-                                            Log.d("DEBUGAPP", TAG + " [bEsportaKML.setOnClickListener] errore: " + downloaded + " / " + total);
-                                        }
-                                        })
-                                        .write(new File(GestoreFileTracciatiGps.dammiGestoreDatabaseCondiviso(mainActivity).getGpsTracksPath() + nomeFile))
-                                        .setCallback(new FutureCallback<File>() {
-                                            @Override
-                                            public void onCompleted(Exception e, File file) {
-                                                downloadInCorso = false;
-                                                rlProgressBar.setVisibility(View.GONE);
-                                                pbDownload.setVisibility(View.GONE);
-
-                                                condividiFileConAltraApp(nomeFile);
+                                    Ion.with(mainActivity)
+                                            .load(urlFile)
+                                            .progressBar(pbDownload)
+                                            .progress(new ProgressCallback() {@Override
+                                            public void onProgress(long downloaded, long total) {
+                                                Log.d("DEBUGAPP", TAG + " [bEsportaKML.setOnClickListener] errore: " + downloaded + " / " + total);
                                             }
-                                        });
+                                            })
+                                            .write(new File(GestoreFileTracciatiGps.dammiGestoreDatabaseCondiviso(mainActivity).getGpsTracksPath() + nomeFile))
+                                            .setCallback(new FutureCallback<File>() {
+                                                @Override
+                                                public void onCompleted(Exception e, File file) {
+                                                    if (e != null) {
+                                                        Log.d("DEBUGAPP", TAG + " Fallito download del file " + nomeFile + " con errore: " + e);
+                                                    } else {
+                                                        condividiFileConAltraApp(nomeFile);
+                                                    }
+
+                                                    downloadInCorso = false;
+                                                    rlProgressBar.setVisibility(View.GONE);
+                                                    pbDownload.setVisibility(View.GONE);
+                                                }
+                                            });
+                                } else {
+                                    condividiFileConAltraApp(nomeFile);
+                                }
                             }
                         }
                 );
@@ -398,29 +406,37 @@ public class PdiDettaglioFragment extends Fragment {
 
                                 Log.d("DEBUGAPP", TAG + " nomeFile: " + nomeFile + " type: " + type);
 
-                                downloadInCorso = true;
-                                rlProgressBar.setVisibility(View.VISIBLE);
-                                pbDownload.setVisibility(View.VISIBLE);
+                                if (GestoreFileTracciatiGps.dammiGestoreDatabaseCondiviso(mainActivity).fileCacheNonEsiste(nomeFile)) {
+                                    downloadInCorso = true;
+                                    rlProgressBar.setVisibility(View.VISIBLE);
+                                    pbDownload.setVisibility(View.VISIBLE);
 
-                                Ion.with(mainActivity)
-                                        .load(urlFile)
-                                        .progressBar(pbDownload)
-                                        .progress(new ProgressCallback() {@Override
-                                        public void onProgress(long downloaded, long total) {
-                                            Log.d("DEBUGAPP", TAG + " [bEsportaKMZ.setOnClickListener] errore: " + downloaded + " / " + total);
-                                        }
-                                        })
-                                        .write(new File(GestoreFileTracciatiGps.dammiGestoreDatabaseCondiviso(mainActivity).getGpsTracksPath() + nomeFile))
-                                        .setCallback(new FutureCallback<File>() {
-                                            @Override
-                                            public void onCompleted(Exception e, File file) {
-                                                downloadInCorso = false;
-                                                rlProgressBar.setVisibility(View.GONE);
-                                                pbDownload.setVisibility(View.GONE);
-
-                                                condividiFileConAltraApp(nomeFile);
+                                    Ion.with(mainActivity)
+                                            .load(urlFile)
+                                            .progressBar(pbDownload)
+                                            .progress(new ProgressCallback() {@Override
+                                            public void onProgress(long downloaded, long total) {
+                                                Log.d("DEBUGAPP", TAG + " [bEsportaKMZ.setOnClickListener] errore: " + downloaded + " / " + total);
                                             }
-                                        });
+                                            })
+                                            .write(new File(GestoreFileTracciatiGps.dammiGestoreDatabaseCondiviso(mainActivity).getGpsTracksPath() + nomeFile))
+                                            .setCallback(new FutureCallback<File>() {
+                                                @Override
+                                                public void onCompleted(Exception e, File file) {
+                                                    if (e != null) {
+                                                        Log.d("DEBUGAPP", TAG + " Fallito download del file " + nomeFile + " con errore: " + e);
+                                                    } else {
+                                                        condividiFileConAltraApp(nomeFile);
+                                                    }
+
+                                                    downloadInCorso = false;
+                                                    rlProgressBar.setVisibility(View.GONE);
+                                                    pbDownload.setVisibility(View.GONE);
+                                                }
+                                            });
+                                } else {
+                                    condividiFileConAltraApp(nomeFile);
+                                }
                             }
                         }
                 );
@@ -782,7 +798,11 @@ public class PdiDettaglioFragment extends Fragment {
     }
 
     private void condividiFileConAltraApp(String nomeFile) {
-        File fileCache = GestoreFileTracciatiGps.dammiGestoreDatabaseCondiviso(mainActivity).dammiFileCacheCreaSeNecessario(nomeFile);
+        if (GestoreFileTracciatiGps.dammiGestoreDatabaseCondiviso(mainActivity).fileCacheNonEsiste(nomeFile)) {
+            GestoreFileTracciatiGps.dammiGestoreDatabaseCondiviso(mainActivity).creaFileCache(nomeFile);
+        }
+
+        File fileCache = GestoreFileTracciatiGps.dammiGestoreDatabaseCondiviso(mainActivity).getFileCache();
 
         Uri uri = FileProvider.getUriForFile(mainActivity, mainActivity.getPackageName(), fileCache);
 

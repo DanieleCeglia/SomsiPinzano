@@ -29,9 +29,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.data.kml.KmlLayer;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
+import com.koushikdutta.ion.ProgressCallback;
 
 import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -278,25 +283,58 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
     //endregion
 
     //region Metodi privati
-    private void impostaTracciatoSuMappa(Pdi pdi) {
+    private void impostaTracciatoSuMappa(final Pdi pdi) {
         String urlFile = pdi.getUrlTracciaGps() + ".kml";
-        String nomeFileKml = pdi.getFileTracciaGps() + ".kml";
+        final String nomeFileKml = pdi.getFileTracciaGps() + ".kml";
+
+        if (GestoreFileTracciatiGps.dammiGestoreDatabaseCondiviso(mainActivity).fileCacheNonEsiste(nomeFileKml)) {
+            Ion.with(mainActivity)
+                    .load(urlFile)
+                    .progress(new ProgressCallback() {@Override
+                    public void onProgress(long downloaded, long total) {
+                        Log.d("DEBUGAPP", TAG + " [impostaTracciatoSuMappa] errore: " + downloaded + " / " + total);
+                    }
+                    })
+                    .write(new File(GestoreFileTracciatiGps.dammiGestoreDatabaseCondiviso(mainActivity).getGpsTracksPath() + nomeFileKml))
+                    .setCallback(new FutureCallback<File>() {
+                        @Override
+                        public void onCompleted(Exception e, File file) {
+                            if (e != null) {
+                                Log.d("DEBUGAPP", TAG + " Fallito download del file " + nomeFileKml + " con errore: " + e);
+                            } else {
+                                impostaTracciatoSuMappaDaCache(pdi, nomeFileKml);
+                            }
+                        }
+                    });
+        } else {
+            impostaTracciatoSuMappaDaCache(pdi, nomeFileKml);
+        }
+    }
+
+    private void impostaTracciatoSuMappaDaCache(Pdi pdi, String nomeFileKml) {
+        if (GestoreFileTracciatiGps.dammiGestoreDatabaseCondiviso(mainActivity).fileCacheNonEsiste(nomeFileKml)) {
+            GestoreFileTracciatiGps.dammiGestoreDatabaseCondiviso(mainActivity).creaFileCache(nomeFileKml);
+        }
+
+        File fileCache = GestoreFileTracciatiGps.dammiGestoreDatabaseCondiviso(mainActivity).getFileCache();
 
         try {
-            InputStream inputStream = mainActivity.getAssets().open(nomeFileKml);
+            InputStream inputStream = new FileInputStream(fileCache);
 
             kmlLayer = new KmlLayer(gmMap, inputStream, mainActivity.getApplicationContext());
             kmlLayer.addLayerToMap();
 
             pdiTracciatoAttivo = pdi;
-        } catch(IOException e) {
-            Log.d("DEBUGAPP", TAG + " Fallita lettura del file " + nomeFileKml + " con errore: " + e);
+
+            gmMap.animateCamera(CameraUpdateFactory.zoomTo(13));
+        } catch(IOException ioe) {
+            Log.d("DEBUGAPP", TAG + " Fallita lettura del file " + nomeFileKml + " con errore: " + ioe);
 
             kmlLayer = null;
             pdiTracciatoAttivo = null;
-        } catch (XmlPullParserException e) {
-            e.printStackTrace();
-            Log.d("DEBUGAPP", TAG + " Fallito parsing XML del file " + nomeFileKml + " con errore: " + e);
+        } catch (XmlPullParserException ppe) {
+            ppe.printStackTrace();
+            Log.d("DEBUGAPP", TAG + " Fallito parsing XML del file " + nomeFileKml + " con errore: " + ppe);
 
             kmlLayer = null;
             pdiTracciatoAttivo = null;
@@ -340,10 +378,6 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
                         if (mainActivity != null && mainActivity.pdiScelto != null) {
                             if (marker.getPosition().latitude == mainActivity.pdiScelto.getLatitudine() && marker.getPosition().longitude == mainActivity.pdiScelto.getLongitudine()) {
                                 marker.showInfoWindow();
-
-                                if (mainActivity.pdiScelto.getFileTracciaGps() != null) {
-                                    gmMap.animateCamera(CameraUpdateFactory.zoomTo(13));
-                                }
                             } else {
                                 marker.hideInfoWindow();
                             }

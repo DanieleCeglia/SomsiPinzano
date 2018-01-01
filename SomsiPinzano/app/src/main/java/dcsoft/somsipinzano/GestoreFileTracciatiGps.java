@@ -24,6 +24,9 @@ class GestoreFileTracciatiGps {
     String getGpsTracksPath() {
         return gpsTracksPath;
     }
+    File getFileCache() {
+        return fileCache;
+    }
 
     //endregion
 
@@ -36,12 +39,6 @@ class GestoreFileTracciatiGps {
         gpsTracksPath = this.context.getApplicationInfo().dataDir + "/gpsTracks/";
     }
 
-    private boolean fileCacheNonEsiste(String nomeFile) {
-        fileCache = new File(context.getCacheDir(), nomeFile);
-
-        return !fileCache.exists() || fileCache.isDirectory();
-    }
-
     private void chiudiStream(@Nullable Closeable closeable) {
         if (closeable != null) {
             try {
@@ -49,27 +46,6 @@ class GestoreFileTracciatiGps {
             } catch (IOException e) {
                 Log.d("DEBUGAPP", TAG + " [chiudiStream] errore: " + e.toString());
             }
-        }
-    }
-
-    private void creaFileCache(String nomeFile) {
-        InputStream inputStream = null;
-        OutputStream outputStream = null;
-
-        try {
-            inputStream = new FileInputStream(gpsTracksPath + nomeFile);
-            outputStream = new FileOutputStream(fileCache);
-            byte[] buf = new byte[1024];
-            int len;
-
-            while ((len = inputStream.read(buf)) > 0) {
-                outputStream.write(buf, 0, len);
-            }
-        } catch (IOException e) {
-            Log.d("DEBUGAPP", TAG + " [creaFileCache] errore: " + e.toString());
-        } finally {
-            chiudiStream(inputStream);
-            chiudiStream(outputStream);
         }
     }
 
@@ -98,12 +74,31 @@ class GestoreFileTracciatiGps {
         return gestoreFileTracciatiGpsCondiviso;
     }
 
-    File dammiFileCacheCreaSeNecessario(String nomeFile) {
-        if (fileCacheNonEsiste(nomeFile)) {
-            creaFileCache(nomeFile);
-        }
+    boolean fileCacheNonEsiste(String nomeFile) {
+        fileCache = new File(context.getCacheDir(), nomeFile);
 
-        return this.fileCache;
+        return !fileCache.exists() || fileCache.isDirectory();
+    }
+
+    void creaFileCache(String nomeFile) {
+        InputStream inputStream = null;
+        OutputStream outputStream = null;
+
+        try {
+            inputStream = new FileInputStream(gpsTracksPath + nomeFile);
+            outputStream = new FileOutputStream(fileCache);
+            byte[] buf = new byte[1024];
+            int len;
+
+            while ((len = inputStream.read(buf)) > 0) {
+                outputStream.write(buf, 0, len);
+            }
+        } catch (IOException e) {
+            Log.d("DEBUGAPP", TAG + " [creaFileCache] errore: " + e.toString());
+        } finally {
+            chiudiStream(inputStream);
+            chiudiStream(outputStream);
+        }
     }
 
     //endregion
