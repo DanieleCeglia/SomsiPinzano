@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "33300827773-imtl1aomevbsoi8l02do83a98rkrn30c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dcsoft.somsipinzano",
+            "certificate_hash": "0287502736cc5b8a44d03f6b0da42bc38b5d19b4"
+          }
+        },
+        {
+          "client_id": "33300827773-9f0ec55mj1d2vee728m6t48n4s6j3272.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dcsoft.somsipinzano",
+            "certificate_hash": "edd00a7921220b3ca7cbb399588859f9adfc879a"
+          }
+        },
+        {
           "client_id": "33300827773-l235ech5kgtjlbeqan2b04fmsbuqsr41.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

@@ -19,8 +19,8 @@ android {
         applicationId "dcsoft.somsipinzano"
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 8
-        versionName "1.25"
+        versionCode 9
+        versionName "1.26"
     }
     buildTypes {
         release {
