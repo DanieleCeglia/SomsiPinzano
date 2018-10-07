@@ -62,6 +62,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'com.google.maps.android:android-maps-utils:0.5+'
     implementation 'com.github.bluejamesbond:textjustify-android:2.1.6'
+    implementation 'com.google.firebase:firebase-core:16.0.4'
     implementation 'com.google.firebase:firebase-database:16.0.3'
     implementation 'org.jetbrains:annotations-java5:15.0'
     implementation 'com.koushikdutta.ion:ion:2.+'
