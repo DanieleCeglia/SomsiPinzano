@@ -3,6 +3,8 @@ package dcsoft.somsipinzano;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 public class ImmaginePdi implements Parcelable {
     private Integer idImmaginePdi;
     private Integer idImmaginePdi_idPdi;
@@ -84,6 +86,7 @@ public class ImmaginePdi implements Parcelable {
         }
     };
 
+    @NonNull
     @Override
     public String toString() {
         return "\n" +

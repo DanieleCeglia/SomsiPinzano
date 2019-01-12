@@ -356,7 +356,7 @@ public class GoogleMapsFragment extends Fragment implements OnMapReadyCallback {
 
         rimuoviTracciatoSeNecessario();
 
-        if (pdi.getFileTracciaGps() != null) {
+        if (pdi != null && pdi.getFileTracciaGps() != null) {
             impostaTracciatoSuMappa(pdi);
         }
     }

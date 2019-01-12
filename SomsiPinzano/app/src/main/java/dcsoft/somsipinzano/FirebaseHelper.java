@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import androidx.annotation.NonNull;
 import javadz.beanutils.BeanComparator;
 
 interface FirebaseHelperEseguiAlScaricamentoCompletato {
@@ -76,7 +77,7 @@ class FirebaseHelper {
 
         queryImmaginePdi.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listaImmaginePdi = new ArrayList<ImmaginePdi>();
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
@@ -100,7 +101,7 @@ class FirebaseHelper {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.d("DEBUGAPP", TAG + "[scaricaImmaginePdi - onCancelled] databaseError: " + databaseError.toString());
 
                 gestisciErroreScaricamentoIniziale();
@@ -113,7 +114,7 @@ class FirebaseHelper {
 
         queryPdi.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listaPdi = new ArrayList<Pdi>();
 
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
@@ -219,7 +220,7 @@ class FirebaseHelper {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.d("DEBUGAPP", TAG + "[scaricaPdi - onCancelled] databaseError: " + databaseError.toString());
 
                 gestisciErroreScaricamentoIniziale();
@@ -232,7 +233,7 @@ class FirebaseHelper {
 
         queryRaggruppamentoPdi.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listaRaggruppamentoPdi = new ArrayList<RaggruppamentoPdi>();
 
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
@@ -262,7 +263,7 @@ class FirebaseHelper {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.d("DEBUGAPP", TAG + "[scaricaRaggruppamentoPdi - onCancelled] databaseError: " + databaseError.toString());
 
                 gestisciErroreScaricamentoIniziale();
@@ -288,7 +289,7 @@ class FirebaseHelper {
 
         queryCategoria.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listaCategoria = new ArrayList<Categoria>();
 
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
@@ -330,7 +331,7 @@ class FirebaseHelper {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.d("DEBUGAPP", TAG + "[iniziaScaricareDb - onCancelled] databaseError: " + databaseError.toString());
 
                 gestisciErroreScaricamentoIniziale();

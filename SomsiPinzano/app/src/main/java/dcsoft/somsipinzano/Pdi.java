@@ -3,6 +3,8 @@ package dcsoft.somsipinzano;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 public class Pdi implements Parcelable {
     private Integer idPdi;
     private Integer idPdi_idCategoria;
@@ -620,6 +622,7 @@ public class Pdi implements Parcelable {
         }
     };
 
+    @NonNull
     @Override
     public String toString() {
         return "\n" +

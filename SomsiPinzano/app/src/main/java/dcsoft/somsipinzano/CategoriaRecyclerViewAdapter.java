@@ -1,5 +1,6 @@
 package dcsoft.somsipinzano;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,15 +19,16 @@ class CategoriaRecyclerViewAdapter extends RecyclerView.Adapter<CategoriaRecycle
         this.mainActivity = mainActivity;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_categoria, parent, false);
 
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         switch (mainActivity.gestoreDatabaseCondiviso.getLingua()) {
             case "italiano": {
                 holder.tvTitoloCategoria.setText(categorie.get(position).getNomeItaliano());
@@ -101,6 +103,7 @@ class CategoriaRecyclerViewAdapter extends RecyclerView.Adapter<CategoriaRecycle
             tvDescrizioneCategoria = (TextView)  view.findViewById(R.id.tvDescrizioneCategoria);
         }
 
+        @NonNull
         @Override
         public String toString() {
             return super.toString() + " '" + tvTitoloCategoria.getText() + "'";

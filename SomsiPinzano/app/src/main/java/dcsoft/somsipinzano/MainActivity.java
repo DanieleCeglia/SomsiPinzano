@@ -200,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
+    public void onSaveInstanceState(@NonNull Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
 
         //Log.d("DEBUGAPP", TAG + " onSaveInstanceState");
@@ -395,7 +395,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             if (!permessiDaRichiedere.isEmpty()) {
-                requestPermissions(permessiDaRichiedere.toArray(new String[permessiDaRichiedere.size()]), REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
+                requestPermissions(permessiDaRichiedere.toArray(new String[0]), REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
             }
         } // else: ci sono già i permessi, quindi non c'è niente da fare!
     }

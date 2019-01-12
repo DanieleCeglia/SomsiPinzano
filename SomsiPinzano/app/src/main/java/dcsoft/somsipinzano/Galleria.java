@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -24,6 +26,7 @@ import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,7 +44,7 @@ public class Galleria extends AppCompatActivity {
         ButterKnife.bind(this);
 
         immaginiPdi = getIntent().getParcelableArrayListExtra("immaginiPdi");
-        int indiceImmagine = getIntent().getExtras().getInt("indiceImmagine");
+        int indiceImmagine = Objects.requireNonNull(getIntent().getExtras()).getInt("indiceImmagine");
 
         GalleriaPagerAdapter galleriaPagerAdapter = new GalleriaPagerAdapter(this);
 
@@ -75,12 +78,13 @@ public class Galleria extends AppCompatActivity {
         }
 
         @Override
-        public boolean isViewFromObject(View view, Object object) {
+        public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
             return view == object;
         }
 
+        @NonNull
         @Override
-        public Object instantiateItem(ViewGroup container, final int position) {
+        public Object instantiateItem(@NonNull ViewGroup container, final int position) {
             View itemView = layoutInflater.inflate(R.layout.pagine_galleria, container, false);
             container.addView(itemView);
 
@@ -108,7 +112,7 @@ public class Galleria extends AppCompatActivity {
         }
 
         @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
+        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
             container.removeView((LinearLayout) object);
         }
     }

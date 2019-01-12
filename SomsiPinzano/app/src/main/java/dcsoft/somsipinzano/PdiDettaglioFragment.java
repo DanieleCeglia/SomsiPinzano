@@ -711,7 +711,9 @@ public class PdiDettaglioFragment extends Fragment {
             SharedPreferences sharedPreferences = mainActivity.getSharedPreferences("Galleria", 0);
             String stringaIndiceImmagine = sharedPreferences.getString("indiceImmagine", "0");
 
-            indiceImmagine = Integer.parseInt(stringaIndiceImmagine);
+            if (stringaIndiceImmagine != null) {
+                indiceImmagine = Integer.parseInt(stringaIndiceImmagine);
+            }
             impostaImmagine();
         }
 

@@ -54,10 +54,8 @@ public class OpenStreetMapFragment extends Fragment {
     private FolderOverlay overlayTracciato;
     private Pdi pdiTracciatoAttivo;
     private static final OnlineTileSourceBase CYCLEMAP = new XYTileSource("CycleMap",
-            0, 17, 256, ".png", new String[] {
-            "http://a.tile.opencyclemap.org/cycle/",
-            "http://b.tile.opencyclemap.org/cycle/",
-            "http://c.tile.opencyclemap.org/cycle/" },
+            0, 17, 256, ".png?apikey=af1c6b2e71c041b398754a8b76eafe77", new String[] {
+            "https://tile.thunderforest.com/cycle/"},
             "Maps © Thunderforest, Data © OpenStreetMap contributors.");
 
     public OpenStreetMapFragment() {

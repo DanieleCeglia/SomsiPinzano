@@ -1,5 +1,6 @@
 package dcsoft.somsipinzano;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,15 +18,16 @@ class RaggruppamentoPdiRecyclerViewAdapter extends RecyclerView.Adapter<Raggrupp
         this.mainActivity = mainActivity;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_pdi, parent, false);
 
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         switch (mainActivity.gestoreDatabaseCondiviso.getLingua()) {
             case "italiano": {
                 holder.tvRaggruppamentoPdi.setText(raggruppamentiPdi.get(position).getNomeRaggruppamentoItaliano());
@@ -75,6 +77,7 @@ class RaggruppamentoPdiRecyclerViewAdapter extends RecyclerView.Adapter<Raggrupp
             tvRaggruppamentoPdi = (TextView) view.findViewById(R.id.tvTitoloPdi);
         }
 
+        @NonNull
         @Override
         public String toString() {
             return super.toString() + " '" + tvRaggruppamentoPdi.getText() + "'";

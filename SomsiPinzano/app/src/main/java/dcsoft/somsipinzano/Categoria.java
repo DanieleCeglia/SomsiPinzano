@@ -3,6 +3,8 @@ package dcsoft.somsipinzano;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 public class Categoria implements Parcelable {
     private Integer idCategoria;
     private Integer ordinamento;
@@ -192,6 +194,7 @@ public class Categoria implements Parcelable {
         }
     };
 
+    @NonNull
     @Override
     public String toString() {
         return "\n" +
