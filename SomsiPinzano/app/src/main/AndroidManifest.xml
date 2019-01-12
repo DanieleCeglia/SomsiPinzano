@@ -23,7 +23,7 @@
             android:value="@string/google_maps_key" />
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="dcsoft.somsipinzano"
             android:grantUriPermissions="true"
             android:exported="false">
