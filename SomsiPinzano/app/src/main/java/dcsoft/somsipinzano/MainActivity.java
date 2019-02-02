@@ -266,11 +266,21 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menuMappaCiclabileOSM: {
                 openStreetMapFragment.impostaMappaCiclabile();
             }
-            //break;
-            //
-            //case R.id.menuMappaTrasportiOSM: {
-            //    openStreetMapFragment.impostaMappaTrasporti();
-            //}
+            break;
+
+            case R.id.menuMappaTrasportiOSM: {
+                openStreetMapFragment.impostaMappaTrasporti();
+            }
+            break;
+
+            case R.id.menuMappaLandscapeOSM: {
+                openStreetMapFragment.impostaMappaLandscape();
+            }
+            break;
+
+            case R.id.menuMappaOutdoorsOSM: {
+                openStreetMapFragment.impostaMappaOutdoors();
+            }
         }
 
         return super.onOptionsItemSelected(item);

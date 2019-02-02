@@ -35,4 +35,6 @@
     <string name="traccia_kml">Formato KML</string>
     <string name="traccia_kmz">Formato KMZ</string>
     <string name="app_non_trovata">Nessun&#8217;app trovata per aprire questo tipo di file.</string>
+    <string name="landscape">Paesaggio</string>
+    <string name="outdoors">All&#8217;aperto</string>
 </resources>

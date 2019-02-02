@@ -53,9 +53,21 @@ public class OpenStreetMapFragment extends Fragment {
     private ArrayList<Marker> listaMarker;
     private FolderOverlay overlayTracciato;
     private Pdi pdiTracciatoAttivo;
-    private static final OnlineTileSourceBase CYCLEMAP = new XYTileSource("CycleMap",
+    private static final OnlineTileSourceBase OpenCycleMap = new XYTileSource("OpenCycleMap",
             0, 17, 256, ".png?apikey=af1c6b2e71c041b398754a8b76eafe77", new String[] {
             "https://tile.thunderforest.com/cycle/"},
+            "Maps © Thunderforest, Data © OpenStreetMap contributors.");
+    private static final OnlineTileSourceBase Transport = new XYTileSource("Transport",
+            0, 17, 256, ".png?apikey=af1c6b2e71c041b398754a8b76eafe77", new String[] {
+            "https://tile.thunderforest.com/transport/"},
+            "Maps © Thunderforest, Data © OpenStreetMap contributors.");
+    private static final OnlineTileSourceBase Landscape = new XYTileSource("Landscape",
+            0, 17, 256, ".png?apikey=af1c6b2e71c041b398754a8b76eafe77", new String[] {
+            "https://tile.thunderforest.com/landscape/"},
+            "Maps © Thunderforest, Data © OpenStreetMap contributors.");
+    private static final OnlineTileSourceBase Outdoors = new XYTileSource("Outdoors",
+            0, 17, 256, ".png?apikey=af1c6b2e71c041b398754a8b76eafe77", new String[] {
+            "https://tile.thunderforest.com/outdoors/"},
             "Maps © Thunderforest, Data © OpenStreetMap contributors.");
 
     public OpenStreetMapFragment() {
@@ -155,7 +167,7 @@ public class OpenStreetMapFragment extends Fragment {
         if (tipoMappa == 1) {
             osmMap.setTileSource(TileSourceFactory.MAPNIK);
         } else if (tipoMappa == 2) {
-            osmMap.setTileSource(CYCLEMAP);
+            osmMap.setTileSource(OpenCycleMap);
         } else if (tipoMappa == 3) {
             osmMap.setTileSource(TileSourceFactory.PUBLIC_TRANSPORT);
         }
@@ -419,14 +431,28 @@ public class OpenStreetMapFragment extends Fragment {
 
     public void impostaMappaCiclabile () {
         if (osmMap != null) {
-            osmMap.setTileSource(CYCLEMAP);
+            osmMap.setTileSource(OpenCycleMap);
             tipoMappa = 2;
         }
     }
 
     public void impostaMappaTrasporti () {
         if (osmMap != null) {
-            osmMap.setTileSource(TileSourceFactory.PUBLIC_TRANSPORT);
+            osmMap.setTileSource(Transport);
+            tipoMappa = 2;
+        }
+    }
+
+    public void impostaMappaLandscape () {
+        if (osmMap != null) {
+            osmMap.setTileSource(Landscape);
+            tipoMappa = 2;
+        }
+    }
+
+    public void impostaMappaOutdoors () {
+        if (osmMap != null) {
+            osmMap.setTileSource(Outdoors);
             tipoMappa = 2;
         }
     }
