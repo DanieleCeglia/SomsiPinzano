@@ -44,10 +44,6 @@
         </activity>
         <activity android:name=".MainActivity" />
 
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="8c40112b021b17c56450ced8f5141529c8926d5e" />
-
         <activity android:name=".Galleria"
             android:theme="@style/Theme.AppCompat.NoActionBar">
         </activity>

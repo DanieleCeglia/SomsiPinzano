@@ -6,10 +6,7 @@ import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 
-import com.crashlytics.android.Crashlytics;
 import com.facebook.stetho.Stetho;
-
-import io.fabric.sdk.android.Fabric;
 
 public class SplashActivity extends AppCompatActivity {
     private final String TAG = getClass().getSimpleName();
@@ -23,8 +20,6 @@ public class SplashActivity extends AppCompatActivity {
             //Fabric.with(this, new Crashlytics());
             Stetho.initializeWithDefaults(this);
             //Bugsee.launch(this.getApplication(), "29ef72b9-804e-4fba-af76-ed830e32145e");
-        } else {
-            Fabric.with(this, new Crashlytics());
         }
 
         timeout = false;
