@@ -1,10 +1,13 @@
 package dcsoft.somsipinzano;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.facebook.stetho.Stetho;
 
@@ -15,6 +18,28 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Context context = getApplicationContext();
+        PackageManager packageManager = context.getPackageManager();
+        String packageName = context.getPackageName();
+
+        String versionName = "non disponibile";
+
+        try {
+            versionName = packageManager.getPackageInfo(packageName, 0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        Integer versionCode = 0;
+
+        try {
+            versionCode = packageManager.getPackageInfo(packageName, 0).versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        Toast.makeText(this, "v. " + versionName + " (" + versionCode + ")", Toast.LENGTH_LONG).show();
 
         if (BuildConfig.DEBUG) {
             //Fabric.with(this, new Crashlytics());
