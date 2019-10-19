@@ -17,6 +17,7 @@ import com.koushikdutta.ion.ProgressCallback;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.bonuspack.kml.KmlDocument;
+import org.osmdroid.config.Configuration;
 import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.tileprovider.tilesource.OnlineTileSourceBase;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
@@ -100,6 +101,8 @@ public class OpenStreetMapFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //Log.d("DEBUGAPP", TAG + " onCreateView");
+
+        Configuration.getInstance().setUserAgentValue(BuildConfig.APPLICATION_ID);
 
         View openStreetMapFragmentView = inflater.inflate(R.layout.fragment_open_street_map, container, false);
 

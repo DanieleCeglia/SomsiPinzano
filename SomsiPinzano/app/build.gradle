@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 28
     buildToolsVersion '28.0.3'
 
     defaultConfig {
         applicationId "dcsoft.somsipinzano"
         minSdkVersion 19
-        targetSdkVersion 29
-        versionCode 16
-        versionName "1.34"
+        targetSdkVersion 28
+        versionCode 17
+        versionName "1.35"
         multiDexEnabled true
     }
     buildTypes {
