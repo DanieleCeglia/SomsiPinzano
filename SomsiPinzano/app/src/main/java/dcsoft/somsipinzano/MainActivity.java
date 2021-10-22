@@ -131,16 +131,16 @@ public class MainActivity extends AppCompatActivity {
 
                 perms.put(Manifest.permission.ACCESS_FINE_LOCATION, PackageManager.PERMISSION_GRANTED);
                 perms.put(Manifest.permission.ACCESS_COARSE_LOCATION, PackageManager.PERMISSION_GRANTED);
-                perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
+                //perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
 
                 for (int i = 0; i < permissions.length; i++) {
                     perms.put(permissions[i], grantResults[i]);
                 }
 
                 Boolean location = perms.get(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && perms.get(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
-                Boolean storage = perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+                //Boolean storage = perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
 
-                if (location && storage) {
+                if (location/* && storage*/) {
                     Toast.makeText(MainActivity.this, getResources().getString(R.string.messaggio_permessi_accettati), Toast.LENGTH_LONG).show();
                 } else {
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
@@ -148,9 +148,9 @@ public class MainActivity extends AppCompatActivity {
 
                     if (location) {
                         alertDialogBuilder.setMessage(getResources().getString(R.string.messaggio_permesso_di_archiviazione_non_accettato));
-                    } else if (storage) {
+                    }/* else if (storage) {
                         alertDialogBuilder.setMessage(getResources().getString(R.string.messaggio_permesso_di_localizzazione_non_accettato));
-                    } else {
+                    }*/ else {
                         alertDialogBuilder.setMessage(getResources().getString(R.string.messaggio_permesso_di_archiviazione_non_accettato)
                                 + "\n\n"
                                 + getResources().getString(R.string.messaggio_permesso_di_localizzazione_non_accettato));
